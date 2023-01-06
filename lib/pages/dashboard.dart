@@ -38,8 +38,127 @@ class _dashboardpageState extends State<dashboardpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFFF4D00),
+        title: DefaultTabController(
+          length: 3,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              width: 600,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => cricket_home()));
+                      setState(() {
+                        selected = "First";
+                      });
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        height: 35,
+                        width: 80,
+                        color: selected == "First"
+                            ? Colors.white
+                            : Colors.transparent,
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 14, top: 8),
+                          child: selected == "First"
+                              ? const Text(
+                                  'Cricket',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15),
+                                )
+                              : const Text(
+                                  'Cricket',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        selected = "Second";
+                      });
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => football_home()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 40),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          height: 35,
+                          width: 80,
+                          color: selected == "Second"
+                              ? Colors.white
+                              : Colors.transparent,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 14, top: 8),
+                            child: selected == "Second"
+                                ? const Text(
+                                    'Football',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15),
+                                  )
+                                : const Text(
+                                    'Football',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => tennis_home()));
+                      setState(() {
+                        selected = "Third";
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 40),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          height: 35,
+                          width: 80,
+                          color: selected == "Third"
+                              ? Colors.white
+                              : Colors.transparent,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 14, top: 8),
+                            child: selected == "Third"
+                                ? const Text(
+                                    'Tennis',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15),
+                                  )
+                                : const Text(
+                                    'Tennis',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         height: 80,

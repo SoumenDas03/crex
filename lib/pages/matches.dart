@@ -17,130 +17,52 @@ class matches extends StatefulWidget {
 class _matchesState extends State<matches> {
   @override
   Widget build(BuildContext context) {
-    String? selected = "First";
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xFFFF4D00),
-          title: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SizedBox(
-              width: 600,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => cricket_home()));
-                      setState(() {
-                        selected = "First";
-                      });
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: 35,
-                        width: 80,
-                        color: selected == "First"
-                            ? Colors.white
-                            : Colors.transparent,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 14, top: 8),
-                          child: selected == "First"
-                              ? const Text(
-                                  'Cricket',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                )
-                              : const Text(
-                                  'Cricket',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                ),
-                        ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFFF4D00),
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DefaultTabController(
+            length: 3,
+            initialIndex: 0,
+            child: Container(
+              width: 325,
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: TabBar(
+                    labelPadding: EdgeInsets.all(5),
+                    indicator: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25)),
+                    unselectedLabelColor: Colors.white,
+                    labelColor: Colors.black,
+                    tabs: [
+                      Text(
+                        "Cricket",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        selected = "Second";
-                      });
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => football_home()));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 40),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 35,
-                          width: 80,
-                          color: selected == "Second"
-                              ? Colors.white
-                              : Colors.transparent,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 14, top: 8),
-                            child: selected == "Second"
-                                ? const Text(
-                                    'Football',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15),
-                                  )
-                                : const Text(
-                                    'Football',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                          ),
-                        ),
+                      Text(
+                        "Football",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => tennis_home()));
-                      setState(() {
-                        selected = "Third";
-                      });
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 40),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 35,
-                          width: 80,
-                          color: selected == "Third"
-                              ? Colors.white
-                              : Colors.transparent,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 14, top: 8),
-                            child: selected == "Third"
-                                ? const Text(
-                                    'Tennis',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15),
-                                  )
-                                : const Text(
-                                    'Tennis',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                          ),
-                        ),
+                      Text(
+                        "Tennis",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                ],
+                    ]),
               ),
             ),
           ),
         ),
-        body: SingleChildScrollView(
+      ),
+      body: DefaultTabController(
+        length: 4,
+        child: SingleChildScrollView(
           child: Container(
             alignment: Alignment.center,
             // ignore: prefer_const_constructors
@@ -227,7 +149,7 @@ class _matchesState extends State<matches> {
                                       CircleAvatar(
                                         radius: 18,
                                         backgroundImage:
-                                            AssetImage('assets/india.jpg'),
+                                            AssetImage('assets/india.png'),
                                       ),
                                       SizedBox(
                                         width: 10,
@@ -420,181 +342,174 @@ class _matchesState extends State<matches> {
             ]),
           ),
         ),
-        bottomNavigationBar: Container(
-          color: Colors.black.withOpacity(0.9),
-          height: 80,
-          child: Stack(
-            children: [
-              Positioned(
-                bottom: 0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20)),
-                  child: Container(
-                    height: 45,
-                    width: MediaQuery.of(context).size.width,
-                    color: const Color(0xFFFF4D00),
-                  ),
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.black.withOpacity(0.9),
+        height: 80,
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20)),
+                child: Container(
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  color: const Color(0xFFFF4D00),
                 ),
               ),
-              Positioned(
-                bottom: 20,
-                left: 10,
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const cricket_home(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 17),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Icon(
-                                Icons.home,
-                                color: const Color(0xFFFF4D00),
-                              ),
+            ),
+            Positioned(
+              bottom: 20,
+              left: 10,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const cricket_home(),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 17),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.home,
+                              color: Colors.black,
                             ),
-                            Text(
-                              'Home',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const trendingseriespage(),
-                        ));
-                      },
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const trendingseriespage(),
-                          ));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(left: 23),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.white,
-                                child: Image.asset(
-                                  'assets/series.jpeg',
-                                  scale: 1.2,
-                                ),
-                              ),
-                              Text(
-                                'Series',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
                           ),
-                        ),
+                          Text(
+                            'Home',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const matches(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 23),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/matches.jpeg',
-                                scale: 1.2,
-                              ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const trendingseriespage(),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 23),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Image.asset(
+                              'assets/series.jpeg',
+                              scale: 1.2,
                             ),
-                            Text(
-                              'Matches',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
+                          ),
+                          Text(
+                            'Series',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const fixtures(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 23),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/fixtures.jpeg',
-                                scale: 1.2,
-                              ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const matches(),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 23),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Image.asset(
+                              'assets/matches_crex.png',
+                              scale: 1.2,
                             ),
-                            Text(
-                              'Fixtures',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
+                          ),
+                          Text(
+                            'Matches',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const morepage(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 23),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/more.jpeg',
-                                scale: 1.2,
-                              ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const fixtures(),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 23),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Image.asset(
+                              'assets/fixtures.jpeg',
+                              scale: 1.2,
                             ),
-                            Text(
-                              'More',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
+                          ),
+                          Text(
+                            'Fixtures',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const morepage(),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 23),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Image.asset(
+                              'assets/more.jpeg',
+                              scale: 1.2,
+                            ),
+                          ),
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -71,7 +71,9 @@ class _speech_settingsState extends State<speech_settings> {
                         width: 100,
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           // ignore: prefer_const_constructors
                           icon: Icon(
                             Icons.close,

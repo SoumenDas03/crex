@@ -1,42 +1,4 @@
-// // ignore_for_file: camel_case_types, unused_element, prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
-// import 'package:flutter/material.dart';
-
-// class live_match extends StatefulWidget {
-//   const live_match({Key? key}) : super(key: key);
-
-//   @override
-//   State<live_match> createState() => _live_matchState();
-// }
-
-// class _live_matchState extends State<live_match> {
-//   // This function is triggered when the floating buttion is pressed
-//   void _show(BuildContext ctx) {
-//     showModalBottomSheet(
-//         isScrollControlled: true,
-//         // shape: RoundedRectangleBorder(
-//         //   borderRadius: BorderRadiusDirectional.only(
-//         //       topStart: Radius.circular(45), topEnd: Radius.circular(45)),
-//         // ),
-//         elevation: 5,
-//         context: ctx,
-//         builder: (BuildContext context) {
-//           return SizedBox(
-//             height: 150,
-//             child: SingleChildScrollView(
-//               child: Padding(
-//                 padding: const EdgeInsets.only(
-//                   left: 20,
-//                   right: 20,
-//                 ),
-//                 child: Container(
-//                   margin: EdgeInsets.only(
-//                     left: 5,
-//                   ),
-//                   child: SingleChildScrollView(
-//                     child: Column(
-//                       children: [
-//                         // ignore_for_file: camel_case_types, unused_element, prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 

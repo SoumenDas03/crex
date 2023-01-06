@@ -28,6 +28,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
           backgroundColor: const Color(0xFFFF4D00),
           title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
+            // ignore: sized_box_for_whitespace
             child: Container(
               width: 600,
               child: Row(
@@ -35,6 +36,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
+                          // ignore: prefer_const_constructors
                           builder: (context) => cricket_home()));
                       setState(() {
                         selected = "First";
@@ -71,9 +73,11 @@ class _fixtures_seriesState extends State<fixtures_series> {
                         selected = "Second";
                       });
                       Navigator.of(context).push(MaterialPageRoute(
+                          // ignore: prefer_const_constructors
                           builder: (context) => football_home()));
                     },
                     child: Container(
+                      // ignore: prefer_const_constructors
                       margin: EdgeInsets.only(left: 40),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -104,12 +108,14 @@ class _fixtures_seriesState extends State<fixtures_series> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
+                          // ignore: prefer_const_constructors
                           builder: (context) => tennis_home()));
                       setState(() {
                         selected = "Third";
                       });
                     },
                     child: Container(
+                      // ignore: prefer_const_constructors
                       margin: EdgeInsets.only(left: 40),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -143,8 +149,11 @@ class _fixtures_seriesState extends State<fixtures_series> {
           ),
         ),
         body: Container(
+          // ignore: prefer_const_constructors
           decoration: BoxDecoration(
+              // ignore: prefer_const_constructors
               image: DecorationImage(
+            // ignore: prefer_const_constructors
             image: AssetImage(
               "assets/background.jpeg",
             ),
@@ -153,43 +162,56 @@ class _fixtures_seriesState extends State<fixtures_series> {
           child: Column(
             children: [
               DefaultTabController(
+                initialIndex: 1,
                 length: 3,
                 child: Row(
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
+                      // ignore: prefer_const_constructors
                       margin: EdgeInsets.only(left: 20),
                       // alignment: Alignment.center,
 
                       width: 200,
                       height: 45,
 
+                      // ignore: prefer_const_constructors
                       child: TabBar(
+                          // ignore: prefer_const_constructors
                           indicatorColor: Color(0xFFFF4D00),
                           indicatorWeight: 2,
                           // indicatorSize: TabBarIndicatorSize.label,
                           // padding: EdgeInsets.only(right: 2),
+                          // ignore: prefer_const_constructors
                           labelPadding: EdgeInsets.all(0),
                           unselectedLabelColor: Colors.white,
+                          // ignore: prefer_const_constructors
                           labelColor: Color(0xFFFF4D00),
+                          // ignore: prefer_const_constructors
                           labelStyle: TextStyle(
                               fontSize: 12.0, fontWeight: FontWeight.bold),
+                          // ignore: prefer_const_literals_to_create_immutables
                           tabs: [
+                            // ignore: prefer_const_constructors
                             Tab(
                               text: ('Day'),
                             ),
+                            // ignore: prefer_const_constructors
                             Tab(
                               text: ('Series'),
                             ),
+                            // ignore: prefer_const_constructors
                             Tab(
                               text: ('My Team'),
                             ),
                           ]),
                     ),
+                    // ignore: prefer_const_constructors
                     SizedBox(
                       width: 90,
                     ),
                     Container(
+                        // ignore: prefer_const_constructors
                         margin: EdgeInsets.only(top: 20),
                         child: Image.asset("assets/three_line.png"))
                   ],
@@ -201,6 +223,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                 color: Colors.greenAccent,
               ),
               DefaultTabController(
+
                 length: 7,
                 child: Container(
                   // ignore: prefer_const_constructors
@@ -279,7 +302,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                 height: 430,
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: 15,
+                    itemCount: 3,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 25),
@@ -292,7 +315,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                             CircleAvatar(
                               radius: 25,
                               // ignore: prefer_const_constructors
-                              backgroundImage: AssetImage('assets/india.jpg'),
+                              backgroundImage: AssetImage('assets/matchlogo 1.png'),
                             ),
                             // ignore: prefer_const_constructors
                             SizedBox(
@@ -334,15 +357,18 @@ class _fixtures_seriesState extends State<fixtures_series> {
             ],
           ),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: 80,
           child: Stack(
             children: [
               Positioned(
                 bottom: 0,
                 child: ClipRRect(
+                  // ignore: prefer_const_constructors
                   borderRadius: BorderRadius.only(
+                      // ignore: prefer_const_constructors
                       topRight: Radius.circular(20),
+                      // ignore: prefer_const_constructors
                       topLeft: Radius.circular(20)),
                   child: Container(
                     height: 45,
@@ -357,17 +383,18 @@ class _fixtures_seriesState extends State<fixtures_series> {
                 child: Row(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 17),
+                      margin: const EdgeInsets.only(left: 17),
                       child: Column(
+                        // ignore: prefer_const_literals_to_create_immutables
                         children: [
-                          CircleAvatar(
+                          const CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Icon(
                               Icons.home,
-                              color: const Color(0xFFFF4D00),
+                              color: Colors.black,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Home',
                             style: TextStyle(
                                 fontSize: 12,
@@ -378,7 +405,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 23),
+                      margin: const EdgeInsets.only(left: 23),
                       child: Column(
                         children: [
                           CircleAvatar(
@@ -388,7 +415,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                               scale: 1.2,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Series',
                             style: TextStyle(
                                 fontSize: 12,
@@ -399,7 +426,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 23),
+                      margin: const EdgeInsets.only(left: 23),
                       child: Column(
                         children: [
                           CircleAvatar(
@@ -409,7 +436,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                               scale: 1.2,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Matches',
                             style: TextStyle(
                                 fontSize: 12,
@@ -420,17 +447,17 @@ class _fixtures_seriesState extends State<fixtures_series> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 23),
+                      margin: const EdgeInsets.only(left: 23),
                       child: Column(
                         children: [
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/fixtures.jpeg',
+                              'assets/fixtures_crex.png',
                               scale: 1.2,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Fixtures',
                             style: TextStyle(
                                 fontSize: 12,
@@ -441,7 +468,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 23),
+                      margin: const EdgeInsets.only(left: 23),
                       child: Column(
                         children: [
                           CircleAvatar(
@@ -451,7 +478,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
                               scale: 1.2,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'More',
                             style: TextStyle(
                                 fontSize: 12,

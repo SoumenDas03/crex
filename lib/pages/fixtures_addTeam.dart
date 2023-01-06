@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:crex/pages/cricket_home.dart';
+import 'package:crex/pages/fixtures_selectteam.dart';
 import 'package:crex/pages/football_home.dart';
 import 'package:crex/pages/tennis_home.dart';
 import 'package:flutter/material.dart';
@@ -151,19 +152,52 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
           ),
         ),
         body: Container(
-            alignment: Alignment.center,
-            // ignore: prefer_const_constructors
-            decoration: BoxDecoration(
-                // ignore: prefer_const_constructors
-                image: DecorationImage(
+          alignment: Alignment.center,
+          // ignore: prefer_const_constructors
+          decoration: BoxDecoration(
               // ignore: prefer_const_constructors
-              image: AssetImage(
-                "assets/background.jpeg",
-              ),
-              fit: BoxFit.cover,
-            )),
-            // ignore: prefer_const_literals_to_create_immutables, prefer_const_constructors
-            child: Column(children: [Text("data")])),
+              image: DecorationImage(
+            // ignore: prefer_const_constructors
+            image: AssetImage(
+              "assets/background.jpeg",
+            ),
+            fit: BoxFit.cover,
+          )),
+          // ignore: prefer_const_literals_to_create_immutables, prefer_const_constructors
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+               Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueGrey,
+                                // ignore: prefer_const_constructors
+                                minimumSize: Size(300, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  //border radius equal to or more than 50% of width
+                                )),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const favouriteteampage(),
+                                  ));
+                            },
+                            // ignore: prefer_const_constructors
+                            child: Text(
+                              "Add teams",
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            )),
+                      ),
+            ],
+          ),
+        ),
         bottomNavigationBar: SizedBox(
           height: 80,
           child: Stack(
@@ -289,6 +323,7 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                       ),
                     ),
                     Container(
+                      // ignore: prefer_const_constructors
                       margin: EdgeInsets.only(left: 23),
                       child: Column(
                         children: [
@@ -299,8 +334,10 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                               scale: 1.2,
                             ),
                           ),
+                          // ignore: prefer_const_constructors
                           Text(
                             'More',
+                            // ignore: prefer_const_constructors
                             style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,

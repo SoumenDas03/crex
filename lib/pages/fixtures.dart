@@ -1,8 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, camel_case_types, duplicate_ignore, use_full_hex_values_for_flutter_colors
 
 import 'package:crex/pages/cricket_home.dart';
+import 'package:crex/pages/fixtures_addTeam.dart';
+import 'package:crex/pages/fixtures_calender.dart';
+import 'package:crex/pages/fixtures_series.dart';
+import 'package:crex/pages/football_home.dart';
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/more.dart';
+import 'package:crex/pages/tennis_home.dart';
 import 'package:flutter/material.dart';
 
 import 'series.dart';
@@ -21,125 +26,43 @@ class _fixturesState extends State<fixtures> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        shape: ContinuousRectangleBorder(
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(25),
-              bottomRight: Radius.circular(25)),
-        ),
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFFF4D00),
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: SizedBox(
-            width: 600,
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => cricket_home()));
-                    setState(() {
-                      selected = "First";
-                    });
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      height: 35,
-                      width: 80,
-                      color: selected == "First"
-                          ? Colors.white
-                          : Colors.transparent,
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 14, top: 8),
-                        child: selected == "First"
-                            ? const Text(
-                                'Cricket',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 15),
-                              )
-                            : const Text(
-                                'Cricket',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              ),
+          child: DefaultTabController(
+            length: 3,
+            initialIndex: 0,
+            child: Container(
+              width: 325,
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: TabBar(
+                    labelPadding: EdgeInsets.all(5),
+                    indicator: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25)),
+                    unselectedLabelColor: Colors.white,
+                    labelColor: Colors.black,
+                    tabs: [
+                      Text(
+                        "Cricket",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      selected = "Second";
-                    });
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => football_home()));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 40),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: 35,
-                        width: 80,
-                        color: selected == "Second"
-                            ? Colors.white
-                            : Colors.transparent,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 14, top: 8),
-                          child: selected == "Second"
-                              ? const Text(
-                                  'Football',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                )
-                              : const Text(
-                                  'Football',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                ),
-                        ),
+                      Text(
+                        "Football",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => tennis_home()));
-                    setState(() {
-                      selected = "Third";
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 40),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: 35,
-                        width: 80,
-                        color: selected == "Third"
-                            ? Colors.white
-                            : Colors.transparent,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 14, top: 8),
-                          child: selected == "Third"
-                              ? const Text(
-                                  'Tennis',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15),
-                                )
-                              : const Text(
-                                  'Tennis',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                ),
-                        ),
+                      Text(
+                        "Tennis",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                    ]),
+              ),
             ),
           ),
         ),
@@ -183,20 +106,39 @@ class _fixturesState extends State<fixtures> {
                             Tab(
                               text: ('Day'),
                             ),
-                            Tab(
-                              text: ('Series'),
-                            ),
-                            Tab(
-                              text: ('My Team'),
-                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const fixtures_series(),
+                                      ));
+                                },
+                                child: Text("Series")),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const fixtures_addTeam(),
+                                      ));
+                                },
+                                child: Text("My Team")),
                           ]),
                     ),
                     SizedBox(
                       width: 90,
                     ),
-                    Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Image.asset("assets/three_line.png"))
+                    InkWell(
+                      onTap: () {
+                        _show(context);
+                      },
+                      child: Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: Image.asset("assets/three_line.png")),
+                    )
                   ],
                 ),
               ),
@@ -824,7 +766,7 @@ class _fixturesState extends State<fixtures> {
                             backgroundColor: Colors.white,
                             child: Icon(
                               Icons.home,
-                              color: const Color(0xFFFF4D00),
+                              color: Colors.black,
                             ),
                           ),
                           Text(
@@ -909,7 +851,7 @@ class _fixturesState extends State<fixtures> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/fixtures.jpeg',
+                              'assets/fixtures_crex.png',
                               scale: 1.2,
                             ),
                           ),
@@ -960,4 +902,385 @@ class _fixturesState extends State<fixtures> {
       ),
     );
   }
+}
+
+void _show(BuildContext ctx) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      elevation: 5,
+      context: ctx,
+      builder: (ctx) => Opacity(
+            opacity: 0.8,
+            child: Container(
+              height: 350.0,
+              // ignore: prefer_const_constructors
+              decoration: BoxDecoration(
+                color: Colors.blueGrey[900],
+                // ignore: prefer_const_constructors
+              ),
+
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          // ignore: prefer_const_constructors
+                          Text(
+                            'Filter Matches',
+                            // ignore: prefer_const_constructors
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          // ignore: prefer_const_constructors
+                          SizedBox(
+                            width: 175,
+                          ),
+                          // ignore: prefer_const_constructors
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(ctx);
+                            },
+                            child: Icon(
+                              Icons.close_sharp,
+                              color: Colors.white,
+                              size: 25,
+                            ),
+                          )
+                        ],
+                      ),
+                      // ignore: prefer_const_constructors
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 1,
+                        width: 360,
+                        color: Colors.greenAccent,
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            // ignore: prefer_const_constructors
+                            Text(
+                              "Team",
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic),
+                            ),
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 10,
+                            ),
+                            DefaultTabController(
+                              length: 3,
+                              child: TabBar(
+                                  isScrollable: true,
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  indicator: BoxDecoration(
+                                      // ignore: prefer_const_constructors
+                                      color: Color(0xFFFF4D00),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  unselectedLabelColor: Colors.white,
+                                  labelColor: Colors.white,
+                                  tabs: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+
+                                      height: 30, width: 75,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('All'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Men'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Women'),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 25,
+                            ),
+
+                            // ignore: prefer_const_constructors
+                            Text(
+                              "Format",
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic),
+                            ),
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 25,
+                            ),
+                            DefaultTabController(
+                              length: 6,
+                              child: TabBar(
+                                  isScrollable: true,
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  indicator: BoxDecoration(
+                                      // ignore: prefer_const_constructors
+                                      color: Color(0xFFFF4D00),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  unselectedLabelColor: Colors.white,
+                                  labelColor: Colors.white,
+                                  tabs: [
+                                    Container(
+                                      alignment: Alignment.center,
+
+                                      height: 30, width: 75,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('All'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('T 20'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('ODI'),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Test'),
+                                      ),
+                                    ),
+
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('T 10'),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 25,
+                            ),
+                            // ignore: prefer_const_constructors
+                            Text(
+                              "Format",
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic),
+                            ),
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 25,
+                            ),
+                            DefaultTabController(
+                              length: 3,
+                              child: TabBar(
+                                  isScrollable: true,
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  indicator: BoxDecoration(
+                                      // ignore: prefer_const_constructors
+                                      color: Color(0xFFFF4D00),
+                                      borderRadius: BorderRadius.circular(5)),
+                                  unselectedLabelColor: Colors.white,
+                                  labelColor: Colors.white,
+                                  tabs: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+
+                                      height: 30, width: 75,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('All'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 150,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('International'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      // margin: EdgeInsets.only(left: 10),
+                                      width: 75,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Domestic'),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+
+                            // ignore: prefer_const_constructors
+                            SizedBox(
+                              height: 25,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueGrey,
+                                // ignore: prefer_const_constructors
+                                minimumSize: Size(300, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  //border radius equal to or more than 50% of width
+                                )),
+                            onPressed: () {
+                              Navigator.push(
+                                  ctx,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const fixtures_calender(),
+                                  ));
+                            },
+                            // ignore: prefer_const_constructors
+                            child: Text(
+                              "Apply Filters",
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            )),
+                      ),
+                      // ignore: prefer_const_constructors
+                      SizedBox(
+                        height: 25,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ));
 }

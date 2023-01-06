@@ -44,7 +44,9 @@ class _win_predictionState extends State<win_prediction> {
                     width: 100,
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: Icon(
                         Icons.close,
                         color: Colors.white,

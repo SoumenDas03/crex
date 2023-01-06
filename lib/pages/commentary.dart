@@ -29,45 +29,6 @@ class commententary extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 20),
-                // alignment: Alignment.topLeft,
-                //margin: EdgeInsets.only(left: 10),
-                width: 350,
-                height: 50,
-
-                child: TabBar(
-                    indicatorColor: Color(0xFFFF4D00),
-                    // indicatorWeight: 3,
-                    // indicatorSize: TabBarIndicatorSize.label,
-                    padding: EdgeInsets.only(right: 0),
-                    labelPadding: EdgeInsets.only(right: 0),
-                    unselectedLabelColor: Colors.white,
-                    labelColor: Color(0xFFFF4D00),
-                    labelStyle:
-                        TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-                    // ignore: prefer_const_literals_to_create_immutables
-                    tabs: [
-                      Tab(
-                        text: ('Info'),
-                      ),
-                      Tab(
-                        text: ('Fantasty'),
-                      ),
-                      Tab(
-                        text: ('Commentary'),
-                      ),
-                      Tab(
-                        text: ('Live'),
-                      ),
-                      Tab(
-                        text: ('Scorecard'),
-                      ),
-                      Tab(
-                        text: ('Graphs'),
-                      )
-                    ]),
-              ),
-              Container(
                 height: 1,
                 width: 350,
                 color: Colors.white,
@@ -107,7 +68,7 @@ class commententary extends StatelessWidget {
                                       CircleAvatar(
                                         radius: 25,
                                         backgroundImage:
-                                            AssetImage('assets/india.jpg'),
+                                            AssetImage('assets/india.png'),
                                       ),
                                       SizedBox(
                                         width: 10,

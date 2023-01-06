@@ -392,9 +392,12 @@ class _morepageState extends State<morepage> {
                       child: Column(
                         // ignore: prefer_const_literals_to_create_immutables
                         children: [
-                          Icon(
-                            Icons.home,
-                            color: const Color(0xFFFF4D00),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Icon(
+                              Icons.home,
+                              color: Colors.black,
+                            ),
                           ),
                           Text(
                             'Home',
@@ -504,7 +507,7 @@ class _morepageState extends State<morepage> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/more.jpeg',
+                              'assets/more_crex.png',
                               scale: 1.2,
                             ),
                           ),

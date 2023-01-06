@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, camel_case_types, sized_box_for_whitespace
 
+import 'package:crex/pages/match_settings.dart';
 import 'package:flutter/material.dart';
 
 class live_pak extends StatelessWidget {
@@ -25,48 +26,6 @@ class live_pak extends StatelessWidget {
                 fit: BoxFit.cover,
               )),
               child: Column(children: [
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  // alignment: Alignment.topLeft,
-                  //margin: EdgeInsets.only(left: 10),
-                  width: 350,
-                  height: 50,
-
-                  // ignore: prefer_const_constructors
-                  child: TabBar(
-                      indicatorColor: Color(0xFFFF4D00),
-                      // indicatorWeight: 3,
-                      // indicatorSize: TabBarIndicatorSize.label,
-                      padding: EdgeInsets.only(left: 10),
-                      labelPadding: EdgeInsets.only(right: 0),
-                      unselectedLabelColor: Colors.white,
-                      labelColor: Color(0xFFFF4D00),
-                      labelStyle: TextStyle(
-                          fontSize: 12.0, fontWeight: FontWeight.bold),
-                      // ignore: prefer_const_literals_to_create_immutables
-                      tabs: [
-                        // ignore: prefer_const_constructors
-
-                        Tab(
-                          text: ('Commentary'),
-                        ),
-                        Tab(
-                          text: ('Live'),
-                        ),
-                        Tab(
-                          text: ('Scorecard'),
-                        ),
-                        Tab(
-                          text: ('Graph'),
-                        ),
-                        Tab(
-                          text: ('Series'),
-                        ),
-                        Tab(
-                          text: ('Status'),
-                        ),
-                      ]),
-                ),
                 Container(
                   height: 1,
                   width: 350,
@@ -1334,23 +1293,32 @@ class live_pak extends StatelessWidget {
                     // ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.settings,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Match Settings',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12),
-                          )
-                        ],
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const match_settings(),
+                              ));
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.settings,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Match Settings',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
