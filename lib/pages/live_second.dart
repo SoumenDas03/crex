@@ -3,8 +3,8 @@
 import 'package:crex/pages/match_settings.dart';
 import 'package:flutter/material.dart';
 
-class live_pak extends StatelessWidget {
-  const live_pak({super.key});
+class live_second extends StatelessWidget {
+  const live_second({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,7 @@ class live_pak extends StatelessWidget {
                           Container(
                               alignment: Alignment.topRight,
                               margin: EdgeInsets.only(right: 25),
-                              child: Icon(
-                                Icons.volume_off,
-                                color: Colors.white,
-                              )),
+                              child: Image.asset("assets/volume.png")),
                           Container(
                             margin: EdgeInsets.only(right: 25),
                             child: Row(
@@ -477,10 +474,9 @@ class live_pak extends StatelessWidget {
                                 SizedBox(
                                   width: 5,
                                 ),
-                                Icon(
-                                  Icons.sports_cricket_sharp,
-                                  size: 15,
-                                  color: Color(0xFFFF4D00),
+                                Image.asset(
+                                  "assets/matches.png",
+                                  scale: 1.5,
                                 )
                               ]),
                         ),
@@ -824,8 +820,10 @@ class live_pak extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              Icon(Icons.sports_cricket,
-                                  color: Color(0xFFFF4D00)),
+                              Image.asset(
+                                "assets/matches.png",
+                                scale: 1,
+                              ),
                               SizedBox(
                                 width: 60,
                               ),
@@ -1213,10 +1211,9 @@ class live_pak extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
-                          Icon(
-                            Icons.sports_cricket,
-                            size: 18,
-                            color: Color(0xFFFF4D00),
+                          Image.asset(
+                            "assets/matches.png",
+                            scale: 1.2,
                           ),
                           SizedBox(
                             width: 135,
@@ -1283,14 +1280,6 @@ class live_pak extends StatelessWidget {
                     height: 45,
                     width: 350,
                     color: Colors.blueGrey[900],
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.only(
-                    //       bottomLeft: Radius.circular(20),
-                    //       bottomRight: Radius.circular(20)),
-                    //   // border: Border.all(color: Colors.white, width: 0.5)
-
-                    //   color: Colors.blueGrey[900],
-                    // ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: InkWell(

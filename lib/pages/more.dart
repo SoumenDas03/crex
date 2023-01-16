@@ -1,19 +1,23 @@
 // ignore_for_file: unused_import, camel_case_types, prefer_const_constructors, avoid_unnecessary_containers
 
+import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/home_dashboard.dart';
+import 'package:crex/dashboard/matches_dashboard.dart';
+import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/cricket_home.dart';
 import 'package:crex/pages/fixtures.dart';
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/series.dart';
 import 'package:flutter/material.dart';
 
-class morepage extends StatefulWidget {
-  const morepage({super.key});
+class more extends StatefulWidget {
+  const more({super.key});
 
   @override
-  State<morepage> createState() => _morepageState();
+  State<more> createState() => _moreState();
 }
 
-class _morepageState extends State<morepage> {
+class _moreState extends State<more> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,7 +216,7 @@ class _morepageState extends State<morepage> {
                       Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: Image.asset(
-                            'assets/support.png',
+                            'assets/feedback.png',
                             scale: 1.1,
                           )),
                       Padding(
@@ -359,8 +363,9 @@ class _morepageState extends State<morepage> {
           ),
         ),
       ),
-      bottomNavigationBar: SizedBox(
-        height: 80,
+      bottomNavigationBar: Container(
+        height: 74,
+        color: Colors.black,
         child: Stack(
           children: [
             Positioned(
@@ -384,7 +389,7 @@ class _morepageState extends State<morepage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const cricket_home(),
+                        builder: (context) => const home_dashboard(),
                       ));
                     },
                     child: Container(
@@ -413,7 +418,7 @@ class _morepageState extends State<morepage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const trendingseriespage(),
+                        builder: (context) => const series_dashboard(),
                       ));
                     },
                     child: Container(
@@ -423,7 +428,8 @@ class _morepageState extends State<morepage> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/series.jpeg',
+                              'assets/series.png',
+                              color: Colors.black,
                               scale: 1.2,
                             ),
                           ),
@@ -441,7 +447,7 @@ class _morepageState extends State<morepage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const matches(),
+                        builder: (context) => const matches_dashboard(),
                       ));
                     },
                     child: Container(
@@ -451,7 +457,8 @@ class _morepageState extends State<morepage> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/matches.jpeg',
+                              'assets/matches.png',
+                              color: Colors.black,
                               scale: 1.2,
                             ),
                           ),
@@ -469,7 +476,7 @@ class _morepageState extends State<morepage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures(),
+                        builder: (context) => const fixtures_dashboard(),
                       ));
                     },
                     child: Container(
@@ -479,7 +486,8 @@ class _morepageState extends State<morepage> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/fixtures.jpeg',
+                              'assets/fixtures.png',
+                              color: Colors.black,
                               scale: 1.2,
                             ),
                           ),
@@ -495,11 +503,7 @@ class _morepageState extends State<morepage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const morepage(),
-                      ));
-                    },
+                    onTap: null,
                     child: Container(
                       margin: EdgeInsets.only(left: 23),
                       child: Column(
@@ -507,7 +511,7 @@ class _morepageState extends State<morepage> {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Image.asset(
-                              'assets/more_crex.png',
+                              'assets/more.png',
                               scale: 1.2,
                             ),
                           ),

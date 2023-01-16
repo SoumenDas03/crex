@@ -51,10 +51,7 @@ class commententary extends StatelessWidget {
                         Container(
                             alignment: Alignment.topRight,
                             margin: EdgeInsets.only(right: 25),
-                            child: Icon(
-                              Icons.volume_off,
-                              color: Colors.white,
-                            )),
+                            child: Image.asset("assets/volume.png")),
                         Container(
                           margin: EdgeInsets.only(right: 25),
                           child: Row(

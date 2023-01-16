@@ -357,6 +357,7 @@ class _team_RankingState extends State<team_Ranking> {
                               style: TextStyle(color: Colors.white70),
                             ),
                           ),
+                          // ignore: prefer_const_constructors
                           SizedBox(
                             width: 10,
                           ),

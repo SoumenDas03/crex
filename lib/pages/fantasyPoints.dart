@@ -202,9 +202,10 @@ class _fantasyPointsState extends State<fantasyPoints> {
         SizedBox(
           height: 270,
           child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              // ignore: prefer_const_constructors
+              //physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 3,
+              itemCount: 5,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
@@ -357,180 +358,277 @@ class _fantasyPointsState extends State<fantasyPoints> {
           ),
         ),
 
+        // ignore: prefer_const_constructors
         SizedBox(
           height: 10,
         ),
 
-        Container(
+        SizedBox(
           width: 325,
-          height: 200,
-          child: SingleChildScrollView(
-            child: Opacity(
-              opacity: 0.8,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blueGrey[900],
-                ),
+          child: Opacity(
+            opacity: 0.8,
+            child: Container(
+              width: 325,
 
-                // width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blueGrey[900],
+              ),
 
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: Row(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
+              // width: 200,
+
+              child: Column(
+                children: [
+                  Container(
+                    // ignore: prefer_const_constructors
+                    margin: EdgeInsets.all(5),
+                    child: Row(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 30,
                           // ignore: prefer_const_constructors
-                          Container(
-                            width: 30,
-                            child: Text(
-                              "Pos",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
+                          child: Text(
+                            "Pos",
+                            // ignore: prefer_const_constructors
+                            style:
+                                // ignore: prefer_const_constructors
+                                TextStyle(
+                                    fontSize: 13.5,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 5,
-                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 5,
+                        ),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 100,
                           // ignore: prefer_const_constructors
-                          Container(
-                            width: 100,
-                            child: Text(
-                              "Name",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
+                          child: Text(
+                            "Name",
+                            // ignore: prefer_const_constructors
+                            style:
+                                // ignore: prefer_const_constructors
+                                TextStyle(
+                                    fontSize: 13.5,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 2,
-                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 2,
+                        ),
+                        // ignore: prefer_const_constructors
+                        Container(
+                          alignment: Alignment.center,
+                          width: 30,
                           // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 30,
-                            child: Text(
-                              "Inn",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
+                          child: Text(
+                            "Inn",
+                            // ignore: prefer_const_constructors
+                            style:
+                                // ignore: prefer_const_constructors
+                                TextStyle(
+                                    fontSize: 13.5,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 2,
-                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 2,
+                        ),
+                        // ignore: prefer_const_constructors
+                        Container(
+                          alignment: Alignment.center,
+                          width: 75,
                           // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 75,
-                            child: Text(
-                              "Avg",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
+                          child: Text(
+                            "Avg",
+                            // ignore: prefer_const_constructors
+                            style:
+                                // ignore: prefer_const_constructors
+                                TextStyle(
+                                    fontSize: 13.5,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            width: 2,
-                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        SizedBox(
+                          width: 2,
+                        ),
+                        // ignore: prefer_const_constructors
+                        Container(
+                          alignment: Alignment.center,
+                          width: 65,
                           // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 65,
-                            child: Text(
-                              "Total Pts",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
+                          child: Text(
+                            "Total Pts",
+                            // ignore: prefer_const_constructors
+                            style:
+                                // ignore: prefer_const_constructors
+                                TextStyle(
+                                    fontSize: 13.5,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      height: 1,
-                      width: 330,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: Row(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 30,
-                            child: Text(
-                              "1",
+                  ),
+                  Container(
+                    height: 1,
+                    width: 330,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 185,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 15,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  // ignore: prefer_const_constructors
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 30,
+                                    // ignore: prefer_const_constructors
+                                    child: Text(
+                                      "1",
+                                      // ignore: prefer_const_constructors
+                                      style:
+                                          // ignore: prefer_const_constructors
+                                          TextStyle(
+                                              fontSize: 13.5,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  SizedBox(
+                                    width: 100,
+                                    // ignore: prefer_const_constructors
+                                    child: Column(
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        const Text(
+                                          "Virat Kohli",
+                                          // ignore: prefer_const_constructors
+                                          style:
+                                              // ignore: prefer_const_constructors
+                                              TextStyle(
+                                                  fontSize: 13.5,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                        // ignore: prefer_const_constructors
+                                        Text(
+                                          "India",
+                                          // ignore: prefer_const_constructors
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 30,
+                                    // ignore: prefer_const_constructors
+                                    child: Text(
+                                      "4",
+                                      // ignore: prefer_const_constructors
+                                      style:
+                                          // ignore: prefer_const_constructors
+                                          TextStyle(
+                                              fontSize: 13.5,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 75,
+                                    // ignore: prefer_const_constructors
+                                    child: Text(
+                                      "228.00",
+                                      // ignore: prefer_const_constructors
+                                      style:
+                                          // ignore: prefer_const_constructors
+                                          TextStyle(
+                                              fontSize: 13.5,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  // ignore: prefer_const_constructors
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 65,
+                                    // ignore: prefer_const_constructors
+                                    child: Text(
+                                      "912",
+                                      // ignore: prefer_const_constructors
+                                      style:
+                                          // ignore: prefer_const_constructors
+                                          TextStyle(
+                                              fontSize: 13.5,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          // ignore: prefer_const_constructors
-                          Container(
-                            width: 100,
-                            child: Text(
-                              "Virat Kohli",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 30,
-                            child: Text(
-                              "Inn",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 75,
-                            child: Text(
-                              "Avg",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 2,
-                          ),
-                          // ignore: prefer_const_constructors
-                          Container(
-                            alignment: Alignment.center,
-                            width: 65,
-                            child: Text(
-                              "Total Pts",
-                              // ignore: prefer_const_constructors
-                              style:
-                                  TextStyle(fontSize: 15, color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                        }),
+                  ),
+                  // ignore: prefer_const_constructors
+                  SizedBox(
+                    height: 10,
+                  )
+                ],
               ),
             ),
           ),

@@ -1,8 +1,7 @@
-// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, file_names
 
 import 'package:flutter/material.dart';
 import 'package:d_chart/d_chart.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class info extends StatefulWidget {
   const info({super.key});
@@ -37,114 +36,148 @@ class _infoState extends State<info> {
             ),
             child: Column(
               children: [
-                
                 Container(
                   height: 1,
                   width: 380,
                   color: Colors.white,
                 ),
-                Container(
-                  height: 90,
-                  width: 380,
-                  color: Color.fromARGB(255, 33, 33, 33),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30, top: 30),
-                        child: Image.asset('assets/india.png'),
-                      ),
-                      Column(
+                SizedBox(
+                  height: 10,
+                ),
+                Opacity(
+                  opacity: 0.8,
+                  child: Container(
+                    height: 160,
+                    width: 400,
+                    color: Colors.blueGrey[900],
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 10, top: 30),
-                            child: Text(
-                              'IND',
-                              style: TextStyle(color: Colors.white),
+                              alignment: Alignment.topRight,
+                              margin: EdgeInsets.only(right: 25),
+                              child: Image.asset("assets/volume.png")),
+                          Container(
+                            margin: EdgeInsets.only(right: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 25,
+                                          backgroundImage:
+                                              AssetImage('assets/india.png'),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Text(
+                                              'IND',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              '29-0',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Text(
+                                              '1st inn',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              '2.3',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                                Text(
+                                  '4',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.amber,
+                                      fontSize: 50),
+                                )
+                              ],
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 12),
-                            child: Text(
-                              '29-0',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 10, top: 32),
-                            child: Text(
-                              '1st inn',
-                              style: TextStyle(color: Colors.grey, fontSize: 8),
-                            ),
+                          SizedBox(
+                            height: 15,
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 8),
-                            child: Text(
-                              '2.3',
-                              style: TextStyle(color: Colors.grey, fontSize: 8),
-                            ),
+                            height: 2,
+                            width: 400,
+                            color: Colors.blueGrey[500],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'CCR : 9.58',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15.5),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'RRR : 8.58',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15.5),
+                              ),
+                              SizedBox(
+                                width: 70,
+                              ),
+                              Image.asset('assets/live_tv.png')
+                            ],
                           )
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(left: 100, top: 20),
-                        child: Text(
-                          '4',
-                          style: TextStyle(
-                              color: Colors.amber,
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(left: 45, top: 15),
-                          child: Image.asset('assets/volume.png'))
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 1,
-                  width: 380,
-                  color: Color.fromARGB(255, 105, 104, 104),
-                ),
-                Container(
-                  height: 35,
-                  width: 380,
-                  color: Color.fromARGB(255, 33, 33, 33),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          'CRR : 9.58',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 208, 206, 206),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 55),
-                        child: Text(
-                          'RRR : 8.58',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 209, 208, 208),
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 90),
-                        child: Image.asset(
-                          'assets/live_tv.png',
-                          scale: 1.2,
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 ),
                 Row(
@@ -444,9 +477,9 @@ class _infoState extends State<info> {
                           ],
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 120),
+                          margin: EdgeInsets.only(left: 100),
                           child: Image.asset(
-                            'assets/matchlogo 1.png',
+                            'assets/vs.png',
                             height: 50,
                           ),
                         ),
@@ -2223,8 +2256,11 @@ class _infoState extends State<info> {
                                 child: AspectRatio(
                                   aspectRatio: 50 / 30,
                                   child: DChartPie(
+                                    // ignore: prefer_const_literals_to_create_immutables
                                     data: [
+                                      // ignore: prefer_const_literals_to_create_immutables
                                       {'domain': 'Ionic', 'measure': 1},
+                                      // ignore: prefer_const_literals_to_create_immutables
                                       {'domain': '', 'measure': 1},
                                     ],
                                     fillColor: (pieData, index) {

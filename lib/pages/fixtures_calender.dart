@@ -39,13 +39,11 @@ class _fixtures_calenderState extends State<fixtures_calender> {
             child: Row(
               children: [
                 const Text("Cricket this year"),
-                const SizedBox(
-                  width: 80,
+                // ignore: prefer_const_constructors
+                SizedBox(
+                  width: 100,
                 ),
-                Container(
-                    // ignore: prefer_const_constructors
-
-                    child: Image.asset("assets/three_line.png"))
+                Image.asset("assets/three_line.png")
               ],
             ),
           ),

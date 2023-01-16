@@ -1,11 +1,5 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_import, prefer_const_literals_to_create_immutables, duplicate_ignore, avoid_unnecessary_containers
 
-import 'package:crex/pages/cricket_home.dart';
-import 'package:crex/pages/fixtures.dart';
-import 'package:crex/pages/matches.dart';
-import 'package:crex/pages/more.dart';
-import 'package:crex/pages/series.dart';
-import 'package:crex/pages/tennis_home.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -22,69 +16,6 @@ class _football_homeState extends State<football_home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFFF4D00),
-        title: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DefaultTabController(
-            length: 3,
-            initialIndex: 1,
-            child: Container(
-              width: 325,
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: TabBar(
-                    labelPadding: EdgeInsets.all(5),
-                    indicator: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25)),
-                    unselectedLabelColor: Colors.white,
-                    labelColor: Colors.black,
-                    tabs: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => cricket_home()));
-                          setState(() {});
-                        },
-                        child: Text(
-                          "Cricket",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => football_home()));
-                          setState(() {});
-                        },
-                        child: Text(
-                          "Football",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => tennis_home()));
-                          setState(() {});
-                        },
-                        child: Text(
-                          "Tennis",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
-                    ]),
-              ),
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.only(top: 5),
@@ -308,21 +239,9 @@ class _football_homeState extends State<football_home> {
                                               SizedBox(
                                                 width: 50,
                                               ),
-                                              Icon(
-                                                Icons.live_tv,
-                                                size: 18,
-                                                color: Colors.red,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                'Live TV.',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 10,
-                                                  color: Colors.red,
-                                                ),
+                                              Image.asset(
+                                                "assets/live_tv.png",
+                                                scale: 1.3,
                                               )
                                             ],
                                           ),
@@ -338,174 +257,6 @@ class _football_homeState extends State<football_home> {
                   ),
                 ),
               ]),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 80,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                child: Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xFFFF4D00),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 17),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            Icons.home,
-                            color: const Color(0xFFFF4D00),
-                          ),
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const trendingseriespage(),
-                      ));
-                    },
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const trendingseriespage(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 23),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/series.jpeg',
-                                scale: 1.2,
-                              ),
-                            ),
-                            Text(
-                              'Series',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const matches(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/matches.jpeg',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'Matches',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/fixtures.jpeg',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'Fixtures',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const morepage(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/more.jpeg',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

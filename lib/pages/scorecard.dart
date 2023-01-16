@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class scorecard extends StatefulWidget {
   const scorecard({super.key});
 
@@ -18,11 +19,8 @@ class _scorecardState extends State<scorecard> {
         scrollDirection: Axis.vertical,
         child: Container(
           alignment: Alignment.center,
-          // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              // ignore: prefer_const_constructors
               image: DecorationImage(
-            // ignore: prefer_const_constructors
             image: AssetImage(
               "assets/background.jpeg",
             ),
@@ -52,10 +50,7 @@ class _scorecardState extends State<scorecard> {
                       Container(
                           alignment: Alignment.topRight,
                           margin: EdgeInsets.only(right: 25),
-                          child: Icon(
-                            Icons.volume_off,
-                            color: Colors.white,
-                          )),
+                          child: Image.asset("assets/volume.png")),
                       Container(
                         margin: EdgeInsets.only(right: 25),
                         child: Row(
@@ -191,126 +186,129 @@ class _scorecardState extends State<scorecard> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Text(
-                        'Over 18',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Text(
+                      'Over 2',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '4',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                            color: Colors.black,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '4',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '0',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '4',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '1',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '0',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '1',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '=',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        '10',
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '0',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                            color: Colors.black,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '4',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '1',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '0',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '1',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '=',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Text(
+                      '10',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: 3,
                 ),
                 Container(
                   height: 20,
@@ -320,123 +318,124 @@ class _scorecardState extends State<scorecard> {
                 SizedBox(
                   width: 3,
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Text(
-                        'Over 19',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Text(
+                      'Over 3',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '2',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                            color: Colors.black,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '2',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '0',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '4',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '-',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '-',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 5,
-                        child: Text(
-                          '-',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '=',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        '6',
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '0',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                            color: Colors.black,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '4',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '-',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '-',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 5,
+                      child: Text(
+                        '-',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      '=',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Text(
+                      '6',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
                 )
               ],
+            ),
+            SizedBox(
+              height: 10,
             ),
             DefaultTabController(
               // initialIndex: 0,
@@ -630,8 +629,10 @@ class _scorecardState extends State<scorecard> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Icon(Icons.sports_cricket,
-                                  size: 15.5, color: Color(0xFFFF4D00))
+                              Image.asset(
+                                "assets/matches.png",
+                                scale: 1.5,
+                              )
                             ],
                           ),
                         ),
@@ -975,7 +976,7 @@ class _scorecardState extends State<scorecard> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    Container(
+                    SizedBox(
                       width: 160,
                       child: Text(
                         'Batter',

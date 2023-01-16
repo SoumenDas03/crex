@@ -97,10 +97,7 @@ class _match_settingsState extends State<match_settings> {
                         Container(
                             alignment: Alignment.topRight,
                             margin: EdgeInsets.only(right: 25),
-                            child: Icon(
-                              Icons.volume_off,
-                              color: Colors.white,
-                            )),
+                            child: Image.asset("assets/volume.png")),
                         Container(
                           margin: EdgeInsets.only(right: 25),
                           child: Row(
@@ -894,8 +891,10 @@ class _match_settingsState extends State<match_settings> {
                             SizedBox(
                               width: 10,
                             ),
-                            Icon(Icons.sports_cricket,
-                                color: Color(0xFFFF4D00)),
+                            Image.asset(
+                              "assets/matches.png",
+                              scale: 1.3,
+                            ),
                             SizedBox(
                               width: 60,
                             ),
@@ -1283,10 +1282,9 @@ class _match_settingsState extends State<match_settings> {
                         SizedBox(
                           width: 5,
                         ),
-                        Icon(
-                          Icons.sports_cricket,
-                          size: 18,
-                          color: Color(0xFFFF4D00),
+                        Image.asset(
+                          "assets/matches.png",
+                          scale: 1.3,
                         ),
                         SizedBox(
                           width: 135,

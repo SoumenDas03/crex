@@ -280,7 +280,9 @@ class _speech_settingsState extends State<speech_settings> {
                             children: [
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.white,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
@@ -288,7 +290,9 @@ class _speech_settingsState extends State<speech_settings> {
                               ),
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.grey,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
@@ -296,7 +300,14 @@ class _speech_settingsState extends State<speech_settings> {
                               ),
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.blueGrey,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
+                                // child: Icon(
+                                //   Icons.graphic_eq,
+                                //   color: Colors.black,
+                                //   size: 50,
+                                // ),
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
@@ -304,7 +315,9 @@ class _speech_settingsState extends State<speech_settings> {
                               ),
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.blueAccent,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
@@ -312,7 +325,9 @@ class _speech_settingsState extends State<speech_settings> {
                               ),
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.cyan,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
                               ),
                               // ignore: prefer_const_constructors
                               SizedBox(
@@ -320,7 +335,9 @@ class _speech_settingsState extends State<speech_settings> {
                               ),
                               // ignore: prefer_const_constructors
                               CircleAvatar(
+                                backgroundColor: Colors.brown,
                                 radius: 16.5,
+                                child: Image.asset("assets/music.png"),
                               )
                             ],
                           ),
@@ -346,124 +363,121 @@ class _speech_settingsState extends State<speech_settings> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                ),
-                                // ignore: prefer_const_constructors
-                                child: Text(
-                                  'Ball',
-                                  // ignore: prefer_const_constructors
-                                  style: TextStyle(
-                                      // ignore: prefer_const_constructors
-                                      color: Color(0xFFFF4D00),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+
+                          // ignore: prefer_const_constructors
+                          SizedBox(
+                            // ignore: prefer_const_constructors
+
+                            // alignment: Alignment.topLeft,
+                            //margin: EdgeInsets.only(left: 10),
+
+                            // ignore: prefer_const_constructors
+                            child: DefaultTabController(
+                              initialIndex: 0,
+                              length: 5,
                               // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5),
-                                  // color: Colors.amber,
-                                ),
-                                // ignore: prefer_const_constructors
-                                child: Text(
-                                  '6',
+                              child: TabBar(
+
                                   // ignore: prefer_const_constructors
-                                  style: TextStyle(
-                                      // ignore: prefer_const_constructors
-                                      color: Color(0xFFFF4D00),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5),
-                                  // color: Colors.amber,
-                                ),
-                                // ignore: prefer_const_constructors
-                                child: Text(
-                                  '4',
+
                                   // ignore: prefer_const_constructors
-                                  style: TextStyle(
-                                      // ignore: prefer_const_constructors
-                                      color: Color(0xFFFF4D00),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5),
-                                  // color: Colors.amber,
-                                ),
-                                // ignore: prefer_const_constructors
-                                child: Text(
-                                  'Wicket',
+                                  // padding: EdgeInsets.only(left: 10),
                                   // ignore: prefer_const_constructors
-                                  style: TextStyle(
-                                      fontSize: 12,
+                                  labelPadding:
                                       // ignore: prefer_const_constructors
-                                      color: Color(0xFFFF4D00),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 25,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(5),
-                                  // color: Colors.amber,
-                                ),
-                                // ignore: prefer_const_constructors
-                                child: Text(
-                                  '1',
+                                      EdgeInsets.only(right: 5, left: 5),
                                   // ignore: prefer_const_constructors
-                                  style: TextStyle(
+                                  labelColor: Color(0xFFFF4D00),
+                                  // unselectedLabelColor: Colors.white,
+                                  // ignore: prefer_const_constructors
+                                  isScrollable: true,
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  indicator: BoxDecoration(
                                       // ignore: prefer_const_constructors
-                                      color: Color(0xFFFF4D00),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          )
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  // ignore: prefer_const_constructors
+                                  labelStyle:
+                                      // ignore: prefer_const_constructors
+                                      TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold),
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  tabs: [
+                                    // ignore: prefer_const_constructors
+
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Ball'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('6'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('4'),
+                                      ),
+                                    ),
+                                    // ignore: prefer_const_constructors
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('Wicket'),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      // ignore: prefer_const_constructors
+                                      child: Tab(
+                                        text: ('1'),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ),
                         ],
                       )),
                 ),
@@ -673,10 +687,7 @@ class _speech_settingsState extends State<speech_settings> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // ignore: prefer_const_constructors
-                      Icon(
-                        Icons.speaker_rounded,
-                        color: Colors.white54,
-                      ),
+                      Image.asset("assets/speech.png"),
                       // ignore: prefer_const_constructors
                       SizedBox(
                         width: 5,

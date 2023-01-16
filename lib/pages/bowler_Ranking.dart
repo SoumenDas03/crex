@@ -241,7 +241,7 @@ class _bowler_RankingState extends State<bowler_Ranking> {
           ),
           // ignore: prefer_const_constructors
 
-          Container(
+          SizedBox(
             height: 450,
             // ignore: prefer_const_constructors
 

@@ -1,12 +1,17 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, camel_case_types
 
-import 'package:crex/pages/live_pak.dart';
+import 'package:crex/pages/live_second.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class live_india extends StatelessWidget {
-  const live_india({super.key});
+class live_first extends StatefulWidget {
+  const live_first({super.key});
 
+  @override
+  State<live_first> createState() => _live_firstState();
+}
+
+class _live_firstState extends State<live_first> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -40,7 +45,7 @@ class live_india extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const live_pak(),
+                        builder: (context) => const live_second(),
                       ));
                 },
                 child: Container(
@@ -56,10 +61,7 @@ class live_india extends StatelessWidget {
                         Container(
                             alignment: Alignment.topRight,
                             margin: EdgeInsets.only(right: 25),
-                            child: Icon(
-                              Icons.volume_off,
-                              color: Colors.white,
-                            )),
+                            child: Image.asset("assets/volume.png")),
                         Container(
                           margin: EdgeInsets.only(right: 25),
                           child: Row(
@@ -427,14 +429,14 @@ class live_india extends StatelessWidget {
               height: 45,
             ),
             CircleAvatar(
-              radius: 88,
+              radius: 80,
               backgroundColor: Colors.white,
               child: Container(
-                height: 163,
-                width: 163,
+                height: 155,
+                width: 155,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(80),
-                    border: Border.all(width: 80, color: Colors.brown)),
+                    border: Border.all(width: 78, color: Colors.brown)),
                 child: PieChart(PieChartData(
                     centerSpaceRadius: 0,
                     centerSpaceColor: Colors.white,
@@ -448,7 +450,7 @@ class live_india extends StatelessWidget {
                               fontStyle: FontStyle.italic),
                           value: 15,
                           color: Colors.green[900],
-                          radius: 80),
+                          radius: 75),
                       PieChartSectionData(
                           title: "India",
                           titleStyle: TextStyle(
@@ -457,7 +459,7 @@ class live_india extends StatelessWidget {
                               fontStyle: FontStyle.italic),
                           value: 50,
                           color: Colors.blue,
-                          radius: 80),
+                          radius: 75),
                       PieChartSectionData(
                           title: "Pakistan",
                           titleStyle: TextStyle(
@@ -466,7 +468,7 @@ class live_india extends StatelessWidget {
                               fontStyle: FontStyle.italic),
                           value: 35,
                           color: Colors.green,
-                          radius: 80)
+                          radius: 75)
                     ])),
               ),
             ),

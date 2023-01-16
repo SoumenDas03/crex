@@ -184,7 +184,7 @@ class _fixtures_filterState extends State<fixtures_filter> {
                                 height: 25,
                               ),
                               DefaultTabController(
-                                length: 6,
+                                length: 5,
                                 child: TabBar(
                                     isScrollable: true,
                                     indicatorSize: TabBarIndicatorSize.label,

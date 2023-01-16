@@ -1,11 +1,7 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, camel_case_types, prefer_const_literals_to_create_immutables, use_full_hex_values_for_flutter_colors
 
-import 'package:crex/pages/cricket_home.dart';
-import 'package:crex/pages/fixtures.dart';
-import 'package:crex/pages/more.dart';
 import 'package:flutter/material.dart';
 
-import 'series.dart';
 
 class matches extends StatefulWidget {
   const matches({super.key});
@@ -18,7 +14,7 @@ class _matchesState extends State<matches> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*  appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFFF4D00),
         title: SingleChildScrollView(
@@ -60,6 +56,9 @@ class _matchesState extends State<matches> {
           ),
         ),
       ),
+
+      */
+
       body: DefaultTabController(
         length: 4,
         child: SingleChildScrollView(
@@ -343,7 +342,7 @@ class _matchesState extends State<matches> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
+      /*bottomNavigationBar: Container(
         color: Colors.black.withOpacity(0.9),
         height: 80,
         child: Stack(
@@ -397,7 +396,7 @@ class _matchesState extends State<matches> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const trendingseriespage(),
+                        builder: (context) => const series(),
                       ));
                     },
                     child: Container(
@@ -511,7 +510,7 @@ class _matchesState extends State<matches> {
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }

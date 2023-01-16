@@ -241,7 +241,7 @@ class _allRounder_RankingState extends State<allRounder_Ranking> {
           ),
           // ignore: prefer_const_constructors
 
-          Container(
+          SizedBox(
             height: 450,
             // ignore: prefer_const_constructors
 

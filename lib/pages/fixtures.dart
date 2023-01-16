@@ -1,16 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, camel_case_types, duplicate_ignore, use_full_hex_values_for_flutter_colors
 
-import 'package:crex/pages/cricket_home.dart';
 import 'package:crex/pages/fixtures_addTeam.dart';
 import 'package:crex/pages/fixtures_calender.dart';
 import 'package:crex/pages/fixtures_series.dart';
-import 'package:crex/pages/football_home.dart';
-import 'package:crex/pages/matches.dart';
-import 'package:crex/pages/more.dart';
-import 'package:crex/pages/tennis_home.dart';
 import 'package:flutter/material.dart';
-
-import 'series.dart';
 
 class fixtures extends StatefulWidget {
   const fixtures({super.key});
@@ -22,51 +15,8 @@ class fixtures extends StatefulWidget {
 class _fixturesState extends State<fixtures> {
   @override
   Widget build(BuildContext context) {
-    String? selected = "First";
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFFF4D00),
-        title: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DefaultTabController(
-            length: 3,
-            initialIndex: 0,
-            child: Container(
-              width: 325,
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: TabBar(
-                    labelPadding: EdgeInsets.all(5),
-                    indicator: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25)),
-                    unselectedLabelColor: Colors.white,
-                    labelColor: Colors.black,
-                    tabs: [
-                      Text(
-                        "Cricket",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      Text(
-                        "Football",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      Text(
-                        "Tennis",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ]),
-              ),
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: ClipRRect(
           child: Container(
@@ -128,16 +78,16 @@ class _fixturesState extends State<fixtures> {
                                 child: Text("My Team")),
                           ]),
                     ),
-                    SizedBox(
-                      width: 90,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        _show(context);
-                      },
-                      child: Container(
-                          margin: EdgeInsets.only(top: 20),
-                          child: Image.asset("assets/three_line.png")),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 90),
+                      child: InkWell(
+                        onTap: () {
+                          _show(context);
+                        },
+                        child: Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: Image.asset("assets/three_line.png")),
+                      ),
                     )
                   ],
                 ),
@@ -253,26 +203,33 @@ class _fixturesState extends State<fixtures> {
                               1,
                             ]),
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.calendar_month,
-                            size: 18,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Calender',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12),
-                          )
-                        ],
+                      child: InkWell(
+                        onTap: (() {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const fixtures_calender(),
+                          ));
+                        }),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.calendar_month,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Calender',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -729,177 +686,6 @@ class _fixturesState extends State<fixtures> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        color: Colors.black.withOpacity(0.9),
-        height: 80,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
-                child: Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xFFFF4D00),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const cricket_home(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 17),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.home,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'Home',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const trendingseriespage(),
-                        ));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 23),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/series.jpeg',
-                                scale: 1.2,
-                              ),
-                            ),
-                            Text(
-                              'Series',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const matches(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/matches.jpeg',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'Matches',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/fixtures_crex.png',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'Fixtures',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const morepage(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/more.jpeg',
-                              scale: 1.2,
-                            ),
-                          ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -1068,7 +854,7 @@ void _show(BuildContext ctx) {
                               height: 25,
                             ),
                             DefaultTabController(
-                              length: 6,
+                              length: 5,
                               child: TabBar(
                                   isScrollable: true,
                                   indicatorSize: TabBarIndicatorSize.label,
@@ -1257,14 +1043,7 @@ void _show(BuildContext ctx) {
                                   borderRadius: BorderRadius.circular(10),
                                   //border radius equal to or more than 50% of width
                                 )),
-                            onPressed: () {
-                              Navigator.push(
-                                  ctx,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const fixtures_calender(),
-                                  ));
-                            },
+                            onPressed: () {},
                             // ignore: prefer_const_constructors
                             child: Text(
                               "Apply Filters",

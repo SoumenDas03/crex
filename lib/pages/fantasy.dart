@@ -1,0 +1,2117 @@
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore
+
+import 'package:flutter/material.dart';
+
+class fantasy extends StatefulWidget {
+  const fantasy({super.key});
+
+  @override
+  State<fantasy> createState() => _fantasyState();
+}
+
+class _fantasyState extends State<fantasy> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 6,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    'assets/background.jpeg',
+                  ),
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: 1,
+                  width: 350,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Opacity(
+                  opacity: 0.8,
+                  child: Container(
+                    height: 160,
+                    width: 400,
+                    color: Colors.blueGrey[900],
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              alignment: Alignment.topRight,
+                              margin: EdgeInsets.only(right: 25),
+                              child: Image.asset("assets/volume.png")),
+                          Container(
+                            margin: EdgeInsets.only(right: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 25,
+                                          backgroundImage:
+                                              AssetImage('assets/india.png'),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Text(
+                                              'IND',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              '29-0',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          // ignore: prefer_const_literals_to_create_immutables
+                                          children: [
+                                            Text(
+                                              '1st inn',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              '2.3',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                                Text(
+                                  '4',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.amber,
+                                      fontSize: 50),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            height: 2,
+                            width: 400,
+                            color: Colors.blueGrey[500],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'CCR : 9.58',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15.5),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'RRR : 8.58',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15.5),
+                              ),
+                              SizedBox(
+                                width: 70,
+                              ),
+                              Image.asset('assets/live_tv.png')
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'Over 2',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '4',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '0',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '4',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '1',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '0',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '1',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '=',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            '10',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      width: 1,
+                      color: Colors.blueGrey,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'Over 3',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '2',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '0',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '4',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '-',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '-',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 5,
+                            child: Text(
+                              '-',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '=',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            '6',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 9, left: 20),
+                      child: Text(
+                        'Top Fantasy Points',
+                        style: TextStyle(color: Colors.white, fontSize: 9),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 12, left: 10),
+                      child: CircleAvatar(
+                        radius: 2,
+                        backgroundColor: Colors.red,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 6, left: 8),
+                      child: Text(
+                        'LIVE',
+                        style: TextStyle(color: Colors.red, fontSize: 12),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 145, top: 6),
+                      child: Text(
+                        'See All  >',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  // margin: EdgeInsets.only(left: 25),
+                  width: 320,
+                  height: 100,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Opacity(
+                        opacity: 0.8,
+                        child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          width: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.blueGrey[900],
+                          ),
+                          child: Stack(
+                            children: [
+                              Image.asset(
+                                "assets/virat.png",
+                                height: 125,
+                              ),
+                              Positioned(
+                                  left: 50,
+                                  top: 25,
+                                  child: Column(
+                                    // ignore: prefer_const_literals_to_create_immutables
+                                    children: [
+                                      Text(
+                                        "Virat",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "200.0",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "Pts",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600),
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 25),
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    'Match Updates',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  height: 160,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Opacity(
+                        opacity: 0.8,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 15, top: 10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Container(
+                              alignment: Alignment.topCenter,
+                              height: 80,
+                              width: 150,
+                              color: Colors.blueGrey[900],
+                              child: Column(
+                                children: [
+                                  Image.asset('assets/cricket3.jpg'),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Good news!Pakistan-india test match to commence today',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 11),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 20),
+                      child: Text(
+                        'Player Stats in Series',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 145),
+                      child: Text(
+                        'Analysis >',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                DefaultTabController(
+                  length: 3,
+                  child: TabBar(
+                      isScrollable: true,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicator: BoxDecoration(
+                          // ignore: prefer_const_constructors
+                          color: Color(0xFFFF4D00),
+                          borderRadius: BorderRadius.circular(5)),
+                      unselectedLabelColor: Colors.white,
+                      labelColor: Colors.white,
+                      tabs: [
+                        Container(
+                          alignment: Alignment.center,
+
+                          height: 30, width: 100,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5)),
+                          // ignore: prefer_const_constructors
+                          child: Tab(
+                            text: ('Fantasy Points'),
+                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        Container(
+                          alignment: Alignment.center,
+                          // margin: EdgeInsets.only(left: 10),
+                          width: 80,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5)),
+                          // ignore: prefer_const_constructors
+                          child: Tab(
+                            text: ('Most Runs'),
+                          ),
+                        ),
+                        // ignore: prefer_const_constructors
+                        Container(
+                          alignment: Alignment.center,
+                          // margin: EdgeInsets.only(left: 10),
+                          width: 95,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(5)),
+                          // ignore: prefer_const_constructors
+                          child: Tab(
+                            text: ('Most Wickets'),
+                          ),
+                        ),
+                      ]),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 15, top: 15, right: 10),
+                  height: 1,
+                  width: 330,
+                  color: Colors.white,
+                ),
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 25),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                ),
+                                child: Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 35,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  Text(
+                                    'Zak Crawley',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                  Text(
+                                    'PAK.Batter',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 25,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(left: 125),
+                                child: Column(
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Text(
+                                      '155 pts',
+                                      style: TextStyle(
+                                          color: Color(0xFFFF4D00),
+                                          fontSize: 12),
+                                    ),
+                                    Text(
+                                      '1Inns',
+                                      style: TextStyle(
+                                          color: Color(0xFFFF4D00),
+                                          fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            height: 1,
+                            width: 320,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 20),
+                      child: Text(
+                        'Fantasy Top Picks',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 170),
+                      child: Text(
+                        'See All >',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Opacity(
+                  opacity: 0.8,
+                  child: Container(
+                    height: 140,
+                    width: 320,
+                    color: Colors.blueGrey[900],
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 17, top: 15),
+                              height: 35,
+                              width: 35,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white)),
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: Text(
+                                'Oliver Edward Robinson',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    AssetImage("assets/pakistan.jpg"),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 65),
+                              child: Text(
+                                'Bowler',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 30),
+                              child: Text(
+                                'Pakistan',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 1,
+                          width: 340,
+                          color: Colors.white,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 75,
+                              margin: EdgeInsets.only(left: 5, top: 20),
+                              child: Text(
+                                'Test Recent Form >',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 11),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10, top: 15),
+                              height: 35,
+                              width: 1,
+                              color: Colors.white,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: 50,
+                                  margin: EdgeInsets.only(left: 5, top: 20),
+                                  child: Text(
+                                    '158(168)',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Text(
+                                  'vs SA',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10, top: 15),
+                              height: 35,
+                              width: 1,
+                              color: Colors.white,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: 50,
+                                  margin: EdgeInsets.only(left: 5, top: 20),
+                                  child: Text(
+                                    '158(168)',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Text(
+                                  'vs SA',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 10, top: 15),
+                              height: 35,
+                              width: 1,
+                              color: Colors.white,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: 50,
+                                  margin: EdgeInsets.only(left: 5, top: 20),
+                                  child: Text(
+                                    '158(168)',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Text(
+                                  'vs SA',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Icon(
+                      Icons.circle,
+                      color: Colors.white,
+                      size: 8,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Icon(
+                      Icons.circle,
+                      color: Colors.red,
+                      size: 8,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Icon(
+                      Icons.circle,
+                      color: Colors.white,
+                      size: 8,
+                    ),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    Icon(
+                      Icons.circle,
+                      color: Colors.white,
+                      size: 8,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 25),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          "Team Analysis",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        child: Text(
+                          "(Based on last 5 matches)",
+                          style: TextStyle(color: Colors.grey, fontSize: 10),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.only(top: 15, left: 25, right: 25),
+                    child: Table(
+                      border: TableBorder.all(
+                          width: 1, color: Colors.white), //table border
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        // ignore: prefer_const_literals_to_create_immutables
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Bat/ Bowl Fronts",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage:
+                                      AssetImage("assets/pakistan.jpg"),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "PAK",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage:
+                                      AssetImage("assets/india.png"),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "IND",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Team Opening",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Middle Order",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Batting Depth",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Pace Bowling",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                        TableRow(children: [
+                          TableCell(
+                              child: Container(
+                            alignment: Alignment.center,
+                            height: 42,
+                            child: Text(
+                              "Spin Bowling",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                          TableCell(
+                              child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    color: Colors.amber,
+                                  ),
+                                  height: 8,
+                                  width: 8,
+                                ),
+                              ],
+                            ),
+                          )),
+                        ]),
+                      ],
+                    )),
+                SizedBox(
+                  height: 25,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 25),
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          "Pace vs Spain",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        child: Text(
+                          "(Last 10 matches)",
+                          style: TextStyle(color: Colors.grey, fontSize: 10),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 60),
+                        child: Text(
+                          'Venue Details >',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Opacity(
+                  opacity: 0.8,
+                  child: Container(
+                    color: Colors.blueGrey[900],
+                    width: 300,
+                    height: 75,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            Text(
+                              "Pace",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              height: 3.5,
+                              width: 65,
+                              color: Colors.amber,
+                            ),
+                            Container(
+                              height: 3.5,
+                              width: 65,
+                              color: Colors.orange,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              "Spain",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            Text(
+                              "156 Wkts",
+                              style: TextStyle(
+                                  color: Color(0xFFFF4D00), fontSize: 13),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "67%",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 75,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 5),
+                              child: Text(
+                                "33%",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "77 Wkts",
+                              style: TextStyle(
+                                  color: Color(0xFFFF4D00), fontSize: 13),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

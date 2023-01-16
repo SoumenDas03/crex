@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-class favouriteteampage extends StatefulWidget {
-  const favouriteteampage({super.key});
+class fixtures_selectteam extends StatefulWidget {
+  const fixtures_selectteam({super.key});
 
   @override
-  State<favouriteteampage> createState() => _favouriteteampageState();
+  State<fixtures_selectteam> createState() => _fixtures_selectteamState();
 }
 
-class _favouriteteampageState extends State<favouriteteampage> {
+class _fixtures_selectteamState extends State<fixtures_selectteam> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,31 +29,40 @@ class _favouriteteampageState extends State<favouriteteampage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 40, left: 20),
-                      child: Text(
-                        'Add favourite team',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                Container(
+                  margin: EdgeInsets.only(top: 50, left: 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 45),
+                        child: Text(
+                          'Add favourite team',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 45, left: 120),
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.white,
+                      SizedBox(
+                        width: 65,
                       ),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.only(left: 45),
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
                 Container(
+                  margin: EdgeInsets.only(left: 20, right: 20),
                   height: 1,
                   width: 380,
                   color: Colors.white,
@@ -70,8 +79,9 @@ class _favouriteteampageState extends State<favouriteteampage> {
                         hintText: "Search Items",
                         hintStyle: const TextStyle(color: Colors.white),
                         fillColor: Colors.black.withOpacity(0.85),
+                        focusColor: Colors.white,
                         suffixIcon: Container(
-                          color: Colors.black.withOpacity(0),
+                          // color: Colors.black.withOpacity(0),
                           margin: EdgeInsets.only(left: 15),
                           child: Icon(
                             Icons.search,
@@ -79,7 +89,7 @@ class _favouriteteampageState extends State<favouriteteampage> {
                             size: 20,
                           ),
                         ),
-                        suffixIconColor: Colors.black,
+                        suffixIconColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: const BorderSide(
@@ -120,11 +130,11 @@ class _favouriteteampageState extends State<favouriteteampage> {
                   itemCount: 9,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 4,
+                      crossAxisSpacing: 2,
                       mainAxisSpacing: 1),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 15, top: 10),
+                      margin: EdgeInsets.only(left: 10, top: 10, right: 10),
                       height: 95,
                       width: 95,
                       decoration: BoxDecoration(
@@ -181,7 +191,7 @@ class _favouriteteampageState extends State<favouriteteampage> {
                       mainAxisSpacing: 10.0),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: EdgeInsets.only(left: 14, top: 15),
+                      margin: EdgeInsets.only(left: 10, top: 15, right: 10),
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
@@ -236,7 +246,9 @@ class _favouriteteampageState extends State<favouriteteampage> {
                     );
                   },
                 ),
-                SizedBox(height: 30,),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),

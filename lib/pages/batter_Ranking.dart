@@ -241,7 +241,7 @@ class _batter_RankingState extends State<batter_Ranking> {
           ),
           // ignore: prefer_const_constructors
 
-          Container(
+          SizedBox(
             height: 450,
             // ignore: prefer_const_constructors
 

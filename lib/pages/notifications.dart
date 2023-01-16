@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class live_match extends StatefulWidget {
   const live_match({Key? key}) : super(key: key);
 
@@ -9,6 +10,7 @@ class live_match extends StatefulWidget {
   State<live_match> createState() => _live_matchState();
 }
 
+// ignore: camel_case_types
 class _live_matchState extends State<live_match> {
   bool status = false;
   bool status1 = false;
@@ -30,20 +32,28 @@ class _live_matchState extends State<live_match> {
                 appBar: AppBar(
                   backgroundColor: Colors.black,
                   automaticallyImplyLeading: false,
+                  // ignore: prefer_const_constructors
                   title: TabBar(
                     // labelColor: Colors.amber,
+                    // ignore: prefer_const_constructors
                     indicatorColor: Color(0xFFFF4D00),
+                    // ignore: prefer_const_literals_to_create_immutables
                     tabs: [
+                      // ignore: prefer_const_constructors
                       Tab(
                         text: "Live Match",
                       ),
+                      // ignore: prefer_const_constructors
                       Tab(text: "Series Updates"),
                     ],
                   ),
 
+                  // ignore: prefer_const_literals_to_create_immutables
                   actions: [
+                    // ignore: prefer_const_constructors
                     Padding(
                       padding: const EdgeInsets.all(10),
+                      // ignore: prefer_const_constructors
                       child: Icon(Icons.close),
                     )
                   ],
@@ -61,8 +71,10 @@ class _live_matchState extends State<live_match> {
                             children: [
                               // ignore: prefer_const_constructors
                               Container(
+                                // ignore: prefer_const_constructors
                                 margin: EdgeInsets.only(left: 25),
                                 width: 200,
+                                // ignore: prefer_const_constructors
                                 child: Text(
                                   "IND vs PAK Notifications",
                                   // ignore: prefer_const_constructors
@@ -90,6 +102,7 @@ class _live_matchState extends State<live_match> {
                             ],
                           ),
 
+                          // ignore: prefer_const_constructors
                           SizedBox(
                             height: 10,
                           ),
@@ -126,6 +139,7 @@ class _live_matchState extends State<live_match> {
                                                   BoxShadow(
                                                     color: Colors.white38
                                                         .withOpacity(0.5),
+                                                    // ignore: prefer_const_constructors
                                                     offset: Offset(0, -5),
                                                     // blurRadius: 5,
                                                     spreadRadius: 1,
@@ -133,18 +147,22 @@ class _live_matchState extends State<live_match> {
                                                 ],
                                               ),
                                               child: Container(
+                                                // ignore: prefer_const_constructors
                                                 margin: EdgeInsets.all(12),
                                                 child: Image.asset(
                                                   'assets/tennis_background.jpeg',
                                                 ),
                                               ),
                                             ),
+                                            // ignore: prefer_const_constructors
                                             Positioned(
                                               bottom: 120,
                                               left: 85,
+                                              // ignore: prefer_const_constructors
                                               child: CircleAvatar(
                                                 backgroundColor: Colors.amber,
                                                 radius: 12,
+                                                // ignore: prefer_const_constructors
                                                 child: Icon(
                                                   Icons.done,
                                                   size: 12,
@@ -154,9 +172,11 @@ class _live_matchState extends State<live_match> {
                                           ],
                                         ),
                                       ),
+                                      // ignore: prefer_const_constructors
                                       SizedBox(
                                         height: 8,
                                       ),
+                                      // ignore: sized_box_for_whitespace
                                       Container(
                                         width: 100,
 
@@ -164,6 +184,7 @@ class _live_matchState extends State<live_match> {
                                         child: Text(
                                           textAlign: TextAlign.center,
                                           "Weckets",
+                                          // ignore: prefer_const_constructors
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18),
@@ -173,19 +194,7 @@ class _live_matchState extends State<live_match> {
                                   );
                                 }),
                           ),
-                          // SizedBox(
-                          //   width: 10,
-                          //   height: 20,
-                          // ),
-                          // Row(
-                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     Text("Score Updates per sessio"),
-                          //     Text("Score Updates per sessio"),
-                          //     Text("Score Updates per sessio")
-                          //   ],
-                          // )
+                          
                         ],
                       ),
                       Column(
@@ -195,8 +204,10 @@ class _live_matchState extends State<live_match> {
                             children: [
                               // ignore: prefer_const_constructors
                               Container(
+                                // ignore: prefer_const_constructors
                                 margin: EdgeInsets.only(left: 25),
                                 width: 200,
+                                // ignore: prefer_const_constructors
                                 child: Text(
                                   "INDIA tour of PAKISTAN 2022 Notifications",
                                   // ignore: prefer_const_constructors
@@ -224,6 +235,7 @@ class _live_matchState extends State<live_match> {
                             ],
                           ),
 
+                          // ignore: prefer_const_constructors
                           SizedBox(
                             height: 10,
                           ),
@@ -260,6 +272,7 @@ class _live_matchState extends State<live_match> {
                                                   BoxShadow(
                                                     color: Colors.white38
                                                         .withOpacity(0.5),
+                                                    // ignore: prefer_const_constructors
                                                     offset: Offset(0, -5),
                                                     // blurRadius: 5,
                                                     spreadRadius: 1,
@@ -267,18 +280,22 @@ class _live_matchState extends State<live_match> {
                                                 ],
                                               ),
                                               child: Container(
+                                                // ignore: prefer_const_constructors
                                                 margin: EdgeInsets.all(12),
                                                 child: Image.asset(
                                                   'assets/tennis_background.jpeg',
                                                 ),
                                               ),
                                             ),
+                                            // ignore: prefer_const_constructors
                                             Positioned(
                                               bottom: 120,
                                               left: 85,
+                                              // ignore: prefer_const_constructors
                                               child: CircleAvatar(
                                                 backgroundColor: Colors.amber,
                                                 radius: 12,
+                                                // ignore: prefer_const_constructors
                                                 child: Icon(
                                                   Icons.done,
                                                   size: 12,
@@ -288,16 +305,19 @@ class _live_matchState extends State<live_match> {
                                           ],
                                         ),
                                       ),
+                                      // ignore: prefer_const_constructors
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Container(
+                                      // ignore: prefer_const_constructors
+                                      SizedBox(
                                         width: 100,
 
                                         // ignore: prefer_const_constructors
                                         child: Text(
                                           textAlign: TextAlign.center,
                                           "Toss",
+                                          // ignore: prefer_const_constructors
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18),
@@ -307,19 +327,7 @@ class _live_matchState extends State<live_match> {
                                   );
                                 }),
                           ),
-                          // SizedBox(
-                          //   width: 10,
-                          //   height: 20,
-                          // ),
-                          // Row(
-                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     Text("Score Updates per sessio"),
-                          //     Text("Score Updates per sessio"),
-                          //     Text("Score Updates per sessio")
-                          //   ],
-                          // )
+                         
                         ],
                       ),
                     ],

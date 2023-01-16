@@ -1,32 +1,28 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:crex/pages/cricket_home.dart';
-import 'package:crex/pages/fixtures.dart';
 // ignore: unused_import
 import 'package:crex/pages/football_home.dart';
-import 'package:crex/pages/matches.dart';
-import 'package:crex/pages/more.dart';
 import 'package:crex/pages/series_details.dart';
 // ignore: unused_import
 import 'package:crex/pages/tennis_home.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class trendingseriespage extends StatefulWidget {
-  const trendingseriespage({super.key});
+class series extends StatefulWidget {
+  const series({super.key});
 
   @override
-  State<trendingseriespage> createState() => _trendingseriespageState();
+  State<series> createState() => _seriesState();
 }
 
 // ignore: camel_case_types
-class _trendingseriespageState extends State<trendingseriespage> {
+class _seriesState extends State<series> {
   String? selected = "First";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
+      /* appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFFF4D00),
         title: SingleChildScrollView(
@@ -68,7 +64,7 @@ class _trendingseriespageState extends State<trendingseriespage> {
             ),
           ),
         ),
-      ),
+      ),*/
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
@@ -267,7 +263,7 @@ class _trendingseriespageState extends State<trendingseriespage> {
         ),
       ),
       // ignore: sized_box_for_whitespace
-      bottomNavigationBar: Container(
+      /* bottomNavigationBar: Container(
         height: 80,
         child: Stack(
           children: [
@@ -292,7 +288,7 @@ class _trendingseriespageState extends State<trendingseriespage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const cricket_home(),
+                        builder: (context) => const home_dashboard(),
                       ));
                     },
                     child: Container(
@@ -321,7 +317,7 @@ class _trendingseriespageState extends State<trendingseriespage> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const trendingseriespage(),
+                        builder: (context) => const series(),
                       ));
                     },
                     child: Container(
@@ -435,7 +431,7 @@ class _trendingseriespageState extends State<trendingseriespage> {
             ),
           ],
         ),
-      ),
+      ),*/
     );
   }
 }
