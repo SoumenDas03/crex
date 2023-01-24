@@ -467,7 +467,8 @@ class _infoState extends State<info> {
                                   Container(
                                     margin: EdgeInsets.only(left: 00),
                                     child: Icon(
-                                      Icons.arrow_forward_ios_rounded,
+                                      Icons.keyboard_arrow_right,
+                                      size: 35,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -480,7 +481,8 @@ class _infoState extends State<info> {
                           margin: EdgeInsets.only(left: 100),
                           child: Image.asset(
                             'assets/vs.png',
-                            height: 50,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                       ],
@@ -505,7 +507,8 @@ class _infoState extends State<info> {
                           alignment: Alignment.bottomLeft,
                           margin: EdgeInsets.only(bottom: 20, left: 15),
                           child: Icon(
-                            Icons.calendar_today_rounded,
+                            Icons.calendar_today,
+                            color: Colors.white,
                             size: 25,
                           ),
                         ),
@@ -517,10 +520,11 @@ class _infoState extends State<info> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 140),
+                          margin: EdgeInsets.only(left: 135),
                           child: Icon(
-                            Icons.arrow_forward_ios_rounded,
+                            Icons.keyboard_arrow_right,
                             color: Colors.white,
+                            size: 35,
                           ),
                         ),
                       ],
@@ -544,6 +548,7 @@ class _infoState extends State<info> {
                           margin: EdgeInsets.only(bottom: 20, left: 15),
                           child: Icon(
                             Icons.location_on_outlined,
+                            color: Colors.white,
                             size: 30,
                           ),
                         ),
@@ -557,7 +562,8 @@ class _infoState extends State<info> {
                         Container(
                           margin: EdgeInsets.only(left: 130),
                           child: Icon(
-                            Icons.arrow_forward_ios_rounded,
+                            Icons.keyboard_arrow_down,
+                            size: 35,
                             color: Colors.white,
                           ),
                         ),
@@ -589,9 +595,8 @@ class _infoState extends State<info> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 10),
-                          child: Image.asset(
-                            'assets/india.png',
-                            height: 40,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage("assets/india.png"),
                           ),
                         ),
                         Container(
@@ -604,7 +609,8 @@ class _infoState extends State<info> {
                         Container(
                           margin: EdgeInsets.only(left: 180),
                           child: Icon(
-                            Icons.arrow_forward_ios_rounded,
+                            Icons.keyboard_arrow_right,
+                            size: 35,
                             color: Colors.white,
                           ),
                         ),
@@ -626,9 +632,8 @@ class _infoState extends State<info> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 10),
-                          child: Image.asset(
-                            'assets/pakistan.jpg',
-                            height: 40,
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage("assets/pakistan.jpg"),
                           ),
                         ),
                         Container(
@@ -639,9 +644,10 @@ class _infoState extends State<info> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 155),
+                          margin: EdgeInsets.only(left: 150),
                           child: Icon(
-                            Icons.arrow_forward_ios_rounded,
+                            Icons.keyboard_arrow_right,
+                            size: 35,
                             color: Colors.white,
                           ),
                         ),
@@ -797,9 +803,8 @@ class _infoState extends State<info> {
                   margin: EdgeInsets.only(left: 40),
                   child: Row(
                     children: [
-                      Image.asset(
-                        'assets/india.png',
-                        height: 40,
+                      CircleAvatar(
+                        backgroundImage: AssetImage("assets/india.png"),
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 10),
@@ -941,7 +946,8 @@ class _infoState extends State<info> {
                       Container(
                         margin: EdgeInsets.only(left: 8),
                         child: Icon(
-                          Icons.arrow_forward_ios_rounded,
+                          Icons.keyboard_arrow_right,
+                          size: 35,
                           color: Colors.white,
                         ),
                       ),
@@ -959,9 +965,8 @@ class _infoState extends State<info> {
                   alignment: Alignment.bottomLeft,
                   margin: EdgeInsets.only(left: 40),
                   child: Row(children: [
-                    Image.asset(
-                      'assets/pakistan.jpg',
-                      height: 40,
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/pakistan.jpg"),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 10),
@@ -1105,7 +1110,8 @@ class _infoState extends State<info> {
                     Container(
                       margin: EdgeInsets.only(left: 8),
                       child: Icon(
-                        Icons.arrow_forward_ios_rounded,
+                        Icons.keyboard_arrow_right,
+                        size: 35,
                         color: Colors.white,
                       ),
                     ),
@@ -1114,274 +1120,298 @@ class _infoState extends State<info> {
                 SizedBox(
                   height: 12,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 110,
-                    width: 320,
-                    color: Color.fromARGB(255, 66, 63, 63),
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Image.asset(
-                                    'assets/india.png',
-                                    height: 40,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                    'SL',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 5, top: 10),
-                                  child: Text(
-                                    '378- 10 & 360 -8',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Image.asset(
-                                    'assets/pakistan.jpg',
-                                    height: 40,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                    'PAK ',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 5, top: 10),
-                                  child: Text(
-                                    '231- 6 & 260 -5 ',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 40),
-                          height: 60,
-                          width: 1,
-                          color: Colors.white,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10),
+                Container(
+                  height: 250,
+                  child: ListView.builder(
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 10, left: 15, right: 15),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(2),
+                            borderRadius: BorderRadius.circular(10),
                             child: Container(
-                              height: 20,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 201, 45, 34),
-                                border: Border.all(
-                                  color: Color.fromARGB(255, 201, 45, 34),
-                                ),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 5),
-                                      child: Text(
-                                        'L',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                              height: 110,
+                              width: 320,
+                              color: Color.fromARGB(255, 66, 63, 63),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(top: 10),
+                                            child: CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/india.png"),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: Text(
+                                              'SL',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 5, top: 10),
+                                            child: Text(
+                                              '378- 10 & 360 -8',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/pakistan.jpg"),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 10, top: 10),
+                                            child: Text(
+                                              'PAK ',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 5, top: 10),
+                                            child: Text(
+                                              '231- 6 & 260 -5 ',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 40),
+                                    height: 60,
+                                    width: 1,
+                                    color: Colors.white,
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(2),
+                                      child: Container(
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              Color.fromARGB(255, 201, 45, 34),
+                                          border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 201, 45, 34),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 5),
+                                                child: Text(
+                                                  'L',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      top: 45,
+                                    ),
+                                    child: Column(
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        Text(
+                                          '2nd Test',
+                                          style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.white),
+                                        ),
+                                        SizedBox(height: 2),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            'SL vs PAK...',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            top: 45,
-                          ),
-                          child: Column(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              Text(
-                                '2nd Test',
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.white),
-                              ),
-                              SizedBox(height: 2),
-                              Container(
-                                margin: EdgeInsets.only(left: 5),
-                                child: Text(
-                                  'SL vs PAK...',
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                        );
+                      }),
                 ),
                 SizedBox(
                   height: 8,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 110,
-                    width: 320,
-                    color: Color.fromARGB(255, 66, 63, 63),
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Image.asset(
-                                    'assets/india.png',
-                                    height: 40,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                    'SL',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 5, top: 10),
-                                  child: Text(
-                                    '378- 10 & 360 -8',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Image.asset(
-                                    'assets/pakistan.jpg',
-                                    height: 40,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                    'PAK ',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 5, top: 10),
-                                  child: Text(
-                                    '231- 6 & 260 -5 ',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 40),
-                          height: 60,
-                          width: 1,
-                          color: Colors.white,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(2),
-                            child: Container(
-                              height: 20,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 26, 121, 29),
-                                border: Border.all(
-                                  color: Color.fromARGB(255, 26, 121, 29),
-                                ),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 5),
-                                      child: Text(
-                                        'W',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            top: 45,
-                          ),
-                          child: Column(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              Text(
-                                '2nd Test',
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.white),
-                              ),
-                              SizedBox(height: 2),
-                              Container(
-                                margin: EdgeInsets.only(left: 5),
-                                child: Text(
-                                  'SL vs PAK...',
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(10),
+                //   child: Container(
+                //     height: 110,
+                //     width: 320,
+                //     color: Color.fromARGB(255, 66, 63, 63),
+                //     child: Row(
+                //       children: [
+                //         Column(
+                //           children: [
+                //             Row(
+                //               children: [
+                //                 Container(
+                //                   margin: EdgeInsets.only(top: 10),
+                //                   child: CircleAvatar(
+                //                     backgroundImage:
+                //                         AssetImage("assets/india.png"),
+                //                   ),
+                //                 ),
+                //                 Container(
+                //                   margin: EdgeInsets.only(left: 10, top: 10),
+                //                   child: Text(
+                //                     'SL',
+                //                     style: TextStyle(
+                //                         color: Colors.white, fontSize: 15),
+                //                   ),
+                //                 ),
+                //                 Container(
+                //                   margin: EdgeInsets.only(left: 5, top: 10),
+                //                   child: Text(
+                //                     '378- 10 & 360 -8',
+                //                     style: TextStyle(
+                //                         color: Colors.white, fontSize: 12),
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //             Row(
+                //               children: [
+                //                 Container(
+                //                   margin: EdgeInsets.only(left: 10, top: 10),
+                //                   child: CircleAvatar(
+                //                     backgroundImage:
+                //                         AssetImage("assets/pakistan.jpg"),
+                //                   ),
+                //                 ),
+                //                 Container(
+                //                   margin: EdgeInsets.only(left: 10, top: 10),
+                //                   child: Text(
+                //                     'PAK ',
+                //                     style: TextStyle(
+                //                         color: Colors.white, fontSize: 15),
+                //                   ),
+                //                 ),
+                //                 Container(
+                //                   margin: EdgeInsets.only(left: 5, top: 10),
+                //                   child: Text(
+                //                     '231- 6 & 260 -5 ',
+                //                     style: TextStyle(
+                //                         color: Colors.white, fontSize: 12),
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ],
+                //         ),
+                //         Container(
+                //           margin: EdgeInsets.only(left: 40),
+                //           height: 60,
+                //           width: 1,
+                //           color: Colors.white,
+                //         ),
+                //         Container(
+                //           margin: EdgeInsets.only(left: 10),
+                //           child: ClipRRect(
+                //             borderRadius: BorderRadius.circular(2),
+                //             child: Container(
+                //               height: 20,
+                //               width: 20,
+                //               decoration: BoxDecoration(
+                //                 color: Color.fromARGB(255, 26, 121, 29),
+                //                 border: Border.all(
+                //                   color: Color.fromARGB(255, 26, 121, 29),
+                //                 ),
+                //               ),
+                //               child: Center(
+                //                 child: Row(
+                //                   // ignore: prefer_const_literals_to_create_immutables
+                //                   children: [
+                //                     Container(
+                //                       margin: EdgeInsets.only(left: 5),
+                //                       child: Text(
+                //                         'W',
+                //                         style: TextStyle(
+                //                             color: Colors.white, fontSize: 12),
+                //                       ),
+                //                     ),
+                //                   ],
+                //                 ),
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //         Container(
+                //           margin: EdgeInsets.only(
+                //             top: 45,
+                //           ),
+                //           child: Column(
+                //             // ignore: prefer_const_literals_to_create_immutables
+                //             children: [
+                //               Text(
+                //                 '2nd Test',
+                //                 style: TextStyle(
+                //                     fontSize: 10, color: Colors.white),
+                //               ),
+                //               SizedBox(height: 2),
+                //               Container(
+                //                 margin: EdgeInsets.only(left: 5),
+                //                 child: Text(
+                //                   'SL vs PAK...',
+                //                   style: TextStyle(
+                //                       fontSize: 10, color: Colors.white),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -1401,9 +1431,9 @@ class _infoState extends State<info> {
                                       Container(
                                         margin:
                                             EdgeInsets.only(left: 10, top: 10),
-                                        child: Image.asset(
-                                          'assets/pakistan.jpg',
-                                          height: 40,
+                                        child: CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage("assets/pakistan.jpg"),
                                         ),
                                       ),
                                       Container(
@@ -1437,13 +1467,13 @@ class _infoState extends State<info> {
                           margin: EdgeInsets.only(left: 50),
                           child: Text(
                             'Fixtures',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 27, 82, 127)),
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                         Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Color.fromARGB(255, 36, 97, 147),
+                          Icons.keyboard_arrow_right,
+                          size: 35,
+                          color: Colors.blue,
                         ),
                       ],
                     ),
@@ -1459,7 +1489,7 @@ class _infoState extends State<info> {
                 ),
                 Container(
                   alignment: Alignment.bottomLeft,
-                  margin: EdgeInsets.only(left: 35, top: 40),
+                  margin: EdgeInsets.only(left: 35, top: 20),
                   child: Row(
                     children: [
                       Text(
@@ -1491,13 +1521,11 @@ class _infoState extends State<info> {
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 50),
-                            child: Image.asset(
-                              'assets/india.png',
-                              //height: 50,
-                              scale: 0.80,
-                            ),
-                          ),
+                              margin: EdgeInsets.only(left: 50),
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage: AssetImage("assets/india.png"),
+                              )),
                           Container(
                             margin: EdgeInsets.only(left: 25),
                             child: Text(
@@ -1523,12 +1551,12 @@ class _infoState extends State<info> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 25),
-                            child: Image.asset(
-                              'assets/pakistan.jpg',
-                              height: 48,
-                            ),
-                          ),
+                              margin: EdgeInsets.only(left: 25),
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage:
+                                    AssetImage("assets/pakistan.jpg"),
+                              )),
                         ],
                       ),
                     ),
@@ -1537,217 +1565,128 @@ class _infoState extends State<info> {
                 SizedBox(
                   height: 10,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 110,
-                    width: 320,
-                    color: Color.fromARGB(255, 66, 63, 63),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          margin: EdgeInsets.only(left: 15, top: 5),
-                          child: Text(
-                            '3rd Test,Pakistan tour of india 2022 on 21 Aug',
-                            style: TextStyle(fontSize: 8, color: Colors.white),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: Image.asset(
-                                        'assets/india.png',
-                                        height: 40,
-                                      ),
+                Container(
+                  height: 250,
+                  child: ListView.builder(
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 10, left: 15, right: 15),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 125,
+                              width: 320,
+                              color: Color.fromARGB(255, 66, 63, 63),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.bottomLeft,
+                                    margin: EdgeInsets.only(left: 15, top: 10),
+                                    child: Text(
+                                      '3rd Test,Pakistan tour of india 2022 on 21 Aug',
+                                      style: TextStyle(
+                                          fontSize: 8, color: Colors.white),
                                     ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      child: Text(
-                                        'SL',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  margin:
+                                                      EdgeInsets.only(top: 10),
+                                                  child: CircleAvatar(
+                                                    backgroundImage: AssetImage(
+                                                        "assets/india.png"),
+                                                  )),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 10, top: 10),
+                                                child: Text(
+                                                  'SL',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 5, top: 10),
+                                                child: Text(
+                                                  '378- 10 & 360 -8',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 10, top: 5),
+                                                  child: CircleAvatar(
+                                                    backgroundImage: AssetImage(
+                                                        "assets/pakistan.jpg"),
+                                                  )),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  left: 10,
+                                                ),
+                                                child: Text(
+                                                  'PAK ',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15),
+                                                ),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  left: 5,
+                                                ),
+                                                child: Text(
+                                                  '231- 6 & 260 -5 ',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 5, top: 10),
-                                      child: Text(
-                                        '378- 10 & 360 -8',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 40),
+                                        height: 60,
+                                        width: 1,
+                                        color: Colors.white,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(left: 10, top: 5),
-                                      child: Image.asset(
-                                        'assets/pakistan.jpg',
-                                        height: 40,
+                                      Container(
+                                        width: 40,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          'Match Drawn',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'PAK ',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        left: 5,
-                                      ),
-                                      child: Text(
-                                        '231- 6 & 260 -5 ',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 40),
-                              height: 60,
-                              width: 1,
-                              color: Colors.white,
-                            ),
-                            Container(
-                              width: 40,
-                              margin: EdgeInsets.only(left: 10),
-                              child: Text(
-                                'Match Drawn',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 110,
-                    width: 320,
-                    color: Color.fromARGB(255, 66, 63, 63),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          margin: EdgeInsets.only(left: 15, top: 5),
-                          child: Text(
-                            '3rd Test,Pakistan tour of india 2022 on 11 Aug',
-                            style: TextStyle(fontSize: 8, color: Colors.white),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      child: Image.asset(
-                                        'assets/india.png',
-                                        height: 40,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'SL',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                        left: 5,
-                                      ),
-                                      child: Text(
-                                        '378- 10 & 360 -8',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      child: Image.asset(
-                                        'assets/pakistan.jpg',
-                                        height: 40,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      child: Text(
-                                        'PAK ',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 5, top: 10),
-                                      child: Text(
-                                        '231- 6 & 260 -5 ',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 40),
-                              height: 60,
-                              width: 1,
-                              color: Colors.white,
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              child: Text(
-                                'Ind Won',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                        );
+                      }),
                 ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -1772,8 +1711,9 @@ class _infoState extends State<info> {
                                           left: 10,
                                         ),
                                         child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: 10, top: 25),
+                                          alignment: Alignment.topRight,
+                                          width: 75,
+                                          margin: EdgeInsets.only(top: 25),
                                           child: Text(
                                             'PAK ',
                                             style: TextStyle(
@@ -1793,6 +1733,7 @@ class _infoState extends State<info> {
                                         ),
                                       ),
                                       Container(
+                                        width: 75,
                                         margin:
                                             EdgeInsets.only(left: 5, top: 25),
                                         child: Text(
@@ -1810,23 +1751,45 @@ class _infoState extends State<info> {
                           ],
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 90),
+                          margin: EdgeInsets.only(left: 0),
                           child: Text(
                             'More Matches',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 27, 82, 127)),
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                         Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Color.fromARGB(255, 36, 97, 147),
+                          Icons.keyboard_arrow_right,
+                          color: Colors.blue,
+                          size: 35,
                         ),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 25),
+                  child: Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        "Team Comparison",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "(Last 10 Matches)",
+                        style: TextStyle(fontSize: 10, color: Colors.blueGrey),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
@@ -1841,10 +1804,8 @@ class _infoState extends State<info> {
                             Container(
                               alignment: Alignment.topLeft,
                               margin: EdgeInsets.only(left: 15, top: 20),
-                              child: Image.asset(
-                                'assets/india.png',
-                                //height: 50,
-                                scale: 0.80,
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage("assets/india.png"),
                               ),
                             ),
                             Column(
@@ -1878,7 +1839,7 @@ class _infoState extends State<info> {
                                       margin:
                                           EdgeInsets.only(top: 30, left: 55),
                                       child: Text(
-                                        'IND',
+                                        'PAK',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500),
@@ -1896,13 +1857,12 @@ class _infoState extends State<info> {
                                   ],
                                 ),
                                 Container(
-                                  alignment: Alignment.topRight,
-                                  margin: EdgeInsets.only(top: 20, left: 10),
-                                  child: Image.asset(
-                                    'assets/pakistan.jpg',
-                                    height: 48,
-                                  ),
-                                ),
+                                    alignment: Alignment.topRight,
+                                    margin: EdgeInsets.only(top: 20, left: 10),
+                                    child: CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage("assets/pakistan.jpg"),
+                                    )),
                               ],
                             ),
                           ],
@@ -1962,7 +1922,7 @@ class _infoState extends State<info> {
                               child: Text(
                                 '60%',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 48, 131, 50),
+                                    color: Color(0xFFFF4D00),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -2003,7 +1963,7 @@ class _infoState extends State<info> {
                               child: Text(
                                 '320',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 48, 131, 50),
+                                    color: Color(0xFFFF4D00),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -2044,7 +2004,7 @@ class _infoState extends State<info> {
                               child: Text(
                                 '539',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 48, 131, 50),
+                                    color: Color(0xFFFF4D00),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -2085,7 +2045,7 @@ class _infoState extends State<info> {
                               child: Text(
                                 '150',
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 48, 131, 50),
+                                    color: Color(0xFFFF4D00),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500),
                               ),
@@ -2130,10 +2090,12 @@ class _infoState extends State<info> {
                       child: Icon(
                         Icons.location_on,
                         color: Colors.white,
-                        size: 16,
+                        size: 18,
                       ),
                     ),
-                    SizedBox(),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Text(
                       'Rawalpindi Cricket Stadium,Rawalpindi,pakistan',
                       style: TextStyle(color: Colors.white, fontSize: 12),
@@ -2146,83 +2108,106 @@ class _infoState extends State<info> {
                     height: 170,
                     width: 320,
                     color: Color.fromARGB(255, 66, 63, 63),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 25, bottom: 60),
-                          child: Image.asset(
-                            'assets/cloud.png',
-                            height: 50,
-                          ),
-                        ),
-                        Column(
+                        Row(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 10, top: 30),
-                              child: Text(
-                                'Rawalpindi,pakistan',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
+                              margin: EdgeInsets.only(left: 25, bottom: 60),
+                              child: Image.asset(
+                                'assets/cloud.png',
+                                height: 50,
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10, right: 58),
-                              child: Text(
-                                '20  C',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 10, top: 30),
+                                  child: Text(
+                                    'Rawalpindi,pakistan',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10, right: 58),
+                                  child: Text(
+                                    '20  C',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 55,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 30),
+                                      child: Image.asset(
+                                        'assets/droplet.png',
+                                        height: 50,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 30),
+                                      child: Text(
+                                        '60% (Humidity)',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 10),
+                                      child: Image.asset(
+                                        'assets/skydrop.png',
+                                        height: 50,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 10),
+                                      child: Text(
+                                        '1% Chance',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Column(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 30),
-                                  child: Image.asset(
-                                    'assets/droplet.png',
-                                    height: 50,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 30),
-                                  child: Text(
-                                    '60% (Humidity)',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              child: Text(
+                                "Clouds and Sun",
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  child: Image.asset(
-                                    'assets/skydrop.png',
-                                    height: 50,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  child: Text(
-                                    '60% (Humidity)',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ],
+                            SizedBox(
+                              width: 75,
                             ),
                             Container(
                               margin: EdgeInsets.only(),
                               child: Text(
-                                '60% (Humidity)',
+                                'updated 10:10 pm',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
+                                    color: Colors.blueGrey, fontSize: 10),
                               ),
                             ),
                           ],
@@ -2237,56 +2222,280 @@ class _infoState extends State<info> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    height: 300,
                     width: 320,
                     color: Color.fromARGB(255, 66, 63, 63),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          bottom: 60, top: 20, left: 10, right: 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          height: 60,
-                          width: 50,
-                          color: Color.fromARGB(255, 132, 130, 130),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(16),
-                                child: AspectRatio(
-                                  aspectRatio: 50 / 30,
-                                  child: DChartPie(
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    data: [
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 150,
+                              width: 300,
+                              color: Color.fromARGB(255, 132, 130, 130),
+                              child: Column(
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: 35 / 15,
+                                    child: DChartPie(
                                       // ignore: prefer_const_literals_to_create_immutables
-                                      {'domain': 'Ionic', 'measure': 1},
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      {'domain': '', 'measure': 1},
-                                    ],
-                                    fillColor: (pieData, index) {
-                                      switch (pieData['domain']) {
-                                        case 'Flutter':
-                                          return Colors.blue;
-                                        case 'React Native':
-                                          return Colors.blueAccent;
-                                        case 'Ionic':
-                                          return Colors.lightBlue;
-                                        default:
-                                          return Colors.orange;
-                                      }
-                                    },
-                                    // pieLabel: (pieData, index) {
-                                    //   return "${pieData['domain']}:\n${pieData['measure']}%";
-                                    // },
-                                    labelPosition: PieLabelPosition.outside,
-                                    donutWidth: 30,
+                                      data: [
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        {'domain': 'Ionic', 'measure': 1},
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        {'domain': '', 'measure': 1},
+                                      ],
+                                      fillColor: (pieData, index) {
+                                        switch (pieData['domain']) {
+                                          case 'Flutter':
+                                            return Colors.blue;
+                                          case 'React Native':
+                                            return Colors.blueAccent;
+                                          case 'Ionic':
+                                            return Colors.lightBlue;
+                                          default:
+                                            return Colors.orange;
+                                        }
+                                      },
+                                      // pieLabel: (pieData, index) {
+                                      //   return "${pieData['domain']}:\n${pieData['measure']}%";
+                                      // },
+                                      labelPosition: PieLabelPosition.outside,
+                                      donutWidth: 30,
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 2,
+                          width: 320,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Avg 1st Innings",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "320",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 80,
+                            ),
+                            Column(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Avg 1st Innings",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "320",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 1,
+                          width: 320,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Avg 3rdst Innings",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "179",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 80,
+                            ),
+                            Column(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Avg 4th Innings",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "91",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 2,
+                          width: 320,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Highest Total",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "476-4",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 15, right: 25),
+                              child: Text(
+                                "(162 Ov)by IND",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white60),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 35,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 15),
+                              child: Text(
+                                "IND vs PAK",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 2,
+                          width: 320,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Text(
+                                  "Highest Total",
+                                  style: TextStyle(color: Colors.white60),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "168-10",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 15, right: 25),
+                              child: Text(
+                                "(62.2 Ov)by BAN",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white60),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 35,
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 15),
+                              child: Text(
+                                "BAN vs PAK",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 25,
+                        )
+                      ],
                     ),
                   ),
                 ),
@@ -2304,14 +2513,14 @@ class _infoState extends State<info> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    height: 110,
+                    height: 125,
                     width: 320,
                     color: Color.fromARGB(255, 66, 63, 63),
                     child: Column(
                       children: [
                         Container(
                           alignment: Alignment.bottomLeft,
-                          margin: EdgeInsets.only(left: 15, top: 5),
+                          margin: EdgeInsets.only(left: 15, top: 10),
                           child: Text(
                             '20th Test,Quaid e Azam Trophy 2022 on 02 Nov',
                             style: TextStyle(fontSize: 8, color: Colors.white),
@@ -2324,12 +2533,11 @@ class _infoState extends State<info> {
                                 Row(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      child: Image.asset(
-                                        'assets/india.png',
-                                        height: 40,
-                                      ),
-                                    ),
+                                        margin: EdgeInsets.only(top: 5),
+                                        child: CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage("assets/india.png"),
+                                        )),
                                     Container(
                                       margin: EdgeInsets.only(
                                         left: 10,
@@ -2355,13 +2563,12 @@ class _infoState extends State<info> {
                                 Row(
                                   children: [
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      child: Image.asset(
-                                        'assets/pakistan.jpg',
-                                        height: 40,
-                                      ),
-                                    ),
+                                        margin:
+                                            EdgeInsets.only(left: 10, top: 10),
+                                        child: CircleAvatar(
+                                          backgroundImage:
+                                              AssetImage("assets/pakistan.jpg"),
+                                        )),
                                     Container(
                                       margin:
                                           EdgeInsets.only(left: 10, top: 10),
@@ -2425,73 +2632,41 @@ class _infoState extends State<info> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    height: 70,
+                    height: 50,
                     width: 320,
                     color: Color.fromARGB(255, 66, 63, 63),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Column(
+                        Text(
+                          "See More Vanue Matches",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        Row(
+                          // ignore: prefer_const_literals_to_create_immutables
                           children: [
-                            Container(
-                              alignment: Alignment.bottomLeft,
-                              child: Row(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          left: 10,
-                                        ),
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: 10, top: 25),
-                                          child: Text(
-                                            'PAK ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(left: 5, top: 25),
-                                        child: Text(
-                                          'vs',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(left: 5, top: 25),
-                                        child: Text(
-                                          'IND ',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              "All Matches",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
                             ),
+                            Icon(
+                              Icons.keyboard_arrow_right,
+                              color: Colors.blue,
+                              size: 25,
+                            )
                           ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 90),
-                          child: Text(
-                            'More Matches',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 27, 82, 127)),
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Color.fromARGB(255, 36, 97, 147),
-                        ),
+                        )
                       ],
                     ),
                   ),

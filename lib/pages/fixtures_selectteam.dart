@@ -50,9 +50,14 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 45),
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.white,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],

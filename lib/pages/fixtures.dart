@@ -2,6 +2,7 @@
 
 import 'package:crex/pages/fixtures_addTeam.dart';
 import 'package:crex/pages/fixtures_calender.dart';
+import 'package:crex/pages/fixtures_pin.dart';
 import 'package:crex/pages/fixtures_series.dart';
 import 'package:flutter/material.dart';
 
@@ -67,15 +68,16 @@ class _fixturesState extends State<fixtures> {
                                 },
                                 child: Text("Series")),
                             InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const fixtures_addTeam(),
-                                      ));
-                                },
-                                child: Text("My Team")),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const fixtures_addTeam(),
+                                    ));
+                              },
+                              child: Text("My Team"),
+                            ),
                           ]),
                     ),
                     Container(
@@ -275,7 +277,16 @@ class _fixturesState extends State<fixtures> {
                                       SizedBox(
                                         width: 60,
                                       ),
-                                      Image.asset("assets/pin.png")
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const fixtures_pin(),
+                                                ));
+                                          },
+                                          child: Image.asset("assets/pin.png"))
                                     ],
                                   ),
                                   SizedBox(

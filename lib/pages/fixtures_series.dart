@@ -2,6 +2,7 @@ import 'package:crex/dashboard/fixtures_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
+import 'package:crex/pages/fixtures_addTeam.dart';
 import 'package:crex/pages/more.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,6 @@ class fixtures_series extends StatefulWidget {
 class _fixtures_seriesState extends State<fixtures_series> {
   @override
   Widget build(BuildContext context) {
-   
     // ignore: prefer_const_constructors
     return DefaultTabController(
       length: 4,
@@ -119,16 +119,39 @@ class _fixtures_seriesState extends State<fixtures_series> {
                           // ignore: prefer_const_literals_to_create_immutables
                           tabs: [
                             // ignore: prefer_const_constructors
-                            Tab(
-                              text: ('Day'),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const fixtures_dashboard(),
+                                    ));
+                              },
+                              child: const Tab(
+                                text: ('Day'),
+                              ),
                             ),
-                            // ignore: prefer_const_constructors
-                            Tab(
-                              text: ('Series'),
-                            ),
-                            // ignore: prefer_const_constructors
-                            Tab(
-                              text: ('My Team'),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const fixtures_series(),
+                                      ));
+                                },
+                                child: const Text("Series")),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const fixtures_addTeam(),
+                                    ));
+                              },
+                              child: const Text("My Team"),
                             ),
                           ]),
                     ),
@@ -137,9 +160,18 @@ class _fixtures_seriesState extends State<fixtures_series> {
                       width: 90,
                     ),
                     Container(
-                        // ignore: prefer_const_constructors
-                        margin: EdgeInsets.only(top: 20),
-                        child: Image.asset("assets/three_line.png"))
+                      // ignore: prefer_const_constructors
+                      margin: EdgeInsets.only(top: 20),
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const fixtures_dashboard()));
+                          },
+                          child: Image.asset("assets/three_line.png")),
+                    )
                   ],
                 ),
               ),

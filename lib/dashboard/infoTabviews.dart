@@ -7,6 +7,7 @@ import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/commentary.dart';
 import 'package:crex/pages/fantasy.dart';
+import 'package:crex/pages/graph.dart';
 import 'package:crex/pages/info.dart';
 import 'package:crex/pages/live_first.dart';
 import 'package:crex/pages/more.dart';
@@ -72,11 +73,7 @@ class _infoTabViewsState extends State<infoTabViews> {
               commententary(),
               live_first(),
               scorecard(),
-              Icon(
-                Icons.graphic_eq,
-                color: Colors.black,
-                size: 50,
-              ),
+              graph(),
               seriesstatus(),
             ],
           ),

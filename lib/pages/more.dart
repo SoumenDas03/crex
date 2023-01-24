@@ -7,6 +7,7 @@ import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/cricket_home.dart';
 import 'package:crex/pages/fixtures.dart';
 import 'package:crex/pages/matches.dart';
+import 'package:crex/pages/notifications_main.dart';
 import 'package:crex/pages/series.dart';
 import 'package:flutter/material.dart';
 
@@ -172,28 +173,35 @@ class _moreState extends State<more> {
                   height: 40,
                   width: 320,
                   color: Color.fromARGB(255, 26, 26, 26),
-                  child: Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Icon(
-                          Icons.notifications,
-                          color: Colors.white,
-                          size: 27,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const notification_main(),
+                      ));
+                    },
+                    child: Row(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Icon(
+                            Icons.notifications,
+                            color: Colors.white,
+                            size: 27,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Notification',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      )
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            'Notification',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(

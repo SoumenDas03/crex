@@ -43,7 +43,11 @@ class _fixtures_calenderState extends State<fixtures_calender> {
                 SizedBox(
                   width: 100,
                 ),
-                Image.asset("assets/three_line.png")
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset("assets/three_line.png"))
               ],
             ),
           ),
@@ -67,13 +71,15 @@ class _fixtures_calenderState extends State<fixtures_calender> {
                   height: 45,
                   // ignore: prefer_const_constructors
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                    color: Colors.white,
+                    // ignore: prefer_const_constructors
+                    borderRadius: BorderRadius.only(
                       // ignore: prefer_const_constructors
-                      borderRadius: BorderRadius.only(
-                          // ignore: prefer_const_constructors
-                          topRight: Radius.circular(10),
-                          // ignore: prefer_const_constructors
-                          topLeft: Radius.circular(10))),
+                      topRight: Radius.circular(10),
+                      // ignore: prefer_const_constructors
+                      topLeft: Radius.circular(10),
+                    ),
+                  ),
                   // ignore: prefer_const_constructors
                   child: TabBar(
                       // ignore: prefer_const_constructors

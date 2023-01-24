@@ -222,7 +222,11 @@ class _fixtures_pinState extends State<fixtures_pin> {
                           // ignore: prefer_const_literals_to_create_immutables
                           children: [
                             // ignore: prefer_const_constructors
-                            Icon(Icons.arrow_back),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Icon(Icons.arrow_back)),
                             // ignore: prefer_const_constructors
                             SizedBox(
                               width: 25,

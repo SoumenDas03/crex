@@ -1,6 +1,12 @@
 // ignore_for_file: file_names
 
+import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/home_dashboard.dart';
+import 'package:crex/dashboard/matches_dashboard.dart';
+import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/fixtures_selectteam.dart';
+import 'package:crex/pages/fixtures_series.dart';
+import 'package:crex/pages/more.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -85,7 +91,7 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
           )),
           child: Column(children: [
             DefaultTabController(
-              initialIndex: 1,
+              initialIndex: 2,
               length: 3,
               child: Row(
                 children: [
@@ -116,16 +122,39 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                         // ignore: prefer_const_literals_to_create_immutables
                         tabs: [
                           // ignore: prefer_const_constructors
-                          Tab(
-                            text: ('Day'),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const fixtures_dashboard(),
+                                  ));
+                            },
+                            child: const Tab(
+                              text: ('Day'),
+                            ),
                           ),
-                          // ignore: prefer_const_constructors
-                          Tab(
-                            text: ('Series'),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Tab(
-                            text: ('My Team'),
+                          InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const fixtures_series(),
+                                    ));
+                              },
+                              child: const Text("Series")),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const fixtures_addTeam(),
+                                  ));
+                            },
+                            child: const Text("My Team"),
                           ),
                         ]),
                   ),
@@ -136,7 +165,15 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                   Container(
                       // ignore: prefer_const_constructors
                       margin: EdgeInsets.only(top: 20),
-                      child: Image.asset("assets/three_line.png"))
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const fixtures_dashboard()));
+                          },
+                          child: Image.asset("assets/three_line.png")))
                 ],
               ),
             ),
@@ -325,7 +362,11 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                 child: Row(
                   children: [
                     InkWell(
-                      onTap: null,
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const home_dashboard(),
+                        ));
+                      },
                       child: Container(
                         // ignore: prefer_const_constructors
                         margin: EdgeInsets.only(left: 17),
@@ -354,104 +395,132 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                         ),
                       ),
                     ),
-                    Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/series.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const series_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/series.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Series',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Series',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/matches.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const matches_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/matches.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Matches',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Matches',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/fixtures.png',
-                              scale: 1.2,
-                              color: const Color(0xFFFF4D00),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const fixtures_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/fixtures.png',
+                                scale: 1.2,
+                                color: const Color(0xFFFF4D00),
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Fixtures',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Fixtures',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/more.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const more(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/more.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'More',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'More',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],

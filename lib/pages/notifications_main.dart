@@ -10,6 +10,9 @@ class notification_main extends StatefulWidget {
 }
 
 class _notification_mainState extends State<notification_main> {
+  bool status1 = false;
+  bool status2 = false;
+  bool status3 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +24,14 @@ class _notification_mainState extends State<notification_main> {
               children: [
                 Container(
                   margin: EdgeInsets.only(left: 20, top: 30),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Container(
@@ -58,91 +66,104 @@ class _notification_mainState extends State<notification_main> {
               color: Colors.orange,
             ),
             Container(
-              height: 120,
-              width: 380,
+              width: 360,
               color: Color.fromARGB(255, 76, 74, 74),
-              child: Row(
+              child: Column(
                 children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 20, top: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Text(
-                              ' Allow Notifications',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 40),
-                              child: Text(
-                                ' Allow ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                            ),
-                          ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        ' Allow Notifications',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13),
+                      ),
+                      SizedBox(
+                        width: 150,
+                      ),
+                      Switch(
+                        activeColor: Colors.blueGrey,
+                        activeTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: Colors.grey,
+                        value: status1,
+                        onChanged: (value) {
+                          // ignore: avoid_print
+                          print("VALUE : $value");
+                          setState(() {
+                            status1 = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        ' Sound',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13,
                         ),
-                        Row(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 70, top: 20),
-                              child: Text(
-                                ' Sound',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 40, top: 20),
-                              child: Text(
-                                ' Allow ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 60, top: 20),
-                              child: Text(
-                                ' Vibration',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 40, top: 20),
-                              child: Text(
-                                ' Allow ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 225,
+                      ),
+                      Switch(
+                        activeColor: Colors.blueGrey,
+                        activeTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: Colors.grey,
+                        value: status2,
+                        onChanged: (value) {
+                          // ignore: avoid_print
+                          print("VALUE : $value");
+                          setState(
+                            () {
+                              status2 = value;
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        ' Vibration',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13),
+                      ),
+                      SizedBox(
+                        width: 210,
+                      ),
+                      Switch(
+                        activeColor: Colors.blueGrey,
+                        activeTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: Colors.grey,
+                        value: status3,
+                        onChanged: (value) {
+                          // ignore: avoid_print
+                          print("VALUE : $value");
+                          setState(
+                            () {
+                              status3 = value;
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -163,7 +184,7 @@ class _notification_mainState extends State<notification_main> {
             ),
             Container(
               height: 2,
-              width: 380,
+              width: 360,
               color: Colors.orange,
             ),
             SizedBox(
@@ -189,7 +210,7 @@ class _notification_mainState extends State<notification_main> {
                   Container(
                     margin: EdgeInsets.only(right: 20),
                     child: Icon(
-                      Icons.arrow_downward,
+                      Icons.keyboard_arrow_down,
                       color: Colors.white,
                     ),
                   )
@@ -246,7 +267,8 @@ class _notification_mainState extends State<notification_main> {
                   Container(
                     margin: EdgeInsets.only(right: 20),
                     child: Icon(
-                      Icons.arrow_forward,
+                      Icons.keyboard_arrow_right,
+                      // size: 18,
                       color: Colors.white,
                     ),
                   )
@@ -304,13 +326,18 @@ class _notification_mainState extends State<notification_main> {
                   ),
                   Spacer(),
                   Container(
-                      margin: EdgeInsets.only(right: 20),
-                      child: Container(
-                        height: 30,
-                        width: 30,
-                        color: Colors.orange,
-                        child: Icon(Icons.fork_right),
-                      ))
+                    margin: EdgeInsets.only(right: 20),
+                    child: Container(
+                      height: 25,
+                      width: 25,
+                      color: Colors.orange,
+                      child: Icon(
+                        Icons.done,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -351,15 +378,22 @@ class _notification_mainState extends State<notification_main> {
                   Container(
                     margin: EdgeInsets.only(right: 20),
                     child: Container(
-                      height: 30,
-                      width: 30,
+                      height: 25,
+                      width: 25,
                       color: Colors.orange,
-                      child: Icon(Icons.fork_right),
+                      child: Icon(
+                        Icons.done,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              height: 25,
+            )
           ],
         ),
       ),

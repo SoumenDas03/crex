@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const notification_main(),
+      home: const home_dashboard(),
     );
   }
 }

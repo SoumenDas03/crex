@@ -10,7 +10,8 @@ class seriesstatus extends StatefulWidget {
 }
 
 class _seriesstatusState extends State<seriesstatus> {
-  bool isVisible = true;
+  bool isVisible = false;
+  bool flag = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -885,6 +886,9 @@ class _seriesstatusState extends State<seriesstatus> {
                     width: 380,
                     color: Colors.white,
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Container(
                     margin: EdgeInsets.only(left: 5),
                     child: ListView.builder(
@@ -1050,7 +1054,7 @@ class _seriesstatusState extends State<seriesstatus> {
                               ],
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                             Container(
                               height: 1,
@@ -1058,7 +1062,7 @@ class _seriesstatusState extends State<seriesstatus> {
                               color: Colors.white,
                             ),
                             SizedBox(
-                              height: 25,
+                              height: 10,
                             ),
                           ],
                         );
