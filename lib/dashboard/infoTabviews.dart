@@ -1,5 +1,5 @@
 // ignore: file_names
-// ignore_for_file: file_names, duplicate_ignore
+// ignore_for_file: file_names, duplicate_ignore, prefer_const_constructors
 
 import 'package:crex/dashboard/fixtures_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
@@ -18,7 +18,9 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class infoTabViews extends StatefulWidget {
-  const infoTabViews({super.key});
+  const infoTabViews({Key? key, required this.id}) : super(key: key);
+
+  final String id;
 
   @override
   State<infoTabViews> createState() => _infoTabViewsState();
@@ -66,10 +68,14 @@ class _infoTabViewsState extends State<infoTabViews> {
                   ),
                 ]),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: <Widget>[
-              info(),
-              fantasy(),
+              info(
+                id: widget.id,
+              ),
+              fantasy(
+                id: widget.id,
+              ),
               commententary(),
               live_first(),
               scorecard(),
@@ -184,6 +190,7 @@ class _infoTabViewsState extends State<infoTabViews> {
                                 backgroundColor: Colors.white,
                                 child: Image.asset(
                                   'assets/matches.png',
+                                  color: Colors.black,
                                   scale: 1.2,
                                 ),
                               ),

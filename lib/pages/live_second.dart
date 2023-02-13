@@ -62,8 +62,10 @@ class live_second extends StatelessWidget {
             )),
             child: TabBarView(
               children: <Widget>[
-                info(),
-                fantasy(),
+                info(id: "1",),
+                fantasy(
+                  id: "1",
+                ),
                 commententary(),
                 SingleChildScrollView(
                   child: Column(children: [

@@ -55,7 +55,7 @@ import 'package:crex/pages/singlePlayer_news.dart';
 import 'package:crex/pages/singlePlayer_overview.dart';
 import 'package:crex/pages/speech_settings.dart';
 import 'package:crex/pages/team_ranking.dart';
-import 'package:crex/pages/tennis_home.dart';
+import 'package:crex/pages/tennis_home.dart';  
 import 'package:crex/pages/topfantasypoints.dart';
 import 'package:crex/pages/win_prediction.dart';
 import 'package:flutter/material.dart';
@@ -69,10 +69,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return MaterialApp(
+    return MaterialApp(         
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: const home_dashboard(),
     );
-  }
-}
+  }      
+} 

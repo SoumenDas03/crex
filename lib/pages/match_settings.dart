@@ -56,8 +56,10 @@ class _match_settingsState extends State<match_settings> {
         ),
         body: TabBarView(
           children: <Widget>[
-            info(),
-            fantasy(),
+            info(id: "1",),
+            fantasy(
+              id: "1",
+            ),
             commententary(),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
