@@ -547,11 +547,14 @@ class _infoState extends State<info> {
                                     margin: EdgeInsets.only(left: 15),
                                     child: Row(
                                       children: [
-                                        Text(
-                                          data["name"].toString(),
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
+                                        Container(
+                                          width: 270,
+                                          child: Text(
+                                            data["name"].toString(),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(left: 00),

@@ -76,7 +76,9 @@ class _infoTabViewsState extends State<infoTabViews> {
               fantasy(
                 id: widget.id,
               ),
-              commententary(),
+              commententary(
+                id: widget.id,
+              ),
               live_first(),
               scorecard(),
               graph(),
@@ -84,7 +86,7 @@ class _infoTabViewsState extends State<infoTabViews> {
             ],
           ),
           bottomNavigationBar: Container(
-            height: 75,
+            height: 60,
             color: Colors.black,
             child: Stack(
               children: [
@@ -98,14 +100,14 @@ class _infoTabViewsState extends State<infoTabViews> {
                         // ignore: prefer_const_constructors
                         topLeft: Radius.circular(20)),
                     child: Container(
-                      height: 45,
+                      height: 35,
                       width: MediaQuery.of(context).size.width,
                       color: const Color(0xFFFF4D00),
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: 20,
+                  bottom: 5,
                   left: 10,
                   child: Row(
                     children: [

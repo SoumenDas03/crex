@@ -60,7 +60,9 @@ class _match_settingsState extends State<match_settings> {
             fantasy(
               id: "1",
             ),
-            commententary(),
+            commententary(
+              id: "1",
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Container(

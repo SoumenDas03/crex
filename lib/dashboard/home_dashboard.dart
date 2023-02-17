@@ -92,7 +92,7 @@ class _home_dashboardState extends State<home_dashboard> {
           ],
         ),
         bottomNavigationBar: Container(
-          height: 75,
+          height: 60,
           color: Colors.black,
           child: Stack(
             children: [
@@ -106,19 +106,18 @@ class _home_dashboardState extends State<home_dashboard> {
                       // ignore: prefer_const_constructors
                       topLeft: Radius.circular(20)),
                   child: Container(
-                    height: 45,
+                    height: 30,
                     width: MediaQuery.of(context).size.width,
                     color: const Color(0xFFFF4D00),
                   ),
                 ),
               ),
               Positioned(
-                bottom: 20,
+                bottom: 5,
                 left: 10,
                 child: Row(
                   children: [
                     InkWell(
-                      
                       onTap: null,
                       child: Container(
                         // ignore: prefer_const_constructors

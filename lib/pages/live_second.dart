@@ -66,7 +66,9 @@ class live_second extends StatelessWidget {
                 fantasy(
                   id: "1",
                 ),
-                commententary(),
+                commententary(
+                  id: "1",
+                ),
                 SingleChildScrollView(
                   child: Column(children: [
                     Container(
