@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, prefer_typing_uninitialized_variables
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:convert';
 
@@ -81,13 +81,17 @@ class _fantasyState extends State<fantasy> {
 
       scoreMap = jsonDecode(response.body.toString());
       scoreData = scoreMap["data"];
-      sugamScore = scoreData["scorecard"].length > 1?(scoreData["scorecard"][0]["batting"] +
-          scoreData["scorecard"][1]["batting"]):scoreData["scorecard"][0]["batting"];
+      sugamScore = scoreData["scorecard"].length > 1
+          ? (scoreData["scorecard"][0]["batting"] +
+              scoreData["scorecard"][1]["batting"])
+          : scoreData["scorecard"][0]["batting"];
       sugamScore.sort((a, b) {
         return a['r'].compareTo(b['r']) as int;
       });
-      sugamWicket = scoreData["scorecard"].length > 1?(scoreData["scorecard"][0]["bowling"] +
-          scoreData["scorecard"][1]["bowling"]): scoreData["scorecard"][0]["bowling"];
+      sugamWicket = scoreData["scorecard"].length > 1
+          ? (scoreData["scorecard"][0]["bowling"] +
+              scoreData["scorecard"][1]["bowling"])
+          : scoreData["scorecard"][0]["bowling"];
       sugamWicket.sort((a, b) {
         return a['w'].compareTo(b['w']) as int;
       });
@@ -154,476 +158,530 @@ class _fantasyState extends State<fantasy> {
                                     SizedBox(
                                       height: 8,
                                     ),
-                                    Opacity(
-                                      opacity: 0.8,
-                                      child: Container(
-                                        height: 160,
-                                        width: 400,
-                                        color: Colors.blueGrey[900],
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 15),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  alignment: Alignment.topRight,
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          color: Color(0xff258D50),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    margin: EdgeInsets.only(
+                                                        right: 25),
+                                                    child: Image.asset(
+                                                        "assets/volume.png")),
+                                                Container(
                                                   margin: EdgeInsets.only(
                                                       right: 25),
-                                                  child: Image.asset(
-                                                      "assets/volume.png")),
-                                              Container(
-                                                margin:
-                                                    EdgeInsets.only(right: 25),
-                                                child: Row(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CircleAvatar(
+                                                                radius: 25,
+                                                                backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                                        data["teamInfo"][0]["name"].substring(
+                                                                            0,
+                                                                            (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                                ? data["teamInfo"][0]["name"].indexOf(
+                                                                                    " ")
+                                                                                : data["teamInfo"][0]["name"]
+                                                                                    .length)
+                                                                    ? data["teamInfo"]
+                                                                            [0]
+                                                                        ["img"]
+                                                                    : data["teamInfo"]
+                                                                            [1][
+                                                                        "img"]),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Column(
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                                  Text(
+                                                                    data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) == data["teamInfo"][0]["name"].substring(0, (data["teamInfo"][0]["name"].indexOf(" ") != -1) ? data["teamInfo"][0]["name"].indexOf(" ") : data["teamInfo"][0]["name"].length)
+                                                                        ? data["teamInfo"][0]
+                                                                            [
+                                                                            "shortname"]
+                                                                        : data["teamInfo"][1]
+                                                                            [
+                                                                            "shortname"],
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                  Text(
+                                                                    '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Column(
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                                  Text(
+                                                                    ((data["score"].length / 2).round()) ==
+                                                                            1
+                                                                        ? '${(data["score"].length / 2).round()}st inn'
+                                                                        : '${(data["score"].length / 2).round()}nd inn',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Text(
+                                                                    data["score"]
+                                                                            [
+                                                                            (data["score"].length) -
+                                                                                1]["o"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 80,
+                                                      ),
+                                                      Text(
+                                                        '4',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.amber,
+                                                            fontSize: 50),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Container(
+                                                    height: 1,
+                                                    width: 400,
+                                                    color: Colors.white),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children:  [
+                                                    Text(
+                                                      // ignore: prefer_interpolation_to_compose_strings
+                                                      'CCR : ' +
+                                                          (data["score"][(data[
+                                                                              "score"]
+                                                                          .length) -
+                                                                      1]["r"] /
+                                                                  data[
+                                                                      "score"][(data[
+                                                                              "score"]
+                                                                          .length) -
+                                                                      1]["o"])
+                                                              .toStringAsFixed(
+                                                                  2),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15.5),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text(
+                                                      data["matchType"] !=
+                                                              "test"
+                                                          ? 'RRR : 8.58'
+                                                          : "",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15.5),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 70,
+                                                    ),
+                                                    Image.asset(
+                                                        'assets/live_tv.png')
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
                                                   children: [
-                                                    Column(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            CircleAvatar(
-                                                              radius: 25,
-                                                              backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                                                      data["teamInfo"][0]["name"].substring(
-                                                                          0,
-                                                                          (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                              ? data["teamInfo"][0]["name"].indexOf(
-                                                                                  " ")
-                                                                              : data["teamInfo"][0]["name"]
-                                                                                  .length)
-                                                                  ? data["teamInfo"]
-                                                                      [0]["img"]
-                                                                  : data["teamInfo"]
-                                                                          [1]
-                                                                      ["img"]),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: const [
+                                                          Text(
+                                                            'Over 18',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '4',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
-                                                            SizedBox(
-                                                              width: 10,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '0',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
-                                                            Column(
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                                Text(
-                                                                  data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) == data["teamInfo"][0]["name"].substring(0, (data["teamInfo"][0]["name"].indexOf(" ") != -1) ? data["teamInfo"][0]["name"].indexOf(" ") : data["teamInfo"][0]["name"].length)
-                                                                      ? data["teamInfo"]
-                                                                              [
-                                                                              0]
-                                                                          [
-                                                                          "shortname"]
-                                                                      : data["teamInfo"]
-                                                                              [
-                                                                              1]
-                                                                          [
-                                                                          "shortname"],
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          20,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                Text(
-                                                                  '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          20,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '4',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
-                                                            SizedBox(
-                                                              width: 10,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '1',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
-                                                            Column(
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                                Text(
-                                                                  ((data["score"].length / 2)
-                                                                              .round()) ==
-                                                                          1
-                                                                      ? '${(data["score"].length / 2).round()}st inn'
-                                                                      : '${(data["score"].length / 2).round()}nd inn',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 10,
-                                                                ),
-                                                                Text(
-                                                                  data["score"][
-                                                                          (data["score"].length) -
-                                                                              1]["o"]
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '0',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                      ],
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '1',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            '=',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 2,
+                                                          ),
+                                                          Text(
+                                                            '10',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 80,
+                                                    Container(
+                                                      height: 20,
+                                                      width: 1,
+                                                      color: Colors.blueGrey,
                                                     ),
-                                                    Text(
-                                                      '4',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.amber,
-                                                          fontSize: 50),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              5.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: const [
+                                                          Text(
+                                                            'Over 19',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '2',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '0',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '4',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          CircleAvatar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            radius: 5,
+                                                            child: Text(
+                                                              '-',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            '=',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 2,
+                                                          ),
+                                                          Text(
+                                                            '6',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          )
+                                                        ],
+                                                      ),
                                                     )
                                                   ],
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Container(
-                                                height: 2,
-                                                width: 400,
-                                                color: Colors.blueGrey[500],
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    // ignore: prefer_interpolation_to_compose_strings
-                                                    'CCR : ' +
-                                                        (data["score"][(data[
-                                                                            "score"]
-                                                                        .length) -
-                                                                    1]["r"] /
-                                                                data["score"][
-                                                                    (data["score"]
-                                                                            .length) -
-                                                                        1]["o"])
-                                                            .toStringAsFixed(2),
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15.5),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Text(
-                                                    data["matchType"] != "test"
-                                                        ? 'RRR : 8.58'
-                                                        : "",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15.5),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 70,
-                                                  ),
-                                                  Image.asset(
-                                                      'assets/live_tv.png')
-                                                ],
-                                              )
-                                            ],
+                                                SizedBox(height: 10),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                'Over 2',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '4',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '0',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '4',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '1',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '0',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '1',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                '=',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              SizedBox(
-                                                width: 2,
-                                              ),
-                                              Text(
-                                                '10',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 20,
-                                          width: 1,
-                                          color: Colors.blueGrey,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                'Over 3',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '2',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '0',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '4',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '-',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '-',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              CircleAvatar(
-                                                backgroundColor: Colors.white,
-                                                radius: 5,
-                                                child: Text(
-                                                  '-',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                '=',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              SizedBox(
-                                                width: 2,
-                                              ),
-                                              Text(
-                                                '6',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )
-                                            ],
-                                          ),
-                                        )
-                                      ],
                                     ),
                                     Row(
                                       crossAxisAlignment:
@@ -1252,10 +1310,7 @@ class _fantasyState extends State<fantasy> {
                                                                       height: 5,
                                                                     ),
                                                                     Text(
-                                                                      "${wicketOrderData[
-                                                                              index]
-                                                                          [
-                                                                          "o"]} Overs",
+                                                                      "${wicketOrderData[index]["o"]} Overs",
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .white,

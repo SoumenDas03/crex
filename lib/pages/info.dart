@@ -1,10 +1,9 @@
-// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, file_names, prefer_interpolation_to_compose_strings
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, file_names, prefer_interpolation_to_compose_strings, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
 
 import 'package:crex/pages/playingXI.dart';
 import 'package:flutter/material.dart';
-import 'package:d_chart/d_chart.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -41,9 +40,11 @@ class _infoState extends State<info> {
           return data;
           // ignore: use_build_context_synchronously
         } else {
+          // ignore: avoid_print
           print('failed');
         }
       } catch (e) {
+        // ignore: avoid_print
         print(e.toString());
       }
     }
@@ -80,578 +81,636 @@ class _infoState extends State<info> {
                       SizedBox(
                         height: 10,
                       ),
-                      Opacity(
-                        opacity: 0.8,
-                        child: Container(
-                          height: 160,
-                          width: 400,
-                          color: Colors.blueGrey[900],
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    alignment: Alignment.topRight,
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Color(0xff258D50),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      alignment: Alignment.topRight,
+                                      margin: EdgeInsets.only(right: 25),
+                                      child: Image.asset("assets/volume.png")),
+                                  Container(
                                     margin: EdgeInsets.only(right: 25),
-                                    child: Image.asset("assets/volume.png")),
-                                Container(
-                                  margin: EdgeInsets.only(right: 25),
-                                  child: Row(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
+                                                              0,
+                                                              (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                  ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                      " ")
+                                                                  : data["score"][data["score"].length - 1]["inning"]
+                                                                      .length) ==
+                                                          data["teamInfo"][0]["name"].substring(
+                                                              0,
+                                                              (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                  ? data["teamInfo"][0]["name"]
+                                                                      .indexOf(" ")
+                                                                  : data["teamInfo"][0]["name"].length)
+                                                      ? data["teamInfo"][0]["img"]
+                                                      : data["teamInfo"][1]["img"]),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    Text(
+                                                      data["score"][data["score"].length - 1]["inning"].substring(
+                                                                  0,
+                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") !=
+                                                                          -1)
+                                                                      ? data["score"][data["score"].length - 1]["inning"]
+                                                                          .indexOf(
+                                                                              " ")
+                                                                      : data["score"][data["score"].length - 1]["inning"]
+                                                                          .length) ==
+                                                              data["teamInfo"]
+                                                                          [0]
+                                                                      ["name"]
+                                                                  .substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                          : data["teamInfo"][0]["name"].length)
+                                                          ? data["teamInfo"][0]["shortname"]
+                                                          : data["teamInfo"][1]["shortname"],
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    Text(
+                                                      ((data["score"].length /
+                                                                      2)
+                                                                  .round()) ==
+                                                              1
+                                                          ? '${(data["score"].length / 2).round()}st inn'
+                                                          : '${(data["score"].length / 2).round()}nd inn',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text(
+                                                      data["score"][
+                                                              (data["score"]
+                                                                      .length) -
+                                                                  1]["o"]
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 80,
+                                        ),
+                                        Text(
+                                          '4',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.amber,
+                                              fontSize: 50),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                      height: 1,
+                                      width: 400,
+                                      color: Colors.white),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'CCR : ' +
+                                            (data["score"][
+                                                        (data["score"].length) -
+                                                            1]["r"] /
+                                                    data["score"][
+                                                        (data["score"].length) -
+                                                            1]["o"])
+                                                .toStringAsFixed(2),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15.5),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        data["matchType"] != "test"
+                                            ? 'RRR : 8.58'
+                                            : "",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15.5),
+                                      ),
+                                      SizedBox(
+                                        width: 70,
+                                      ),
+                                      Image.asset('assets/live_tv.png')
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 25,
-                                                backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
-                                                            0,
-                                                            (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                                                    " ")
-                                                                : data["score"][data["score"].length - 1]["inning"]
-                                                                    .length) ==
-                                                        data["teamInfo"][0]["name"].substring(
-                                                            0,
-                                                            (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                ? data["teamInfo"][0]["name"]
-                                                                    .indexOf(" ")
-                                                                : data["teamInfo"][0]["name"].length)
-                                                    ? data["teamInfo"][0]["img"]
-                                                    : data["teamInfo"][1]["img"]),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Text(
+                                              'Over 18',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '4',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              SizedBox(
-                                                width: 10,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '0',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              Column(
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-                                                  Text(
-                                                    data["score"][data["score"].length - 1]["inning"].substring(
-                                                                0,
-                                                                (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                    ? data["score"][data["score"].length - 1]["inning"]
-                                                                        .indexOf(
-                                                                            " ")
-                                                                    : data["score"][data["score"].length - 1]["inning"]
-                                                                        .length) ==
-                                                            data["teamInfo"][0]["name"].substring(
-                                                                0,
-                                                                (data["teamInfo"][0]["name"].indexOf(" ") !=
-                                                                        -1)
-                                                                    ? data["teamInfo"][0]
-                                                                            ["name"]
-                                                                        .indexOf(" ")
-                                                                    : data["teamInfo"][0]["name"].length)
-                                                        ? data["teamInfo"][0]["shortname"]
-                                                        : data["teamInfo"][1]["shortname"],
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(
-                                                    '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '4',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              SizedBox(
-                                                width: 10,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '1',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                              Column(
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-                                                  Text(
-                                                    ((data["score"].length / 2)
-                                                                .round()) ==
-                                                            1
-                                                        ? '${(data["score"].length / 2).round()}st inn'
-                                                        : '${(data["score"].length / 2).round()}nd inn',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Text(
-                                                    data["score"][(data["score"]
-                                                                .length) -
-                                                            1]["o"]
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '0',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                        ],
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '1',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '=',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text(
+                                              '10',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      SizedBox(
-                                        width: 80,
+                                      Container(
+                                        height: 20,
+                                        width: 1,
+                                        color: Colors.blueGrey,
                                       ),
-                                      Text(
-                                        '4',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.amber,
-                                            fontSize: 50),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: const [
+                                            Text(
+                                              'Over 19',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '2',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '0',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '4',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '-',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '-',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 5,
+                                              child: Text(
+                                                '-',
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              '=',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text(
+                                              '6',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 15,
+                                  SizedBox(height: 10),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 40,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Container(
+                                  alignment: Alignment.bottomLeft,
+                                  margin: EdgeInsets.only(bottom: 10, left: 20),
+                                  child: Image.asset(
+                                    'assets/coin.png',
+                                    scale: 0.5,
+                                  ),
                                 ),
                                 Container(
-                                  height: 2,
-                                  width: 400,
-                                  color: Colors.blueGrey[500],
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    data["status"].toString(),
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.white),
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'CCR : ' +
-                                          (data["score"][
-                                                      (data["score"].length) -
-                                                          1]["r"] /
-                                                  data["score"][
-                                                      (data["score"].length) -
-                                                          1]["o"])
-                                              .toStringAsFixed(2),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15.5),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      data["matchType"] != "test"
-                                          ? 'RRR : 8.58'
-                                          : "",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15.5),
-                                    ),
-                                    SizedBox(
-                                      width: 70,
-                                    ),
-                                    Image.asset('assets/live_tv.png')
-                                  ],
-                                )
                               ],
                             ),
                           ),
                         ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 8, left: 6),
-                            child: Text(
-                              'Over 2',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 177, 175, 175),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '4',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '0',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '4',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '1',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '0',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '1',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 8, top: 9),
-                            child: Text(
-                              '= 10',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 201, 200, 200),
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10, top: 8),
-                            height: 15,
-                            width: 1,
-                            color: Colors.white,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 8, left: 10),
-                            child: Text(
-                              'Over 3',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 177, 175, 175),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '2',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '0',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '4',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '-',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '-',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 4, top: 9),
-                            child: CircleAvatar(
-                              radius: 6,
-                              backgroundColor: Colors.white,
-                              child: Text(
-                                '-',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 8, top: 9),
-                            child: Text(
-                              '= 6',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 201, 200, 200),
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          height: 40,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                alignment: Alignment.bottomLeft,
-                                margin: EdgeInsets.only(bottom: 10, left: 20),
-                                child: Image.asset(
-                                  'assets/coin.png',
-                                  scale: 0.5,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 70,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.bottomLeft,
+                                      margin:
+                                          EdgeInsets.only(right: 200, top: 10),
+                                      child: Text(
+                                        data["matchType"].toUpperCase(),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      alignment: Alignment.bottomLeft,
+                                      margin: EdgeInsets.only(left: 15),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 270,
+                                            child: Text(
+                                              data["name"].toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 00),
+                                            child: Icon(
+                                              Icons.keyboard_arrow_right,
+                                              size: 35,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Text(
-                                  data["status"].toString(),
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          height: 70,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.bottomLeft,
-                                    margin:
-                                        EdgeInsets.only(right: 200, top: 10),
-                                    child: Text(
-                                      data["matchType"].toUpperCase(),
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: Container(
+                            height: 60,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Container(
+                                  alignment: Alignment.bottomLeft,
+                                  margin: EdgeInsets.only(bottom: 20, left: 15),
+                                  child: Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.white,
+                                    size: 25,
                                   ),
-                                  SizedBox(
-                                    height: 5,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    DateFormat("dd-MMM-yyyy")
+                                        .add_jm()
+                                        .format(
+                                            (DateFormat("yyyy-MM-ddTHH:mm:ss")
+                                                .parse(
+                                                    data["dateTimeGMT"], true)
+                                                .toLocal()))
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
                                   ),
-                                  Container(
-                                    alignment: Alignment.bottomLeft,
-                                    margin: EdgeInsets.only(left: 15),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 270,
-                                          child: Text(
-                                            data["name"].toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 00),
-                                          child: Icon(
-                                            Icons.keyboard_arrow_right,
-                                            size: 35,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              // Container(
-                              //   margin: EdgeInsets.only(left: 20),
-                              //   child: Image.asset(
-                              //     'assets/vs.png',
-                              //     height: 40,
-                              //     width: 40,
-                              //   ),
-                              // ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: Container(height: 1, color: Colors.white),
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        child: Container(
-                          height: 60,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                alignment: Alignment.bottomLeft,
-                                margin: EdgeInsets.only(bottom: 20, left: 15),
-                                child: Icon(
-                                  Icons.calendar_today,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Text(
-                                  DateFormat("dd-MMM-yyyy")
-                                      .add_jm()
-                                      .format((DateFormat("yyyy-MM-ddTHH:mm:ss")
-                                          .parse(data["dateTimeGMT"], true)
-                                          .toLocal()))
-                                      .toString(),
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14),
-                                ),
-                              ),
-                            ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
                           ),
-                        ),
-                      ),
-                      Container(height: 1, width: 320, color: Colors.white),
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        child: Container(
-                          height: 60,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                alignment: Alignment.bottomLeft,
-                                margin: EdgeInsets.only(bottom: 20, left: 15),
-                                child: Icon(
-                                  Icons.location_on_outlined,
-                                  color: Colors.white,
-                                  size: 30,
+                          child: Container(
+                            height: 60,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Container(
+                                  alignment: Alignment.bottomLeft,
+                                  margin: EdgeInsets.only(bottom: 20, left: 15),
+                                  child: Icon(
+                                    Icons.location_on_outlined,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                width: 200,
-                                margin: EdgeInsets.only(left: 10),
-                                child: Text(
-                                  data["venue"],
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                Container(
+                                  width: 200,
+                                  margin: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    data["venue"],
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -679,9 +738,58 @@ class _infoState extends State<info> {
                                   builder: (context) => const playingXI(),
                                 ));
                           },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            child: Container(
+                              height: 60,
+                              color: Color.fromARGB(255, 66, 63, 63),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          data["teamInfo"][0]["img"]),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 225,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      data["teamInfo"][0]["shortname"],
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      size: 35,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: Container(height: 1, color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
                           child: Container(
                             height: 60,
-                            width: 320,
                             color: Color.fromARGB(255, 66, 63, 63),
                             child: Row(
                               children: [
@@ -689,13 +797,14 @@ class _infoState extends State<info> {
                                   margin: EdgeInsets.only(left: 10),
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                        data["teamInfo"][0]["img"]),
+                                        data["teamInfo"][1]["img"]),
                                   ),
                                 ),
                                 Container(
+                                  width: 225,
                                   margin: EdgeInsets.only(left: 10),
                                   child: Text(
-                                    data["teamInfo"][0]["shortname"],
+                                    (data["teamInfo"][1]["shortname"]),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
@@ -703,7 +812,7 @@ class _infoState extends State<info> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 120),
+                                  alignment: Alignment.centerRight,
                                   child: Icon(
                                     Icons.keyboard_arrow_right,
                                     size: 35,
@@ -715,167 +824,135 @@ class _infoState extends State<info> {
                           ),
                         ),
                       ),
-                      Container(height: 1, width: 320, color: Colors.white),
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        child: Container(
-                          height: 60,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(data["teamInfo"][1]["img"]),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                child: Text(
-                                  (data["teamInfo"][1]["shortname"]),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 120),
-                                child: Icon(
-                                  Icons.keyboard_arrow_right,
-                                  size: 35,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                       SizedBox(
                         height: 8,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        child: Container(
-                          height: 45,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: Text(
-                                  'Who will win?',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: Container(
+                            height: 45,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    'Who will win?',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 80),
-                                child: Text(
-                                  'Total Votes:2,26,200',
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.white),
-                                ),
-                              )
-                            ],
+                                Container(
+                                  margin: EdgeInsets.only(left: 80),
+                                  child: Text(
+                                    'Total Votes:2,26,200',
+                                    style: TextStyle(
+                                        fontSize: 13, color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      Container(height: 1, width: 320, color: Colors.white),
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        child: Container(
-                          height: 60,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(2),
-                                  child: Container(
-                                    height: 28,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color: Colors.amber,
-                                        border: Border.all(
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: Container(height: 1, color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                          child: Container(
+                            height: 60,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(2),
+                                    child: Container(
+                                      height: 28,
+                                      width: 70,
+                                      decoration: BoxDecoration(
                                           color: Colors.amber,
-                                          width: 1,
-                                        )),
-                                    child: Center(
-                                      child: Text(
-                                        data["teamInfo"][0]["shortname"],
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
+                                          border: Border.all(
+                                            color: Colors.amber,
+                                            width: 1,
+                                          )),
+                                      child: Center(
+                                        child: Text(
+                                          data["teamInfo"][0]["shortname"],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 30),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(2),
-                                  child: Container(
-                                    height: 28,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 84, 80, 80),
-                                        border: Border.all(
-                                          color: Colors.white,
-                                          width: 1,
-                                        )),
-                                    child: Center(
-                                      child: Text(
-                                        'DRAW',
-                                        style: TextStyle(
+                                Container(
+                                  margin: EdgeInsets.only(left: 30),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(2),
+                                    child: Container(
+                                      height: 28,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                          color:
+                                              Color.fromARGB(255, 84, 80, 80),
+                                          border: Border.all(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.w500),
+                                            width: 1,
+                                          )),
+                                      child: Center(
+                                        child: Text(
+                                          'DRAW',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: 40),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(2),
-                                  child: Container(
-                                    height: 28,
-                                    width: 70,
-                                    decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 25, 103, 28),
-                                        border: Border.all(
+                                Container(
+                                  margin: EdgeInsets.only(left: 40),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(2),
+                                    child: Container(
+                                      height: 28,
+                                      width: 70,
+                                      decoration: BoxDecoration(
                                           color:
                                               Color.fromARGB(255, 25, 103, 28),
-                                          width: 1,
-                                        )),
-                                    child: Center(
-                                      child: Text(
-                                        data["teamInfo"][1]["shortname"],
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
+                                          border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 25, 103, 28),
+                                            width: 1,
+                                          )),
+                                      child: Center(
+                                        child: Text(
+                                          data["teamInfo"][1]["shortname"],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -905,7 +982,7 @@ class _infoState extends State<info> {
                       ),
                       Container(
                         alignment: Alignment.bottomLeft,
-                        margin: EdgeInsets.only(left: 40),
+                        margin: EdgeInsets.only(left: 30),
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -913,6 +990,7 @@ class _infoState extends State<info> {
                                   NetworkImage(data["teamInfo"][0]["img"]),
                             ),
                             Container(
+                              width: 125,
                               margin: EdgeInsets.only(left: 10),
                               child: Text(
                                 data["teamInfo"][0]["shortname"],
@@ -924,7 +1002,7 @@ class _infoState extends State<info> {
                               height: 5,
                             ),
                             Container(
-                              margin: EdgeInsets.only(left: 63),
+                              margin: EdgeInsets.only(left: 10),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(2),
                                 child: Container(
@@ -1064,13 +1142,14 @@ class _infoState extends State<info> {
                       ),
                       Container(
                         alignment: Alignment.bottomLeft,
-                        margin: EdgeInsets.only(left: 40),
+                        margin: EdgeInsets.only(left: 30),
                         child: Row(children: [
                           CircleAvatar(
                             backgroundImage:
                                 NetworkImage(data["teamInfo"][1]["img"]),
                           ),
                           Container(
+                            width: 125,
                             margin: EdgeInsets.only(left: 10),
                             child: Text(
                               data["teamInfo"][1]["shortname"],
@@ -1079,7 +1158,7 @@ class _infoState extends State<info> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 55),
+                            margin: EdgeInsets.only(left: 10),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(2),
                               child: Container(
@@ -1896,308 +1975,377 @@ class _infoState extends State<info> {
                       SizedBox(
                         height: 15,
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          height: 300,
-                          width: 320,
-                          color: Color.fromARGB(255, 66, 63, 63),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    margin: EdgeInsets.only(left: 15, top: 20),
-                                    child: CircleAvatar(
-                                      backgroundImage: (NetworkImage(
-                                          data["teamInfo"][0]["img"])),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 300,
+                            color: Color.fromARGB(255, 66, 63, 63),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      margin: EdgeInsets.only(top: 20),
+                                      child: CircleAvatar(
+                                        backgroundImage: (NetworkImage(
+                                            data["teamInfo"][0]["img"])),
+                                      ),
                                     ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: 30, right: 35),
-                                        child: Text(
-                                          (data["teamInfo"][0]["shortname"]),
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                      Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            'vs all teams',
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 187, 183, 183),
-                                                fontSize: 12),
-                                          )),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 30, left: 55),
-                                            child: Text(
-                                              data["teamInfo"][1]["shortname"],
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ),
-                                          Container(
-                                              margin: EdgeInsets.only(left: 30),
-                                              child: Text(
-                                                'vs all teams',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 187, 183, 183),
-                                                    fontSize: 12),
-                                              )),
-                                        ],
-                                      ),
-                                      Container(
-                                          alignment: Alignment.topRight,
+                                    Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          width: 110,
                                           margin: EdgeInsets.only(
-                                              top: 20, left: 10),
-                                          child: CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                data["teamInfo"][1]["img"]),
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 15, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                              Row(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 15, top: 6),
-                                    child: Text(
-                                      '10',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                            left: 5,
+                                            right: 5,
+                                            top: 30,
+                                          ),
+                                          child: Text(
+                                            (data["teamInfo"][0]["shortname"]),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        Container(
+                                            width: 110,
+                                            margin: EdgeInsets.only(
+                                                left: 5, right: 5),
+                                            child: Text(
+                                              'vs all teams',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 187, 183, 183),
+                                                  fontSize: 12),
+                                            )),
+                                      ],
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      'Matches played',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                    Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.centerRight,
+                                              width: 110,
+                                              margin: EdgeInsets.only(
+                                                  top: 30, left: 5, right: 5),
+                                              child: Text(
+                                                data["teamInfo"][1]
+                                                    ["shortname"],
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                            Container(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                width: 110,
+                                                margin: EdgeInsets.only(
+                                                    left: 5, right: 5),
+                                                child: Text(
+                                                  'vs all teams',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 187, 183, 183),
+                                                      fontSize: 12),
+                                                )),
+                                          ],
+                                        ),
+                                        Container(
+                                            alignment: Alignment.topRight,
+                                            margin: EdgeInsets.only(
+                                              top: 20,
+                                            ),
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  data["teamInfo"][1]["img"]),
+                                            )),
+                                      ],
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      '10',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 15, left: 8, right: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Container(
+                                      width: 55,
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.only(
+                                          left: 5, top: 6, right: 5),
+                                      child: Text(
+                                        '10',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 13, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                              Row(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 15, top: 6),
-                                    child: Text(
-                                      '60%',
-                                      style: TextStyle(
-                                          color: Color(0xFFFF4D00),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      width: 210,
+                                      alignment: Alignment.center,
+                                      margin: EdgeInsets.only(
+                                          left: 5, top: 6, right: 5),
+                                      child: Text(
+                                        'Matches played',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 100, top: 6),
-                                    child: Text(
-                                      'Win',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '10',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 108, top: 6),
-                                    child: Text(
-                                      '40%',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 13, left: 8, right: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '60%',
+                                        style: TextStyle(
+                                            color: Color(0xFFFF4D00),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 13, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                              Row(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 15, top: 6),
-                                    child: Text(
-                                      '320',
-                                      style: TextStyle(
-                                          color: Color(0xFFFF4D00),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 210,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        'Win',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      'Avarage Score',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '40%',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      '200',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 13, left: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '320',
+                                        style: TextStyle(
+                                            color: Color(0xFFFF4D00),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 13, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                              Row(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 15, top: 6),
-                                    child: Text(
-                                      '539',
-                                      style: TextStyle(
-                                          color: Color(0xFFFF4D00),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 210,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        'Avarage Score',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      'Highest Score',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '200',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      '510',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 13, left: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '539',
+                                        style: TextStyle(
+                                            color: Color(0xFFFF4D00),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 13, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                              Row(
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 15, top: 6),
-                                    child: Text(
-                                      '150',
-                                      style: TextStyle(
-                                          color: Color(0xFFFF4D00),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 210,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        'Highest Score',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 75, top: 6),
-                                    child: Text(
-                                      'Laest Score',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '510',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 87, top: 6),
-                                    child: Text(
-                                      '140',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 248, 244, 244),
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 13, left: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                                Row(
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '150',
+                                        style: TextStyle(
+                                            color: Color(0xFFFF4D00),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 13, left: 8),
-                                height: 1,
-                                width: 310,
-                                color: Colors.white,
-                              ),
-                            ],
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 210,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        'Laest Score',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      margin: EdgeInsets.only(
+                                          left: 5, right: 5, top: 6),
+                                      child: Text(
+                                        '140',
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 248, 244, 244),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 13, left: 8),
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -2226,7 +2374,6 @@ class _infoState extends State<info> {
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
                           height: 190,
-                          width: 320,
                           color: Color.fromARGB(255, 66, 63, 63),
                           child: Column(
                             children: [

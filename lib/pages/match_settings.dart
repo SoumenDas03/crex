@@ -47,7 +47,7 @@ class _match_settingsState extends State<match_settings> {
                   text: 'Scorecard',
                 ),
                 Tab(
-                  text: 'Grephs',
+                  text: 'Graphs',
                 ),
                 Tab(
                   text: 'Series Status',
@@ -1833,7 +1833,9 @@ class _match_settingsState extends State<match_settings> {
                 ]),
               ),
             ),
-            scorecard(),
+            scorecard(
+              id: "1",
+            ),
             Icon(
               Icons.graphic_eq,
               color: Colors.black,

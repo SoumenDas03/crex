@@ -372,172 +372,173 @@ class _moreState extends State<more> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 74,
         color: Colors.black,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+            color: Color(0xFFFF4D00),
+          ),
+          height: 60,
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
                 child: Container(
                   height: 45,
                   width: MediaQuery.of(context).size.width,
                   color: const Color(0xFFFF4D00),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const home_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 17),
-                      child: Column(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.home,
-                              color: Colors.black,
+              Positioned(
+                left: 10,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const home_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 17),
+                        child: Column(
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Icon(
+                                Icons.home,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Home',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Home',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const series_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/series.png',
-                              color: Colors.black,
-                              scale: 1.2,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const series_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/series.png',
+                                color: Colors.black,
+                                scale: 1.2,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Series',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Series',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const matches_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/matches.png',
-                              color: Colors.black,
-                              scale: 1.2,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const matches_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/matches.png',
+                                color: Colors.black,
+                                scale: 1.2,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Matches',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Matches',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/fixtures.png',
-                              color: Colors.black,
-                              scale: 1.2,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const fixtures_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/fixtures.png',
+                                color: Colors.black,
+                                scale: 1.2,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Fixtures',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Fixtures',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: null,
-                    child: Container(
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/more.png',
-                              scale: 1.2,
+                    InkWell(
+                      onTap: null,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/more.png',
+                                scale: 1.2,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'More',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

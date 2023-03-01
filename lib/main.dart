@@ -64,12 +64,13 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   
     // ignore: prefer_const_constructors
-    return MaterialApp(         
+    return MaterialApp(    
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(), 
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: const home_dashboard(),

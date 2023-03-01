@@ -88,197 +88,198 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
       body: fixtures(),
 
       bottomNavigationBar: Container(
-        height: 75,
         color: Colors.black,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: ClipRRect(
+        child: Container(
+          height: 60,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
                 // ignore: prefer_const_constructors
-                borderRadius: BorderRadius.only(
-                    // ignore: prefer_const_constructors
-                    topRight: Radius.circular(20),
-                    // ignore: prefer_const_constructors
-                    topLeft: Radius.circular(20)),
+                topRight: Radius.circular(20),
+                // ignore: prefer_const_constructors
+                topLeft: Radius.circular(20)),
+            color: Color(0xFFFF4D00),
+          ),
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
                 child: Container(
                   height: 45,
                   width: MediaQuery.of(context).size.width,
                   color: const Color(0xFFFF4D00),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 10,
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const home_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 17),
-                      child: Column(
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          // ignore: prefer_const_constructors
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
+              Positioned(
+                left: 10,
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const home_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 17),
+                        child: Column(
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
                             // ignore: prefer_const_constructors
-                            child: Icon(
-                              Icons.home,
-                              color: Colors.black,
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              // ignore: prefer_const_constructors
+                              child: Icon(
+                                Icons.home,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Home',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Home',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const series_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/series.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const series_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/series.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Series',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Series',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const matches_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/matches.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const matches_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/matches.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Matches',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Matches',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures_dashboard(),
-                      ));
-                    },
-                    child: Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/fixtures.png',
-                              scale: 1.2,
-                              color: const Color(0xFFFF4D00),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const fixtures_dashboard(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/fixtures.png',
+                                scale: 1.2,
+                                color: const Color(0xFFFF4D00),
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'Fixtures',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'Fixtures',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const more(),
-                      ));
-                    },
-                    child: Container(
-                      // ignore: prefer_const_constructors
-                      margin: EdgeInsets.only(left: 23),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/more.png',
-                              scale: 1.2,
-                              color: Colors.black,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const more(),
+                        ));
+                      },
+                      child: Container(
+                        // ignore: prefer_const_constructors
+                        margin: EdgeInsets.only(left: 23),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/more.png',
+                                scale: 1.2,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          // ignore: prefer_const_constructors
-                          Text(
-                            'More',
                             // ignore: prefer_const_constructors
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
+                            Text(
+                              'More',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
