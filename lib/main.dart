@@ -55,10 +55,12 @@ import 'package:crex/pages/singlePlayer_news.dart';
 import 'package:crex/pages/singlePlayer_overview.dart';
 import 'package:crex/pages/speech_settings.dart';
 import 'package:crex/pages/team_ranking.dart';
-import 'package:crex/pages/tennis_home.dart';  
+import 'package:crex/pages/tennis_home.dart';
 import 'package:crex/pages/topfantasypoints.dart';
 import 'package:crex/pages/win_prediction.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -66,15 +68,28 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {   
+  Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return MaterialApp(    
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(), 
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: const home_dashboard(),
+    return ChangeNotifierProvider(
+      create: (context) => ThemeChanger(),
+      child: Builder(builder: (BuildContext context) {
+        final themeChanger = Provider.of<ThemeChanger>(context);
+        return MaterialApp(
+          themeMode: themeChanger.themeMode,
+          theme: ThemeData(
+            brightness: Brightness.light,
+            primaryColor: Colors.black,
+            iconTheme: IconThemeData(color: Colors.black),
+          ),
+          darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              primaryColor: Colors.white,
+              iconTheme: IconThemeData(color: Colors.white)),
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          home: const home_dashboard(),
+        );
+      }),
     );
-  }      
+  }
 }
-
