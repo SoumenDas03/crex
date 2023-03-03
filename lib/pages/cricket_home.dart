@@ -26,14 +26,18 @@ class _cricket_homeState extends State<cricket_home> {
 
       map = jsonDecode(response.body.toString());
       data = map["data"]
-          .where((element) => element["matchEnded"] == false && element["status"] != "Match not started" && element["teamInfo"].length > 1 && element["bbbEnabled"] == true)
+          .where((element) =>
+              element["matchEnded"] == false &&
+              element["status"] != "Match not started" &&
+              element["teamInfo"].length > 1 &&
+              element["bbbEnabled"] == true)
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)
           .toList();
       if (response.statusCode == 200) {
         return data;
-        // ignore: use_build_context_synchronously 
+        // ignore: use_build_context_synchronously
       } else {
         print('failed');
       }
@@ -51,7 +55,10 @@ class _cricket_homeState extends State<cricket_home> {
 
       upcomingMap = jsonDecode(response.body.toString());
       upcomingData = upcomingMap["data"]
-          .where((element) => element["matchStarted"] == false && element["teams"][0] != "Tbc" && element["teamInfo"].length > 1)
+          .where((element) =>
+              element["matchStarted"] == false &&
+              element["teams"][0] != "Tbc" &&
+              element["teamInfo"].length > 1)
           .toList();
       if (response.statusCode == 200) {
         return upcomingData;
@@ -92,16 +99,59 @@ class _cricket_homeState extends State<cricket_home> {
                           // mainAxisAlignment: MainAxisAlignment.center,
                           // mainAxisSize: MainAxisSize.max,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Image.asset(
-                                  'assets/cricket.png',
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(20),
+                                      bottomRight: Radius.circular(20)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Image.asset(
+                                      'assets/cricket.png',
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Positioned(
+                                    right: 5,
+                                    child: Container(
+                                      alignment: Alignment.topRight,
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        height: 25,
+                                        width: 85,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.blueGrey,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Image.asset('assets/game.png'),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Container(
+                                              height: 15,
+                                              width: 55,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Colors.white),
+                                              child: Center(
+                                                  child: Text(
+                                                "Play Now",
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: Colors.black),
+                                              )),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ))
+                              ],
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -160,7 +210,9 @@ class _cricket_homeState extends State<cricket_home> {
                                           child: ListView.builder(
                                               physics: ClampingScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: data.length < 5? data.length:4,
+                                              itemCount: data.length < 5
+                                                  ? data.length
+                                                  : 4,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -414,7 +466,9 @@ class _cricket_homeState extends State<cricket_home> {
                                           child: ListView.builder(
                                               physics: ClampingScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: data.length < 5? data.length:5,
+                                              itemCount: data.length < 5
+                                                  ? data.length
+                                                  : 5,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -668,7 +722,9 @@ class _cricket_homeState extends State<cricket_home> {
                                           child: ListView.builder(
                                               physics: ClampingScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: upcomingData.length > 5 ? upcomingData.length: 5,
+                                              itemCount: upcomingData.length > 5
+                                                  ? upcomingData.length
+                                                  : 5,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -679,21 +735,21 @@ class _cricket_homeState extends State<cricket_home> {
                                                   child: Column(
                                                     children: [
                                                       Container(
-                                                        alignment: Alignment
-                                                            .topRight,
+                                                        alignment:
+                                                            Alignment.topRight,
                                                         child: ClipRRect(
-                                                          borderRadius: BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      50),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50)),
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          50),
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          50)),
                                                           child: Container(
                                                             height: 60,
                                                             width: 330,
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             child: Row(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -706,14 +762,18 @@ class _cricket_homeState extends State<cricket_home> {
                                                                 CircleAvatar(
                                                                   radius: 15,
                                                                   backgroundImage:
-                                                                      NetworkImage(
-                                                                          upcomingData[index]["teamInfo"][0]["img"].toString()),
+                                                                      NetworkImage(upcomingData[index]["teamInfo"][0]
+                                                                              [
+                                                                              "img"]
+                                                                          .toString()),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 Text(
-                                                                  upcomingData[index]["teamInfo"][0]
+                                                                  upcomingData[index]["teamInfo"]
+                                                                              [
+                                                                              0]
                                                                           [
                                                                           "shortname"]
                                                                       .toString(),
@@ -721,7 +781,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontWeight:
-                                                                          FontWeight.bold),
+                                                                          FontWeight
+                                                                              .bold),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 10,
@@ -732,14 +793,18 @@ class _cricket_homeState extends State<cricket_home> {
                                                                 CircleAvatar(
                                                                   radius: 15,
                                                                   backgroundImage:
-                                                                      NetworkImage(
-                                                                          upcomingData[index]["teamInfo"][1]["img"].toString()),
+                                                                      NetworkImage(upcomingData[index]["teamInfo"][1]
+                                                                              [
+                                                                              "img"]
+                                                                          .toString()),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 10,
                                                                 ),
                                                                 Text(
-                                                                  upcomingData[index]["teamInfo"][1]
+                                                                  upcomingData[index]["teamInfo"]
+                                                                              [
+                                                                              1]
                                                                           [
                                                                           "shortname"]
                                                                       .toString(),
@@ -747,7 +812,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontWeight:
-                                                                          FontWeight.bold),
+                                                                          FontWeight
+                                                                              .bold),
                                                                 ),
                                                               ],
                                                             ),
@@ -758,19 +824,18 @@ class _cricket_homeState extends State<cricket_home> {
                                                         height: 5,
                                                       ),
                                                       Container(
-                                                        alignment: Alignment
-                                                            .topRight,
+                                                        alignment:
+                                                            Alignment.topRight,
                                                         child: ClipRRect(
                                                           borderRadius:
                                                               BorderRadius.only(
-                                                                  bottomLeft:
-                                                                      Radius.circular(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
                                                                           15)),
                                                           child: Container(
                                                             height: 35,
                                                             width: 300,
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             child: Row(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -780,7 +845,9 @@ class _cricket_homeState extends State<cricket_home> {
                                                                       .center,
                                                               children: [
                                                                 Text(
-                                                                  upcomingData[index]["teamInfo"][0]
+                                                                  upcomingData[index]["teamInfo"]
+                                                                              [
+                                                                              0]
                                                                           [
                                                                           "shortname"]
                                                                       .toString(),
@@ -788,7 +855,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                       color: Color(
                                                                           0xFFFF4D00),
                                                                       fontWeight:
-                                                                          FontWeight.bold),
+                                                                          FontWeight
+                                                                              .bold),
                                                                 ),
                                                                 SizedBox(
                                                                   width: 5,
@@ -807,24 +875,24 @@ class _cricket_homeState extends State<cricket_home> {
                                                                 ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .circular(3),
+                                                                          .circular(
+                                                                              3),
                                                                   child:
                                                                       Container(
                                                                     alignment:
                                                                         Alignment
                                                                             .center,
-                                                                    height:
-                                                                        22,
+                                                                    height: 22,
                                                                     width: 42,
                                                                     color: Colors
                                                                         .black54,
-                                                                    child:
-                                                                        Text(
+                                                                    child: Text(
                                                                       '56',
                                                                       style: TextStyle(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontWeight: FontWeight.bold),
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -834,24 +902,24 @@ class _cricket_homeState extends State<cricket_home> {
                                                                 ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
-                                                                          .circular(3),
+                                                                          .circular(
+                                                                              3),
                                                                   child:
                                                                       Container(
                                                                     alignment:
                                                                         Alignment
                                                                             .center,
-                                                                    height:
-                                                                        22,
+                                                                    height: 22,
                                                                     width: 42,
                                                                     color: Colors
                                                                         .black12,
-                                                                    child:
-                                                                        Text(
+                                                                    child: Text(
                                                                       '22',
                                                                       style: TextStyle(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight: FontWeight.bold),
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                     ),
                                                                   ),
                                                                 ),

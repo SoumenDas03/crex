@@ -318,7 +318,7 @@ class _fantasyState extends State<fantasy> {
                                                       CrossAxisAlignment.center,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
-                                                  children:  [
+                                                  children: [
                                                     Text(
                                                       // ignore: prefer_interpolation_to_compose_strings
                                                       'CCR : ' +
@@ -912,7 +912,7 @@ class _fantasyState extends State<fantasy> {
                                       height: 25,
                                     ),
                                     DefaultTabController(
-                                      length: 3,
+                                      length: 5,
                                       child: Column(
                                         children: [
                                           Container(
@@ -981,6 +981,40 @@ class _fantasyState extends State<fantasy> {
                                                     // ignore: prefer_const_constructors
                                                     child: Tab(
                                                       text: ('Most Wickets'),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    // margin: EdgeInsets.only(left: 10),
+                                                    width: 95,
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color:
+                                                                Colors.white),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
+                                                    // ignore: prefer_const_constructors
+                                                    child: Tab(
+                                                      text: ('Highest Score'),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    // margin: EdgeInsets.only(left: 10),
+                                                    width: 95,
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color:
+                                                                Colors.white),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5)),
+                                                    // ignore: prefer_const_constructors
+                                                    child: Tab(
+                                                      text: ('Best Economy'),
                                                     ),
                                                   ),
                                                 ]),
@@ -1215,6 +1249,258 @@ class _fantasyState extends State<fantasy> {
                                                                       ),
                                                                       Text(
                                                                         'Runs',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Color(0xFFFF4D00),
+                                                                            fontSize: 12),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Container(
+                                                              height: 1,
+                                                              width: 320,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                  ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    physics:
+                                                        ClampingScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount: 3,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 25),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Container(
+                                                                  height: 35,
+                                                                  width: 35,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    size: 35,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 15,
+                                                                ),
+                                                                Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                                  children: [
+                                                                    Text(
+                                                                      wicketOrderData[index]
+                                                                              [
+                                                                              "bowler"]
+                                                                          [
+                                                                          "name"],
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              12),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
+                                                                    Text(
+                                                                      "${wicketOrderData[index]["o"]} Overs",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              12),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 25,
+                                                                ),
+                                                                Spacer(),
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          right:
+                                                                              35),
+                                                                  child: Column(
+                                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                                    children: [
+                                                                      Text(
+                                                                        wicketOrderData[index]["w"]
+                                                                            .toString(),
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Color(0xFFFF4D00),
+                                                                            fontSize: 15),
+                                                                      ),
+                                                                      Text(
+                                                                        'Wickets',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Color(0xFFFF4D00),
+                                                                            fontSize: 12),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Container(
+                                                              height: 1,
+                                                              width: 320,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                  ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    physics:
+                                                        ClampingScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount: 3,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 25),
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Container(
+                                                                  height: 35,
+                                                                  width: 35,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .person,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    size: 35,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 15,
+                                                                ),
+                                                                Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                                  children: [
+                                                                    Text(
+                                                                      wicketOrderData[index]
+                                                                              [
+                                                                              "bowler"]
+                                                                          [
+                                                                          "name"],
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              12),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: 5,
+                                                                    ),
+                                                                    Text(
+                                                                      "${wicketOrderData[index]["o"]} Overs",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              12),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 25,
+                                                                ),
+                                                                Spacer(),
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          right:
+                                                                              35),
+                                                                  child: Column(
+                                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                                    children: [
+                                                                      Text(
+                                                                        wicketOrderData[index]["w"]
+                                                                            .toString(),
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Color(0xFFFF4D00),
+                                                                            fontSize: 15),
+                                                                      ),
+                                                                      Text(
+                                                                        'Wickets',
                                                                         style: TextStyle(
                                                                             color:
                                                                                 Color(0xFFFF4D00),

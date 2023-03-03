@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import 'package:marquee/marquee.dart';
+
 class info extends StatefulWidget {
   const info({Key? key, required this.id}) : super(key: key);
 
@@ -533,6 +535,35 @@ class _infoState extends State<info> {
                                   ),
                                   SizedBox(height: 10),
                                 ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            // margin: EdgeInsets.only(left: 10),
+
+                            height: 35,
+                            color: Color(0xFFFF4D00),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: Center(
+                                child: Marquee(
+                                  showFadingOnlyWhenScrolling: true,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  blankSpace: 60,
+                                  // fadingEdgeStartFraction: 0.3,
+                                  // fadingEdgeEndFraction: 0.3,
+                                  startAfter: Duration(seconds: 2),
+                                  pauseAfterRound: Duration(seconds: 2),
+                                  text: "India has won the match by 4 runs",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),

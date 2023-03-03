@@ -514,16 +514,19 @@ class _live_secondState extends State<live_second> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      color: Color(0xffFF8A00),
-                      child: Text(
-                        'PAK need 200 runs in 183 balls',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 35,
+                        color: Color(0xffFF8A00),
+                        child: Text(
+                          'PAK need 200 runs in 183 balls',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
@@ -772,74 +775,82 @@ class _live_secondState extends State<live_second> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      color: Color(0xffFF8A00),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Batter',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 130,
-                            ),
-                            Text(
-                              'R',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'B',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              '4s',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              '6s',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'SR',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 35,
+                        color: Color(0xffFF8A00),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Batter',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 130,
+                              ),
+                              Text(
+                                'R',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'B',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                '4s',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                '6s',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'SR',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      right: 5,
+                    ),
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -855,6 +866,7 @@ class _live_secondState extends State<live_second> {
                                 left: 10, top: 10, bottom: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
                                   'Babar Azam(Captain)',
@@ -911,7 +923,6 @@ class _live_secondState extends State<live_second> {
                             ),
                           ),
                           Container(
-                            height: 35,
                             width: 350,
                             decoration: BoxDecoration(
                               // borderRadius: BorderRadius.circular(0),
@@ -920,25 +931,36 @@ class _live_secondState extends State<live_second> {
                               color: Colors.black45,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 10, bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Fawad Alam',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                  Container(
+                                    width: 155,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          // width: 125,
+                                          child: Text(
+                                            'Fawad Alam',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Image.asset(
+                                          "assets/matches.png",
+                                          scale: 1,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 10,
-                                  ),
-                                  Image.asset(
-                                    "assets/matches.png",
-                                    scale: 1,
-                                  ),
-                                  SizedBox(
-                                    width: 60,
                                   ),
                                   Text(
                                     '10',
@@ -1015,67 +1037,72 @@ class _live_secondState extends State<live_second> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      color: Color(0xffFF8A00),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bowler',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 135,
-                            ),
-                            Text(
-                              'O',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'M',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'R',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'W',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Eco',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10)),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 35,
+                        color: Color(0xffFF8A00),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Bowler',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 135,
+                              ),
+                              Text(
+                                'O',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'M',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'R',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'W',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                'Eco',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -1415,7 +1442,7 @@ class _live_secondState extends State<live_second> {
                             width: 5,
                           ),
                           Text(
-                            'Share Score',
+                            'Share Application',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,

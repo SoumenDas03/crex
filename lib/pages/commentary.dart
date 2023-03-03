@@ -111,27 +111,26 @@ class _commententaryState extends State<commententary> {
       }
     }
 
-    return DefaultTabController(
-      length: 6,
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: FutureBuilder(
-          future: getSingleCricketMatchDetails(),
-          builder: (context, snapshot) {
-            if (data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return FutureBuilder(
-                future: getMatchScores(),
-                builder: (context, snapshot) {
-                  if (scoreData == null) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return Container(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: FutureBuilder(
+        future: getSingleCricketMatchDetails(),
+        builder: (context, snapshot) {
+          if (data == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return FutureBuilder(
+              future: getMatchScores(),
+              builder: (context, snapshot) {
+                if (scoreData == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return SingleChildScrollView(
+                    child: Container(
                       alignment: Alignment.center,
                       // ignore: prefer_const_constructors
                       decoration: BoxDecoration(
@@ -629,415 +628,502 @@ class _commententaryState extends State<commententary> {
                           SizedBox(
                             height: 10,
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          Container(
+                            child: Column(
                               children: [
-                                Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(32),
-                                          border: Border.all(
-                                              color: Colors.white, width: 0.5)),
-                                      child: FutureBuilder(
-                                        future: getPlayerInfo(scoreData[0]
-                                                ["batsman"]["id"]
-                                            .toString()),
-                                        builder: (context, snapshot) {
-                                          if (playerInfoData == null) {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                            );
-                                          } else {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  playerInfoData["playerImg"]),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        scoreData[0]["batsman"]["name"],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      scoreData[0]["r"].toString() +
-                                          "(" +
-                                          scoreData[0]["b"].toString() +
-                                          ")" +
-                                          '*',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 45,
-                                ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(32),
-                                          border: Border.all(
-                                              color: Colors.white, width: 0.5)),
-                                      child: FutureBuilder(
-                                        future: getPlayerInfo(scoreData[1]
-                                                ["batsman"]["id"]
-                                            .toString()),
-                                        builder: (context, snapshot) {
-                                          if (playerInfoData == null) {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                            );
-                                          } else {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  playerInfoData["playerImg"]),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        scoreData[1]["batsman"]["name"],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      scoreData[1]["r"].toString() +
-                                          "(" +
-                                          scoreData[1]["b"].toString() +
-                                          ")",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    )
-                                  ],
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 25, right: 25),
-                                  child: Container(
-                                    height: 110,
-                                    width: 1,
-                                    color: Colors.blueGrey,
+                                      left: 10, right: 10),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(32),
+                                                  border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 0.5)),
+                                              child: FutureBuilder(
+                                                future: getPlayerInfo(
+                                                    scoreData[0]["batsman"]
+                                                            ["id"]
+                                                        .toString()),
+                                                builder: (context, snapshot) {
+                                                  if (playerInfoData == null) {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage: NetworkImage(
+                                                          'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                    );
+                                                  } else {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              playerInfoData[
+                                                                  "playerImg"]),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                scoreData[0]["batsman"]["name"],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 15),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              scoreData[0]["r"].toString() +
+                                                  "(" +
+                                                  scoreData[0]["b"].toString() +
+                                                  ")" +
+                                                  '*',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 45,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(32),
+                                                  border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 0.5)),
+                                              child: FutureBuilder(
+                                                future: getPlayerInfo(
+                                                    scoreData[1]["batsman"]
+                                                            ["id"]
+                                                        .toString()),
+                                                builder: (context, snapshot) {
+                                                  if (playerInfoData == null) {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage: NetworkImage(
+                                                          'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                    );
+                                                  } else {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              playerInfoData[
+                                                                  "playerImg"]),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                scoreData[1]["batsman"]["name"],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 15),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              scoreData[1]["r"].toString() +
+                                                  "(" +
+                                                  scoreData[1]["b"].toString() +
+                                                  ")",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            )
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 25, right: 25),
+                                          child: Container(
+                                            height: 110,
+                                            width: 1,
+                                            color: Colors.blueGrey,
+                                          ),
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(32),
+                                                  border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 0.5)),
+                                              child: FutureBuilder(
+                                                future: getPlayerInfo(
+                                                    wicketData[wicketData
+                                                                .indexOf(
+                                                                    wicketData
+                                                                        .last)]
+                                                            ["bowler"]["name"]
+                                                        .toString()),
+                                                builder: (context, snapshot) {
+                                                  if (playerInfoData == null) {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage: NetworkImage(
+                                                          'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                    );
+                                                  } else {
+                                                    return CircleAvatar(
+                                                      radius: 32,
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              playerInfoData[
+                                                                  "playerImg"]),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                wicketData[wicketData.indexOf(
+                                                        wicketData.last)]
+                                                    ["bowler"]["name"],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 15),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              wicketData[wicketData.indexOf(
+                                                          wicketData.last)]["r"]
+                                                      .toString() +
+                                                  '-' +
+                                                  wicketData[wicketData.indexOf(
+                                                          wicketData.last)]["w"]
+                                                      .toString() +
+                                                  '(' +
+                                                  wicketData[wicketData.indexOf(
+                                                          wicketData.last)]["o"]
+                                                      .toString() +
+                                                  ')',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Column(
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  height: 1,
+                                  width: 320,
+                                  color: Colors.blueGrey[500],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(32),
-                                          border: Border.all(
-                                              color: Colors.white, width: 0.5)),
-                                      child: FutureBuilder(
-                                        future: getPlayerInfo(wicketData[
-                                                    wicketData.indexOf(
-                                                        wicketData.last)]
-                                                ["bowler"]["name"]
-                                            .toString()),
-                                        builder: (context, snapshot) {
-                                          if (playerInfoData == null) {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                            );
-                                          } else {
-                                            return CircleAvatar(
-                                              radius: 32,
-                                              backgroundImage: NetworkImage(
-                                                  playerInfoData["playerImg"]),
-                                            );
-                                          }
-                                        },
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        // CircleAvatar(
+                                        //   radius: 18,
+
+                                        // )
+
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '2',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '0',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+
+                                        Text(
+                                          '=',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+
+                                        Text(
+                                          '10',
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Container(
+                                        height: 28,
+                                        width: 2,
+                                        color: Colors.blueGrey,
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        wicketData[wicketData.indexOf(
-                                            wicketData.last)]["bowler"]["name"],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      wicketData[wicketData.indexOf(
-                                                  wicketData.last)]["r"]
-                                              .toString() +
-                                          '-' +
-                                          wicketData[wicketData.indexOf(
-                                                  wicketData.last)]["w"]
-                                              .toString() +
-                                          '(' +
-                                          wicketData[wicketData.indexOf(
-                                                  wicketData.last)]["o"]
-                                              .toString() +
-                                          ')',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Over 82',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.green,
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '6',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.amber,
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '4',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFFF4D00),
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            'W',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '0',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            '2',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 0.5)),
+                                          alignment: Alignment.center,
+                                          height: 22,
+                                          width: 22,
+                                          child: Text(
+                                            'NB',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            height: 1,
-                            width: 320,
-                            color: Colors.blueGrey[500],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // CircleAvatar(
-                                  //   radius: 18,
-
-                                  // )
-
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '2',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '0',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-
-                                  Text(
-                                    '=',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-
-                                  Text(
-                                    '10',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Container(
-                                  height: 28,
-                                  width: 2,
-                                  color: Colors.blueGrey,
+                                Container(
+                                  height: 1,
+                                  width: 320,
+                                  color: Colors.blueGrey[500],
                                 ),
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Over 82',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '6',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.amber,
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '4',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Color(0xFFFF4D00),
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      'W',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '0',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      '2',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                            color: Colors.white, width: 0.5)),
-                                    alignment: Alignment.center,
-                                    height: 22,
-                                    width: 22,
-                                    child: Text(
-                                      'NB',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Container(
-                            height: 1,
-                            width: 320,
-                            color: Colors.blueGrey[500],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(15),
-                            child: Text(
-                              'The oldest classcical British and Latin writing had little or no spance between world and could be written in (alterneting derections).',
-                              style: TextStyle(color: Colors.white),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  child: ListView.builder(
+                                      physics: ClampingScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: 15, right: 15),
+                                              child: Text(
+                                                'The oldest classcical British and Latin writing had little or no spance between world and could be written in (alterneting derections).',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              height: 1,
+                                              width: 325,
+                                              color: Colors.blueGrey[500],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            )
+                                          ],
+                                        );
+                                      }),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                )
+                              ], //hello
                             ),
-                          )
+                          ),
+                          // SizedBox(
+                          //   height: 105,
+                          // ),
                         ],
                       ),
-                    );
-                  }
-                },
-              );
-            }
-          },
-        ),
+                    ),
+                  );
+                }
+              },
+            );
+          }
+        },
       ),
     );
   }
