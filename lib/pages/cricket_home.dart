@@ -29,8 +29,8 @@ class _cricket_homeState extends State<cricket_home> {
           .where((element) =>
               element["matchEnded"] == false &&
               element["status"] != "Match not started" &&
-              element["teamInfo"].length > 1 &&
-              element["bbbEnabled"] == true)
+              element["teamInfo"].length > 1
+              )
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)
