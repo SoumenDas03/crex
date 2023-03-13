@@ -64,6 +64,7 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(const MyApp());
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
@@ -73,18 +74,19 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ThemeChanger(),
       child: Builder(builder: (BuildContext context) {
+     
         final themeChanger = Provider.of<ThemeChanger>(context);
         return MaterialApp(
           themeMode: themeChanger.themeMode,
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: Colors.black,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
           ),
           darkTheme: ThemeData(
               brightness: Brightness.dark,
               primaryColor: Colors.white,
-              iconTheme: IconThemeData(color: Colors.white)),
+              iconTheme: const IconThemeData(color: Colors.white)),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           home: const home_dashboard(),

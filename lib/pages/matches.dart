@@ -2,8 +2,10 @@
 
 import 'dart:convert';
 
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class matches extends StatefulWidget {
   const matches({super.key});
@@ -70,6 +72,8 @@ class _matchesState extends State<matches> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -95,12 +99,12 @@ class _matchesState extends State<matches> {
                         alignment: Alignment.center,
                         // ignore: prefer_const_constructors
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage(
-                            "assets/background.jpeg",
-                          ),
-                          fit: BoxFit.cover,
-                        )),
+                          image: DecorationImage(
+                              image: isDarkMode
+                                  ? AssetImage('assets/background.jpeg')
+                                  : AssetImage("assets/bgLightMode.png"),
+                              fit: BoxFit.fill),
+                        ),
                         child: Column(children: [
                           Container(
                             margin: EdgeInsets.only(top: 10),

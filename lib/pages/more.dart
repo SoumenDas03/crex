@@ -22,6 +22,7 @@ class more extends StatefulWidget {
 }
 
 class _moreState extends State<more> {
+  bool flag = false;
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
@@ -35,7 +36,7 @@ class _moreState extends State<more> {
                 image: isDarkMode
                     ? AssetImage('assets/background.jpeg')
                     : AssetImage("assets/bgLightMode.png"),
-                fit: BoxFit.fitHeight),
+                fit: BoxFit.fill),
           ),
           child: Column(
             children: [
@@ -223,35 +224,47 @@ class _moreState extends State<more> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 15),
-                height: 40,
-                width: 320,
-                color:
-                    isDarkMode ? Color.fromARGB(255, 26, 26, 26) : Colors.white,
-                child: Row(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Icon(
-                        Icons.mode_night_outlined,
-                        size: 27,
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    flag == true
+                        ? flag = false
+                        : flag == false
+                            ? flag = true
+                            : false;
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 15),
+                  height: 40,
+                  width: 320,
+                  color: isDarkMode
+                      ? Color.fromARGB(255, 26, 26, 26)
+                      : Colors.white,
+                  child: Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(
+                          Icons.mode_night_outlined,
+                          size: 27,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Change Theme',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Change Theme',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Visibility(
-                visible: true,
+                visible: flag,
                 child: Container(
                   child: Column(
                     children: [
@@ -295,11 +308,18 @@ class _moreState extends State<more> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Image.asset(
-                          'assets/feedback.png',
-                          scale: 1.1,
-                        )),
+                      padding: const EdgeInsets.only(left: 10),
+                      child: isDarkMode
+                          ? Image.asset(
+                              'assets/feedback.png',
+                              scale: 1.1,
+                            )
+                          : Image.asset(
+                              'assets/feedback.png',
+                              scale: 1.1,
+                              color: Colors.black,
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -332,10 +352,16 @@ class _moreState extends State<more> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Image.asset(
-                          'assets/contact.png',
-                        )),
+                      padding: const EdgeInsets.only(left: 10),
+                      child: isDarkMode
+                          ? Image.asset(
+                              'assets/contact.png',
+                            )
+                          : Image.asset(
+                              'assets/contact.png',
+                              color: Colors.black,
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -357,10 +383,16 @@ class _moreState extends State<more> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Image.asset(
-                          'assets/privacy.png',
-                        )),
+                      padding: const EdgeInsets.only(left: 10),
+                      child: isDarkMode
+                          ? Image.asset(
+                              'assets/privacy.png',
+                            )
+                          : Image.asset(
+                              'assets/privacy.png',
+                              color: Colors.black,
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -382,10 +414,16 @@ class _moreState extends State<more> {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Image.asset(
-                          'assets/terms.png',
-                        )),
+                      padding: const EdgeInsets.only(left: 10),
+                      child: isDarkMode
+                          ? Image.asset(
+                              'assets/terms.png',
+                            )
+                          : Image.asset(
+                              'assets/terms.png',
+                              color: Colors.black,
+                            ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
@@ -441,24 +479,27 @@ class _moreState extends State<more> {
         ),
       ),
       bottomNavigationBar: Container(
-        color: Colors.black,
+        // color: Colors.black,
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-            color: Color(0xFFFF4D00),
+              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20),
+            ),
+            color:
+                isDarkMode ? const Color(0xFFFF2E00) : const Color(0xFFDFDFDF),
           ),
           height: 60,
           child: Stack(
             children: [
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xFFFF4D00),
-                ),
-              ),
+              // Positioned(
+              //   bottom: 0,
+              //   child: Container(
+              //     height: 45,
+              //     width: MediaQuery.of(context).size.width,
+              //     color: const Color(0xFFFF4D00),
+              //   ),
+              // ),
               Positioned(
                 left: 10,
                 child: Row(

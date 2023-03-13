@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_import, prefer_const_literals_to_create_immutables, duplicate_ignore, avoid_unnecessary_containers
 
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class football_home extends StatefulWidget {
@@ -14,6 +16,8 @@ class football_home extends StatefulWidget {
 class _football_homeState extends State<football_home> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -36,12 +40,12 @@ class _football_homeState extends State<football_home> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: AssetImage(
-                      "assets/background.jpeg",
-                    ),
-                    fit: BoxFit.cover,
-                  )),
+                    image: DecorationImage(
+                        image: isDarkMode
+                            ? AssetImage('assets/background.jpeg')
+                            : AssetImage("assets/bgLightMode.png"),
+                        fit: BoxFit.fill),
+                  ),
                   child: Column(
                     children: [
                       SizedBox(
@@ -55,17 +59,23 @@ class _football_homeState extends State<football_home> {
                           width: 340,
                           height: 40,
                           decoration: BoxDecoration(
-                              color: Color(0xFFFF4D00),
+                              color: isDarkMode
+                                  ? const Color(0xFFFF2E00)
+                                  : const Color(0xFFDFDFDF),
                               borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.all(2.5),
                             child: TabBar(
                                 labelPadding: EdgeInsets.all(5),
                                 indicator: BoxDecoration(
-                                    color: Colors.black,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Color(0xFF494949),
                                     borderRadius: BorderRadius.circular(25)),
-                                unselectedLabelColor: Colors.white,
-                                labelColor: Colors.white,
+                                unselectedLabelColor:
+                                    isDarkMode ? Colors.white : Colors.black,
+                                labelColor:
+                                    isDarkMode ? Colors.black : Colors.white,
                                 tabs: [
                                   Tab(
                                     text: ('Live'),
@@ -143,7 +153,11 @@ class _football_homeState extends State<football_home> {
                                                   Text(
                                                     '00:38:50',
                                                     style: TextStyle(
-                                                      color: Color(0xFFFF4D00),
+                                                      color: isDarkMode
+                                                          ? const Color(
+                                                              0xFFFF2E00)
+                                                          : const Color(
+                                                              0xFFFF4D00),
                                                     ),
                                                   )
                                                 ],
@@ -192,7 +206,11 @@ class _football_homeState extends State<football_home> {
                                               Text(
                                                 'GER',
                                                 style: TextStyle(
-                                                    color: Color(0xFFFF4D00),
+                                                    color: isDarkMode
+                                                        ? const Color(
+                                                            0xFFFF2E00)
+                                                        : const Color(
+                                                            0xFFFF4D00),
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),

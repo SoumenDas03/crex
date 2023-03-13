@@ -4,7 +4,9 @@ import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/fixtures_addTeam.dart';
 import 'package:crex/pages/more.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class fixtures_series extends StatefulWidget {
@@ -18,6 +20,8 @@ class fixtures_series extends StatefulWidget {
 class _fixtures_seriesState extends State<fixtures_series> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // ignore: prefer_const_constructors
     return DefaultTabController(
       length: 4,
@@ -77,14 +81,12 @@ class _fixtures_seriesState extends State<fixtures_series> {
         body: Container(
           // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              // ignore: prefer_const_constructors
-              image: DecorationImage(
-            // ignore: prefer_const_constructors
-            image: AssetImage(
-              "assets/background.jpeg",
-            ),
-            fit: BoxFit.cover,
-          )),
+            image: DecorationImage(
+                image: isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
+                fit: BoxFit.fill),
+          ),
           child: Column(
             children: [
               // DefaultTabController(
@@ -285,13 +287,19 @@ class _fixtures_seriesState extends State<fixtures_series> {
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
                                 // ignore: prefer_const_constructors
-                                Text(
-                                  "India Women tour of Pakistan, 2022",
-                                  // ignore: prefer_const_constructors
-                                  style: TextStyle(
+                                Container(
+                                  width: 265,
+                                  child: Text(
+                                    "India Women tour of Pakistan, 2022",
+                                    // ignore: prefer_const_constructors
+                                    style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
-                                      color: Colors.white),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
                                 ),
                                 // ignore: prefer_const_constructors
                                 SizedBox(
@@ -303,7 +311,9 @@ class _fixtures_seriesState extends State<fixtures_series> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                 ),
                               ],
