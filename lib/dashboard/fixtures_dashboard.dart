@@ -18,7 +18,9 @@ import 'package:crex/pages/series.dart';
 
 // ignore: unused_import
 import 'package:crex/pages/tennis_home.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class fixtures_dashboard extends StatefulWidget {
@@ -32,10 +34,13 @@ class fixtures_dashboard extends StatefulWidget {
 class _fixtures_dashboardState extends State<fixtures_dashboard> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFFF4D00),
+        backgroundColor:
+            isDarkMode ? const Color(0xFFFF2E00) : const Color(0xFFDFDFDF),
         title: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: SizedBox(
@@ -49,10 +54,11 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                     // ignore: prefer_const_constructors
                     labelPadding: EdgeInsets.all(5),
                     indicator: BoxDecoration(
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : Color(0xFF494949),
                         borderRadius: BorderRadius.circular(25)),
-                    unselectedLabelColor: Colors.white,
-                    labelColor: Colors.black,
+                    unselectedLabelColor:
+                        isDarkMode ? Colors.white : Colors.black,
+                    labelColor: isDarkMode ? Colors.black : Colors.white,
                     // ignore: prefer_const_literals_to_create_immutables
                     tabs: [
                       // ignore: prefer_const_constructors
@@ -88,27 +94,28 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
       body: fixtures(),
 
       bottomNavigationBar: Container(
-        color: Colors.black,
+        color: Colors.black12,
         child: Container(
           height: 60,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 // ignore: prefer_const_constructors
                 topRight: Radius.circular(20),
                 // ignore: prefer_const_constructors
                 topLeft: Radius.circular(20)),
-            color: Color(0xFFFF4D00),
+            color:
+                isDarkMode ? const Color(0xFFFF2E00) : const Color(0xFFDFDFDF),
           ),
           child: Stack(
             children: [
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  color: const Color(0xFFFF4D00),
-                ),
-              ),
+              // Positioned(
+              //   bottom: 0,
+              //   child: Container(
+              //     height: 45,
+              //     width: MediaQuery.of(context).size.width,
+              //     color: const Color(0xFFFF4D00),
+              //   ),
+              // ),
               Positioned(
                 left: 10,
                 child: Row(
@@ -140,7 +147,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w500),
                             )
                           ],
@@ -172,7 +180,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w500),
                             )
                           ],
@@ -204,7 +213,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w500),
                             )
                           ],
@@ -236,7 +246,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w500),
                             )
                           ],
@@ -268,7 +279,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.w500),
                             )
                           ],

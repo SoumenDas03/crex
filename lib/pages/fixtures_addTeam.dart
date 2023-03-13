@@ -7,7 +7,9 @@ import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/fixtures_selectteam.dart';
 import 'package:crex/pages/fixtures_series.dart';
 import 'package:crex/pages/more.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class fixtures_addTeam extends StatefulWidget {
@@ -21,6 +23,8 @@ class fixtures_addTeam extends StatefulWidget {
 class _fixtures_addTeamState extends State<fixtures_addTeam> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // ignore: prefer_const_constructors
     return DefaultTabController(
       length: 4,
@@ -81,14 +85,12 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
           alignment: Alignment.center,
           // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              // ignore: prefer_const_constructors
-              image: DecorationImage(
-            // ignore: prefer_const_constructors
-            image: AssetImage(
-              "assets/background.jpeg",
-            ),
-            fit: BoxFit.fill,
-          )),
+            image: DecorationImage(
+                image: isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
+                fit: BoxFit.fill),
+          ),
           child: Column(children: [
             // DefaultTabController(
             //   initialIndex: 2,
@@ -264,7 +266,7 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                 Stack(clipBehavior: Clip.none, children: [
                   Image.asset(
                     "assets/addteam.png",
-                    color: Colors.white,
+                    color: isDarkMode ? Colors.white : Colors.grey,
                   ),
                   // ignore: prefer_const_constructors
                   Positioned(
@@ -272,12 +274,16 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                       left: 60,
                       // ignore: prefer_const_constructors
                       child: CircleAvatar(
-                        backgroundColor: Colors.black87,
+                        backgroundColor:
+                            isDarkMode ? Colors.blueGrey[900] : Colors.white,
                         // ignore: prefer_const_constructors
                         child: Text(
                           "+",
                           // ignore: prefer_const_constructors
-                          style: TextStyle(fontSize: 25, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: isDarkMode ? Colors.white : Colors.black,
+                          ),
                         ),
                       ))
                 ]),
@@ -296,7 +302,7 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                     "Add your fav teams here to see all of their matches",
                     // ignore: prefer_const_constructors
                     style: TextStyle(
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.w700),
                   ),
@@ -309,7 +315,8 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey[900],
+                          backgroundColor:
+                              isDarkMode ? Colors.blueGrey[900] : Colors.white,
                           // ignore: prefer_const_constructors
                           minimumSize: Size(200, 50),
                           shape: RoundedRectangleBorder(
@@ -328,7 +335,9 @@ class _fixtures_addTeamState extends State<fixtures_addTeam> {
                         "+ Add teams",
                         // ignore: prefer_const_constructors
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                            color: isDarkMode ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
                       )),
                 ),
               ],

@@ -5,7 +5,9 @@ import 'package:crex/pages/fixtures_calender.dart';
 import 'package:crex/pages/fixtures_home.dart';
 import 'package:crex/pages/fixtures_pin.dart';
 import 'package:crex/pages/fixtures_series.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class fixtures extends StatefulWidget {
   const fixtures({super.key});
@@ -17,6 +19,8 @@ class fixtures extends StatefulWidget {
 class _fixturesState extends State<fixtures> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: ClipRRect(
@@ -24,12 +28,12 @@ class _fixturesState extends State<fixtures> {
           alignment: Alignment.center,
           // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage(
-              "assets/background.jpeg",
-            ),
-            fit: BoxFit.cover,
-          )),
+            image: DecorationImage(
+                image: isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
+                fit: BoxFit.fill),
+          ),
           child: Column(children: [
             DefaultTabController(
               length: 3,
@@ -51,7 +55,9 @@ class _fixturesState extends State<fixtures> {
                             // indicatorSize: TabBarIndicatorSize.label,
                             // padding: EdgeInsets.only(right: 2),
                             labelPadding: EdgeInsets.all(0),
-                            unselectedLabelColor: Colors.white,
+                            // unselectedLabelColor: Colors.white,
+                            unselectedLabelColor:
+                                isDarkMode ? Colors.white : Colors.black,
                             labelColor: Color(0xFFFF4D00),
                             labelStyle: TextStyle(
                                 fontSize: 12.0, fontWeight: FontWeight.bold),

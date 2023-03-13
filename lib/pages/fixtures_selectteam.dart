@@ -1,6 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors
 
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class fixtures_selectteam extends StatefulWidget {
   const fixtures_selectteam({super.key});
@@ -12,6 +14,8 @@ class fixtures_selectteam extends StatefulWidget {
 class _fixtures_selectteamState extends State<fixtures_selectteam> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -19,11 +23,10 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(
-                    'assets/background.jpeg',
-                  ),
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.high),
+                  image: isDarkMode
+                      ? AssetImage('assets/background.jpeg')
+                      : AssetImage("assets/bgLightMode.png"),
+                  fit: BoxFit.fill),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +45,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
-                              color: Colors.white),
+                              color: isDarkMode ? Colors.white : Colors.grey),
                         ),
                       ),
                       SizedBox(
@@ -56,7 +59,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                           },
                           child: Icon(
                             Icons.close,
-                            color: Colors.white,
+                            color: isDarkMode ? Colors.white : Colors.grey,
                           ),
                         ),
                       )
@@ -70,7 +73,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                   margin: EdgeInsets.only(left: 20, right: 20),
                   height: 1,
                   width: 380,
-                  color: Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.grey,
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
@@ -113,7 +116,8 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       child: Text(
                         'International Teams',
                         style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.w400),
+                            color: isDarkMode ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w400),
                       ),
                     ),
                     Container(
@@ -153,7 +157,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                         child: Text(
                           'IND',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: isDarkMode ? Colors.white : Colors.black,
                               fontWeight: FontWeight.w500,
                               fontSize: 11),
                         ),
@@ -168,7 +172,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       child: Text(
                         'Indian Premier League 2022',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: isDarkMode ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 12),
                       ),
@@ -200,7 +204,8 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
+                          border: Border.all(
+                              color: isDarkMode ? Colors.white : Colors.black),
                           borderRadius: BorderRadius.circular(8)),
                       child: Image.asset('assets/kkr.png'),
                     );
@@ -213,7 +218,7 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       child: Text(
                         'Popular Leagues',
                         style: TextStyle(
-                            color: Colors.white,
+                            color: isDarkMode ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 13),
                       ),
@@ -245,9 +250,12 @@ class _fixtures_selectteamState extends State<fixtures_selectteam> {
                       height: 30,
                       width: 60,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Image.asset('assets/leagues.png'),
+                          border: Border.all(
+                              color: isDarkMode ? Colors.white : Colors.black),
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                              image: AssetImage("assets/leagues.png"),
+                              fit: BoxFit.fill)),
                     );
                   },
                 ),

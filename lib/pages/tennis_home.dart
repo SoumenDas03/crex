@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_import, prefer_const_literals_to_create_immutables, duplicate_ignore, avoid_unnecessary_containers
 
-
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class tennis_home extends StatefulWidget {
@@ -15,6 +16,8 @@ class tennis_home extends StatefulWidget {
 class _tennis_homeState extends State<tennis_home> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -36,12 +39,12 @@ class _tennis_homeState extends State<tennis_home> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: AssetImage(
-                      "assets/background.jpeg",
-                    ),
-                    fit: BoxFit.cover,
-                  )),
+                    image: DecorationImage(
+                        image: isDarkMode
+                            ? AssetImage('assets/background.jpeg')
+                            : AssetImage("assets/bgLightMode.png"),
+                        fit: BoxFit.fill),
+                  ),
                   child: Column(
                     children: [
                       SizedBox(
@@ -53,7 +56,9 @@ class _tennis_homeState extends State<tennis_home> {
                         width: 340,
                         height: 40,
                         decoration: BoxDecoration(
-                            color: Color(0xFFFF4D00),
+                            color: isDarkMode
+                                ? const Color(0xFFFF2E00)
+                                : const Color(0xFFDFDFDF),
                             borderRadius: BorderRadius.circular(20)),
                         child: DefaultTabController(
                           length: 4,
@@ -62,10 +67,14 @@ class _tennis_homeState extends State<tennis_home> {
                             child: TabBar(
                                 labelPadding: EdgeInsets.all(5),
                                 indicator: BoxDecoration(
-                                    color: Colors.black,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Color(0xFF494949),
                                     borderRadius: BorderRadius.circular(25)),
-                                unselectedLabelColor: Colors.white,
-                                labelColor: Colors.white,
+                                unselectedLabelColor:
+                                    isDarkMode ? Colors.white : Colors.black,
+                                labelColor:
+                                    isDarkMode ? Colors.black : Colors.white,
                                 tabs: [
                                   Tab(
                                     text: ('Live'),
@@ -247,6 +256,7 @@ class _tennis_homeState extends State<tennis_home> {
                                               Text(
                                                 'Novak Djokovic',
                                                 style: TextStyle(
+                                                    color: Colors.black,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),

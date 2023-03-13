@@ -16,7 +16,9 @@ import 'package:crex/pages/more.dart';
 import 'package:crex/pages/series.dart';
 
 import 'package:crex/pages/tennis_home.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class home_dashboard extends StatefulWidget {
@@ -30,12 +32,15 @@ class home_dashboard extends StatefulWidget {
 class _home_dashboardState extends State<home_dashboard> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xFFFF4D00),
+          backgroundColor:
+              isDarkMode ? const Color(0xFFFF2E00) : const Color(0xFFDFDFDF),
           title: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: SizedBox(
@@ -47,10 +52,11 @@ class _home_dashboardState extends State<home_dashboard> {
                     // ignore: prefer_const_constructors
                     labelPadding: EdgeInsets.all(5),
                     indicator: BoxDecoration(
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : Color(0xFF494949),
                         borderRadius: BorderRadius.circular(25)),
-                    unselectedLabelColor: Colors.white,
-                    labelColor: Colors.black,
+                    unselectedLabelColor:
+                        isDarkMode ? Colors.white : Colors.black,
+                    labelColor: isDarkMode ? Colors.black : Colors.white,
                     // ignore: prefer_const_literals_to_create_immutables
                     tabs: [
                       // ignore: prefer_const_constructors
@@ -92,36 +98,38 @@ class _home_dashboardState extends State<home_dashboard> {
           ],
         ),
         bottomNavigationBar: Container(
-          color: Colors.black,
+          // color: Colors.black,
           child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
                 // ignore: prefer_const_constructors
                 topRight: Radius.circular(20),
                 // ignore: prefer_const_constructors
                 topLeft: Radius.circular(20),
               ),
-              color: Color(0xFFFF4D00),
+              color: isDarkMode
+                  ? const Color(0xFFFF2E00)
+                  : const Color(0xFFDFDFDF),
             ),
             height: 60,
             child: Stack(
               children: [
-                Positioned(
-                  bottom: 0,
-                  child: ClipRRect(
-                    // ignore: prefer_const_constructors
-                    borderRadius: BorderRadius.only(
-                        // ignore: prefer_const_constructors
-                        topRight: Radius.circular(20),
-                        // ignore: prefer_const_constructors
-                        topLeft: Radius.circular(20)),
-                    child: Container(
-                      height: 30,
-                      width: MediaQuery.of(context).size.width,
-                      color: const Color(0xFFFF4D00),
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   bottom: 0,
+                //   child: ClipRRect(
+                //     // ignore: prefer_const_constructors
+                //     borderRadius: BorderRadius.only(
+                //         // ignore: prefer_const_constructors
+                //         topRight: Radius.circular(20),
+                //         // ignore: prefer_const_constructors
+                //         topLeft: Radius.circular(20)),
+                //     child: Container(
+                //       height: 30,
+                //       width: MediaQuery.of(context).size.width,
+                //       color: isDarkMode ?const Color(0xFFFF2E00) : const Color(0xFFFF4D00),
+                //     ),
+                //   ),
+                // ),
                 Positioned(
                   bottom: 5,
                   left: 10,
@@ -141,7 +149,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 child: Icon(
                                   Icons.home,
-                                  color: const Color(0xFFFF4D00),
+                                  color: isDarkMode
+                                      ? const Color(0xFFFF2E00)
+                                      : const Color(0xFFFF4D00),
                                 ),
                               ),
                               // ignore: prefer_const_constructors
@@ -150,7 +160,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w500),
                               )
                             ],
@@ -182,7 +194,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w500),
                               )
                             ],
@@ -214,7 +228,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w500),
                               )
                             ],
@@ -246,7 +262,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w500),
                               )
                             ],
@@ -278,7 +296,9 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.w500),
                               )
                             ],

@@ -4,10 +4,12 @@
 import 'package:crex/pages/football_home.dart';
 // ignore: unused_import
 import 'package:crex/pages/tennis_home.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class series extends StatefulWidget {
@@ -45,195 +47,248 @@ class _seriesState extends State<series> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         body: FutureBuilder(
-          future: getSeriesList(),
-          builder: (context, snapshot) {
-            if (data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return SingleChildScrollView(
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: AssetImage(
-                      "assets/background.jpeg",
+      future: getSeriesList(),
+      builder: (context, snapshot) {
+        if (data == null) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return SingleChildScrollView(
+            child: Column(children: [
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: isDarkMode
+                          ? AssetImage('assets/background.jpeg')
+                          : AssetImage("assets/bgLightMode.png"),
+                      fit: BoxFit.fill),
+                ),
+                child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 20),
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        'Trending Series',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17),
+                      ),
                     ),
-                    fit: BoxFit.fill,
-                  )),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: Column(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 20, left: 20),
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            'Trending Series',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 17),
+                    InkWell(
+                      onTap: () {
+                        setState(
+                          () {
+                            flag == true ? flag = false : flag = true;
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              bottomLeft: Radius.circular(30)),
+                          gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            stops: [
+                              0.5,
+                              0.8,
+                            ],
+                            // ignore: prefer_const_literals_to_create_immutables
+                            colors: [
+                              Color.fromARGB(255, 230, 98, 42),
+                              Color.fromARGB(255, 246, 75, 1),
+                            ],
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(
-                              () {
-                                flag == true ? flag = false : flag = true;
-                              },
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(top: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30)),
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                // ignore: prefer_const_literals_to_create_immutables
-                                stops: [
-                                  0.5,
-                                  0.8,
-                                ],
-                                // ignore: prefer_const_literals_to_create_immutables
-                                colors: [
-                                  Color.fromARGB(255, 230, 98, 42),
-                                  Color.fromARGB(255, 246, 75, 1),
-                                ],
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 15, bottom: 10, left: 10, right: 7),
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 25,
+                                child: Column(
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      data[0]["matches"].toString(),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Matches',
+                                      style: TextStyle(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                            child: Row(
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 15, bottom: 10, left: 10, right: 7),
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 25,
-                                    child: Column(
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          data[0]["matches"].toString(),
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          'Matches',
-                                          style: TextStyle(
-                                              fontSize: 8,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black),
-                                        )
-                                      ],
+                                Container(
+                                  width: 250,
+                                  margin: EdgeInsets.only(left: 10, top: 10),
+                                  child: Text(
+                                    data[0]["name"],
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            Color.fromARGB(255, 246, 242, 242)),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 6, left: 10),
+                                  child: Text(
+                                    DateFormat.yMMMEd().format(DateTime.parse(
+                                            data[0]["startDate"])) +
+                                        "-" +
+                                        data[0]["endDate"] +
+                                        ", " +
+                                        (DateTime.now().year).toString(),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 246, 242, 242),
                                     ),
                                   ),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 250,
-                                      margin:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      child: Text(
-                                        data[0]["name"],
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 246, 242, 242)),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: flag,
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 30),
+                            height: 60,
+                            width: 330,
+                            color: const Color.fromARGB(255, 91, 85, 85),
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 30, top: 00),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    'Series',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 90),
+                                    width: 140,
+                                    child: Text(
+                                      data[0]["name"].toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13,
                                       ),
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 6, left: 10),
-                                      child: Text(
-                                        DateFormat.yMMMEd().format(
-                                                DateTime.parse(
-                                                    data[0]["startDate"])) +
-                                            "-" +
-                                            data[0]["endDate"] +
-                                            ", " +
-                                            (DateTime.now().year).toString(),
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(
-                                              255, 246, 242, 242),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                              margin: const EdgeInsets.only(left: 30),
+                              height: 1,
+                              width: 330,
+                              color: Colors.white),
+                          Container(
+                            margin: const EdgeInsets.only(left: 30),
+                            height: 60,
+                            width: 330,
+                            color: const Color.fromARGB(255, 91, 85, 85),
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 30, top: 00),
+                                  child: const Text(
+                                    'Duration',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 80),
+                                  width: 140,
+                                  child: data[0]["startDate"] != "Jun 07"
+                                      ? Text(
+                                          "${"${DateFormat.yMMMEd().format(DateTime.parse(data[0]["startDate"]))}-" + data[0]["endDate"]}, ${DateTime.now().year}",
+                                          style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromARGB(
+                                                  255, 246, 242, 242)),
+                                        )
+                                      : Text(
+                                          data[0]["startDate"] +
+                                              ", " +
+                                              (DateTime.now().year).toString() +
+                                              "- " +
+                                              data[0]["endDate"] +
+                                              ", " +
+                                              (DateTime.now().year).toString(),
+                                          style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color.fromARGB(
+                                                  255, 246, 242, 242)),
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                )
+                                ),
                               ],
                             ),
                           ),
-                        ),
-                        Visibility(
-                          visible: flag,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(left: 30),
-                                height: 60,
-                                width: 330,
-                                color: const Color.fromARGB(255, 91, 85, 85),
-                                child: Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 30, top: 00),
-                                  child: Row(
-                                    children: [
-                                      const Text(
-                                        'Series',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 90),
-                                        width: 140,
-                                        child: Text(
-                                          data[0]["name"].toString(),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                  margin: const EdgeInsets.only(left: 30),
-                                  height: 1,
-                                  width: 330,
-                                  color: Colors.white),
-                              Container(
-                                margin: const EdgeInsets.only(left: 30),
+                          Container(
+                              margin: const EdgeInsets.only(left: 30),
+                              height: 1,
+                              width: 330,
+                              color: Colors.white),
+                          Container(
+                            margin: const EdgeInsets.only(left: 30),
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(20)),
+                              child: Container(
                                 height: 60,
                                 width: 330,
                                 color: const Color.fromARGB(255, 91, 85, 85),
                                 child: Row(
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 30, top: 00),
+                                      margin: const EdgeInsets.only(left: 30),
                                       child: const Text(
-                                        'Duration',
+                                        'Format',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
@@ -241,119 +296,61 @@ class _seriesState extends State<series> {
                                       ),
                                     ),
                                     Container(
-                                      margin: const EdgeInsets.only(left: 80),
-                                      width: 140,
-                                      child: data[0]["startDate"] != "Jun 07"
-                                          ? Text(
-                                              "${"${DateFormat.yMMMEd().format(DateTime.parse(data[0]["startDate"]))}-" + data[0]["endDate"]}, ${DateTime.now().year}",
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color.fromARGB(
-                                                      255, 246, 242, 242)),
-                                            )
-                                          : Text(
-                                              data[0]["startDate"] +
-                                                  ", " +
-                                                  (DateTime.now().year)
-                                                      .toString() +
-                                                  "- " +
-                                                  data[0]["endDate"] +
-                                                  ", " +
-                                                  (DateTime.now().year)
-                                                      .toString(),
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color.fromARGB(
-                                                      255, 246, 242, 242)),
-                                            ),
+                                      margin: const EdgeInsets.only(left: 95),
+                                      child: Text(
+                                        data[0]["odi"].toString() +
+                                            " ODIs, " +
+                                            data[0]["t20"].toString() +
+                                            " T20s, " +
+                                            data[0]["test"].toString() +
+                                            " Tests",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              Container(
-                                  margin: const EdgeInsets.only(left: 30),
-                                  height: 1,
-                                  width: 330,
-                                  color: Colors.white),
-                              Container(
-                                margin: const EdgeInsets.only(left: 30),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20)),
-                                  child: Container(
-                                    height: 60,
-                                    width: 330,
-                                    color:
-                                        const Color.fromARGB(255, 91, 85, 85),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 30),
-                                          child: const Text(
-                                            'Format',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 95),
-                                          child: Text(
-                                            data[0]["odi"].toString() +
-                                                " ODIs, " +
-                                                data[0]["t20"].toString() +
-                                                " T20s, " +
-                                                data[0]["test"].toString() +
-                                                " Tests",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                        ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          physics: ClampingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 5,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                       flag1 == true ? flag1 = false : flag1 = true;
-                                    });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    height: 60,
-                                    width: 380,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          bottomLeft: Radius.circular(30)),
-                                      color: Color.fromARGB(255, 39, 38, 38),
-                                    ),
-                                    child: Row(
+                          const SizedBox(
+                            height: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  flag1 == true ? flag1 = false : flag1 = true;
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: 10,
+                                ),
+                                width: 380,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      bottomLeft: Radius.circular(30)),
+                                  color: Color.fromARGB(255, 39, 38, 38),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(7),
@@ -377,7 +374,8 @@ class _seriesState extends State<series> {
                                                   'Matches',
                                                   style: TextStyle(
                                                       fontSize: 8,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       color: Colors.black),
                                                 )
                                               ],
@@ -389,6 +387,7 @@ class _seriesState extends State<series> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
+                                              width: 265,
                                               margin: EdgeInsets.only(
                                                   top: 10, left: 10),
                                               child: Text(
@@ -446,55 +445,124 @@ class _seriesState extends State<series> {
                                         )
                                       ],
                                     ),
-                                  ),
+                                    SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
                                 ),
-                                Visibility(
-                                  visible: flag1,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 30),
-                                        height: 60,
-                                        width: 330,
-                                        color: const Color.fromARGB(
-                                            255, 91, 85, 85),
-                                        child: Container(
+                              ),
+                            ),
+                            Visibility(
+                              visible: flag1,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 30),
+                                    height: 60,
+                                    width: 330,
+                                    color:
+                                        const Color.fromARGB(255, 91, 85, 85),
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 30, top: 00),
+                                      child: Row(
+                                        children: [
+                                          const Text(
+                                            'Series',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 90),
+                                            width: 140,
+                                            child: Text(
+                                              data[index + 1]["name"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: const EdgeInsets.only(left: 30),
+                                      height: 1,
+                                      width: 330,
+                                      color: Colors.white),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 30),
+                                    height: 60,
+                                    width: 330,
+                                    color:
+                                        const Color.fromARGB(255, 91, 85, 85),
+                                    child: Row(
+                                      children: [
+                                        Container(
                                           margin: const EdgeInsets.only(
                                               left: 30, top: 00),
-                                          child: Row(
-                                            children: [
-                                              const Text(
-                                                'Series',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 90),
-                                                width: 140,
-                                                child: Text(
-                                                  data[index + 1]["name"].toString(),
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 13,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                          child: const Text(
+                                            'Duration',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         ),
-                                      ),
-                                      Container(
+                                        Container(
                                           margin:
-                                              const EdgeInsets.only(left: 30),
-                                          height: 1,
-                                          width: 330,
-                                          color: Colors.white),
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 30),
+                                              const EdgeInsets.only(left: 80),
+                                          width: 140,
+                                          child: data[index + 1]["startDate"] !=
+                                                  "Jun 07"
+                                              ? Text(
+                                                  "${"${DateFormat.yMMMEd().format(DateTime.parse(data[index + 1]["startDate"]))}-" + data[index + 1]["endDate"]}, ${DateTime.now().year}",
+                                                  style: TextStyle(
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Color.fromARGB(
+                                                          255, 246, 242, 242)),
+                                                )
+                                              : Text(
+                                                  data[index + 1]["startDate"] +
+                                                      ", " +
+                                                      (DateTime.now().year)
+                                                          .toString() +
+                                                      "- " +
+                                                      data[index + 1]
+                                                          ["endDate"] +
+                                                      ", " +
+                                                      (DateTime.now().year)
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Color.fromARGB(
+                                                          255, 246, 242, 242)),
+                                                ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                      margin: const EdgeInsets.only(left: 30),
+                                      height: 1,
+                                      width: 330,
+                                      color: Colors.white),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 30),
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20)),
+                                      child: Container(
                                         height: 60,
                                         width: 330,
                                         color: const Color.fromARGB(
@@ -503,9 +571,9 @@ class _seriesState extends State<series> {
                                           children: [
                                             Container(
                                               margin: const EdgeInsets.only(
-                                                  left: 30, top: 00),
+                                                  left: 30),
                                               child: const Text(
-                                                'Duration',
+                                                'Format',
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15,
@@ -515,117 +583,49 @@ class _seriesState extends State<series> {
                                             ),
                                             Container(
                                               margin: const EdgeInsets.only(
-                                                  left: 80),
-                                              width: 140,
-                                              child: data[index + 1]["startDate"] !=
-                                                      "Jun 07"
-                                                  ? Text(
-                                                      "${"${DateFormat.yMMMEd().format(DateTime.parse(data[index + 1]["startDate"]))}-" + data[index + 1]["endDate"]}, ${DateTime.now().year}",
-                                                      style: TextStyle(
-                                                          fontSize: 11,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              246,
-                                                              242,
-                                                              242)),
-                                                    )
-                                                  : Text(
-                                                      data[index + 1]["startDate"] +
-                                                          ", " +
-                                                          (DateTime.now().year)
-                                                              .toString() +
-                                                          "- " +
-                                                          data[index + 1]["endDate"] +
-                                                          ", " +
-                                                          (DateTime.now().year)
-                                                              .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 11,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              246,
-                                                              242,
-                                                              242)),
-                                                    ),
+                                                  left: 95),
+                                              child: Text(
+                                                data[index + 1]["odi"]
+                                                        .toString() +
+                                                    " ODIs, " +
+                                                    data[index + 1]["t20"]
+                                                        .toString() +
+                                                    " T20s, " +
+                                                    data[index + 1]["test"]
+                                                        .toString() +
+                                                    " Tests",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 13,
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 30),
-                                          height: 1,
-                                          width: 330,
-                                          color: Colors.white),
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 30),
-                                        child: ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                              bottomLeft: Radius.circular(20)),
-                                          child: Container(
-                                            height: 60,
-                                            width: 330,
-                                            color: const Color.fromARGB(
-                                                255, 91, 85, 85),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 30),
-                                                  child: const Text(
-                                                    'Format',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 95),
-                                                  child: Text(
-                                                    data[index + 1]["odi"].toString() +
-                                                        " ODIs, " +
-                                                        data[index + 1]["t20"]
-                                                            .toString() +
-                                                        " T20s, " +
-                                                        data[index + 1]["test"]
-                                                            .toString() +
-                                                        " Tests",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 13,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
-                  ),
+                    SizedBox(
+                      height: 225,
+                    )
+                  ],
                 ),
-              );
-            }
-          },
-        )
+              ),
+            ]),
+          );
+        }
+      },
+    )
         // ignore: sized_box_for_whitespace
 
         );

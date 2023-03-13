@@ -4,6 +4,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../provider/theme_changer.dart';
 
 class fantasy extends StatefulWidget {
   const fantasy({Key? key, required this.id}) : super(key: key);
@@ -110,6 +113,8 @@ class _fantasyState extends State<fantasy> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return DefaultTabController(
       length: 6,
       child: Scaffold(
@@ -142,10 +147,11 @@ class _fantasyState extends State<fantasy> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/background.jpeg',
-                                      ),
-                                      fit: BoxFit.cover,
+                                      image: isDarkMode
+                                          ? AssetImage('assets/background.jpeg')
+                                          : AssetImage(
+                                              "assets/bgLightMode.png"),
+                                      fit: BoxFit.fill,
                                       filterQuality: FilterQuality.high),
                                 ),
                                 child: Column(

@@ -4,7 +4,9 @@ import 'package:crex/pages/fixtures_addTeam.dart';
 import 'package:crex/pages/fixtures_calender.dart';
 import 'package:crex/pages/fixtures_pin.dart';
 import 'package:crex/pages/fixtures_series.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class fixtures1 extends StatefulWidget {
   const fixtures1({super.key});
@@ -16,6 +18,8 @@ class fixtures1 extends StatefulWidget {
 class _fixtures1State extends State<fixtures1> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -24,12 +28,12 @@ class _fixtures1State extends State<fixtures1> {
             alignment: Alignment.center,
             // ignore: prefer_const_constructors
             decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage(
-                "assets/background.jpeg",
-              ),
-              fit: BoxFit.cover,
-            )),
+              image: DecorationImage(
+                  image: isDarkMode
+                      ? AssetImage('assets/background.jpeg')
+                      : AssetImage("assets/bgLightMode.png"),
+                  fit: BoxFit.fill),
+            ),
             child: Column(children: [
               DefaultTabController(
                 length: 3,
@@ -176,7 +180,11 @@ class _fixtures1State extends State<fixtures1> {
                         Text(
                           'Today',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: isDarkMode
+                                  ? isDarkMode
+                                      ? Colors.white
+                                      : Colors.black
+                                  : Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 15),
                         ),
@@ -187,7 +195,7 @@ class _fixtures1State extends State<fixtures1> {
                           alignment: Alignment.center,
                           height: 20,
                           width: 2,
-                          color: Colors.white,
+                          color: isDarkMode ? Colors.white : Colors.black,
                         ),
                         SizedBox(
                           width: 5,
@@ -195,7 +203,7 @@ class _fixtures1State extends State<fixtures1> {
                         Text(
                           '1 Dec 2022',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: isDarkMode ? Colors.white : Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 15),
                         ),
@@ -213,7 +221,10 @@ class _fixtures1State extends State<fixtures1> {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                   colors: [
-                                    Color(0xFFFF4D00),
+                                    //  Color(0xFFFF4D00),
+                                    isDarkMode
+                                        ? const Color(0xFFFF2E00)
+                                        : const Color(0xFFDFDFDF),
                                     Colors.orange,
                                     Color(0xFF7A00)
                                   ],
@@ -238,7 +249,9 @@ class _fixtures1State extends State<fixtures1> {
                                   Icon(
                                     Icons.calendar_month,
                                     size: 18,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -246,7 +259,9 @@ class _fixtures1State extends State<fixtures1> {
                                   Text(
                                     'Calender',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12),
                                   )
@@ -272,7 +287,9 @@ class _fixtures1State extends State<fixtures1> {
                                 child: Container(
                                   height: 160,
                                   width: 400,
-                                  color: Colors.blueGrey[900],
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[900]
+                                      : Colors.white,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
                                         left: 25, top: 20),
@@ -293,7 +310,9 @@ class _fixtures1State extends State<fixtures1> {
                                               child: Text(
                                                 '2nd ODI, Pakistan Vs Australia',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16),
                                               ),
@@ -342,7 +361,9 @@ class _fixtures1State extends State<fixtures1> {
                                                     Text(
                                                       'AUSTRALIA',
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
@@ -356,8 +377,11 @@ class _fixtures1State extends State<fixtures1> {
                                                             Text(
                                                               '289-8',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -371,8 +395,11 @@ class _fixtures1State extends State<fixtures1> {
                                                               child: Text(
                                                                   '48.2',
                                                                   style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
+                                                                      color: isDarkMode
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .black,
                                                                       fontSize:
                                                                           10)),
                                                             ),
@@ -396,7 +423,9 @@ class _fixtures1State extends State<fixtures1> {
                                                     Text(
                                                       'PAKISTAN',
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     )
@@ -445,7 +474,9 @@ class _fixtures1State extends State<fixtures1> {
                               Text(
                                 'Tomorrow',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
@@ -456,7 +487,7 @@ class _fixtures1State extends State<fixtures1> {
                                 alignment: Alignment.center,
                                 height: 20,
                                 width: 2,
-                                color: Colors.white,
+                                color: isDarkMode ? Colors.white : Colors.black,
                               ),
                               SizedBox(
                                 width: 5,
@@ -464,7 +495,9 @@ class _fixtures1State extends State<fixtures1> {
                               Text(
                                 '2 Dec 2022',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15),
                               ),
@@ -481,7 +514,9 @@ class _fixtures1State extends State<fixtures1> {
                             child: Container(
                               height: 160,
                               width: 400,
-                              color: Colors.blueGrey[900],
+                              color: isDarkMode
+                                  ? Colors.blueGrey[900]
+                                  : Colors.white,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.only(left: 25, top: 20),
@@ -494,7 +529,7 @@ class _fixtures1State extends State<fixtures1> {
                                     //   child: Text(
                                     //     'T10 League, Pakistan Vs Australia',
                                     //     style: TextStyle(
-                                    //         color: Colors.white,
+                                    //         color: isDarkMode ? Colors.white : Colors.black,
                                     //         fontWeight: FontWeight.bold,
                                     //         fontSize: 15),
                                     //   ),
@@ -511,7 +546,9 @@ class _fixtures1State extends State<fixtures1> {
                                           child: Text(
                                             'T10 League, Pakistan Vs Australia',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16),
                                           ),
@@ -546,7 +583,9 @@ class _fixtures1State extends State<fixtures1> {
                                                 Text(
                                                   'AUSTRALIA',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )
@@ -568,7 +607,9 @@ class _fixtures1State extends State<fixtures1> {
                                                 Text(
                                                   'PAKISTAN',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 )
@@ -592,13 +633,17 @@ class _fixtures1State extends State<fixtures1> {
                                             Text(
                                               'Start from',
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black),
                                             ),
                                             Text(
                                               '03:00 PM',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 18),
                                             )
                                           ],
@@ -623,7 +668,10 @@ class _fixtures1State extends State<fixtures1> {
                                   child: Container(
                                     height: 160,
                                     width: 400,
-                                    color: Colors.blueGrey[900],
+                                    // color: Colors.blueGrey[900],
+                                    color: isDarkMode
+                                        ? Colors.blueGrey[900]
+                                        : Colors.white,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                         left: 25,
@@ -638,7 +686,9 @@ class _fixtures1State extends State<fixtures1> {
                                           Text(
                                             'T20 League, Pakistan Vs Australia',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 15),
                                           ),
@@ -666,7 +716,9 @@ class _fixtures1State extends State<fixtures1> {
                                                       Text(
                                                         'AUSTRALIA',
                                                         style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -689,7 +741,9 @@ class _fixtures1State extends State<fixtures1> {
                                                       Text(
                                                         'PAKISTAN',
                                                         style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -714,14 +768,18 @@ class _fixtures1State extends State<fixtures1> {
                                                   Text(
                                                     'Start from',
                                                     style: TextStyle(
-                                                        color: Colors.white),
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black),
                                                   ),
                                                   Text(
                                                     '04:00 PM',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: Colors.white,
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
                                                         fontSize: 18),
                                                   )
                                                 ],

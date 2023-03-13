@@ -5,6 +5,9 @@ import 'dart:convert';
 import 'package:crex/dashboard/infoTabviews.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/theme_changer.dart';
 
 // ignore: camel_case_types
 class cricket_home extends StatefulWidget {
@@ -73,6 +76,8 @@ class _cricket_homeState extends State<cricket_home> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -155,12 +160,12 @@ class _cricket_homeState extends State<cricket_home> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/background.jpeg",
-                                ),
-                                fit: BoxFit.cover,
-                              )),
+                                image: DecorationImage(
+                                    image: isDarkMode
+                                        ? AssetImage('assets/background.jpeg')
+                                        : AssetImage("assets/bgLightMode.png"),
+                                    fit: BoxFit.fill),
+                              ),
                               child: DefaultTabController(
                                 length: 4,
                                 child: Column(
@@ -171,7 +176,9 @@ class _cricket_homeState extends State<cricket_home> {
                                       width: 340,
                                       height: 40,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFFF4D00),
+                                          color: isDarkMode
+                                              ? const Color(0xFFFF2E00)
+                                              : const Color(0xFFDFDFDF),
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       child: Padding(
@@ -179,10 +186,14 @@ class _cricket_homeState extends State<cricket_home> {
                                         child: TabBar(
                                             labelPadding: EdgeInsets.all(5),
                                             indicator: BoxDecoration(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Color(0xFF494949),
                                                 borderRadius:
                                                     BorderRadius.circular(25)),
-                                            unselectedLabelColor: Colors.white,
+                                            unselectedLabelColor: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             labelColor: Colors.white,
                                             tabs: [
                                               Tab(
@@ -248,8 +259,11 @@ class _cricket_homeState extends State<cricket_home> {
                                                             child: Container(
                                                               height: 60,
                                                               width: 330,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Color(
+                                                                      0xFFDFDFDF)
+                                                                  : Colors
+                                                                      .white,
                                                               child: Row(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -356,8 +370,13 @@ class _cricket_homeState extends State<cricket_home> {
                                                             child: Container(
                                                               height: 35,
                                                               width: 300,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                            
+                                                                  ? Color(
+                                                                      0xFFcccccc
+                                                                      )
+                                                                  : Colors
+                                                                      .white,
                                                               child: Row(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -372,8 +391,11 @@ class _cricket_homeState extends State<cricket_home> {
                                                                             "shortname"]
                                                                         .toString(),
                                                                     style: TextStyle(
-                                                                        color: Color(
-                                                                            0xFFFF4D00),
+                                                                        color: isDarkMode
+                                                                            ? const Color(
+                                                                                0xFFFF2E00)
+                                                                            : const Color(
+                                                                                0xFFFF4D00),
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   ),
@@ -628,8 +650,11 @@ class _cricket_homeState extends State<cricket_home> {
                                                                             "shortname"]
                                                                         .toString(),
                                                                     style: TextStyle(
-                                                                        color: Color(
-                                                                            0xFFFF4D00),
+                                                                        color: isDarkMode
+                                                                            ? const Color(
+                                                                                0xFFFF2E00)
+                                                                            : const Color(
+                                                                                0xFFFF4D00),
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   ),
@@ -1106,8 +1131,11 @@ class _cricket_homeState extends State<cricket_home> {
                                                                             "shortname"]
                                                                         .toString(),
                                                                     style: TextStyle(
-                                                                        color: Color(
-                                                                            0xFFFF4D00),
+                                                                        color: isDarkMode
+                                                                            ? const Color(
+                                                                                0xFFFF2E00)
+                                                                            : const Color(
+                                                                                0xFFFF4D00),
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   ),

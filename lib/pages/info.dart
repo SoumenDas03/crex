@@ -3,11 +3,13 @@
 import 'dart:convert';
 
 import 'package:crex/pages/playingXI.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import 'package:marquee/marquee.dart';
+import 'package:provider/provider.dart';
 
 class info extends StatefulWidget {
   const info({Key? key, required this.id}) : super(key: key);
@@ -19,6 +21,7 @@ class info extends StatefulWidget {
 }
 
 class _infoState extends State<info> {
+  var map, data;
   List ranking = [
     {'class': 'A', 'total': 23},
     {'class': 'B', 'total': 14},
@@ -26,31 +29,32 @@ class _infoState extends State<info> {
     {'class': 'D', 'total': 7},
     {'class': 'E', 'total': 21},
   ];
+  getSingleCricketMatchDetails() async {
+    try {
+      http.Response response = await http.get(
+        Uri.parse(
+            'https://api.cricapi.com/v1/match_scorecard?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+      );
+
+      map = jsonDecode(response.body.toString());
+      data = map["data"];
+      if (response.statusCode == 200) {
+        return data;
+        // ignore: use_build_context_synchronously
+      } else {
+        // ignore: avoid_print
+        print('failed');
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var map, data;
-    getSingleCricketMatchDetails() async {
-      try {
-        http.Response response = await http.get(
-          Uri.parse(
-              'https://api.cricapi.com/v1/match_scorecard?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
-        );
-
-        map = jsonDecode(response.body.toString());
-        data = map["data"];
-        if (response.statusCode == 200) {
-          return data;
-          // ignore: use_build_context_synchronously
-        } else {
-          // ignore: avoid_print
-          print('failed');
-        }
-      } catch (e) {
-        // ignore: avoid_print
-        print(e.toString());
-      }
-    }
-
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -67,11 +71,14 @@ class _infoState extends State<info> {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(
-                          'assets/background.jpeg',
-                        ),
-                        fit: BoxFit.cover,
-                        filterQuality: FilterQuality.high),
+                        // image: isDarkMode
+                        //     ? AssetImage('assets/background.jpeg')
+                        //     : AssetImage("assets/bgLightMode.png"),
+
+                        image: isDarkMode
+                            ? AssetImage("assets/background.jpeg")
+                            : AssetImage("assets/bgLightMode.png"),
+                        fit: BoxFit.fill),
                   ),
                   child: Column(
                     children: [
