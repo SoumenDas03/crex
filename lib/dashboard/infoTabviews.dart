@@ -13,7 +13,9 @@ import 'package:crex/pages/more.dart';
 
 import 'package:crex/pages/scorecard.dart';
 import 'package:crex/pages/seriesstatus.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class infoTabViews extends StatefulWidget {
@@ -29,14 +31,16 @@ class infoTabViews extends StatefulWidget {
 class _infoTabViewsState extends State<infoTabViews> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 7,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.black,
-            title: const TabBar(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            title: TabBar(
                 isScrollable: true,
                 labelStyle: TextStyle(fontSize: 12),
                 labelPadding: EdgeInsets.only(right: 10),
@@ -44,8 +48,8 @@ class _infoTabViewsState extends State<infoTabViews> {
                     EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 5),
                 indicatorColor: Colors.black,
                 labelColor: Color(0xFFFF4D00),
-                unselectedLabelColor: Colors.white,
-                tabs: [
+                unselectedLabelColor: isDarkMode ? Colors.white : Colors.black,
+                tabs: const [
                   Tab(
                     text: 'Info',
                   ),
@@ -67,56 +71,46 @@ class _infoTabViewsState extends State<infoTabViews> {
                   ),
                 ]),
           ),
-          body: TabBarView(
-            children: <Widget>[
-              info(
-                id: widget.id,
-              ),
-              fantasy(
-                id: widget.id,
-              ),
-              commententary(
-                id: widget.id,
-              ),
-              live_second(id: widget.id,),
-              scorecard(
-                id: widget.id,
-              ),
-              graph(),
-              seriesstatus(),
-            ],
+          body: Material(
+            child: TabBarView(
+              children: <Widget>[              
+                info(
+                  id: widget.id,
+                ),
+                fantasy(
+                  id: widget.id,
+                ),
+                commententary(
+                  id: widget.id,
+                ),
+                live_second(
+                  id: widget.id,
+                ),
+                scorecard(
+                  id: widget.id,
+                ),
+                graph(),
+                seriesstatus(),
+              ],
+            ),
           ),
           bottomNavigationBar: Container(
             color: Colors.black,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   // ignore: prefer_const_constructors
                   topRight: Radius.circular(20),
                   // ignore: prefer_const_constructors
                   topLeft: Radius.circular(20),
                 ),
-                color: Color(0xFFFF4D00),
+                color: isDarkMode
+                    ? const Color(0xFFFF2E00)
+                    : const Color(0xFFDFDFDF),
               ),
               height: 60,
               child: Stack(
                 children: [
-                  Positioned(
-                    bottom: 0,
-                    child: ClipRRect(
-                      // ignore: prefer_const_constructors
-                      borderRadius: BorderRadius.only(
-                          // ignore: prefer_const_constructors
-                          topRight: Radius.circular(20),
-                          // ignore: prefer_const_constructors
-                          topLeft: Radius.circular(20)),
-                      child: Container(
-                        height: 30,
-                        width: MediaQuery.of(context).size.width,
-                        color: const Color(0xFFFF4D00),
-                      ),
-                    ),
-                  ),
                   Positioned(
                     bottom: 5,
                     left: 10,
@@ -145,7 +139,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
@@ -177,7 +173,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
@@ -209,7 +207,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
@@ -241,7 +241,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
@@ -273,7 +275,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                                   // ignore: prefer_const_constructors
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],

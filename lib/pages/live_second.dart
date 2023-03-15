@@ -2,10 +2,12 @@
 
 import 'package:crex/pages/speech_settings.dart';
 import 'package:crex/pages/win_prediction.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class live_second extends StatefulWidget {
   const live_second({Key? key, required this.id}) : super(key: key);
@@ -44,6 +46,8 @@ class _live_secondState extends State<live_second> {
   bool flag = false;
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -59,9 +63,9 @@ class _live_secondState extends State<live_second> {
                   // ignore: prefer_const_constructors
                   image: DecorationImage(
                 // ignore: prefer_const_constructors
-                image: AssetImage(
-                  "assets/background.jpeg",
-                ),
+                image: isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
                 fit: BoxFit.cover,
               )),
               child: SingleChildScrollView(
@@ -79,7 +83,9 @@ class _live_secondState extends State<live_second> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        color: Color(0xff258D50),
+                        color: isDarkMode
+                            ? Color(0xff258D50)
+                            : const Color(0xFFDFDFDF),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: Column(
@@ -89,7 +95,12 @@ class _live_secondState extends State<live_second> {
                               Container(
                                   alignment: Alignment.topRight,
                                   margin: EdgeInsets.only(right: 25),
-                                  child: Image.asset("assets/volume.png")),
+                                  child: isDarkMode
+                                      ? Image.asset("assets/volume.png")
+                                      : Image.asset(
+                                          "assets/volume.png",
+                                          color: Colors.grey,
+                                        )),
                               Container(
                                 margin: EdgeInsets.only(right: 25),
                                 child: Row(
@@ -147,7 +158,9 @@ class _live_secondState extends State<live_second> {
                                                       ? data["teamInfo"][0]["shortname"]
                                                       : data["teamInfo"][1]["shortname"],
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -155,7 +168,9 @@ class _live_secondState extends State<live_second> {
                                                 Text(
                                                   '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -175,7 +190,9 @@ class _live_secondState extends State<live_second> {
                                                       ? '${(data["score"].length / 2).round()}st inn'
                                                       : '${(data["score"].length / 2).round()}nd inn',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12),
                                                 ),
                                                 SizedBox(
@@ -187,7 +204,9 @@ class _live_secondState extends State<live_second> {
                                                           1]["o"]
                                                       .toString(),
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -208,7 +227,9 @@ class _live_secondState extends State<live_second> {
                                       '4',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.amber,
+                                          color: isDarkMode
+                                              ? Colors.amber
+                                              : Colors.blueGrey,
                                           fontSize: 50),
                                     )
                                   ],
@@ -218,7 +239,10 @@ class _live_secondState extends State<live_second> {
                                 height: 15,
                               ),
                               Container(
-                                  height: 1, width: 400, color: Colors.white),
+                                  height: 1,
+                                  width: 400,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey),
                               SizedBox(
                                 height: 10,
                               ),
@@ -236,7 +260,10 @@ class _live_secondState extends State<live_second> {
                                                         1]["o"])
                                             .toStringAsFixed(2),
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 15.5),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 15.5),
                                   ),
                                   SizedBox(
                                     width: 20,
@@ -246,7 +273,10 @@ class _live_secondState extends State<live_second> {
                                         ? 'RRR : 8.58'
                                         : "",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 15.5),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 15.5),
                                   ),
                                   SizedBox(
                                     width: 70,
@@ -266,11 +296,13 @@ class _live_secondState extends State<live_second> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         Text(
                                           'Over 18',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -278,12 +310,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '4',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -292,12 +328,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '0',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -306,12 +346,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '4',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -320,12 +364,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '1',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -334,12 +382,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '0',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -348,12 +400,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '1',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -363,7 +419,10 @@ class _live_secondState extends State<live_second> {
                                         ),
                                         Text(
                                           '=',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
                                         ),
                                         SizedBox(
                                           width: 2,
@@ -371,7 +430,9 @@ class _live_secondState extends State<live_second> {
                                         Text(
                                           '10',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -388,11 +449,13 @@ class _live_secondState extends State<live_second> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         Text(
                                           'Over 19',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -400,12 +463,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '2',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -414,12 +481,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '0',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -428,12 +499,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '4',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -442,12 +517,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '-',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -456,12 +535,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '-',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -470,12 +553,16 @@ class _live_secondState extends State<live_second> {
                                           width: 5,
                                         ),
                                         CircleAvatar(
-                                          backgroundColor: Colors.white,
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           radius: 5,
                                           child: Text(
                                             '-',
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -485,7 +572,10 @@ class _live_secondState extends State<live_second> {
                                         ),
                                         Text(
                                           '=',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
                                         ),
                                         SizedBox(
                                           width: 2,
@@ -493,7 +583,9 @@ class _live_secondState extends State<live_second> {
                                         Text(
                                           '6',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         )
@@ -519,11 +611,13 @@ class _live_secondState extends State<live_second> {
                       child: Container(
                         alignment: Alignment.center,
                         height: 35,
-                        color: Color(0xffFF8A00),
+                        color: isDarkMode
+                            ? Color(0xffFF8A00)
+                            : const Color(0xFFDFDFDF),
                         child: Text(
                           'PAK need 200 runs in 183 balls',
                           style: TextStyle(
-                              color: Colors.white,
+                              color: isDarkMode ? Colors.white : Colors.black,
                               fontSize: 12,
                               fontWeight: FontWeight.bold),
                         ),
@@ -540,7 +634,9 @@ class _live_secondState extends State<live_second> {
                           borderRadius: BorderRadius.circular(10),
                           // border: Border.all(color: Colors.white, width: 0.5)
 
-                          color: Colors.blueGrey[900],
+                          color: isDarkMode
+                              ? Colors.blueGrey[900]
+                              : const Color(0xFFDFDFDF),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -555,7 +651,9 @@ class _live_secondState extends State<live_second> {
                                   'PAKISTAN',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black),
                                 ),
                               ),
                               SizedBox(
@@ -567,7 +665,10 @@ class _live_secondState extends State<live_second> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(2.5),
                                     border: Border.all(
-                                        color: Colors.white, width: 0.5)),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        width: 0.5)),
                                 child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -576,7 +677,9 @@ class _live_secondState extends State<live_second> {
                                       Text(
                                         'PAK',
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
@@ -622,12 +725,16 @@ class _live_secondState extends State<live_second> {
                                   // border: Border.all(
                                   //     color: Colors.white, width: 0.5)
 
-                                  color: Color(0xffFF8A00),
+                                  color: isDarkMode
+                                      ? Color(0xffFF8A00)
+                                      : Colors.black26,
                                 ),
                                 child: Text(
                                   '22',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -638,7 +745,9 @@ class _live_secondState extends State<live_second> {
                               Text(
                                 'View',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontStyle: FontStyle.italic),
                               )
                             ],
@@ -660,7 +769,9 @@ class _live_secondState extends State<live_second> {
                           borderRadius: BorderRadius.circular(10),
                           // border: Border.all(color: Colors.white, width: 0.5)
 
-                          color: Colors.blueGrey[900],
+                          color: isDarkMode
+                              ? Colors.blueGrey[900]
+                              : const Color(0xFFDFDFDF),
                         ),
                         child: Column(
                           children: [
@@ -674,7 +785,9 @@ class _live_secondState extends State<live_second> {
                                     '20 Ov Runs',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black),
                                   ),
                                   SizedBox(
                                     width: 75,
@@ -710,12 +823,16 @@ class _live_secondState extends State<live_second> {
                                       // border: Border.all(
                                       //     color: Colors.white, width: 0.5)
 
-                                      color: Color(0xffFF8A00),
+                                      color: isDarkMode
+                                          ? Color(0xffFF8A00)
+                                          : Colors.black26,
                                     ),
                                     child: Text(
                                       'YES 200',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -728,7 +845,8 @@ class _live_secondState extends State<live_second> {
                                   const EdgeInsets.only(top: 10, bottom: 10),
                               child: Container(
                                 height: 1,
-                                color: Colors.white,
+                                color:
+                                    isDarkMode ? Colors.white : Colors.blueGrey,
                               ),
                             ),
                             Row(
@@ -738,7 +856,10 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   'Open 150',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 12),
                                 ),
                                 SizedBox(
                                   width: 12,
@@ -746,7 +867,10 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   'Min 120',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 12),
                                 ),
                                 SizedBox(
                                   width: 12,
@@ -754,7 +878,10 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   'Max 150',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 12),
                                 ),
                                 SizedBox(
                                   width: 45,
@@ -762,7 +889,10 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '10 runs in 9 balls',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 12),
                                 ),
                               ],
                             ),
@@ -783,7 +913,7 @@ class _live_secondState extends State<live_second> {
                       child: Container(
                         alignment: Alignment.center,
                         height: 35,
-                        color: Color(0xffFF8A00),
+                        color: isDarkMode ? Color(0xffFF8A00) : Colors.black26,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(
@@ -857,7 +987,9 @@ class _live_secondState extends State<live_second> {
                         // borderRadius: BorderRadius.circular(0),
                         // border: Border.all(color: Colors.white, width: 0.5)
 
-                        color: Colors.blueGrey[900],
+                        color: isDarkMode
+                            ? Colors.blueGrey[900]
+                            : const Color(0xFFDFDFDF),
                       ),
                       child: Column(
                         children: [
@@ -871,7 +1003,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   'Babar Azam(Captain)',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -880,7 +1014,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '19',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -889,7 +1025,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '7',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -898,7 +1036,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '2',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -907,7 +1047,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '1',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -916,7 +1058,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '89.98',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -927,8 +1071,9 @@ class _live_secondState extends State<live_second> {
                             decoration: BoxDecoration(
                               // borderRadius: BorderRadius.circular(0),
                               // border: Border.all(color: Colors.white, width: 0.5)
-
-                              color: Colors.black45,
+                              color: isDarkMode
+                                  ? Colors.black45
+                                  : const Color(0xFFDFDFDF),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -945,7 +1090,9 @@ class _live_secondState extends State<live_second> {
                                           child: Text(
                                             'Fawad Alam',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
@@ -965,7 +1112,9 @@ class _live_secondState extends State<live_second> {
                                   Text(
                                     '10',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
@@ -974,7 +1123,9 @@ class _live_secondState extends State<live_second> {
                                   Text(
                                     '8',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
@@ -983,7 +1134,9 @@ class _live_secondState extends State<live_second> {
                                   Text(
                                     '1',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
@@ -992,7 +1145,9 @@ class _live_secondState extends State<live_second> {
                                   Text(
                                     '0',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
@@ -1001,7 +1156,9 @@ class _live_secondState extends State<live_second> {
                                   Text(
                                     '49.98',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -1024,7 +1181,10 @@ class _live_secondState extends State<live_second> {
                               child: Text(
                                 "P'ship : 58(30)",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15),
                               ),
                             ),
                           )
@@ -1044,7 +1204,7 @@ class _live_secondState extends State<live_second> {
                       child: Container(
                         alignment: Alignment.center,
                         height: 35,
-                        color: Color(0xffFF8A00),
+                        color: isDarkMode ? Color(0xffFF8A00) : Colors.black26,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10),
                           child: Row(
@@ -1114,7 +1274,9 @@ class _live_secondState extends State<live_second> {
                         // borderRadius: BorderRadius.circular(0),
                         // border: Border.all(color: Colors.white, width: 0.5)
 
-                        color: Colors.blueGrey[900],
+                        color: isDarkMode
+                            ? Colors.blueGrey[900]
+                            : const Color(0xFFDFDFDF),
                       ),
                       child: Column(
                         children: [
@@ -1129,7 +1291,9 @@ class _live_secondState extends State<live_second> {
                                   child: Text(
                                     'Jasprit Bumrah',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -1139,7 +1303,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '2.0',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -1148,7 +1314,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '0',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -1157,7 +1325,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '30',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -1166,7 +1336,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '0',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -1175,7 +1347,9 @@ class _live_secondState extends State<live_second> {
                                 Text(
                                   '7.60',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -1198,7 +1372,9 @@ class _live_secondState extends State<live_second> {
                           borderRadius: BorderRadius.circular(10),
                           // border: Border.all(color: Colors.white, width: 0.5)
 
-                          color: Colors.blueGrey[900],
+                          color: isDarkMode
+                              ? Colors.blueGrey[900]
+                              : const Color(0xFFDFDFDF),
                         ),
                         child: Column(
                           children: [
@@ -1213,7 +1389,9 @@ class _live_secondState extends State<live_second> {
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.blueGrey[100]),
+                                        color: isDarkMode
+                                            ? Colors.blueGrey[100]
+                                            : Colors.black45),
                                   ),
                                   SizedBox(
                                     width: 45,
@@ -1222,7 +1400,9 @@ class _live_secondState extends State<live_second> {
                                     'Total Votes:2,25,222',
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Colors.blueGrey[100]),
+                                        color: isDarkMode
+                                            ? Colors.blueGrey[100]
+                                            : Colors.black45),
                                   )
                                 ],
                               ),
@@ -1231,7 +1411,8 @@ class _live_secondState extends State<live_second> {
                               padding: const EdgeInsets.only(top: 5, bottom: 5),
                               child: Container(
                                 height: 1,
-                                color: Colors.white,
+                                color:
+                                    isDarkMode ? Colors.white : Colors.blueGrey,
                               ),
                             ),
                             SizedBox(
@@ -1249,12 +1430,16 @@ class _live_secondState extends State<live_second> {
                                     // border: Border.all(
                                     //     color: Colors.white, width: 0.5)
 
-                                    color: Colors.amber,
+                                    color: isDarkMode
+                                        ? Colors.amber
+                                        : Colors.black26,
                                   ),
                                   child: Text(
                                     'IND',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1269,12 +1454,19 @@ class _live_secondState extends State<live_second> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(2.5),
                                       border: Border.all(
-                                          color: Colors.white, width: 1)),
-                                  child: Text('DRAW',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          width: 1)),
+                                  child: Text(
+                                    'DRAW',
+                                    style: TextStyle(
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 20,
@@ -1288,7 +1480,9 @@ class _live_secondState extends State<live_second> {
                                       // border: Border.all(
                                       //     color: Colors.white, width: 0.5)
 
-                                      color: Colors.green),
+                                      color: isDarkMode
+                                          ? Colors.green
+                                          : Colors.grey),
                                   child: Text(
                                     'PAK',
                                     style: TextStyle(
@@ -1428,14 +1622,16 @@ class _live_secondState extends State<live_second> {
                         borderRadius: BorderRadius.circular(8),
                         // border: Border.all(color: Colors.white, width: 0.5)
 
-                        color: Color(0xffFF8A00),
+                        color: isDarkMode
+                            ? Color(0xffFF8A00)
+                            : const Color(0xFFDFDFDF),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.share_sharp,
-                            color: Colors.white,
+                            color: isDarkMode ? Colors.white : Colors.black,
                             size: 18,
                           ),
                           SizedBox(
@@ -1446,7 +1642,8 @@ class _live_secondState extends State<live_second> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
-                                color: Colors.white),
+                                color:
+                                    isDarkMode ? Colors.white : Colors.black),
                           )
                         ],
                       ),
@@ -1460,7 +1657,9 @@ class _live_secondState extends State<live_second> {
                     child: Container(
                       height: 45,
                       width: 350,
-                      color: Colors.blueGrey[900],
+                      color: isDarkMode
+                          ? Colors.blueGrey[900]
+                          : const Color(0xFFDFDFDF),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: InkWell(
@@ -1475,7 +1674,7 @@ class _live_secondState extends State<live_second> {
                             children: [
                               Icon(
                                 Icons.settings,
-                                color: Colors.white,
+                                color: isDarkMode ? Colors.white : Colors.black,
                               ),
                               SizedBox(
                                 width: 10,
@@ -1483,7 +1682,9 @@ class _live_secondState extends State<live_second> {
                               Text(
                                 'Match Settings',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12),
                               )
@@ -1659,452 +1860,472 @@ class _live_secondState extends State<live_second> {
                   Visibility(
                     visible: flag,
                     child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                          // border: Border.all(color: Colors.white, width: 0.5)
-                          color: Colors.blueGrey[900],
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
                         ),
-                        child: Column(children: [
-                          Container(
-                            height: 1,
-                            width: 350,
-                            color: Colors.blueGrey[200],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 20),
-                            child: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const win_prediction(),
-                                        ));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.emoji_events,
-                                        color: Colors.white70,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        'Win Probability View',
-                                        style: TextStyle(color: Colors.white70),
-                                      )
-                                    ],
-                                  ),
+                        // border: Border.all(color: Colors.white, width: 0.5)
+                        color: isDarkMode
+                            ? Colors.blueGrey[900]
+                            : const Color(0xFFDFDFDF),
+                      ),
+                      child: Column(children: [
+                        Container(
+                          height: 1,
+                          width: 350,
+                          color: isDarkMode
+                              ? Colors.blueGrey[200]
+                              : const Color(0xFFDFDFDF),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15, left: 20),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const win_prediction(),
+                                      ));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.emoji_events,
+                                      color: isDarkMode
+                                          ? Colors.white70
+                                          : Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Win Probability View',
+                                      style: TextStyle(
+                                          color: isDarkMode
+                                              ? Colors.white70
+                                              : Colors.black),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 10,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const speech_settings(),
+                                      ));
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.record_voice_over,
+                                      color: isDarkMode
+                                          ? Colors.white70
+                                          : Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      'Speech Settings (Accessibility)',
+                                      style: TextStyle(
+                                          color: isDarkMode
+                                              ? Colors.white70
+                                              : Colors.black),
+                                    )
+                                  ],
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const speech_settings(),
-                                        ));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.record_voice_over,
-                                        color: Colors.white70,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text('Speech Settings (Accessibility)',
-                                          style:
-                                              TextStyle(color: Colors.white70))
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // showModalBottomSheet(
-                                    //     isScrollControlled: true,
-                                    //     // shape: RoundedRectangleBorder(
-                                    //     //   borderRadius: BorderRadiusDirectional.only(
-                                    //     //       topStart: Radius.circular(45), topEnd: Radius.circular(45)),
-                                    //     // ),
-                                    //     elevation: 5,
-                                    //     context: context,
-                                    //     builder: (BuildContext context) {
-                                    //       return StatefulBuilder(
-                                    //           builder: (context, setState) {
-                                    //         return SizedBox(
-                                    //           height: 375,
-                                    //           child: DefaultTabController(
-                                    //             length: 2,
-                                    //             child: Scaffold(
-                                    //               appBar: AppBar(
-                                    //                 backgroundColor: Colors.black,
-                                    //                 automaticallyImplyLeading:
-                                    //                     false,
-                                    //                 title: TabBar(
-                                    //                   // labelColor: Colors.amber,
-                                    //                   indicatorColor:
-                                    //                       Color(0xFFFF4D00),
-                                    //                   tabs: [
-                                    //                     Tab(
-                                    //                       text: "Live Match",
-                                    //                     ),
-                                    //                     Tab(
-                                    //                         text:
-                                    //                             "Series Updates"),
-                                    //                   ],
-                                    //                 ),
-                                    //                 actions: [
-                                    //                   Padding(
-                                    //                     padding:
-                                    //                         const EdgeInsets.all(
-                                    //                             10),
-                                    //                     child: IconButton(
-                                    //                         onPressed: () {
-                                    //                           Navigator.pop(
-                                    //                               context);
-                                    //                         },
-                                    //                         icon: Icon(
-                                    //                           Icons.close,
-                                    //                           color: Colors.white,
-                                    //                         )),
-                                    //                   )
-                                    //                 ],
-                                    //               ),
-                                    //               body: Container(
-                                    //                 color: Colors.black,
-                                    //                 child: TabBarView(
-                                    //                   children: [
-                                    //                     Column(
-                                    //                       children: [
-                                    //                         Row(
-                                    //                           mainAxisAlignment:
-                                    //                               MainAxisAlignment
-                                    //                                   .center,
-                                    //                           children: [
-                                    //                             // ignore: prefer_const_constructors
-                                    //                             Container(
-                                    //                               margin: EdgeInsets
-                                    //                                   .only(
-                                    //                                       left:
-                                    //                                           25),
-                                    //                               width: 200,
-                                    //                               child: Text(
-                                    //                                 "IND vs PAK Notifications",
-                                    //                                 // ignore: prefer_const_constructors
-                                    //                                 style: TextStyle(
-                                    //                                     color: Colors
-                                    //                                         .white),
-                                    //                               ),
-                                    //                             ),
-                                    //                             // ignore: prefer_const_constructors
-                                    //                             SizedBox(
-                                    //                               width: 75,
-                                    //                             ),
-                                    //                             Switch(
-                                    //                               activeColor:
-                                    //                                   Colors
-                                    //                                       .blueGrey,
-                                    //                               activeTrackColor:
-                                    //                                   Colors.grey,
-                                    //                               inactiveThumbColor:
-                                    //                                   Colors
-                                    //                                       .white,
-                                    //                               inactiveTrackColor:
-                                    //                                   Colors.grey,
-                                    //                               value: status,
-                                    //                               onChanged:
-                                    //                                   (value) {
-                                    //                                 // ignore: avoid_print
-                                    //                                 print(
-                                    //                                     "VALUE : $value");
-                                    //                                 setState(() {
-                                    //                                   status =
-                                    //                                       value;
-                                    //                                 });
-                                    //                               },
-                                    //                             ),
-                                    //                           ],
-                                    //                         ),
-                                    //                         SizedBox(
-                                    //                           height: 10,
-                                    //                         ),
-                                    //                         Container(
-                                    //                           alignment: Alignment
-                                    //                               .center,
-                                    //                           height: 200,
-                                    //                           child: ListView
-                                    //                               .builder(
-                                    //                                   scrollDirection:
-                                    //                                       Axis
-                                    //                                           .horizontal,
-                                    //                                   itemCount:
-                                    //                                       5,
-                                    //                                   itemBuilder:
-                                    //                                       (context,
-                                    //                                           index) {
-                                    //                                     return Column(
-                                    //                                       children: [
-                                    //                                         Container(
-                                    //                                           // ignore: prefer_const_constructors
-                                    //                                           margin: EdgeInsets.only(
-                                    //                                               left: 20,
-                                    //                                               right: 10,
-                                    //                                               top: 25),
-                                    //                                           child:
-                                    //                                               Stack(
-                                    //                                             clipBehavior: Clip.none,
-                                    //                                             children: [
-                                    //                                               Container(
-                                    //                                                 transform: Matrix4.rotationX(0),
-                                    //                                                 height: 125,
-                                    //                                                 width: 125,
-                                    //                                                 // padding: EdgeInsets.symmetric(
-                                    //                                                 //     vertical: 1, horizontal: 1),
-                                    //                                                 decoration: BoxDecoration(
-                                    //                                                   border: Border.all(color: Colors.blue),
-                                    //                                                   color: Colors.black,
-                                    //                                                   borderRadius: BorderRadius.circular(25),
-                                    //                                                   boxShadow: [
-                                    //                                                     BoxShadow(
-                                    //                                                       color: Colors.white38.withOpacity(0.5),
-                                    //                                                       offset: Offset(0, -5),
-                                    //                                                       // blurRadius: 5,
-                                    //                                                       spreadRadius: 1,
-                                    //                                                     )
-                                    //                                                   ],
-                                    //                                                 ),
-                                    //                                                 child: Container(
-                                    //                                                   margin: EdgeInsets.all(12),
-                                    //                                                   child: Image.asset(
-                                    //                                                     'assets/tennis_background.jpeg',
-                                    //                                                   ),
-                                    //                                                 ),
-                                    //                                               ),
-                                    //                                               Positioned(
-                                    //                                                 bottom: 120,
-                                    //                                                 left: 85,
-                                    //                                                 child: CircleAvatar(
-                                    //                                                   backgroundColor: Colors.amber,
-                                    //                                                   radius: 12,
-                                    //                                                   child: Icon(
-                                    //                                                     Icons.done,
-                                    //                                                     size: 12,
-                                    //                                                   ),
-                                    //                                                 ),
-                                    //                                               ),
-                                    //                                             ],
-                                    //                                           ),
-                                    //                                         ),
-                                    //                                         SizedBox(
-                                    //                                           height:
-                                    //                                               8,
-                                    //                                         ),
-                                    //                                         Container(
-                                    //                                           width:
-                                    //                                               100,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // showModalBottomSheet(
+                                  //     isScrollControlled: true,
+                                  //     // shape: RoundedRectangleBorder(
+                                  //     //   borderRadius: BorderRadiusDirectional.only(
+                                  //     //       topStart: Radius.circular(45), topEnd: Radius.circular(45)),
+                                  //     // ),
+                                  //     elevation: 5,
+                                  //     context: context,
+                                  //     builder: (BuildContext context) {
+                                  //       return StatefulBuilder(
+                                  //           builder: (context, setState) {
+                                  //         return SizedBox(
+                                  //           height: 375,
+                                  //           child: DefaultTabController(
+                                  //             length: 2,
+                                  //             child: Scaffold(
+                                  //               appBar: AppBar(
+                                  //                 backgroundColor: Colors.black,
+                                  //                 automaticallyImplyLeading:
+                                  //                     false,
+                                  //                 title: TabBar(
+                                  //                   // labelColor: Colors.amber,
+                                  //                   indicatorColor:
+                                  //                       Color(0xFFFF4D00),
+                                  //                   tabs: [
+                                  //                     Tab(
+                                  //                       text: "Live Match",
+                                  //                     ),
+                                  //                     Tab(
+                                  //                         text:
+                                  //                             "Series Updates"),
+                                  //                   ],
+                                  //                 ),
+                                  //                 actions: [
+                                  //                   Padding(
+                                  //                     padding:
+                                  //                         const EdgeInsets.all(
+                                  //                             10),
+                                  //                     child: IconButton(
+                                  //                         onPressed: () {
+                                  //                           Navigator.pop(
+                                  //                               context);
+                                  //                         },
+                                  //                         icon: Icon(
+                                  //                           Icons.close,
+                                  //                           color: Colors.white,
+                                  //                         )),
+                                  //                   )
+                                  //                 ],
+                                  //               ),
+                                  //               body: Container(
+                                  //                 color: Colors.black,
+                                  //                 child: TabBarView(
+                                  //                   children: [
+                                  //                     Column(
+                                  //                       children: [
+                                  //                         Row(
+                                  //                           mainAxisAlignment:
+                                  //                               MainAxisAlignment
+                                  //                                   .center,
+                                  //                           children: [
+                                  //                             // ignore: prefer_const_constructors
+                                  //                             Container(
+                                  //                               margin: EdgeInsets
+                                  //                                   .only(
+                                  //                                       left:
+                                  //                                           25),
+                                  //                               width: 200,
+                                  //                               child: Text(
+                                  //                                 "IND vs PAK Notifications",
+                                  //                                 // ignore: prefer_const_constructors
+                                  //                                 style: TextStyle(
+                                  //                                     color: Colors
+                                  //                                         .white),
+                                  //                               ),
+                                  //                             ),
+                                  //                             // ignore: prefer_const_constructors
+                                  //                             SizedBox(
+                                  //                               width: 75,
+                                  //                             ),
+                                  //                             Switch(
+                                  //                               activeColor:
+                                  //                                   Colors
+                                  //                                       .blueGrey,
+                                  //                               activeTrackColor:
+                                  //                                   Colors.grey,
+                                  //                               inactiveThumbColor:
+                                  //                                   Colors
+                                  //                                       .white,
+                                  //                               inactiveTrackColor:
+                                  //                                   Colors.grey,
+                                  //                               value: status,
+                                  //                               onChanged:
+                                  //                                   (value) {
+                                  //                                 // ignore: avoid_print
+                                  //                                 print(
+                                  //                                     "VALUE : $value");
+                                  //                                 setState(() {
+                                  //                                   status =
+                                  //                                       value;
+                                  //                                 });
+                                  //                               },
+                                  //                             ),
+                                  //                           ],
+                                  //                         ),
+                                  //                         SizedBox(
+                                  //                           height: 10,
+                                  //                         ),
+                                  //                         Container(
+                                  //                           alignment: Alignment
+                                  //                               .center,
+                                  //                           height: 200,
+                                  //                           child: ListView
+                                  //                               .builder(
+                                  //                                   scrollDirection:
+                                  //                                       Axis
+                                  //                                           .horizontal,
+                                  //                                   itemCount:
+                                  //                                       5,
+                                  //                                   itemBuilder:
+                                  //                                       (context,
+                                  //                                           index) {
+                                  //                                     return Column(
+                                  //                                       children: [
+                                  //                                         Container(
+                                  //                                           // ignore: prefer_const_constructors
+                                  //                                           margin: EdgeInsets.only(
+                                  //                                               left: 20,
+                                  //                                               right: 10,
+                                  //                                               top: 25),
+                                  //                                           child:
+                                  //                                               Stack(
+                                  //                                             clipBehavior: Clip.none,
+                                  //                                             children: [
+                                  //                                               Container(
+                                  //                                                 transform: Matrix4.rotationX(0),
+                                  //                                                 height: 125,
+                                  //                                                 width: 125,
+                                  //                                                 // padding: EdgeInsets.symmetric(
+                                  //                                                 //     vertical: 1, horizontal: 1),
+                                  //                                                 decoration: BoxDecoration(
+                                  //                                                   border: Border.all(color: Colors.blue),
+                                  //                                                   color: Colors.black,
+                                  //                                                   borderRadius: BorderRadius.circular(25),
+                                  //                                                   boxShadow: [
+                                  //                                                     BoxShadow(
+                                  //                                                       color: Colors.white38.withOpacity(0.5),
+                                  //                                                       offset: Offset(0, -5),
+                                  //                                                       // blurRadius: 5,
+                                  //                                                       spreadRadius: 1,
+                                  //                                                     )
+                                  //                                                   ],
+                                  //                                                 ),
+                                  //                                                 child: Container(
+                                  //                                                   margin: EdgeInsets.all(12),
+                                  //                                                   child: Image.asset(
+                                  //                                                     'assets/tennis_background.jpeg',
+                                  //                                                   ),
+                                  //                                                 ),
+                                  //                                               ),
+                                  //                                               Positioned(
+                                  //                                                 bottom: 120,
+                                  //                                                 left: 85,
+                                  //                                                 child: CircleAvatar(
+                                  //                                                   backgroundColor: Colors.amber,
+                                  //                                                   radius: 12,
+                                  //                                                   child: Icon(
+                                  //                                                     Icons.done,
+                                  //                                                     size: 12,
+                                  //                                                   ),
+                                  //                                                 ),
+                                  //                                               ),
+                                  //                                             ],
+                                  //                                           ),
+                                  //                                         ),
+                                  //                                         SizedBox(
+                                  //                                           height:
+                                  //                                               8,
+                                  //                                         ),
+                                  //                                         Container(
+                                  //                                           width:
+                                  //                                               100,
 
-                                    //                                           // ignore: prefer_const_constructors
-                                    //                                           child:
-                                    //                                               Text(
-                                    //                                             textAlign: TextAlign.center,
-                                    //                                             "Weckets",
-                                    //                                             style: TextStyle(color: Colors.white, fontSize: 18),
-                                    //                                           ),
-                                    //                                         )
-                                    //                                       ],
-                                    //                                     );
-                                    //                                   }),
-                                    //                         ),
-                                    //                       ],
-                                    //                     ),
-                                    //                     Column(
-                                    //                       children: [
-                                    //                         Row(
-                                    //                           mainAxisAlignment:
-                                    //                               MainAxisAlignment
-                                    //                                   .center,
-                                    //                           children: [
-                                    //                             // ignore: prefer_const_constructors
-                                    //                             Container(
-                                    //                               margin: EdgeInsets
-                                    //                                   .only(
-                                    //                                       left:
-                                    //                                           25),
-                                    //                               width: 200,
-                                    //                               child: Text(
-                                    //                                 "INDIA tour of PAKISTAN 2022 Notifications",
-                                    //                                 // ignore: prefer_const_constructors
-                                    //                                 style: TextStyle(
-                                    //                                     color: Colors
-                                    //                                         .white),
-                                    //                               ),
-                                    //                             ),
-                                    //                             // ignore: prefer_const_constructors
-                                    //                             SizedBox(
-                                    //                               width: 75,
-                                    //                             ),
-                                    //                             Switch(
-                                    //                               activeColor:
-                                    //                                   Colors
-                                    //                                       .blueGrey,
-                                    //                               activeTrackColor:
-                                    //                                   Colors.grey,
-                                    //                               inactiveThumbColor:
-                                    //                                   Colors
-                                    //                                       .white,
-                                    //                               inactiveTrackColor:
-                                    //                                   Colors.grey,
-                                    //                               value: status1,
-                                    //                               onChanged:
-                                    //                                   (value) {
-                                    //                                 // ignore: avoid_print
-                                    //                                 print(
-                                    //                                     "VALUE : $value");
-                                    //                                 setState(() {
-                                    //                                   status1 =
-                                    //                                       value;
-                                    //                                 });
-                                    //                               },
-                                    //                             ),
-                                    //                           ],
-                                    //                         ),
-                                    //                         SizedBox(
-                                    //                           height: 10,
-                                    //                         ),
-                                    //                         Container(
-                                    //                           alignment: Alignment
-                                    //                               .center,
-                                    //                           height: 200,
-                                    //                           child: ListView
-                                    //                               .builder(
-                                    //                                   scrollDirection:
-                                    //                                       Axis
-                                    //                                           .horizontal,
-                                    //                                   itemCount:
-                                    //                                       5,
-                                    //                                   itemBuilder:
-                                    //                                       (context,
-                                    //                                           index) {
-                                    //                                     return Column(
-                                    //                                       children: [
-                                    //                                         Container(
-                                    //                                           // ignore: prefer_const_constructors
-                                    //                                           margin: EdgeInsets.only(
-                                    //                                               left: 20,
-                                    //                                               right: 10,
-                                    //                                               top: 25),
-                                    //                                           child:
-                                    //                                               Stack(
-                                    //                                             clipBehavior: Clip.none,
-                                    //                                             children: [
-                                    //                                               Container(
-                                    //                                                 transform: Matrix4.rotationX(0),
-                                    //                                                 height: 125,
-                                    //                                                 width: 125,
-                                    //                                                 // padding: EdgeInsets.symmetric(
-                                    //                                                 //     vertical: 1, horizontal: 1),
-                                    //                                                 decoration: BoxDecoration(
-                                    //                                                   border: Border.all(color: Colors.blue),
-                                    //                                                   color: Colors.black,
-                                    //                                                   borderRadius: BorderRadius.circular(25),
-                                    //                                                   boxShadow: [
-                                    //                                                     BoxShadow(
-                                    //                                                       color: Colors.white38.withOpacity(0.5),
-                                    //                                                       offset: Offset(0, -5),
-                                    //                                                       // blurRadius: 5,
-                                    //                                                       spreadRadius: 1,
-                                    //                                                     )
-                                    //                                                   ],
-                                    //                                                 ),
-                                    //                                                 child: Container(
-                                    //                                                   margin: EdgeInsets.all(12),
-                                    //                                                   child: Image.asset(
-                                    //                                                     'assets/tennis_background.jpeg',
-                                    //                                                   ),
-                                    //                                                 ),
-                                    //                                               ),
-                                    //                                               Positioned(
-                                    //                                                 bottom: 120,
-                                    //                                                 left: 85,
-                                    //                                                 child: CircleAvatar(
-                                    //                                                   backgroundColor: Colors.amber,
-                                    //                                                   radius: 12,
-                                    //                                                   child: Icon(
-                                    //                                                     Icons.done,
-                                    //                                                     size: 12,
-                                    //                                                   ),
-                                    //                                                 ),
-                                    //                                               ),
-                                    //                                             ],
-                                    //                                           ),
-                                    //                                         ),
-                                    //                                         SizedBox(
-                                    //                                           height:
-                                    //                                               8,
-                                    //                                         ),
-                                    //                                         Container(
-                                    //                                           width:
-                                    //                                               100,
+                                  //                                           // ignore: prefer_const_constructors
+                                  //                                           child:
+                                  //                                               Text(
+                                  //                                             textAlign: TextAlign.center,
+                                  //                                             "Weckets",
+                                  //                                             style: TextStyle(color: Colors.white, fontSize: 18),
+                                  //                                           ),
+                                  //                                         )
+                                  //                                       ],
+                                  //                                     );
+                                  //                                   }),
+                                  //                         ),
+                                  //                       ],
+                                  //                     ),
+                                  //                     Column(
+                                  //                       children: [
+                                  //                         Row(
+                                  //                           mainAxisAlignment:
+                                  //                               MainAxisAlignment
+                                  //                                   .center,
+                                  //                           children: [
+                                  //                             // ignore: prefer_const_constructors
+                                  //                             Container(
+                                  //                               margin: EdgeInsets
+                                  //                                   .only(
+                                  //                                       left:
+                                  //                                           25),
+                                  //                               width: 200,
+                                  //                               child: Text(
+                                  //                                 "INDIA tour of PAKISTAN 2022 Notifications",
+                                  //                                 // ignore: prefer_const_constructors
+                                  //                                 style: TextStyle(
+                                  //                                     color: Colors
+                                  //                                         .white),
+                                  //                               ),
+                                  //                             ),
+                                  //                             // ignore: prefer_const_constructors
+                                  //                             SizedBox(
+                                  //                               width: 75,
+                                  //                             ),
+                                  //                             Switch(
+                                  //                               activeColor:
+                                  //                                   Colors
+                                  //                                       .blueGrey,
+                                  //                               activeTrackColor:
+                                  //                                   Colors.grey,
+                                  //                               inactiveThumbColor:
+                                  //                                   Colors
+                                  //                                       .white,
+                                  //                               inactiveTrackColor:
+                                  //                                   Colors.grey,
+                                  //                               value: status1,
+                                  //                               onChanged:
+                                  //                                   (value) {
+                                  //                                 // ignore: avoid_print
+                                  //                                 print(
+                                  //                                     "VALUE : $value");
+                                  //                                 setState(() {
+                                  //                                   status1 =
+                                  //                                       value;
+                                  //                                 });
+                                  //                               },
+                                  //                             ),
+                                  //                           ],
+                                  //                         ),
+                                  //                         SizedBox(
+                                  //                           height: 10,
+                                  //                         ),
+                                  //                         Container(
+                                  //                           alignment: Alignment
+                                  //                               .center,
+                                  //                           height: 200,
+                                  //                           child: ListView
+                                  //                               .builder(
+                                  //                                   scrollDirection:
+                                  //                                       Axis
+                                  //                                           .horizontal,
+                                  //                                   itemCount:
+                                  //                                       5,
+                                  //                                   itemBuilder:
+                                  //                                       (context,
+                                  //                                           index) {
+                                  //                                     return Column(
+                                  //                                       children: [
+                                  //                                         Container(
+                                  //                                           // ignore: prefer_const_constructors
+                                  //                                           margin: EdgeInsets.only(
+                                  //                                               left: 20,
+                                  //                                               right: 10,
+                                  //                                               top: 25),
+                                  //                                           child:
+                                  //                                               Stack(
+                                  //                                             clipBehavior: Clip.none,
+                                  //                                             children: [
+                                  //                                               Container(
+                                  //                                                 transform: Matrix4.rotationX(0),
+                                  //                                                 height: 125,
+                                  //                                                 width: 125,
+                                  //                                                 // padding: EdgeInsets.symmetric(
+                                  //                                                 //     vertical: 1, horizontal: 1),
+                                  //                                                 decoration: BoxDecoration(
+                                  //                                                   border: Border.all(color: Colors.blue),
+                                  //                                                   color: Colors.black,
+                                  //                                                   borderRadius: BorderRadius.circular(25),
+                                  //                                                   boxShadow: [
+                                  //                                                     BoxShadow(
+                                  //                                                       color: Colors.white38.withOpacity(0.5),
+                                  //                                                       offset: Offset(0, -5),
+                                  //                                                       // blurRadius: 5,
+                                  //                                                       spreadRadius: 1,
+                                  //                                                     )
+                                  //                                                   ],
+                                  //                                                 ),
+                                  //                                                 child: Container(
+                                  //                                                   margin: EdgeInsets.all(12),
+                                  //                                                   child: Image.asset(
+                                  //                                                     'assets/tennis_background.jpeg',
+                                  //                                                   ),
+                                  //                                                 ),
+                                  //                                               ),
+                                  //                                               Positioned(
+                                  //                                                 bottom: 120,
+                                  //                                                 left: 85,
+                                  //                                                 child: CircleAvatar(
+                                  //                                                   backgroundColor: Colors.amber,
+                                  //                                                   radius: 12,
+                                  //                                                   child: Icon(
+                                  //                                                     Icons.done,
+                                  //                                                     size: 12,
+                                  //                                                   ),
+                                  //                                                 ),
+                                  //                                               ),
+                                  //                                             ],
+                                  //                                           ),
+                                  //                                         ),
+                                  //                                         SizedBox(
+                                  //                                           height:
+                                  //                                               8,
+                                  //                                         ),
+                                  //                                         Container(
+                                  //                                           width:
+                                  //                                               100,
 
-                                    //                                           // ignore: prefer_const_constructors
-                                    //                                           child:
-                                    //                                               Text(
-                                    //                                             textAlign: TextAlign.center,
-                                    //                                             "Toss",
-                                    //                                             style: TextStyle(color: Colors.white, fontSize: 18),
-                                    //                                           ),
-                                    //                                         )
-                                    //                                       ],
-                                    //                                     );
-                                    //                                   }),
-                                    //                         ),
-                                    //                       ],
-                                    //                     ),
-                                    //                   ],
-                                    //                 ),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //         );
-                                    //       });
-                                    //     });
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.notifications,
-                                        color: Colors.white70,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text('Notification Settings',
-                                          style:
-                                              TextStyle(color: Colors.white70))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                                  //                                           // ignore: prefer_const_constructors
+                                  //                                           child:
+                                  //                                               Text(
+                                  //                                             textAlign: TextAlign.center,
+                                  //                                             "Toss",
+                                  //                                             style: TextStyle(color: Colors.white, fontSize: 18),
+                                  //                                           ),
+                                  //                                         )
+                                  //                                       ],
+                                  //                                     );
+                                  //                                   }),
+                                  //                         ),
+                                  //                       ],
+                                  //                     ),
+                                  //                   ],
+                                  //                 ),
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //         );
+                                  //       });
+                                  //     });
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.notifications,
+                                      color: isDarkMode
+                                          ? Colors.white70
+                                          : Colors.black,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text('Notification Settings',
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black),)
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            height: 25,
-                          )
-                        ])),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        )
+                      ]),
+                    ),
                   ),
                   SizedBox(
                     height: 25,

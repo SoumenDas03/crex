@@ -1,6 +1,8 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, duplicate_ignore, sized_box_for_whitespace
 
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class seriesstatus extends StatefulWidget {
   const seriesstatus({super.key});
@@ -14,6 +16,8 @@ class _seriesstatusState extends State<seriesstatus> {
   bool flag = true;
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
@@ -23,9 +27,9 @@ class _seriesstatusState extends State<seriesstatus> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage(
-                  "assets/background.jpeg",
-                ),
+                image:  isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
                 fit: BoxFit.cover,
               )),
               child: Column(

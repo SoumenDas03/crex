@@ -95,7 +95,9 @@ class _infoState extends State<info> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
-                            color: Color(0xff258D50),
+                            color: isDarkMode
+                                ? Color(0xff258D50)
+                                : const Color(0xFFDFDFDF),
                             child: Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: Column(
@@ -105,7 +107,12 @@ class _infoState extends State<info> {
                                   Container(
                                       alignment: Alignment.topRight,
                                       margin: EdgeInsets.only(right: 25),
-                                      child: Image.asset("assets/volume.png")),
+                                      child: isDarkMode
+                                          ? Image.asset("assets/volume.png")
+                                          : Image.asset(
+                                              "assets/volume.png",
+                                              color: Colors.grey,
+                                            )),
                                   Container(
                                     margin: EdgeInsets.only(right: 25),
                                     child: Row(
@@ -163,7 +170,9 @@ class _infoState extends State<info> {
                                                           ? data["teamInfo"][0]["shortname"]
                                                           : data["teamInfo"][1]["shortname"],
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -171,7 +180,9 @@ class _infoState extends State<info> {
                                                     Text(
                                                       '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -192,7 +203,9 @@ class _infoState extends State<info> {
                                                           ? '${(data["score"].length / 2).round()}st inn'
                                                           : '${(data["score"].length / 2).round()}nd inn',
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 12),
                                                     ),
                                                     SizedBox(
@@ -205,7 +218,9 @@ class _infoState extends State<info> {
                                                                   1]["o"]
                                                           .toString(),
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 12,
                                                           fontWeight:
                                                               FontWeight.bold),
@@ -226,7 +241,9 @@ class _infoState extends State<info> {
                                           '4',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.amber,
+                                              color: isDarkMode
+                                                  ? Colors.amber
+                                                  : Colors.blueGrey,
                                               fontSize: 50),
                                         )
                                       ],
@@ -238,7 +255,9 @@ class _infoState extends State<info> {
                                   Container(
                                       height: 1,
                                       width: 400,
-                                      color: Colors.white),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.grey),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -257,7 +276,9 @@ class _infoState extends State<info> {
                                                             1]["o"])
                                                 .toStringAsFixed(2),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             fontSize: 15.5),
                                       ),
                                       SizedBox(
@@ -268,7 +289,9 @@ class _infoState extends State<info> {
                                             ? 'RRR : 8.58'
                                             : "",
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             fontSize: 15.5),
                                       ),
                                       SizedBox(
@@ -290,11 +313,13 @@ class _infoState extends State<info> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          children: const [
+                                          children: [
                                             Text(
                                               'Over 18',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -302,12 +327,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '4',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -317,12 +346,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '0',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -332,12 +365,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '4',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -347,12 +384,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '1',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -362,12 +403,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '0',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -377,12 +422,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '1',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -394,7 +443,9 @@ class _infoState extends State<info> {
                                             Text(
                                               '=',
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black),
                                             ),
                                             SizedBox(
                                               width: 2,
@@ -402,7 +453,9 @@ class _infoState extends State<info> {
                                             Text(
                                               '10',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.bold),
                                             )
@@ -419,11 +472,13 @@ class _infoState extends State<info> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          children: const [
+                                          children: [
                                             Text(
                                               'Over 19',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -431,12 +486,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '2',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -446,12 +505,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '0',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -461,12 +524,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '4',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -476,12 +543,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '-',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -491,12 +562,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '-',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -506,12 +581,16 @@ class _infoState extends State<info> {
                                               width: 5,
                                             ),
                                             CircleAvatar(
-                                              backgroundColor: Colors.white,
+                                              backgroundColor: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               radius: 5,
                                               child: Text(
                                                 '-',
                                                 style: TextStyle(
-                                                    color: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     fontSize: 10,
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -523,7 +602,9 @@ class _infoState extends State<info> {
                                             Text(
                                               '=',
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black),
                                             ),
                                             SizedBox(
                                               width: 2,
@@ -531,7 +612,9 @@ class _infoState extends State<info> {
                                             Text(
                                               '6',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.bold),
                                             )
@@ -555,7 +638,9 @@ class _infoState extends State<info> {
                             // margin: EdgeInsets.only(left: 10),
 
                             height: 35,
-                            color: Color(0xFFFF4D00),
+                            color: isDarkMode
+                                ? Color(0xFFFF4D00)
+                                : const Color(0xFFDFDFDF),
                             child: Padding(
                               padding:
                                   const EdgeInsets.only(left: 10, right: 10),
@@ -569,7 +654,10 @@ class _infoState extends State<info> {
                                   startAfter: Duration(seconds: 2),
                                   pauseAfterRound: Duration(seconds: 2),
                                   text: "India has won the match by 4 runs",
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black),
                                 ),
                               ),
                             ),
@@ -586,7 +674,9 @@ class _infoState extends State<info> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             height: 40,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -602,7 +692,10 @@ class _infoState extends State<info> {
                                   child: Text(
                                     data["status"].toString(),
                                     style: TextStyle(
-                                        fontSize: 12, color: Colors.white),
+                                        fontSize: 12,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black),
                                   ),
                                 ),
                               ],
@@ -619,7 +712,9 @@ class _infoState extends State<info> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             height: 70,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Column(
@@ -631,7 +726,10 @@ class _infoState extends State<info> {
                                       child: Text(
                                         data["matchType"].toUpperCase(),
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 12),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 12),
                                       ),
                                     ),
                                     SizedBox(
@@ -647,7 +745,9 @@ class _infoState extends State<info> {
                                             child: Text(
                                               data["name"].toString(),
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 15),
                                             ),
                                           ),
@@ -656,7 +756,9 @@ class _infoState extends State<info> {
                                             child: Icon(
                                               Icons.keyboard_arrow_right,
                                               size: 35,
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                             ),
                                           ),
                                         ],
@@ -681,7 +783,9 @@ class _infoState extends State<info> {
                           ),
                           child: Container(
                             height: 60,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -689,7 +793,9 @@ class _infoState extends State<info> {
                                   margin: EdgeInsets.only(bottom: 20, left: 15),
                                   child: Icon(
                                     Icons.calendar_today,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     size: 25,
                                   ),
                                 ),
@@ -705,7 +811,10 @@ class _infoState extends State<info> {
                                                 .toLocal()))
                                         .toString(),
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 14),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 14),
                                   ),
                                 ),
                               ],
@@ -715,7 +824,9 @@ class _infoState extends State<info> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: Container(height: 1, color: Colors.white),
+                        child: Container(
+                            height: 1,
+                            color: isDarkMode ? Colors.white : Colors.grey),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 5, right: 5),
@@ -726,7 +837,9 @@ class _infoState extends State<info> {
                           ),
                           child: Container(
                             height: 60,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -734,7 +847,9 @@ class _infoState extends State<info> {
                                   margin: EdgeInsets.only(bottom: 20, left: 15),
                                   child: Icon(
                                     Icons.location_on_outlined,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                     size: 30,
                                   ),
                                 ),
@@ -744,7 +859,10 @@ class _infoState extends State<info> {
                                   child: Text(
                                     data["venue"],
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 12),
                                   ),
                                 ),
                               ],
@@ -757,7 +875,9 @@ class _infoState extends State<info> {
                         margin: EdgeInsets.only(left: 25, top: 8),
                         child: Text(
                           'Playing XI',
-                          style: TextStyle(color: Colors.white, fontSize: 17),
+                          style: TextStyle(
+                              color: isDarkMode ? Colors.white : Colors.black,
+                              fontSize: 17),
                         ),
                       ),
                       SizedBox(
@@ -780,7 +900,9 @@ class _infoState extends State<info> {
                             padding: const EdgeInsets.only(left: 5, right: 5),
                             child: Container(
                               height: 60,
-                              color: Color.fromARGB(255, 66, 63, 63),
+                              color: isDarkMode
+                                  ? Color.fromARGB(255, 66, 63, 63)
+                                  : const Color(0xFFDFDFDF),
                               child: Row(
                                 children: [
                                   Container(
@@ -796,7 +918,9 @@ class _infoState extends State<info> {
                                     child: Text(
                                       data["teamInfo"][0]["shortname"],
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -806,7 +930,9 @@ class _infoState extends State<info> {
                                     child: Icon(
                                       Icons.keyboard_arrow_right,
                                       size: 35,
-                                      color: Colors.white,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
                                   ),
                                 ],
@@ -828,7 +954,9 @@ class _infoState extends State<info> {
                           ),
                           child: Container(
                             height: 60,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -844,7 +972,9 @@ class _infoState extends State<info> {
                                   child: Text(
                                     (data["teamInfo"][1]["shortname"]),
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -854,7 +984,9 @@ class _infoState extends State<info> {
                                   child: Icon(
                                     Icons.keyboard_arrow_right,
                                     size: 35,
-                                    color: Colors.white,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                 ),
                               ],
@@ -874,7 +1006,9 @@ class _infoState extends State<info> {
                           ),
                           child: Container(
                             height: 45,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -882,7 +1016,10 @@ class _infoState extends State<info> {
                                   child: Text(
                                     'Who will win?',
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 14),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 14),
                                   ),
                                 ),
                                 Container(
@@ -890,7 +1027,10 @@ class _infoState extends State<info> {
                                   child: Text(
                                     'Total Votes:2,26,200',
                                     style: TextStyle(
-                                        fontSize: 13, color: Colors.white),
+                                        fontSize: 13,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black),
                                   ),
                                 )
                               ],
@@ -911,7 +1051,9 @@ class _infoState extends State<info> {
                           ),
                           child: Container(
                             height: 60,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Row(
                               children: [
                                 Container(
@@ -931,7 +1073,9 @@ class _infoState extends State<info> {
                                         child: Text(
                                           data["teamInfo"][0]["shortname"],
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ),
@@ -946,8 +1090,9 @@ class _infoState extends State<info> {
                                       height: 28,
                                       width: 70,
                                       decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 84, 80, 80),
+                                          color: isDarkMode
+                                              ? Color.fromARGB(255, 66, 63, 63)
+                                              : const Color(0xFFDFDFDF),
                                           border: Border.all(
                                             color: Colors.white,
                                             width: 1,
@@ -956,7 +1101,9 @@ class _infoState extends State<info> {
                                         child: Text(
                                           'DRAW',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ),
@@ -971,8 +1118,9 @@ class _infoState extends State<info> {
                                       height: 28,
                                       width: 70,
                                       decoration: BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 25, 103, 28),
+                                          color: isDarkMode
+                                              ? Color.fromARGB(255, 25, 103, 28)
+                                              : Colors.grey,
                                           border: Border.all(
                                             color: Color.fromARGB(
                                                 255, 25, 103, 28),
@@ -982,7 +1130,9 @@ class _infoState extends State<info> {
                                         child: Text(
                                           data["teamInfo"][1]["shortname"],
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.w500),
                                         ),
                                       ),
@@ -1001,7 +1151,9 @@ class _infoState extends State<info> {
                             margin: EdgeInsets.only(top: 20, left: 40),
                             child: Text(
                               'Team from',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black),
                             ),
                           ),
                           Container(
@@ -1009,8 +1161,10 @@ class _infoState extends State<info> {
                             margin: EdgeInsets.only(top: 20, left: 5),
                             child: Text(
                               '(last 5 matches)',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 10),
+                              style: TextStyle(
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
+                                  fontSize: 10),
                             ),
                           ),
                         ],
@@ -1033,7 +1187,10 @@ class _infoState extends State<info> {
                               child: Text(
                                 data["teamInfo"][0]["shortname"],
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 17),
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 17),
                               ),
                             ),
                             SizedBox(
@@ -1048,7 +1205,10 @@ class _infoState extends State<info> {
                                   width: 13,
                                   decoration: BoxDecoration(
                                     color: Colors.black,
-                                    border: Border.all(color: Colors.white),
+                                    border: Border.all(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black),
                                   ),
                                   child: Center(
                                     child: Text(
@@ -1191,8 +1351,10 @@ class _infoState extends State<info> {
                             margin: EdgeInsets.only(left: 10),
                             child: Text(
                               data["teamInfo"][1]["shortname"],
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 17),
+                              style: TextStyle(
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black,
+                                  fontSize: 17),
                             ),
                           ),
                           Container(
@@ -1997,7 +2159,9 @@ class _infoState extends State<info> {
                           children: [
                             Text(
                               "Team Comparison",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.black),
                             ),
                             SizedBox(
                               width: 5,
@@ -2005,7 +2169,10 @@ class _infoState extends State<info> {
                             Text(
                               "(Last 10 Matches)",
                               style: TextStyle(
-                                  fontSize: 10, color: Colors.blueGrey),
+                                  fontSize: 10,
+                                  color: isDarkMode
+                                      ? Colors.blueGrey
+                                      : Colors.black),
                             ),
                           ],
                         ),
@@ -2019,7 +2186,9 @@ class _infoState extends State<info> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             height: 300,
-                            color: Color.fromARGB(255, 66, 63, 63),
+                            color: isDarkMode
+                                ? Color.fromARGB(255, 66, 63, 63)
+                                : const Color(0xFFDFDFDF),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -2048,7 +2217,9 @@ class _infoState extends State<info> {
                                           child: Text(
                                             (data["teamInfo"][0]["shortname"]),
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ),
@@ -2059,8 +2230,9 @@ class _infoState extends State<info> {
                                             child: Text(
                                               'vs all teams',
                                               style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 187, 183, 183),
+                                                  color: isDarkMode
+                                                      ? Colors.blueGrey
+                                                      : Colors.black,
                                                   fontSize: 12),
                                             )),
                                       ],
@@ -2078,7 +2250,9 @@ class _infoState extends State<info> {
                                                 data["teamInfo"][1]
                                                     ["shortname"],
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
@@ -2092,8 +2266,9 @@ class _infoState extends State<info> {
                                                 child: Text(
                                                   'vs all teams',
                                                   style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 187, 183, 183),
+                                                      color: isDarkMode
+                                                          ? Colors.blueGrey
+                                                          : Colors.black,
                                                       fontSize: 12),
                                                 )),
                                           ],
@@ -2115,7 +2290,8 @@ class _infoState extends State<info> {
                                   margin: EdgeInsets.only(
                                       top: 15, left: 8, right: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -2130,8 +2306,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '10',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2144,8 +2321,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         'Matches played',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2158,8 +2336,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '10',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2170,7 +2349,8 @@ class _infoState extends State<info> {
                                   margin: EdgeInsets.only(
                                       top: 13, left: 8, right: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -2198,8 +2378,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         'Win',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2212,8 +2393,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '40%',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2223,7 +2405,8 @@ class _infoState extends State<info> {
                                 Container(
                                   margin: EdgeInsets.only(top: 13, left: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -2251,8 +2434,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         'Avarage Score',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2265,8 +2449,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '200',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2276,7 +2461,8 @@ class _infoState extends State<info> {
                                 Container(
                                   margin: EdgeInsets.only(top: 13, left: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -2304,8 +2490,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         'Highest Score',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2318,8 +2505,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '510',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2329,7 +2517,8 @@ class _infoState extends State<info> {
                                 Container(
                                   margin: EdgeInsets.only(top: 13, left: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                                 Row(
                                   // ignore: prefer_const_literals_to_create_immutables
@@ -2355,8 +2544,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         'Laest Score',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2369,8 +2559,9 @@ class _infoState extends State<info> {
                                       child: Text(
                                         '140',
                                         style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 248, 244, 244),
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -2380,7 +2571,8 @@ class _infoState extends State<info> {
                                 Container(
                                   margin: EdgeInsets.only(top: 13, left: 8),
                                   height: 1,
-                                  color: Colors.white,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey,
                                 ),
                               ],
                             ),
@@ -2395,7 +2587,7 @@ class _infoState extends State<info> {
                                 EdgeInsets.only(left: 30, top: 30, bottom: 26),
                             child: Icon(
                               Icons.location_on,
-                              color: Colors.white,
+                              color: isDarkMode ? Colors.white : Colors.black,
                               size: 18,
                             ),
                           ),
@@ -2404,7 +2596,9 @@ class _infoState extends State<info> {
                           ),
                           Text(
                             data["venue"],
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            style: TextStyle(
+                                color: isDarkMode ? Colors.white : Colors.black,
+                                fontSize: 12),
                           ),
                         ],
                       ),
@@ -2412,7 +2606,9 @@ class _infoState extends State<info> {
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
                           height: 190,
-                          color: Color.fromARGB(255, 66, 63, 63),
+                          color: isDarkMode
+                              ? Color.fromARGB(255, 66, 63, 63)
+                              : const Color(0xFFDFDFDF),
                           child: Column(
                             children: [
                               Row(
@@ -2434,7 +2630,9 @@ class _infoState extends State<info> {
                                         child: Text(
                                           data["venue"],
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 12),
                                         ),
                                       ),
@@ -2444,7 +2642,9 @@ class _infoState extends State<info> {
                                         child: Text(
                                           '20°  C',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -2473,7 +2673,9 @@ class _infoState extends State<info> {
                                             child: Text(
                                               '60% (Humidity)',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12),
                                             ),
                                           ),
@@ -2493,7 +2695,9 @@ class _infoState extends State<info> {
                                             child: Text(
                                               '1% Chance',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 12),
                                             ),
                                           ),
@@ -2509,7 +2713,10 @@ class _infoState extends State<info> {
                                   Container(
                                     child: Text(
                                       "Clouds and Sun",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black),
                                     ),
                                   ),
                                   SizedBox(

@@ -113,16 +113,21 @@ class _matchesState extends State<matches> {
                             width: 340,
                             height: 40,
                             decoration: BoxDecoration(
-                                color: Color(0xFFFF4D00),
+                                color: isDarkMode
+                                    ? const Color(0xFFFF2E00)
+                                    : const Color(0xFFDFDFDF),
                                 borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                               padding: const EdgeInsets.all(2.5),
                               child: TabBar(
                                   labelPadding: EdgeInsets.all(5),
                                   indicator: BoxDecoration(
-                                      color: Colors.black,
+                                      color: isDarkMode
+                                          ? Colors.black
+                                          : Color(0xFF494949),
                                       borderRadius: BorderRadius.circular(25)),
-                                  unselectedLabelColor: Colors.white,
+                                  unselectedLabelColor:
+                                      isDarkMode ? Colors.white : Colors.black,
                                   labelColor: Colors.white,
                                   tabs: [
                                     Tab(
@@ -162,7 +167,9 @@ class _matchesState extends State<matches> {
                                                 data[index]["name"].toString(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontSize: 16),
                                               ),
                                             ),
@@ -373,7 +380,9 @@ class _matchesState extends State<matches> {
                                             child: Text(
                                               data[index]["status"],
                                               style: TextStyle(
-                                                  color: Colors.white70,
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black38,
                                                   fontSize: 12,
                                                   fontStyle: FontStyle.italic),
                                             ),

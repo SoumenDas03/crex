@@ -3,8 +3,10 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class commententary extends StatefulWidget {
@@ -20,6 +22,8 @@ class commententary extends StatefulWidget {
 class _commententaryState extends State<commententary> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     // ignore: prefer_typing_uninitialized_variables
     var map,
         // ignore: prefer_typing_uninitialized_variables
@@ -137,10 +141,11 @@ class _commententaryState extends State<commententary> {
                         // ignore: prefer_const_constructors
                         image: DecorationImage(
                           // ignore: prefer_const_constructors
-                          image: AssetImage(
-                            "assets/background.jpeg",
-                          ),
-                          fit: BoxFit.cover,
+                          image:  isDarkMode
+                                          ? AssetImage('assets/background.jpeg')
+                                          : AssetImage(
+                                              "assets/bgLightMode.png"),
+                          fit: BoxFit.fill,
                         ),
                       ),
                       child: Column(
@@ -158,7 +163,9 @@ class _commententaryState extends State<commententary> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Container(
-                                color: Color(0xff258D50),
+                                color: isDarkMode
+                                    ? Color(0xff258D50)
+                                    : const Color(0xFFDFDFDF),
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 15),
                                   child: Column(
@@ -169,8 +176,12 @@ class _commententaryState extends State<commententary> {
                                       Container(
                                           alignment: Alignment.topRight,
                                           margin: EdgeInsets.only(right: 25),
-                                          child:
-                                              Image.asset("assets/volume.png")),
+                                          child: isDarkMode
+                                              ? Image.asset("assets/volume.png")
+                                              : Image.asset(
+                                                  "assets/volume.png",
+                                                  color: Colors.grey,
+                                                )),
                                       Container(
                                         margin: EdgeInsets.only(right: 25),
                                         child: Row(
@@ -227,8 +238,10 @@ class _commententaryState extends State<commententary> {
                                                                   [0]["shortname"]
                                                               : data["teamInfo"][1]["shortname"],
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                               fontSize: 20,
                                                               fontWeight:
                                                                   FontWeight
@@ -237,8 +250,10 @@ class _commententaryState extends State<commententary> {
                                                         Text(
                                                           '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                               fontSize: 20,
                                                               fontWeight:
                                                                   FontWeight
@@ -260,8 +275,10 @@ class _commententaryState extends State<commententary> {
                                                               ? '${(data["score"].length / 2).round()}st inn'
                                                               : '${(data["score"].length / 2).round()}nd inn',
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                               fontSize: 12),
                                                         ),
                                                         SizedBox(
@@ -274,8 +291,10 @@ class _commententaryState extends State<commententary> {
                                                                   1]["o"]
                                                               .toString(),
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                               fontSize: 12,
                                                               fontWeight:
                                                                   FontWeight
@@ -297,7 +316,9 @@ class _commententaryState extends State<commententary> {
                                               '4',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.amber,
+                                                  color: isDarkMode
+                                                      ? Colors.amber
+                                                      : Colors.blueGrey,
                                                   fontSize: 50),
                                             )
                                           ],
@@ -309,7 +330,9 @@ class _commententaryState extends State<commententary> {
                                       Container(
                                           height: 1,
                                           width: 400,
-                                          color: Colors.white),
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.grey),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -330,7 +353,9 @@ class _commententaryState extends State<commententary> {
                                                                 1]["o"])
                                                     .toStringAsFixed(2),
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 15.5),
                                           ),
                                           SizedBox(
@@ -341,7 +366,9 @@ class _commententaryState extends State<commententary> {
                                                 ? 'RRR : 8.58'
                                                 : "",
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 15.5),
                                           ),
                                           SizedBox(
@@ -364,11 +391,13 @@ class _commententaryState extends State<commententary> {
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Text(
                                                   'Over 18',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -377,12 +406,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '4',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -392,12 +425,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '0',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -407,12 +444,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '4',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -422,12 +463,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '1',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -437,12 +482,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '0',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -452,12 +501,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '1',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -469,7 +522,9 @@ class _commententaryState extends State<commententary> {
                                                 Text(
                                                   '=',
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black),
                                                 ),
                                                 SizedBox(
                                                   width: 2,
@@ -477,7 +532,9 @@ class _commententaryState extends State<commententary> {
                                                 Text(
                                                   '10',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -495,11 +552,13 @@ class _commententaryState extends State<commententary> {
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Text(
                                                   'Over 19',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -508,12 +567,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '2',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -523,12 +586,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '0',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -538,12 +605,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '4',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -553,12 +624,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '-',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -568,12 +643,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '-',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -583,12 +662,16 @@ class _commententaryState extends State<commententary> {
                                                   width: 5,
                                                 ),
                                                 CircleAvatar(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   radius: 5,
                                                   child: Text(
                                                     '-',
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
                                                         fontSize: 10,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -600,7 +683,9 @@ class _commententaryState extends State<commententary> {
                                                 Text(
                                                   '=',
                                                   style: TextStyle(
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black),
                                                 ),
                                                 SizedBox(
                                                   width: 2,
@@ -608,7 +693,9 @@ class _commententaryState extends State<commententary> {
                                                 Text(
                                                   '6',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -647,7 +734,9 @@ class _commententaryState extends State<commententary> {
                                                   borderRadius:
                                                       BorderRadius.circular(32),
                                                   border: Border.all(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                       width: 0.5)),
                                               child: FutureBuilder(
                                                 future: getPlayerInfo(
@@ -681,7 +770,9 @@ class _commententaryState extends State<commententary> {
                                                 scoreData[0]["batsman"]["name"],
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                     fontSize: 15),
                                               ),
                                             ),
@@ -695,7 +786,9 @@ class _commententaryState extends State<commententary> {
                                                   ")" +
                                                   '*',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   fontSize: 12),
                                             )
                                           ],
@@ -710,7 +803,9 @@ class _commententaryState extends State<commententary> {
                                                   borderRadius:
                                                       BorderRadius.circular(32),
                                                   border: Border.all(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                       width: 0.5)),
                                               child: FutureBuilder(
                                                 future: getPlayerInfo(
@@ -744,7 +839,9 @@ class _commententaryState extends State<commententary> {
                                                 scoreData[1]["batsman"]["name"],
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                     fontSize: 15),
                                               ),
                                             ),
@@ -757,7 +854,9 @@ class _commententaryState extends State<commententary> {
                                                   scoreData[1]["b"].toString() +
                                                   ")",
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   fontSize: 12),
                                             )
                                           ],
@@ -778,7 +877,9 @@ class _commententaryState extends State<commententary> {
                                                   borderRadius:
                                                       BorderRadius.circular(32),
                                                   border: Border.all(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                       width: 0.5)),
                                               child: FutureBuilder(
                                                 future: getPlayerInfo(
@@ -817,7 +918,9 @@ class _commententaryState extends State<commententary> {
                                                     ["bowler"]["name"],
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                     fontSize: 15),
                                               ),
                                             ),
@@ -838,7 +941,9 @@ class _commententaryState extends State<commententary> {
                                                       .toString() +
                                                   ')',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   fontSize: 12),
                                             ),
                                           ],
@@ -875,15 +980,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             '2',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -894,7 +1003,9 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   width: 0.5)),
                                           alignment: Alignment.center,
                                           height: 22,
@@ -902,7 +1013,9 @@ class _commententaryState extends State<commententary> {
                                           child: Text(
                                             '0',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -911,7 +1024,9 @@ class _commententaryState extends State<commententary> {
 
                                         Text(
                                           '=',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                         ),
 
                                         SizedBox(
@@ -920,7 +1035,9 @@ class _commententaryState extends State<commententary> {
 
                                         Text(
                                           '10',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                         )
                                       ],
                                     ),
@@ -941,7 +1058,9 @@ class _commententaryState extends State<commententary> {
                                         Text(
                                           'Over 82',
                                           style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -954,15 +1073,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             '6',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -974,7 +1097,9 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   width: 0.5)),
                                           alignment: Alignment.center,
                                           height: 22,
@@ -982,7 +1107,9 @@ class _commententaryState extends State<commententary> {
                                           child: Text(
                                             '4',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -994,15 +1121,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             'W',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -1013,15 +1144,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             '0',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -1032,15 +1167,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             '2',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                         SizedBox(
@@ -1051,15 +1190,19 @@ class _commententaryState extends State<commententary> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 0.5)),
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                                  width: 0.5),),
                                           alignment: Alignment.center,
                                           height: 22,
                                           width: 22,
                                           child: Text(
                                             'NB',
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                           ),
                                         ),
                                       ],
@@ -1088,7 +1231,9 @@ class _commententaryState extends State<commententary> {
                                               child: Text(
                                                 'The oldest classcical British and Latin writing had little or no spance between world and could be written in (alterneting derections).',
                                                 style: TextStyle(
-                                                    color: Colors.white),
+                                                    color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                               ),
                                             ),
                                             SizedBox(

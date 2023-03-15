@@ -1,7 +1,9 @@
 // ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, duplicate_ignore
 
 import 'package:crex/pages/live_second.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class graph extends StatefulWidget {
@@ -14,6 +16,8 @@ class graph extends StatefulWidget {
 class _graphState extends State<graph> {
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         backgroundColor: Colors.black,
         body: Container(
@@ -23,9 +27,9 @@ class _graphState extends State<graph> {
             // ignore: prefer_const_constructors
             image: DecorationImage(
               // ignore: prefer_const_constructors
-              image: AssetImage(
-                "assets/background.jpeg",
-              ),
+              image:  isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
               fit: BoxFit.cover,
             ),
           ),
@@ -462,7 +466,7 @@ class _graphState extends State<graph> {
                 width: 275,
                 child: Text(
                   'Win Percentage graph is no available for test matches',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle( color:isDarkMode? Colors.white: Colors.black, fontSize: 16),
                 ),
               )
             ],

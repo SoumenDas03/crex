@@ -169,7 +169,9 @@ class _fantasyState extends State<fantasy> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Container(
-                                          color: Color(0xff258D50),
+                                          color: isDarkMode
+                                              ? Color(0xff258D50)
+                                              : const Color(0xFFDFDFDF),
                                           child: Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 15),
@@ -184,8 +186,13 @@ class _fantasyState extends State<fantasy> {
                                                         Alignment.topRight,
                                                     margin: EdgeInsets.only(
                                                         right: 25),
-                                                    child: Image.asset(
-                                                        "assets/volume.png")),
+                                                    child: isDarkMode
+                                                        ? Image.asset(
+                                                            "assets/volume.png")
+                                                        : Image.asset(
+                                                            "assets/volume.png",
+                                                            color: Colors.grey,
+                                                          )),
                                                 Container(
                                                   margin: EdgeInsets.only(
                                                       right: 25),
@@ -233,8 +240,11 @@ class _fantasyState extends State<fantasy> {
                                                                             [
                                                                             "shortname"],
                                                                     style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
+                                                                        color: isDarkMode
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
                                                                         fontSize:
                                                                             20,
                                                                         fontWeight:
@@ -243,8 +253,11 @@ class _fantasyState extends State<fantasy> {
                                                                   Text(
                                                                     '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
                                                                     style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
+                                                                        color: isDarkMode
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
                                                                         fontSize:
                                                                             20,
                                                                         fontWeight:
@@ -264,8 +277,11 @@ class _fantasyState extends State<fantasy> {
                                                                         ? '${(data["score"].length / 2).round()}st inn'
                                                                         : '${(data["score"].length / 2).round()}nd inn',
                                                                     style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
+                                                                        color: isDarkMode
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
                                                                         fontSize:
                                                                             12),
                                                                   ),
@@ -279,8 +295,11 @@ class _fantasyState extends State<fantasy> {
                                                                                 1]["o"]
                                                                         .toString(),
                                                                     style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
+                                                                        color: isDarkMode
+                                                                            ? Colors
+                                                                                .white
+                                                                            : Colors
+                                                                                .black,
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:
@@ -303,7 +322,10 @@ class _fantasyState extends State<fantasy> {
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: Colors.amber,
+                                                            color: isDarkMode
+                                                                ? Colors.amber
+                                                                : Colors
+                                                                    .blueGrey,
                                                             fontSize: 50),
                                                       )
                                                     ],
@@ -315,7 +337,9 @@ class _fantasyState extends State<fantasy> {
                                                 Container(
                                                     height: 1,
                                                     width: 400,
-                                                    color: Colors.white),
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.grey),
                                                 SizedBox(
                                                   height: 10,
                                                 ),
@@ -326,7 +350,6 @@ class _fantasyState extends State<fantasy> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      // ignore: prefer_interpolation_to_compose_strings
                                                       'CCR : ' +
                                                           (data["score"][(data[
                                                                               "score"]
@@ -340,7 +363,9 @@ class _fantasyState extends State<fantasy> {
                                                               .toStringAsFixed(
                                                                   2),
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15.5),
                                                     ),
                                                     SizedBox(
@@ -352,7 +377,9 @@ class _fantasyState extends State<fantasy> {
                                                           ? 'RRR : 8.58'
                                                           : "",
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15.5),
                                                     ),
                                                     SizedBox(
@@ -379,12 +406,15 @@ class _fantasyState extends State<fantasy> {
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,
-                                                        children: const [
+                                                        children: [
                                                           Text(
                                                             'Over 18',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
@@ -395,13 +425,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '4',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -413,13 +450,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '0',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -431,13 +475,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '4',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -449,13 +500,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '1',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -467,13 +525,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '0',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -485,13 +550,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '1',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -504,8 +576,11 @@ class _fantasyState extends State<fantasy> {
                                                           Text(
                                                             '=',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black),
                                                           ),
                                                           SizedBox(
                                                             width: 2,
@@ -513,8 +588,11 @@ class _fantasyState extends State<fantasy> {
                                                           Text(
                                                             '10',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
@@ -536,12 +614,15 @@ class _fantasyState extends State<fantasy> {
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,
-                                                        children: const [
+                                                        children: [
                                                           Text(
                                                             'Over 19',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
@@ -552,13 +633,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '2',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -570,13 +658,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '0',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -588,13 +683,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '4',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -606,13 +708,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '-',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -624,13 +733,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '-',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -642,13 +758,20 @@ class _fantasyState extends State<fantasy> {
                                                           ),
                                                           CircleAvatar(
                                                             backgroundColor:
-                                                                Colors.white,
+                                                                isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                             radius: 5,
                                                             child: Text(
                                                               '-',
                                                               style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .black
+                                                                      : Colors
+                                                                          .white,
                                                                   fontSize: 10,
                                                                   fontWeight:
                                                                       FontWeight
@@ -661,8 +784,11 @@ class _fantasyState extends State<fantasy> {
                                                           Text(
                                                             '=',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black),
                                                           ),
                                                           SizedBox(
                                                             width: 2,
@@ -670,8 +796,11 @@ class _fantasyState extends State<fantasy> {
                                                           Text(
                                                             '6',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
@@ -699,7 +828,9 @@ class _fantasyState extends State<fantasy> {
                                           child: Text(
                                             'Top Fantasy Points',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 9),
                                           ),
                                         ),
@@ -896,7 +1027,9 @@ class _fantasyState extends State<fantasy> {
                                           child: Text(
                                             'Player Stats in Series',
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 13),
                                           ),
@@ -927,14 +1060,19 @@ class _fantasyState extends State<fantasy> {
                                                 isScrollable: true,
                                                 indicatorSize:
                                                     TabBarIndicatorSize.label,
+                                                // indicator: BoxDecoration(
+                                                //   // ignore: prefer_const_constructors
+                                                //   color: Color(0xFFFF4D00),
                                                 indicator: BoxDecoration(
-                                                    // ignore: prefer_const_constructors
-                                                    color: Color(0xFFFF4D00),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                unselectedLabelColor:
-                                                    Colors.white,
+                                                  color: isDarkMode
+                                                      ? Color(0xFFFF4D00)
+                                                      : Color(0xFF494949),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                unselectedLabelColor: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 labelColor: Colors.white,
                                                 tabs: [
                                                   Container(
@@ -943,8 +1081,10 @@ class _fantasyState extends State<fantasy> {
                                                     height: 30, width: 100,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color:
-                                                                Colors.white),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .blueGrey),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -961,8 +1101,10 @@ class _fantasyState extends State<fantasy> {
                                                     height: 30,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color:
-                                                                Colors.white),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .blueGrey),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -979,8 +1121,10 @@ class _fantasyState extends State<fantasy> {
                                                     height: 30,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color:
-                                                                Colors.white),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .blueGrey),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -996,8 +1140,10 @@ class _fantasyState extends State<fantasy> {
                                                     height: 30,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color:
-                                                                Colors.white),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .blueGrey),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -1013,8 +1159,10 @@ class _fantasyState extends State<fantasy> {
                                                     height: 30,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color:
-                                                                Colors.white),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors
+                                                                    .blueGrey),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5)),
@@ -1030,7 +1178,9 @@ class _fantasyState extends State<fantasy> {
                                                 left: 15, top: 15, right: 10),
                                             height: 1,
                                             width: 330,
-                                            color: Colors.white,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.blueGrey,
                                           ),
                                           SizedBox(
                                             height: 10,
@@ -1068,14 +1218,18 @@ class _fantasyState extends State<fantasy> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
-                                                                        color: Colors
-                                                                            .white),
+                                                                        color: isDarkMode
+                                                                            ? Colors.white
+                                                                            : Colors.black),
                                                                   ),
                                                                   child: Icon(
                                                                     Icons
                                                                         .person,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blueGrey,
                                                                     size: 35,
                                                                   ),
                                                                 ),
@@ -1097,10 +1251,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "name"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1142,8 +1296,10 @@ class _fantasyState extends State<fantasy> {
                                                             Container(
                                                               height: 1,
                                                               width: 320,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .blueGrey,
                                                             ),
                                                             SizedBox(
                                                               height: 20,
@@ -1182,14 +1338,18 @@ class _fantasyState extends State<fantasy> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
-                                                                        color: Colors
-                                                                            .white),
+                                                                        color: isDarkMode
+                                                                            ? Colors.white
+                                                                            : Colors.blueGrey),
                                                                   ),
                                                                   child: Icon(
                                                                     Icons
                                                                         .person,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blueGrey,
                                                                     size: 35,
                                                                   ),
                                                                 ),
@@ -1212,10 +1372,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "name"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                     SizedBox(
                                                                       height: 5,
@@ -1226,10 +1386,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "dismissal-text"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1271,8 +1431,10 @@ class _fantasyState extends State<fantasy> {
                                                             Container(
                                                               height: 1,
                                                               width: 320,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .blueGrey,
                                                             ),
                                                             SizedBox(
                                                               height: 20,
@@ -1311,14 +1473,18 @@ class _fantasyState extends State<fantasy> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
-                                                                        color: Colors
-                                                                            .white),
+                                                                        color: isDarkMode
+                                                                            ? Colors.white
+                                                                            : Colors.blueGrey),
                                                                   ),
                                                                   child: Icon(
                                                                     Icons
                                                                         .person,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blueGrey,
                                                                     size: 35,
                                                                   ),
                                                                 ),
@@ -1341,10 +1507,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "name"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                     SizedBox(
                                                                       height: 5,
@@ -1352,10 +1518,10 @@ class _fantasyState extends State<fantasy> {
                                                                     Text(
                                                                       "${wicketOrderData[index]["o"]} Overs",
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1397,8 +1563,10 @@ class _fantasyState extends State<fantasy> {
                                                             Container(
                                                               height: 1,
                                                               width: 320,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .blueGrey,
                                                             ),
                                                             SizedBox(
                                                               height: 20,
@@ -1437,14 +1605,18 @@ class _fantasyState extends State<fantasy> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
-                                                                        color: Colors
-                                                                            .white),
+                                                                        color: isDarkMode
+                                                                            ? Colors.white
+                                                                            : Colors.blueGrey),
                                                                   ),
                                                                   child: Icon(
                                                                     Icons
                                                                         .person,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blueGrey,
                                                                     size: 35,
                                                                   ),
                                                                 ),
@@ -1467,10 +1639,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "name"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                     SizedBox(
                                                                       height: 5,
@@ -1478,10 +1650,10 @@ class _fantasyState extends State<fantasy> {
                                                                     Text(
                                                                       "${wicketOrderData[index]["o"]} Overs",
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1523,8 +1695,10 @@ class _fantasyState extends State<fantasy> {
                                                             Container(
                                                               height: 1,
                                                               width: 320,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .blueGrey,
                                                             ),
                                                             SizedBox(
                                                               height: 20,
@@ -1563,14 +1737,18 @@ class _fantasyState extends State<fantasy> {
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     border: Border.all(
-                                                                        color: Colors
-                                                                            .white),
+                                                                        color: isDarkMode
+                                                                            ? Colors.white
+                                                                            : Colors.blueGrey),
                                                                   ),
                                                                   child: Icon(
                                                                     Icons
                                                                         .person,
-                                                                    color: Colors
-                                                                        .white,
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .blueGrey,
                                                                     size: 35,
                                                                   ),
                                                                 ),
@@ -1593,10 +1771,10 @@ class _fantasyState extends State<fantasy> {
                                                                           [
                                                                           "name"],
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                     SizedBox(
                                                                       height: 5,
@@ -1604,10 +1782,10 @@ class _fantasyState extends State<fantasy> {
                                                                     Text(
                                                                       "${wicketOrderData[index]["o"]} Overs",
                                                                       style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              12),
+                                                                          color: isDarkMode
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                          fontSize: 12),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -1649,8 +1827,10 @@ class _fantasyState extends State<fantasy> {
                                                             Container(
                                                               height: 1,
                                                               width: 320,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .blueGrey,
                                                             ),
                                                             SizedBox(
                                                               height: 20,
@@ -1942,7 +2122,9 @@ class _fantasyState extends State<fantasy> {
                                             child: Text(
                                               "Team Analysis",
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12),
                                             ),
@@ -1967,23 +2149,28 @@ class _fantasyState extends State<fantasy> {
                                         child: Table(
                                           border: TableBorder.all(
                                               width: 1,
-                                              color:
-                                                  Colors.white), //table border
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors
+                                                      .blueGrey), //table border
                                           // ignore: prefer_const_literals_to_create_immutables
                                           children: [
                                             // ignore: prefer_const_literals_to_create_immutables
                                             TableRow(children: [
                                               TableCell(
-                                                  child: Container(
-                                                alignment: Alignment.center,
-                                                height: 42,
-                                                child: Text(
-                                                  "Bat/ Bowl Fronts",
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white),
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  height: 42,
+                                                  child: Text(
+                                                    "Bat/ Bowl Fronts",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
+                                                  ),
                                                 ),
-                                              )),
+                                              ),
                                               TableCell(
                                                   child: Container(
                                                 margin: EdgeInsets.only(top: 8),
@@ -2008,7 +2195,9 @@ class _fantasyState extends State<fantasy> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 12,
-                                                          color: Colors.white),
+                                                          color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                     ),
                                                   ],
                                                 ),
@@ -2037,7 +2226,9 @@ class _fantasyState extends State<fantasy> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 12,
-                                                          color: Colors.white),
+                                                          color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                     ),
                                                   ],
                                                 ),
@@ -2053,7 +2244,9 @@ class _fantasyState extends State<fantasy> {
                                                   "Team Opening",
                                                   style: TextStyle(
                                                       fontSize: 12,
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                 ),
                                               )),
                                               TableCell(
@@ -2271,7 +2464,9 @@ class _fantasyState extends State<fantasy> {
                                                   "Middle Order",
                                                   style: TextStyle(
                                                       fontSize: 12,
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                 ),
                                               )),
                                               TableCell(
@@ -2489,7 +2684,9 @@ class _fantasyState extends State<fantasy> {
                                                   "Batting Depth",
                                                   style: TextStyle(
                                                       fontSize: 12,
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                 ),
                                               )),
                                               TableCell(
@@ -2706,7 +2903,9 @@ class _fantasyState extends State<fantasy> {
                                                   "Pace Bowling",
                                                   style: TextStyle(
                                                       fontSize: 12,
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                 ),
                                               )),
                                               TableCell(
@@ -2923,9 +3122,11 @@ class _fantasyState extends State<fantasy> {
                                                   "Spin Bowling",
                                                   style: TextStyle(
                                                       fontSize: 12,
-                                                      color: Colors.white),
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
                                                 ),
-                                              )),
+                                              ),),
                                               TableCell(
                                                   child: Container(
                                                 margin:
@@ -3144,7 +3345,9 @@ class _fantasyState extends State<fantasy> {
                                             child: Text(
                                               "Pace vs Spain",
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12),
                                             ),
@@ -3179,7 +3382,7 @@ class _fantasyState extends State<fantasy> {
                                     Opacity(
                                       opacity: 0.8,
                                       child: Container(
-                                        color: Colors.blueGrey[900],
+                                        color:isDarkMode? Colors.blueGrey[900]: const Color(0xFFDFDFDF),
                                         width: 300,
                                         height: 75,
                                         child: Column(
@@ -3194,7 +3397,9 @@ class _fantasyState extends State<fantasy> {
                                                 Text(
                                                   "Pace",
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 12),
@@ -3218,7 +3423,9 @@ class _fantasyState extends State<fantasy> {
                                                 Text(
                                                   "Spain",
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 12),
@@ -3245,7 +3452,9 @@ class _fantasyState extends State<fantasy> {
                                                   child: Text(
                                                     "67%",
                                                     style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                         fontSize: 12),
                                                   ),
                                                 ),
@@ -3258,7 +3467,9 @@ class _fantasyState extends State<fantasy> {
                                                   child: Text(
                                                     "33%",
                                                     style: TextStyle(
-                                                        color: Colors.white,
+                                                        color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                                         fontSize: 12),
                                                   ),
                                                 ),

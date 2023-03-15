@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:convert';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class scorecard extends StatefulWidget {
@@ -40,6 +42,8 @@ class _scorecardState extends State<scorecard> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -56,9 +60,10 @@ class _scorecardState extends State<scorecard> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage(
-                    "assets/background.jpeg",
-                  ),
+                  image:  isDarkMode
+                    ? AssetImage('assets/background.jpeg')
+                    : AssetImage("assets/bgLightMode.png"),
+                 
                   fit: BoxFit.cover,
                 )),
                 child: Column(children: [
@@ -75,7 +80,9 @@ class _scorecardState extends State<scorecard> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        color: Color(0xff258D50),
+                        color: isDarkMode
+                            ? Color(0xff258D50)
+                            : const Color(0xFFDFDFDF),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: Column(
@@ -85,7 +92,12 @@ class _scorecardState extends State<scorecard> {
                               Container(
                                   alignment: Alignment.topRight,
                                   margin: EdgeInsets.only(right: 25),
-                                  child: Image.asset("assets/volume.png")),
+                                  child: isDarkMode
+                                      ? Image.asset("assets/volume.png")
+                                      : Image.asset(
+                                          "assets/volume.png",
+                                          color: Colors.grey,
+                                        )),
                               Container(
                                 margin: EdgeInsets.only(right: 25),
                                 child: Row(
@@ -143,7 +155,9 @@ class _scorecardState extends State<scorecard> {
                                                       ? data["teamInfo"][0]["shortname"]
                                                       : data["teamInfo"][1]["shortname"],
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -151,7 +165,9 @@ class _scorecardState extends State<scorecard> {
                                                 Text(
                                                   '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -171,7 +187,9 @@ class _scorecardState extends State<scorecard> {
                                                       ? '${(data["score"].length / 2).round()}st inn'
                                                       : '${(data["score"].length / 2).round()}nd inn',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12),
                                                 ),
                                                 SizedBox(
@@ -183,7 +201,9 @@ class _scorecardState extends State<scorecard> {
                                                           1]["o"]
                                                       .toString(),
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -204,7 +224,9 @@ class _scorecardState extends State<scorecard> {
                                       '4',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.amber,
+                                          color: isDarkMode
+                                              ? Colors.amber
+                                              : Colors.blueGrey,
                                           fontSize: 50),
                                     )
                                   ],
@@ -214,7 +236,10 @@ class _scorecardState extends State<scorecard> {
                                 height: 15,
                               ),
                               Container(
-                                  height: 1, width: 400, color: Colors.white),
+                                  height: 1,
+                                  width: 400,
+                                  color:
+                                      isDarkMode ? Colors.white : Colors.grey),
                               SizedBox(
                                 height: 10,
                               ),
@@ -232,7 +257,10 @@ class _scorecardState extends State<scorecard> {
                                                         1]["o"])
                                             .toStringAsFixed(2),
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 15.5),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 15.5),
                                   ),
                                   SizedBox(
                                     width: 20,
@@ -242,7 +270,10 @@ class _scorecardState extends State<scorecard> {
                                         ? 'RRR : 8.58'
                                         : "",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 15.5),
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 15.5),
                                   ),
                                   SizedBox(
                                     width: 70,
@@ -257,250 +288,310 @@ class _scorecardState extends State<scorecard> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      Text(
-                                        'Over 2',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '4',
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Over 18',
                                           style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '0',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '4',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '4',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '1',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '0',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '0',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '1',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '=',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        '10',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 3,
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '4',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '1',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '0',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '1',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '=',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text(
+                                          '10',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   Container(
                                     height: 20,
                                     width: 1,
                                     color: Colors.blueGrey,
                                   ),
-                                  SizedBox(
-                                    width: 3,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    // ignore: prefer_const_literals_to_create_immutables
-                                    children: [
-                                      Text(
-                                        'Over 3',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '2',
+                                  Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Over 19',
                                           style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '0',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '4',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '2',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '-',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '-',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '0',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 5,
-                                        child: Text(
-                                          '-',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '=',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Text(
-                                        '6',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '4',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '-',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '-',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          radius: 5,
+                                          child: Text(
+                                            '-',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '=',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text(
+                                          '6',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                height: 15,
-                              )
+                              SizedBox(height: 10),
                             ],
                           ),
                         ),
@@ -519,16 +610,16 @@ class _scorecardState extends State<scorecard> {
                       width: 340,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: Color(0xFFFF4D00),
-                          borderRadius: BorderRadius.circular(20)),
+                          color:isDarkMode? Color(0xFFFF4D00):const Color(0xFFDFDFDF),
+                          borderRadius: BorderRadius.circular(20),),
                       child: Padding(
                         padding: const EdgeInsets.all(2.5),
                         child: TabBar(
                             labelPadding: EdgeInsets.all(5),
                             indicator: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(25)),
-                            unselectedLabelColor: Colors.white,
+                                color:isDarkMode? Colors.black:Color(0xFF494949),
+                                borderRadius: BorderRadius.circular(25),),
+                            unselectedLabelColor:isDarkMode? Colors.white: Colors.black,
                             labelColor: Colors.white,
                             // ignore: prefer_const_literals_to_create_immutables
                             tabs: [
@@ -634,7 +725,7 @@ class _scorecardState extends State<scorecard> {
                                 child: Text(
                                   'Rohit Sharma (Captain)',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color:isDarkMode? Colors.white: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -644,7 +735,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '19',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                  color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -653,7 +744,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '7',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                  color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -662,7 +753,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '2',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                   color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -671,7 +762,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '1',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -680,7 +771,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '89.98',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                  color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -701,7 +792,7 @@ class _scorecardState extends State<scorecard> {
                                     Text(
                                       'Shikhar Dhawan',
                                       style: TextStyle(
-                                          color: Colors.white,
+                                         color:isDarkMode? Colors.white: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -720,7 +811,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '10',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                   color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -729,7 +820,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '8',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                   color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -738,7 +829,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '1',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                   color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -747,7 +838,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '0',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -756,7 +847,7 @@ class _scorecardState extends State<scorecard> {
                               Text(
                                 '49.98',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                  color:isDarkMode? Colors.white: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -781,7 +872,7 @@ class _scorecardState extends State<scorecard> {
                                 "Extras :",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                  color:isDarkMode? Colors.white: Colors.black,
                                     fontSize: 15),
                               ),
                             ),
@@ -794,13 +885,13 @@ class _scorecardState extends State<scorecard> {
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
                                 CircleAvatar(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: isDarkMode? Colors.white: Colors.black,
                                   radius: 10,
                                   child: Text(
                                     "2",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFFFF4D00),
+                                      color:isDarkMode? Color(0xFFFF4D00):Colors.white,
                                     ),
                                   ),
                                 ),
@@ -811,7 +902,7 @@ class _scorecardState extends State<scorecard> {
                                   "1w , ",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                      color: isDarkMode? Colors.white: Colors.black),
                                 ),
                                 SizedBox(
                                   width: 5,
@@ -820,7 +911,7 @@ class _scorecardState extends State<scorecard> {
                                   "1nb",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+                                     color:isDarkMode? Colors.white: Colors.black),
                                 ),
                               ],
                             ),
@@ -852,7 +943,7 @@ class _scorecardState extends State<scorecard> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         CircleAvatar(
-                          backgroundColor: Colors.white,
+                          backgroundColor: isDarkMode? Colors.white: Colors.black,
                           radius: 48,
                           child: Opacity(
                             opacity: 0.9,
@@ -874,7 +965,7 @@ class _scorecardState extends State<scorecard> {
                             Text(
                               "Virat Kohli",
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: isDarkMode? Colors.white: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25),
                             ),
@@ -888,7 +979,7 @@ class _scorecardState extends State<scorecard> {
                                   "Age :",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                                 SizedBox(
@@ -898,7 +989,7 @@ class _scorecardState extends State<scorecard> {
                                   "34 year",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                               ],
@@ -913,7 +1004,7 @@ class _scorecardState extends State<scorecard> {
                                   "Total Runs :",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                                 SizedBox(
@@ -923,7 +1014,7 @@ class _scorecardState extends State<scorecard> {
                                   "8074",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                               ],
@@ -938,7 +1029,7 @@ class _scorecardState extends State<scorecard> {
                                   "Strike Rate :",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                                 SizedBox(
@@ -948,7 +1039,7 @@ class _scorecardState extends State<scorecard> {
                                   "143",
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: Colors.white,
+                                    color: isDarkMode? Colors.white: Colors.black,
                                   ),
                                 ),
                               ],
@@ -1022,7 +1113,7 @@ class _scorecardState extends State<scorecard> {
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: isDarkMode? Colors.white: Colors.black,
                                       ),
                                     ),
                                     Text(
@@ -1134,7 +1225,7 @@ class _scorecardState extends State<scorecard> {
                             child: Text(
                               'Shahin Afridi',
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: isDarkMode? Colors.white: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -1144,7 +1235,7 @@ class _scorecardState extends State<scorecard> {
                           Text(
                             '2.3',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -1153,7 +1244,7 @@ class _scorecardState extends State<scorecard> {
                           Text(
                             '0',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -1171,7 +1262,7 @@ class _scorecardState extends State<scorecard> {
                           Text(
                             '0',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -1180,7 +1271,7 @@ class _scorecardState extends State<scorecard> {
                           Text(
                             '7.60',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -1236,7 +1327,7 @@ class _scorecardState extends State<scorecard> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: isDarkMode? Colors.white: Colors.black,
                             ),
                           ),
                         ),
@@ -1251,7 +1342,7 @@ class _scorecardState extends State<scorecard> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: isDarkMode? Colors.white: Colors.black,
                             ),
                           ),
                         ),
@@ -1275,7 +1366,7 @@ class _scorecardState extends State<scorecard> {
                     child: Text(
                       "1st WICKET",
                       style: TextStyle(
-                          color: Colors.white, fontStyle: FontStyle.italic),
+                          color: isDarkMode? Colors.white: Colors.black, fontStyle: FontStyle.italic),
                     ),
                   ),
                   Container(
@@ -1293,7 +1384,7 @@ class _scorecardState extends State<scorecard> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: isDarkMode? Colors.white: Colors.black,
                             ),
                           ),
                         ),
@@ -1319,7 +1410,7 @@ class _scorecardState extends State<scorecard> {
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: isDarkMode? Colors.white: Colors.black,
                                 ),
                               ),
                             ],
@@ -1333,7 +1424,7 @@ class _scorecardState extends State<scorecard> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: isDarkMode? Colors.white: Colors.black,
                             ),
                           ),
                         ),
@@ -1355,7 +1446,7 @@ class _scorecardState extends State<scorecard> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                               ),
                             ),
                             Container(
@@ -1365,7 +1456,7 @@ class _scorecardState extends State<scorecard> {
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: isDarkMode? Colors.white: Colors.black,
                                 ),
                               ),
                             ),
@@ -1403,7 +1494,7 @@ class _scorecardState extends State<scorecard> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: isDarkMode? Colors.white: Colors.black,
                               ),
                             ),
                             Container(
@@ -1413,7 +1504,7 @@ class _scorecardState extends State<scorecard> {
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: isDarkMode? Colors.white: Colors.black,
                                 ),
                               ),
                             ),
