@@ -19,7 +19,7 @@ class live_second extends StatefulWidget {
 }
 
 class _live_secondState extends State<live_second> {
-  var map, data;
+  var map, data, sugamWicket, wicketOrderData;
 
   getSingleCricketMatchDetails() async {
     try {
@@ -30,6 +30,13 @@ class _live_secondState extends State<live_second> {
 
       map = jsonDecode(response.body.toString());
       data = map["data"];
+      sugamWicket = data["scorecard"].length > 1? data["scorecard"][0]["bowling"] 
+      + data["scorecard"][1]["bowling"] 
+      : data["scorecard"][0]["bowling"];
+      sugamWicket.sort((a,b) {
+         return a['w'].compareTo(b['w']) as int;
+      });
+      wicketOrderData = sugamWicket.reversed.toList();
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
@@ -615,10 +622,10 @@ class _live_secondState extends State<live_second> {
                             ? Color(0xffFF8A00)
                             : const Color(0xFFDFDFDF),
                         child: Text(
-                          'PAK need 200 runs in 183 balls',
+                          data["status"].toString(),
                           style: TextStyle(
                               color: isDarkMode ? Colors.white : Colors.black,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -647,14 +654,27 @@ class _live_secondState extends State<live_second> {
                               Container(
                                 alignment: Alignment.centerLeft,
                                 width: 100,
-                                child: Text(
-                                  'PAKISTAN',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black),
-                                ),
+                                child: data["score"].length > 1
+                                    ? Text(
+                                        data["score"][1]["inning"].substring(
+                                            0,
+                                            ((data["score"][1]["inning"]
+                                                    .indexOf("Inning")) -
+                                                1)),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      )
+                                    : Text(
+                                        data["score"][0]["inning"].substring(
+                                            0,
+                                            ((data["score"][0]["inning"]
+                                                    .indexOf("Inning")) -
+                                                1)),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
                               ),
                               SizedBox(
                                 width: 5,
@@ -674,14 +694,35 @@ class _live_secondState extends State<live_second> {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        'PAK',
-                                        style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                      data["score"].length > 1
+                                          ? Text(
+                                              (data["score"][1]["inning"]
+                                                      .substring(
+                                                          0,
+                                                          ((data["score"][1]
+                                                                      ["inning"]
+                                                                  .indexOf(
+                                                                      "Inning")) -
+                                                              1)))
+                                                  .substring(0, 3),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            )
+                                          : Text(
+                                              (data["score"][0]["inning"]
+                                                      .substring(
+                                                          0,
+                                                          ((data["score"][0]
+                                                                      ["inning"]
+                                                                  .indexOf(
+                                                                      "Inning")) -
+                                                              1)))
+                                                  .substring(0, 3),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            ),
                                       SizedBox(
                                         width: 5,
                                       ),
@@ -781,14 +822,19 @@ class _live_secondState extends State<live_second> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '20 Ov Runs',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: isDarkMode
-                                            ? Colors.white
-                                            : Colors.black),
-                                  ),
+                                  data["scorecard"].length > 1
+                                      ? Text(
+                                          "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        )
+                                      : Text(
+                                          "Over: ${data["scorecard"][data["scorecard"].length - 2]["totals"]["O"]}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
                                   SizedBox(
                                     width: 75,
                                   ),
@@ -986,7 +1032,6 @@ class _live_secondState extends State<live_second> {
                       decoration: BoxDecoration(
                         // borderRadius: BorderRadius.circular(0),
                         // border: Border.all(color: Colors.white, width: 0.5)
-
                         color: isDarkMode
                             ? Colors.blueGrey[900]
                             : const Color(0xFFDFDFDF),
@@ -1000,19 +1045,69 @@ class _live_secondState extends State<live_second> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  'Babar Azam(Captain)',
-                                  style: TextStyle(
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0
+                                    ? Container(
+                                      width: 80,
+                                      child: Text(
+                                          data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["batsman"]["name"])
+                                              .toList()[0]
+                                              .toString(),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                    )
+                                    : data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["batsman"]["name"],
                                 SizedBox(
-                                  width: 30,
+                                  width: 85,
                                 ),
                                 Text(
-                                  '19',
+                                  data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["r"]).toList()[0].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["r"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1023,7 +1118,62 @@ class _live_secondState extends State<live_second> {
                                   width: 15,
                                 ),
                                 Text(
-                                  '7',
+                                  data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["b"]).toList()[0].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["b"].toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["4s"]).toList()[0].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["4s"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1034,18 +1184,30 @@ class _live_secondState extends State<live_second> {
                                   width: 25,
                                 ),
                                 Text(
-                                  '2',
-                                  style: TextStyle(
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Text(
-                                  '1',
+                                  data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["6s"]).toList()[0].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["6s"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1056,7 +1218,30 @@ class _live_secondState extends State<live_second> {
                                   width: 15,
                                 ),
                                 Text(
-                                  '89.98',
+                                  data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        0? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["sr"]).toList()[0].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        2]["sr"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1088,7 +1273,30 @@ class _live_secondState extends State<live_second> {
                                         Container(
                                           // width: 125,
                                           child: Text(
-                                            'Fawad Alam',
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["batsman"]["name"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["batsman"]["name"].toString(),
                                             style: TextStyle(
                                                 color: isDarkMode
                                                     ? Colors.white
@@ -1110,7 +1318,30 @@ class _live_secondState extends State<live_second> {
                                     width: 10,
                                   ),
                                   Text(
-                                    '10',
+                                    data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["r"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["r"].toString(),
                                     style: TextStyle(
                                         color: isDarkMode
                                             ? Colors.white
@@ -1121,7 +1352,62 @@ class _live_secondState extends State<live_second> {
                                     width: 15,
                                   ),
                                   Text(
-                                    '8',
+                                    data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["b"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["b"].toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["4s"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["4s"].toString(),
                                     style: TextStyle(
                                         color: isDarkMode
                                             ? Colors.white
@@ -1132,18 +1418,30 @@ class _live_secondState extends State<live_second> {
                                     width: 25,
                                   ),
                                   Text(
-                                    '1',
-                                    style: TextStyle(
-                                        color: isDarkMode
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  Text(
-                                    '0',
+                                    data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["6s"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["6s"].toString(),
                                     style: TextStyle(
                                         color: isDarkMode
                                             ? Colors.white
@@ -1154,7 +1452,30 @@ class _live_secondState extends State<live_second> {
                                     width: 15,
                                   ),
                                   Text(
-                                    '49.98',
+                                    data["scorecard"][data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .where((element) =>
+                                                element["dismissal-text"] ==
+                                                "not out")
+                                            .map((element) =>
+                                                element["batsman"]["name"])
+                                            .toList()
+                                            .length >
+                                        1? data["scorecard"][
+                                                  data["scorecard"].length -
+                                                      1]["batting"]
+                                              .where((element) =>
+                                                  element["dismissal-text"] ==
+                                                  "not out")
+                                              .map((element) =>
+                                                  element["sr"]).toList()[1].toString(): 
+                                          data["scorecard"]
+                                            [data["scorecard"].length - 1]
+                                        ["batting"][data["scorecard"]
+                                                    [data["scorecard"].length - 1]
+                                                ["batting"]
+                                            .length -
+                                        1]["sr"].toString(),
                                     style: TextStyle(
                                         color: isDarkMode
                                             ? Colors.white
@@ -1168,26 +1489,7 @@ class _live_secondState extends State<live_second> {
                           SizedBox(
                             height: 2,
                           ),
-                          Container(
-                            height: 1.5,
-                            width: 350,
-                            color: Colors.white54,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              margin: EdgeInsets.only(left: 5),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "P'ship : 58(30)",
-                                style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: 15),
-                              ),
-                            ),
-                          )
+                          
                         ],
                       ),
                     ),
@@ -1289,7 +1591,7 @@ class _live_secondState extends State<live_second> {
                                 Container(
                                   width: 160,
                                   child: Text(
-                                    'Jasprit Bumrah',
+                                    wicketOrderData[0]["bowler"]["name"],
                                     style: TextStyle(
                                         color: isDarkMode
                                             ? Colors.white
@@ -1301,7 +1603,7 @@ class _live_secondState extends State<live_second> {
                                   width: 10,
                                 ),
                                 Text(
-                                  '2.0',
+                                  wicketOrderData[0]["o"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1312,7 +1614,7 @@ class _live_secondState extends State<live_second> {
                                   width: 15,
                                 ),
                                 Text(
-                                  '0',
+                                  wicketOrderData[0]["m"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1323,7 +1625,7 @@ class _live_secondState extends State<live_second> {
                                   width: 20,
                                 ),
                                 Text(
-                                  '30',
+                                  wicketOrderData[0]["r"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1334,7 +1636,7 @@ class _live_secondState extends State<live_second> {
                                   width: 20,
                                 ),
                                 Text(
-                                  '0',
+                                  wicketOrderData[0]["w"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1345,7 +1647,7 @@ class _live_secondState extends State<live_second> {
                                   width: 15,
                                 ),
                                 Text(
-                                  '7.60',
+                                  wicketOrderData[0]["eco"].toString(),
                                   style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1371,7 +1673,6 @@ class _live_secondState extends State<live_second> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           // border: Border.all(color: Colors.white, width: 0.5)
-
                           color: isDarkMode
                               ? Colors.blueGrey[900]
                               : const Color(0xFFDFDFDF),
@@ -1429,13 +1730,12 @@ class _live_secondState extends State<live_second> {
                                     borderRadius: BorderRadius.circular(3),
                                     // border: Border.all(
                                     //     color: Colors.white, width: 0.5)
-
                                     color: isDarkMode
                                         ? Colors.amber
                                         : Colors.black26,
                                   ),
                                   child: Text(
-                                    'IND',
+                                    data["teamInfo"][0]["shortname"].toString(),
                                     style: TextStyle(
                                       color: isDarkMode
                                           ? Colors.white
@@ -1479,12 +1779,11 @@ class _live_secondState extends State<live_second> {
                                       borderRadius: BorderRadius.circular(2.5),
                                       // border: Border.all(
                                       //     color: Colors.white, width: 0.5)
-
                                       color: isDarkMode
                                           ? Colors.green
                                           : Colors.grey),
                                   child: Text(
-                                    'PAK',
+                                    data["teamInfo"][1]["shortname"].toString(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -1503,116 +1802,7 @@ class _live_secondState extends State<live_second> {
                   ),
                   SizedBox(
                     height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          // border: Border.all(color: Colors.white, width: 0.5)
-
-                          color: Colors.white),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  width: 115,
-                                  child: Text(
-                                    'PAK *',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  width: 115,
-                                  child: Text(
-                                    'IND',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                width: 100,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Batting',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFFFF4D00),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Image.asset(
-                                      "assets/matches.png",
-                                      scale: 1.2,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.centerRight,
-                                width: 200,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      '340-5/',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      child: Text(
-                                        '100',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  ),                  
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(

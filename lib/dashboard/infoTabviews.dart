@@ -71,28 +71,24 @@ class _infoTabViewsState extends State<infoTabViews> {
                   ),
                 ]),
           ),
-          body: Material(
-            child: TabBarView(
-              children: <Widget>[              
-                info(
-                  id: widget.id,
-                ),
-                fantasy(
-                  id: widget.id,
-                ),
-                commententary(
-                  id: widget.id,
-                ),
-                live_second(
-                  id: widget.id,
-                ),
-                scorecard(
-                  id: widget.id,
-                ),
-                graph(),
-                seriesstatus(),
-              ],
-            ),
+          body: TabBarView(
+            children: <Widget>[
+              info(
+                id: widget.id,
+              ),
+              fantasy(
+                id: widget.id,
+              ),
+              commententary(
+                id: widget.id,
+              ),
+              live_second(id: widget.id,),
+              scorecard(
+                id: widget.id,
+              ),
+              graph(id: widget.id),
+              seriesstatus(),
+            ],
           ),
           bottomNavigationBar: Container(
             color: Colors.black,

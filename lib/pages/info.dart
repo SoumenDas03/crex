@@ -71,10 +71,6 @@ class _infoState extends State<info> {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        // image: isDarkMode
-                        //     ? AssetImage('assets/background.jpeg')
-                        //     : AssetImage("assets/bgLightMode.png"),
-
                         image: isDarkMode
                             ? AssetImage("assets/background.jpeg")
                             : AssetImage("assets/bgLightMode.png"),

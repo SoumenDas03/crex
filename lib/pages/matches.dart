@@ -16,6 +16,7 @@ class matches extends StatefulWidget {
 
 class _matchesState extends State<matches> {
   var map, data, newData, upcomingData, upcomingMap;
+  bool scoreFirst = true, scoreSecond = false;
   getCricketDetails() async {
     try {
       http.Response response = await http.get(
@@ -28,8 +29,7 @@ class _matchesState extends State<matches> {
           .where((element) =>
               element["matchEnded"] == false &&
               element["status"] != "Match not started" &&
-              element["teamInfo"].length > 1 &&
-              element["bbbEnabled"] == true)
+              element["teamInfo"].length > 1)
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)
@@ -151,6 +151,279 @@ class _matchesState extends State<matches> {
                               ListView.builder(
                                   physics: ClampingScrollPhysics(),
                                   shrinkWrap: true,
+                                  itemCount: 5,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 10),
+                                            child: Container(
+                                              alignment: Alignment.topCenter,
+                                              child: Text(
+                                                data[index]["name"].toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Stack(children: [
+                                            Image.asset(
+                                              'assets/matches_back.jpeg',
+                                              // color: Colors.amber,
+                                            ),
+                                            Positioned(
+                                              top: 30,
+                                              left: 10,
+                                              right: 10,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage:
+                                                            NetworkImage(data[
+                                                                            index]
+                                                                        [
+                                                                        "teamInfo"]
+                                                                    [0]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        data[index]["teamInfo"]
+                                                                [0]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 135,
+                                                      ),
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage:
+                                                            NetworkImage(data[
+                                                                            index]
+                                                                        [
+                                                                        "teamInfo"]
+                                                                    [1]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        data[index]["teamInfo"]
+                                                                [1]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    margin:
+                                                        EdgeInsets.only(top: 5),
+                                                    width: 350,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      children: [
+                                                        Visibility(
+                                                          visible: scoreFirst,
+                                                          child: Container(
+                                                            width: 150,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 10,
+                                                                    right: 25),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                data[index]["score"]
+                                                                            .length >
+                                                                        1
+                                                                    ? Text(
+                                                                        "${data[index]["score"][1]["r"]}-${data[index]["score"][1]["w"]}/",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                25,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )
+                                                                    : Text(
+                                                                        "${data[index]["score"][0]["r"]}-${data[index]["score"][0]["w"]}/",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                25,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      ),
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          top:
+                                                                              12),
+                                                                  child: data[index]["score"]
+                                                                              .length >
+                                                                          1
+                                                                      ? Text(
+                                                                          data[index]["score"][1]["o"]
+                                                                              .toString(),
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        )
+                                                                      : Text(
+                                                                          data[index]["score"][0]["o"]
+                                                                              .toString(),
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Visibility(
+                                                          visible: data[index][
+                                                                          "score"]
+                                                                      .length >
+                                                                  1
+                                                              ? true
+                                                              : false,
+                                                          child: Container(
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            width: 155,
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                              top: 10,
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                  "${data[index]["score"][0]["r"]}-${data[index]["score"][0]["w"]}/",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          25,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                                Container(
+                                                                  margin: EdgeInsets
+                                                                      .only(
+                                                                          top:
+                                                                              12),
+                                                                  child: Text(
+                                                                    data[index]["score"][0]
+                                                                            [
+                                                                            "o"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 225),
+                                                      child: Image.asset(
+                                                        'assets/live_tv.png',
+                                                        scale: 1.2,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ]),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Text(
+                                              data[index]["status"],
+                                              style: TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 12,
+                                                  fontStyle: FontStyle.italic),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            color: Colors.grey[700],
+                                            height: 1.5,
+                                            width: 360,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                              ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  shrinkWrap: true,
                                   itemCount: data.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -177,7 +450,6 @@ class _matchesState extends State<matches> {
                                           SizedBox(
                                             height: 5,
                                           ),
-
                                           Stack(children: [
                                             Image.asset(
                                               'assets/matches_back.jpeg',
@@ -262,7 +534,7 @@ class _matchesState extends State<matches> {
                                                               .start,
                                                       children: [
                                                         Visibility(
-                                                          visible: true,
+                                                          visible: scoreFirst,
                                                           child: Container(
                                                             width: 150,
                                                             margin:
@@ -274,32 +546,51 @@ class _matchesState extends State<matches> {
                                                                   MainAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                Text(
-                                                                  '29-0/',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          25,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      color: Colors
-                                                                          .white),
-                                                                ),
+                                                                data[index]["score"]
+                                                                            .length >
+                                                                        1
+                                                                    ? Text(
+                                                                        "${data[index]["score"][1]["r"]}-${data[index]["score"][1]["w"]}/",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                25,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      )
+                                                                    : Text(
+                                                                        "${data[index]["score"][0]["r"]}-${data[index]["score"][0]["w"]}/",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                25,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Colors.white),
+                                                                      ),
                                                                 Container(
                                                                   margin: EdgeInsets
                                                                       .only(
                                                                           top:
                                                                               12),
-                                                                  child: Text(
-                                                                    '2.3',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            12,
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
+                                                                  child: data[index]["score"]
+                                                                              .length >
+                                                                          1
+                                                                      ? Text(
+                                                                          data[index]["score"][1]["o"]
+                                                                              .toString(),
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        )
+                                                                      : Text(
+                                                                          data[index]["score"][0]["o"]
+                                                                              .toString(),
+                                                                          style: TextStyle(
+                                                                              fontSize: 12,
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold),
+                                                                        ),
                                                                 )
                                                               ],
                                                             ),
@@ -309,7 +600,12 @@ class _matchesState extends State<matches> {
                                                           width: 10,
                                                         ),
                                                         Visibility(
-                                                          visible: false,
+                                                          visible: data[index][
+                                                                          "score"]
+                                                                      .length >
+                                                                  1
+                                                              ? true
+                                                              : false,
                                                           child: Container(
                                                             alignment: Alignment
                                                                 .centerRight,
@@ -324,7 +620,7 @@ class _matchesState extends State<matches> {
                                                                       .end,
                                                               children: [
                                                                 Text(
-                                                                  '29-0/',
+                                                                  "${data[index]["score"][0]["r"]}-${data[index]["score"][0]["w"]}/",
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           25,
@@ -340,7 +636,10 @@ class _matchesState extends State<matches> {
                                                                           top:
                                                                               12),
                                                                   child: Text(
-                                                                    '2.3',
+                                                                    data[index]["score"][0]
+                                                                            [
+                                                                            "o"]
+                                                                        .toString(),
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             12,
@@ -387,127 +686,6 @@ class _matchesState extends State<matches> {
                                                   fontStyle: FontStyle.italic),
                                             ),
                                           ),
-                                          // SizedBox(
-                                          //   height: 20,
-                                          // ),
-                                          // Row(
-                                          //   crossAxisAlignment:
-                                          //       CrossAxisAlignment.center,
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.center,
-                                          //   children: [
-                                          //     ClipRRect(
-                                          //       borderRadius: BorderRadius.only(
-                                          //         topLeft: Radius.circular(25),
-                                          //         bottomLeft:
-                                          //             Radius.circular(25),
-                                          //         topRight: Radius.circular(25),
-                                          //         bottomRight:
-                                          //             Radius.circular(5),
-                                          //       ),
-                                          //       child: Container(
-                                          //         height: 40,
-                                          //         width: 155,
-                                          //         decoration: BoxDecoration(
-                                          //           gradient: LinearGradient(
-                                          //               colors: [
-                                          //                 Color(0xFFFF4D00),
-                                          //                 Colors.orange,
-                                          //                 Color(0xFF7A00)
-                                          //               ],
-                                          //               end: Alignment
-                                          //                   .bottomRight,
-                                          //               stops: [
-                                          //                 0.4,
-                                          //                 1,
-                                          //                 1,
-                                          //               ]),
-                                          //         ),
-                                          //         child: Row(
-                                          //           mainAxisAlignment:
-                                          //               MainAxisAlignment
-                                          //                   .center,
-                                          //           children: [
-                                          //             Icon(
-                                          //               Icons.play_circle,
-                                          //               color: Colors.white,
-                                          //               size: 32,
-                                          //             ),
-                                          //             SizedBox(
-                                          //               width: 10,
-                                          //             ),
-                                          //             Text(
-                                          //               'VIEW PREDICTION',
-                                          //               style: TextStyle(
-                                          //                   fontWeight:
-                                          //                       FontWeight.bold,
-                                          //                   fontSize: 12,
-                                          //                   color:
-                                          //                       Colors.white),
-                                          //             )
-                                          //           ],
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     SizedBox(
-                                          //       width: 15,
-                                          //     ),
-                                          //     ClipRRect(
-                                          //       borderRadius: BorderRadius.only(
-                                          //         topLeft: Radius.circular(25),
-                                          //         bottomLeft:
-                                          //             Radius.circular(25),
-                                          //         topRight: Radius.circular(25),
-                                          //         bottomRight:
-                                          //             Radius.circular(5),
-                                          //       ),
-                                          //       child: Container(
-                                          //         height: 40,
-                                          //         width: 155,
-                                          //         // color: Color(0xFFFF4D00),
-                                          //         decoration: BoxDecoration(
-                                          //           gradient: LinearGradient(
-                                          //               colors: [
-                                          //                 Color(0xFFFF4D00),
-                                          //                 Colors.orange,
-                                          //                 Color(0xFF7A00)
-                                          //               ],
-                                          //               end: Alignment
-                                          //                   .bottomRight,
-                                          //               stops: [
-                                          //                 0.4,
-                                          //                 1,
-                                          //                 1,
-                                          //               ]),
-                                          //         ),
-                                          //         child: Row(
-                                          //           mainAxisAlignment:
-                                          //               MainAxisAlignment
-                                          //                   .center,
-                                          //           children: [
-                                          //             Icon(
-                                          //               Icons.play_circle,
-                                          //               color: Colors.white,
-                                          //               size: 32,
-                                          //             ),
-                                          //             SizedBox(
-                                          //               width: 10,
-                                          //             ),
-                                          //             Text(
-                                          //               'VIEW LIVE MATCH',
-                                          //               style: TextStyle(
-                                          //                   fontWeight:
-                                          //                       FontWeight.bold,
-                                          //                   fontSize: 12,
-                                          //                   color:
-                                          //                       Colors.white),
-                                          //             )
-                                          //           ],
-                                          //         ),
-                                          //       ),
-                                          //     )
-                                          //   ],
-                                          // ),
                                           SizedBox(
                                             height: 5,
                                           ),
@@ -521,17 +699,286 @@ class _matchesState extends State<matches> {
                                       ),
                                     );
                                   }),
-                              Center(
-                                  child: Text(
-                                "data 1",
-                                style: TextStyle(color: Colors.white),
-                              )),
-                              Center(
-                                  child: Text("data 2",
-                                      style: TextStyle(color: Colors.white))),
-                              Center(
-                                  child: Text("data 3",
-                                      style: TextStyle(color: Colors.white))),
+                              ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: upcomingData.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 10),
+                                            child: Container(
+                                              alignment: Alignment.topCenter,
+                                              child: Text(
+                                                upcomingData[index]["name"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Stack(children: [
+                                            Image.asset(
+                                              'assets/matches_back.jpeg',
+                                              // color: Colors.amber,
+                                            ),
+                                            Positioned(
+                                              top: 30,
+                                              left: 10,
+                                              right: 10,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage: NetworkImage(
+                                                            upcomingData[index][
+                                                                        "teamInfo"]
+                                                                    [0]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        upcomingData[index]
+                                                                    ["teamInfo"]
+                                                                [0]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 135,
+                                                      ),
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage: NetworkImage(
+                                                            upcomingData[index][
+                                                                        "teamInfo"]
+                                                                    [1]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        upcomingData[index]
+                                                                    ["teamInfo"]
+                                                                [1]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 40,
+                                                  ),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 225),
+                                                      child: Image.asset(
+                                                        'assets/live_tv.png',
+                                                        scale: 1.2,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ]),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Text(
+                                              upcomingData[index]["status"],
+                                              style: TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 12,
+                                                  fontStyle: FontStyle.italic),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            color: Colors.grey[700],
+                                            height: 1.5,
+                                            width: 360,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                              ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: newData.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, right: 10),
+                                            child: Container(
+                                              alignment: Alignment.topCenter,
+                                              child: Text(
+                                                newData[index]["name"]
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Stack(children: [
+                                            Image.asset(
+                                              'assets/matches_back.jpeg',
+                                              // color: Colors.amber,
+                                            ),
+                                            Positioned(
+                                              top: 30,
+                                              left: 10,
+                                              right: 10,
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    // ignore: prefer_const_literals_to_create_immutables
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage:
+                                                            NetworkImage(newData[
+                                                                            index]
+                                                                        [
+                                                                        "teamInfo"]
+                                                                    [0]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        newData[index]
+                                                                    ["teamInfo"]
+                                                                [0]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 135,
+                                                      ),
+                                                      CircleAvatar(
+                                                        radius: 18,
+                                                        backgroundImage:
+                                                            NetworkImage(newData[
+                                                                            index]
+                                                                        [
+                                                                        "teamInfo"]
+                                                                    [1]["img"]
+                                                                .toString()),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        newData[index]
+                                                                    ["teamInfo"]
+                                                                [1]["shortname"]
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 40,
+                                                  ),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 225),
+                                                      child: Image.asset(
+                                                        'assets/live_tv.png',
+                                                        scale: 1.2,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
+                                          ]),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Text(
+                                              newData[index]["status"],
+                                              style: TextStyle(
+                                                  color: Colors.white70,
+                                                  fontSize: 12,
+                                                  fontStyle: FontStyle.italic),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            color: Colors.grey[700],
+                                            height: 1.5,
+                                            width: 360,
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }),
                             ]),
                           ),
                         ]),
