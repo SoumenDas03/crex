@@ -684,6 +684,7 @@ class _infoState extends State<info> {
                                   ),
                                 ),
                                 Container(
+                                  width: 250,
                                   margin: EdgeInsets.only(left: 10),
                                   child: Text(
                                     data["status"].toString(),
@@ -719,14 +720,14 @@ class _infoState extends State<info> {
                                       alignment: Alignment.bottomLeft,
                                       margin:
                                           EdgeInsets.only(right: 200, top: 10),
-                                      child: Text(
+                                      child: data["matchType"] != null? Text(
                                         data["matchType"].toUpperCase(),
                                         style: TextStyle(
                                             color: isDarkMode
                                                 ? Colors.white
                                                 : Colors.black,
                                             fontSize: 12),
-                                      ),
+                                      ): Text(""),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -2620,7 +2621,7 @@ class _infoState extends State<info> {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 100,
+                                        width: 150,
                                         margin:
                                             EdgeInsets.only(left: 10, top: 30),
                                         child: Text(

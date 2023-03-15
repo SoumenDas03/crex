@@ -1841,7 +1841,7 @@ class _match_settingsState extends State<match_settings> {
               color: Colors.black,
               size: 50,
             ),
-            seriesstatus(),
+            seriesstatus(id: "1", seriesId: "1",),
           ],
         ),
       ),

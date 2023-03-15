@@ -602,7 +602,7 @@ class _scorecardState extends State<scorecard> {
                   ),
                   DefaultTabController(
                     // initialIndex: 0,
-                    length: 2,
+                    length: data["scorecard"].length > 1? 2: 1,
                     child: Column(
                       children: [
                         Container(
@@ -625,18 +625,23 @@ class _scorecardState extends State<scorecard> {
                                 // ignore: prefer_const_literals_to_create_immutables
                                 tabs: [
                                   Tab(
-                                    text: data["score"]
-                                        [data["score"].length - 2]["inning"],
-                                  ),
-                                  Tab(
-                                    text: data["score"]
+                                    text: data["score"].length > 1 ? data["score"]
+                                        [data["score"].length - 2]["inning"]:
+                                        data["score"]
                                         [data["score"].length - 1]["inning"],
+                                  ),
+                                  Visibility(
+                                    visible:  data["scorecard"].length > 1? true: false,
+                                    child: Tab(
+                                      text: data["score"]
+                                          [data["score"].length - 1]["inning"],
+                                    ),
                                   ),
                                 ]),
                           ),
                         ),
                         Container(
-                          height: (100 * data["scorecard"][data["scorecard"].length - 2]["batting"].length).toDouble(),
+                          height:1000,
                           child: TabBarView(children: [
                             Column(
                               children: [
@@ -725,9 +730,12 @@ class _scorecardState extends State<scorecard> {
                                         scrollDirection: Axis.vertical,
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: data["scorecard"][
+                                        itemCount: data["scorecard"].length > 1 ? data["scorecard"][
                                                 data["scorecard"].length -
                                                     2]["batting"]
+                                            .length: data["scorecard"][
+                                                data["scorecard"].length -
+                                                    1]["batting"]
                                             .length,
                                         itemBuilder: (context, index) {
                                           return Padding(
@@ -748,10 +756,16 @@ class _scorecardState extends State<scorecard> {
                                                     Container(
                                                       width: 130,
                                                       child: Text(
-                                                        data["scorecard"][data[
+                                                        data["score"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"][index]
+                                                            [
+                                                            "batsman"]["name"]:
+                                                            data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"][index]
                                                             [
                                                             "batsman"]["name"],
                                                         style: TextStyle(
@@ -767,10 +781,15 @@ class _scorecardState extends State<scorecard> {
                                                       margin: EdgeInsets.only(
                                                           top: 7),
                                                       child: Text(
-                                                        data["scorecard"][data[
+                                                        data["score"].length >1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"][index]
+                                                            [
+                                                            "dismissal-text"]: data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"][index]
                                                             [
                                                             "dismissal-text"],
                                                         style: TextStyle(
@@ -791,10 +810,16 @@ class _scorecardState extends State<scorecard> {
                                                   width: 42,
                                                   child: Center(
                                                     child: Text(
-                                                      data["scorecard"][data[
+                                                      data["score"].length > 1? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["batting"]
+                                                              [index]["r"]
+                                                          .toString():
+                                                          data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["batting"]
                                                               [index]["r"]
                                                           .toString(),
                                                       style: TextStyle(
@@ -812,10 +837,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"]
+                                                            [index]["b"]
+                                                        .toString():
+                                                        data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"]
                                                             [index]["b"]
                                                         .toString(),
                                                     style: TextStyle(
@@ -831,10 +862,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"]
+                                                            [index]["4s"]
+                                                        .toString() :
+                                                        data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"]
                                                             [index]["4s"]
                                                         .toString(),
                                                     style: TextStyle(
@@ -850,10 +887,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"]
+                                                            [index]["6s"]
+                                                        .toString():
+                                                        data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"]
                                                             [index]["6s"]
                                                         .toString(),
                                                     style: TextStyle(
@@ -869,10 +912,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 44,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["batting"]
+                                                            [index]["sr"]
+                                                        .toString():
+                                                        data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["batting"]
                                                             [index]["sr"]
                                                         .toString(),
                                                     style: TextStyle(
@@ -924,10 +973,15 @@ class _scorecardState extends State<scorecard> {
                                                 backgroundColor: Colors.white,
                                                 radius: 10,
                                                 child: Text(
-                                                  data["scorecard"][data[
+                                                  data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                   "scorecard"]
                                                               .length -
                                                           2]["extras"]["r"]
+                                                      .toString():
+                                                      data["scorecard"][data[
+                                                                  "scorecard"]
+                                                              .length -
+                                                          1]["extras"]["r"]
                                                       .toString(),
                                                   style: TextStyle(
                                                     fontWeight:
@@ -940,7 +994,7 @@ class _scorecardState extends State<scorecard> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                ", ${data["scorecard"][data["scorecard"].length - 2]["extras"]["w"]}w, ",
+                                                data["scorecard"].length > 1 ? ", ${data["scorecard"][data["scorecard"].length - 2]["extras"]["w"]}w, " : ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
                                                 style: TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold,
@@ -950,7 +1004,7 @@ class _scorecardState extends State<scorecard> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                "${data["scorecard"][data["scorecard"].length - 2]["extras"]["nb"]}nb ",
+                                                data["scorecard"].length > 10 ? "${data["scorecard"][data["scorecard"].length - 2]["extras"]["nb"]}nb ": "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
                                                 style: TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold,
@@ -1046,9 +1100,12 @@ class _scorecardState extends State<scorecard> {
                                         scrollDirection: Axis.vertical,
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: data["scorecard"][
+                                        itemCount: data["scorecard"].length > 1? data["scorecard"][
                                                 data["scorecard"].length -
                                                     2]["bowling"]
+                                            .length: data["scorecard"][
+                                                data["scorecard"].length -
+                                                    1]["bowling"]
                                             .length,
                                         itemBuilder: (context, index) {
                                           return Padding(
@@ -1069,10 +1126,16 @@ class _scorecardState extends State<scorecard> {
                                                     Container(
                                                       width: 130,
                                                       child: Text(
-                                                        data["scorecard"][data[
+                                                        data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                         "scorecard"]
                                                                     .length -
                                                                 2]["bowling"][index]
+                                                            [
+                                                            "bowler"]["name"] :
+                                                            data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["bowling"][index]
                                                             [
                                                             "bowler"]["name"],
                                                         style: TextStyle(
@@ -1092,10 +1155,16 @@ class _scorecardState extends State<scorecard> {
                                                   width: 42,
                                                   child: Center(
                                                     child: Text(
-                                                      data["scorecard"][data[
+                                                      data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["bowling"]
+                                                              [index]["o"]
+                                                          .toString() :
+                                                          data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["bowling"]
                                                               [index]["o"]
                                                           .toString(),
                                                       style: TextStyle(
@@ -1113,10 +1182,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["bowling"]
+                                                              [index]["m"]
+                                                          .toString() :
+                                                          data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["bowling"]
                                                               [index]["m"]
                                                           .toString(),
                                                     style: TextStyle(
@@ -1132,10 +1207,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1 ? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["bowling"]
+                                                              [index]["r"]
+                                                          .toString():
+                                                          data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["bowling"]
                                                               [index]["r"]
                                                           .toString(),
                                                     style: TextStyle(
@@ -1151,10 +1232,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 42,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["bowling"]
+                                                              [index]["w"]
+                                                          .toString():
+                                                          data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["bowling"]
                                                               [index]["w"]
                                                           .toString(),
                                                     style: TextStyle(
@@ -1170,10 +1257,16 @@ class _scorecardState extends State<scorecard> {
                                                   alignment: Alignment.center,
                                                   width: 44,
                                                   child: Text(
-                                                    data["scorecard"][data[
+                                                    data["scorecard"].length > 1? data["scorecard"][data[
                                                                           "scorecard"]
                                                                       .length -
                                                                   2]["bowling"]
+                                                              [index]["eco"]
+                                                          .toString() :
+                                                           data["scorecard"][data[
+                                                                          "scorecard"]
+                                                                      .length -
+                                                                  1]["bowling"]
                                                               [index]["eco"]
                                                           .toString(),
                                                     style: TextStyle(
@@ -1763,7 +1856,7 @@ class _scorecardState extends State<scorecard> {
                               ],
                             ),
                           ]),
-                        )
+                        ),
                       ],
                     ),
                   ),

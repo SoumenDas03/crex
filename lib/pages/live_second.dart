@@ -830,7 +830,7 @@ class _live_secondState extends State<live_second> {
                                               color: Colors.white),
                                         )
                                       : Text(
-                                          "Over: ${data["scorecard"][data["scorecard"].length - 2]["totals"]["O"]}",
+                                          "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white),
@@ -1045,7 +1045,9 @@ class _live_secondState extends State<live_second> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                data["scorecard"][data["scorecard"].length - 1]
+                                 Container(
+                                      width: 80,
+                                      child: Text( data["scorecard"][data["scorecard"].length - 1]
                                                 ["batting"]
                                             .where((element) =>
                                                 element["dismissal-text"] ==
@@ -1055,9 +1057,7 @@ class _live_secondState extends State<live_second> {
                                             .toList()
                                             .length >
                                         0
-                                    ? Container(
-                                      width: 80,
-                                      child: Text(
+                                    ?
                                           data["scorecard"][
                                                   data["scorecard"].length -
                                                       1]["batting"]
@@ -1067,19 +1067,19 @@ class _live_secondState extends State<live_second> {
                                               .map((element) =>
                                                   element["batsman"]["name"])
                                               .toList()[0]
-                                              .toString(),
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                    )
-                                    : data["scorecard"]
+                                              .toString()
+                                              : data["scorecard"]
                                             [data["scorecard"].length - 1]
                                         ["batting"][data["scorecard"]
                                                     [data["scorecard"].length - 1]
                                                 ["batting"]
                                             .length -
                                         2]["batsman"]["name"],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                    ),
                                 SizedBox(
                                   width: 85,
                                 ),
@@ -1147,7 +1147,7 @@ class _live_secondState extends State<live_second> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  width: 20,
+                                  width: 10,
                                 ),
                                 Text(
                                   data["scorecard"][data["scorecard"].length - 1]
@@ -1181,7 +1181,7 @@ class _live_secondState extends State<live_second> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  width: 25,
+                                  width: 20,
                                 ),
                                 Text(
                                   data["scorecard"][data["scorecard"].length - 1]
@@ -1381,7 +1381,7 @@ class _live_secondState extends State<live_second> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
-                                    width: 20,
+                                    width: 10,
                                   ),
                                   Text(
                                     data["scorecard"][data["scorecard"].length - 1]

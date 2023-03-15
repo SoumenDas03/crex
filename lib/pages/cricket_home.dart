@@ -163,7 +163,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                             .symmetric(
                                                         horizontal: 5.0),
                                                     child: Image.network(
-                                                      "http://99skyex.com/banner_image/" +
+                                                     "http://99skyex.com/banner_image/" +
                                                           i,
                                                       fit: BoxFit.fill,
                                                     ),
@@ -296,6 +296,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                   id: data[
                                                                           index]
                                                                       ["id"],
+                                                                      seriesId: data[index]["series_id"],
                                                                 ),
                                                               ));
                                                         },
@@ -536,6 +537,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                   id: data[
                                                                           index]
                                                                       ["id"],
+                                                                  seriesId: data[index]["series_id"]
                                                                 ),
                                                               ));
                                                         },
@@ -988,6 +990,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                   id: newData[
                                                                           index]
                                                                       ["id"],
+                                                                  seriesId: data[index]["series_id"]
                                                                 ),
                                                               ));
                                                         },
