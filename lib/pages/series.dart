@@ -51,7 +51,7 @@ class _seriesState extends State<series> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         // backgroundColor: Colors.black,
-        body: FutureBuilder(
+      body: FutureBuilder(
       future: getSeriesList(),
       builder: (context, snapshot) {
         if (data == null) {

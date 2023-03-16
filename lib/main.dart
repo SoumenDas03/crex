@@ -73,8 +73,7 @@ class MyApp extends StatelessWidget {
     // ignore: prefer_const_constructors
     return ChangeNotifierProvider(
       create: (context) => ThemeChanger(),
-      child: Builder(builder: (BuildContext context) {
-     
+      child: Builder(builder: (BuildContext context) {     
         final themeChanger = Provider.of<ThemeChanger>(context);
         return MaterialApp(
           themeMode: themeChanger.themeMode,
