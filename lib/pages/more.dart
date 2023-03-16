@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, camel_case_types, prefer_const_constructors, avoid_unnecessary_containers
+
 
 import 'package:crex/dashboard/fixtures_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';

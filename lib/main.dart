@@ -79,12 +79,12 @@ class MyApp extends StatelessWidget {
           themeMode: themeChanger.themeMode,
           theme: ThemeData(
             brightness: Brightness.light,
-            primaryColor: Colors.black,
+            primaryColor: Colors.white,
             iconTheme: const IconThemeData(color: Colors.black),
           ),
           darkTheme: ThemeData(
               brightness: Brightness.dark,
-              primaryColor: Colors.white,
+              primaryColor: Colors.black,
               iconTheme: const IconThemeData(color: Colors.white)),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',

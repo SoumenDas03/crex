@@ -19,11 +19,12 @@ import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class infoTabViews extends StatefulWidget {
-  const infoTabViews({Key? key, required this.id, required this.seriesId})
+  const infoTabViews({Key? key, required this.id, required this.seriesId, required this.theme})
       : super(key: key);
 
   final String id;
   final String seriesId;
+  final String theme;
 
   @override
   State<infoTabViews> createState() => _infoTabViewsState();
@@ -38,6 +39,7 @@ class _infoTabViewsState extends State<infoTabViews> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
+        initialIndex: 3,
         length: 7,
         child: Scaffold(
           appBar: AppBar(
@@ -77,21 +79,26 @@ class _infoTabViewsState extends State<infoTabViews> {
             children: <Widget>[
               info(
                 id: widget.id,
+                theme: widget.theme,
               ),
               fantasy(
                 id: widget.id,
+                theme: widget.theme,
               ),
               commententary(
                 id: widget.id,
+                theme: widget.theme,
               ),
               live_second(
                 id: widget.id,
+                theme: widget.theme,
               ),
               scorecard(
                 id: widget.id,
+                theme: widget.theme,
               ),
-              graph(id: widget.id),
-              seriesstatus(id: widget.id, seriesId: widget.seriesId),
+              graph(id: widget.id, theme: widget.theme,),
+              seriesstatus(id: widget.id, seriesId: widget.seriesId, theme: widget.theme,),
             ],
           ),
           bottomNavigationBar: Container(

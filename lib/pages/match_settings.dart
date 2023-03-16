@@ -56,12 +56,14 @@ class _match_settingsState extends State<match_settings> {
         ),
         body: TabBarView(
           children: <Widget>[
-            info(id: "1",),
+            info(id: "1",theme: "dark"),
             fantasy(
               id: "1",
+              theme: "dark",
             ),
             commententary(
               id: "1",
+              theme: "dark",
             ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -1835,13 +1837,14 @@ class _match_settingsState extends State<match_settings> {
             ),
             scorecard(
               id: "1",
+              theme: "dark",
             ),
             Icon(
               Icons.graphic_eq,
               color: Colors.black,
               size: 50,
             ),
-            seriesstatus(id: "1", seriesId: "1",),
+            seriesstatus(id: "1", seriesId: "1", theme: "dark",),
           ],
         ),
       ),

@@ -10,9 +10,10 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class live_second extends StatefulWidget {
-  const live_second({Key? key, required this.id}) : super(key: key);
+  const live_second({Key? key, required this.id, required this.theme}) : super(key: key);
 
   final String id;
+  final String theme;
 
   @override
   State<live_second> createState() => _live_secondState();
@@ -72,9 +73,8 @@ class _live_secondState extends State<live_second> {
 
   bool flag = false;
   @override
-  Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+  Widget build(BuildContext context) {    
+    final isDarkMode = widget.theme == "dark";
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(

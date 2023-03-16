@@ -8,9 +8,10 @@ import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class scorecard extends StatefulWidget {
-  const scorecard({Key? key, required this.id}) : super(key: key);
+  const scorecard({Key? key, required this.id, required this.theme}) : super(key: key);
 
   final String id;
+  final String theme;
 
   @override
   State<scorecard> createState() => _scorecardState();
@@ -62,8 +63,7 @@ class _scorecardState extends State<scorecard> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = widget.theme == "dark";
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(

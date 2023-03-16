@@ -163,7 +163,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                             .symmetric(
                                                         horizontal: 5.0),
                                                     child: Image.network(
-                                                     "http://99skyex.com/banner_image/" +
+                                                      "http://99skyex.com/banner_image/" +
                                                           i,
                                                       fit: BoxFit.fill,
                                                     ),
@@ -287,18 +287,20 @@ class _cricket_homeState extends State<cricket_home> {
                                                             int index) {
                                                       return InkWell(
                                                         onTap: () {
-                                                          Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        infoTabViews(
+                                                          Navigator.of(context)
+                                                              .push(
+                                                            MaterialPageRoute(
+                                                              builder: (context) => infoTabViews(
                                                                   id: data[
                                                                           index]
                                                                       ["id"],
-                                                                      seriesId: data[index]["series_id"],
-                                                                ),
-                                                              ));
+                                                                  seriesId: data[
+                                                                          index]
+                                                                      [
+                                                                      "series_id"],
+                                                                      theme: Theme.of(context).brightness.name,),
+                                                            ),
+                                                          );                                                        
                                                         },
                                                         child: Padding(
                                                           padding:
@@ -531,14 +533,15 @@ class _cricket_homeState extends State<cricket_home> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        infoTabViews(
-                                                                  id: data[
-                                                                          index]
-                                                                      ["id"],
-                                                                  seriesId: data[index]["series_id"]
-                                                                ),
+                                                                builder: (context) => infoTabViews(
+                                                                    id: data[
+                                                                            index]
+                                                                        ["id"],
+                                                                    seriesId: data[
+                                                                            index]
+                                                                        [
+                                                                        "series_id"], 
+                                                                        theme: Theme.of(context).brightness.name,),
                                                               ));
                                                         },
                                                         child: Padding(
@@ -984,14 +987,15 @@ class _cricket_homeState extends State<cricket_home> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        infoTabViews(
-                                                                  id: newData[
-                                                                          index]
-                                                                      ["id"],
-                                                                  seriesId: data[index]["series_id"]
-                                                                ),
+                                                                builder: (context) => infoTabViews(
+                                                                    id: newData[
+                                                                            index]
+                                                                        ["id"],
+                                                                    seriesId: data[
+                                                                            index]
+                                                                        [
+                                                                        "series_id"],
+                                                                        theme: Theme.of(context).brightness.name,),
                                                               ));
                                                         },
                                                         child: Padding(

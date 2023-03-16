@@ -47,7 +47,6 @@ class _seriesState extends State<series> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         // backgroundColor: Colors.black,

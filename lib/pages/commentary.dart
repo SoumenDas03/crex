@@ -10,9 +10,10 @@ import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class commententary extends StatefulWidget {
-  const commententary({Key? key, required this.id}) : super(key: key);
+  const commententary({Key? key, required this.id, required this.theme}) : super(key: key);
 
   final String id;
+  final String theme;
 
   @override
   State<commententary> createState() => _commententaryState();
@@ -20,12 +21,7 @@ class commententary extends StatefulWidget {
 
 // ignore: camel_case_types
 class _commententaryState extends State<commententary> {
-  @override
-  Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    // ignore: prefer_typing_uninitialized_variables
-    var map,
+      var map,
         // ignore: prefer_typing_uninitialized_variables
         data,
         scoreMap,
@@ -140,7 +136,10 @@ class _commententaryState extends State<commententary> {
         print(e.toString());
       }
     }
-
+  @override
+  Widget build(BuildContext context) {
+    final isDarkMode = widget.theme == "dark";
+    // ignore: prefer_typing_uninitialized_variables
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -1227,7 +1226,7 @@ class _commententaryState extends State<commententary> {
                                                                           wicketData
                                                                               .last)]
                                                                   [
-                                                                  "bowler"]["name"]
+                                                                  "bowler"]["id"]
                                                               .toString()),
                                                       builder:
                                                           (context, snapshot) {

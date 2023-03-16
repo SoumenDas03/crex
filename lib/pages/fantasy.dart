@@ -9,9 +9,10 @@ import 'package:provider/provider.dart';
 import '../provider/theme_changer.dart';
 
 class fantasy extends StatefulWidget {
-  const fantasy({Key? key, required this.id}) : super(key: key);
+  const fantasy({Key? key, required this.id, required this.theme}) : super(key: key);
 
   final String id;
+  final String theme;
 
   @override
   State<fantasy> createState() => _fantasyState();
@@ -33,7 +34,8 @@ class _fantasyState extends State<fantasy> {
       sugamSixes,
       sixesOrderdata,
       economySugam,
-      bbbmap,bbbData;
+      bbbmap,bbbData,
+      topPointList;
   getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
@@ -152,8 +154,7 @@ class _fantasyState extends State<fantasy> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = widget.theme == "dark";
     return DefaultTabController(
       length: 6,
       child: Scaffold(
@@ -1184,13 +1185,13 @@ class _fantasyState extends State<fantasy> {
                                                             width: 55,
                                                             child: Center(
                                                               child: Text(
-                                                                fantasyData["totals"]
+                                                                pointsOrderData
                                                                             [
                                                                             index]
                                                                         ["name"]
                                                                     .substring(
                                                                         0,
-                                                                        fantasyData["totals"][index]["name"]
+                                                                        pointsOrderData[index]["name"]
                                                                             .indexOf(" "))
                                                                     .toString(),
                                                                 style: TextStyle(
@@ -1205,7 +1206,7 @@ class _fantasyState extends State<fantasy> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            fantasyData["totals"]
+                                                            pointsOrderData
                                                                         [index]
                                                                     ["points"]
                                                                 .toString(),

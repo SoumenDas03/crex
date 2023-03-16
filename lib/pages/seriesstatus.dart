@@ -8,10 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class seriesstatus extends StatefulWidget {
-  const seriesstatus({Key? key, required this.id, required this.seriesId})
+  const seriesstatus({Key? key, required this.id, required this.seriesId, required this.theme})
       : super(key: key);
   final String id;
   final String seriesId;
+  final String theme;
 
   @override
   State<seriesstatus> createState() => _seriesstatusState();
@@ -83,8 +84,7 @@ class _seriesstatusState extends State<seriesstatus> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = widget.theme == "dark";
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -1050,7 +1050,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                     ],
                                                   ),
                                                 ),
-                                                Container(
+                                                data1["matchList"][index]["teamInfo"].length > 1? Container(
                                                   margin: EdgeInsets.only(
                                                       left: 10, top: 20),
                                                   child: Column(
@@ -1079,7 +1079,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                       )
                                                     ],
                                                   ),
-                                                ),
+                                                ): Container(),
                                               ],
                                             ),
                                             SizedBox(

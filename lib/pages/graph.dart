@@ -10,9 +10,10 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:http/http.dart' as http;
 
 class graph extends StatefulWidget {
-  const graph({Key? key, required this.id}) : super(key: key);
+  const graph({Key? key, required this.id, required this.theme}) : super(key: key);
 
   final String id;
+  final String theme;
 
   @override
   State<graph> createState() => _graphState();
@@ -63,8 +64,7 @@ class _graphState extends State<graph> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChanger = Provider.of<ThemeChanger>(context);
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = widget.theme == "dark";
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
