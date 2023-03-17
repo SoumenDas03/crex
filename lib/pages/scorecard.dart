@@ -1826,768 +1826,766 @@ class _scorecardState extends State<scorecard> {
                                       ],
                                     ),
                                   ),
-                                  Expanded(
-                                    child: SingleChildScrollView( 
-                                      physics: NeverScrollableScrollPhysics(),                                     
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 25,
-                                          ),
-                                          Container(
-                                            height: 1,
-                                            width: 360,
-                                            color: Colors.blueGrey,
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: 35,
-                                            width: 350,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-                                                  Text(
-                                                    'Batter',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 105,
-                                                  ),
-                                                  Text(
-                                                    'R',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    'B',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    '4s',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 22,
-                                                  ),
-                                                  Text(
-                                                    '6s',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 33,
-                                                  ),
-                                                  Text(
-                                                    'SR',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
+                                  SingleChildScrollView( 
+                                    physics: NeverScrollableScrollPhysics(),                                     
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 25,
+                                        ),
+                                        Container(
+                                          height: 1,
+                                          width: 360,
+                                          color: Colors.blueGrey,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: 35,
+                                          width: 350,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                Text(
+                                                  'Batter',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 105,
+                                                ),
+                                                Text(
+                                                  'R',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Text(
+                                                  'B',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Text(
+                                                  '4s',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 22,
+                                                ),
+                                                Text(
+                                                  '6s',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 33,
+                                                ),
+                                                Text(
+                                                  'SR',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Column(
-                                              children: [
-                                                ListView.builder(
-                                                  scrollDirection: Axis.vertical,
-                                                  physics:
-                                                      ClampingScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: data["scorecard"][
-                                                          data["scorecard"]
-                                                                  .length -
-                                                              1]["batting"]
-                                                      .length,
-                                                  itemBuilder: (context, index) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5,
-                                                              top: 5,
-                                                              bottom: 10),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          // ignore: sized_box_for_whitespace
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                width: 130,
-                                                                child: Text(
-                                                                  data["scorecard"]
-                                                                              [
-                                                                              data["scorecard"].length -
-                                                                                  1]
-                                                                          [
-                                                                          "batting"][index]
-                                                                      [
-                                                                      "batsman"]["name"],
-                                                                  style: TextStyle(
-                                                                      color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                width: 130,
-                                                                margin: EdgeInsets
-                                                                    .only(top: 7),
-                                                                child: Text(
-                                                                  data["scorecard"]
-                                                                              [
-                                                                              data["scorecard"].length -
-                                                                                  1]
-                                                                          [
-                                                                          "batting"][index]
-                                                                      [
-                                                                      "dismissal-text"],
-                                                                  style: TextStyle(
-                                                                      color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .normal,
-                                                                      fontSize:
-                                                                          10),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            width: 42,
-                                                            child: Center(
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Column(
+                                            children: [
+                                              ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: data["scorecard"][
+                                                        data["scorecard"]
+                                                                .length -
+                                                            1]["batting"]
+                                                    .length,
+                                                itemBuilder: (context, index) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5,
+                                                            top: 5,
+                                                            bottom: 10),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        // ignore: sized_box_for_whitespace
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 130,
                                                               child: Text(
-                                                                data["scorecard"][data["scorecard"].length -
-                                                                                1]
+                                                                data["scorecard"]
                                                                             [
-                                                                            "batting"]
+                                                                            data["scorecard"].length -
+                                                                                1]
                                                                         [
-                                                                        index]["r"]
-                                                                    .toString(),
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "batsman"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                      ? Colors.white
+                                      : Colors.black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
                                                               ),
                                                             ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
-                                                                      [index]["b"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                            Container(
+                                                              width: 130,
+                                                              margin: EdgeInsets
+                                                                  .only(top: 7),
+                                                              child: Text(
+                                                                data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "dismissal-text"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          width: 42,
+                                                          child: Center(
                                                             child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
+                                                              data["scorecard"][data["scorecard"].length -
+                                                                              1]
+                                                                          [
+                                                                          "batting"]
                                                                       [
-                                                                      index]["4s"]
+                                                                      index]["r"]
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                      ? Colors.white
+                                      : Colors.black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
                                                             ),
                                                           ),
-                                                          SizedBox(
-                                                            width: 1.5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [index]["b"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["4s"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["6s"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 44,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["sr"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Container(
+                                                height: 1.5,
+                                                width: 350,
+                                                color: Colors.blueGrey,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10,
+                                                        top: 10,
+                                                        bottom: 10),
+                                                    width: 100,
+                                                    child: Text(
+                                                      "Extras :",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(width: 220,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        CircleAvatar(
+                                                          backgroundColor:
+                                                              isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                          radius: 10,
+                                                          child: Text(
+                                                            data["scorecard"][data[
+                                                                            "scorecard"]
+                                                                        .length -
+                                                                    1]["extras"]["r"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color: Color(
+                                                                  0xFFFF4D00),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color:
+                                                                  isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              color:
+                                                                  isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                height: 1.5,
+                                                width: 360,
+                                                color: Colors.blueGrey,
+                                              ),
+                                              SizedBox(height: 15,),
+                                              Container(
+                                                height: 1.5,
+                                                width: 350,
+                                                color: Colors.blueGrey,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10,
+                                                        top: 10,
+                                                        bottom: 10),
+                                                    width: 100,
+                                                    child: Text(
+                                                      "Totals :",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Container(width: 220,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        Text(
+                                                          data["score"].length > 1
+                                                              ? data["score"][
+                                                                      data["score"]
                                                                               .length -
-                                                                          1]["batting"]
-                                                                      [
-                                                                      index]["6s"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 44,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
+                                                                          1]["r"]
+                                                                  .toString()
+                                                              : data["score"][
+                                                                      data["score"]
                                                                               .length -
-                                                                          1]["batting"]
-                                                                      [
-                                                                      index]["sr"]
+                                                                          1]["r"]
                                                                   .toString(),
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 25,
-                                                ),
-                                                Container(
-                                                  height: 1.5,
-                                                  width: 350,
-                                                  color: Colors.blueGrey,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 10,
-                                                          top: 10,
-                                                          bottom: 10),
-                                                      width: 100,
-                                                      child: Text(
-                                                        "Extras :",
-                                                        style: TextStyle(
+                                                          style: TextStyle(
+                                                            fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Container(width: 220,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment.end,
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                            radius: 10,
-                                                            child: Text(
-                                                              data["scorecard"][data[
-                                                                              "scorecard"]
+                                                            color:
+                                                                Color(0xFFFF4D00),
+                                                          ),
+                                                        ),
+                                                        data["score"].length > 1 ? Text(
+                                                          "/" +
+                                                              data["score"][data[
+                                                                              "score"]
                                                                           .length -
-                                                                      1]["extras"]["r"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight.bold,
-                                                                color: Color(
-                                                                    0xFFFF4D00),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight.bold,
-                                                                color:
-                                                                    isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight.bold,
-                                                                color:
-                                                                    isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Container(
-                                                  height: 1.5,
-                                                  width: 360,
-                                                  color: Colors.blueGrey,
-                                                ),
-                                                SizedBox(height: 15,),
-                                                Container(
-                                                  height: 1.5,
-                                                  width: 350,
-                                                  color: Colors.blueGrey,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 10,
-                                                          top: 10,
-                                                          bottom: 10),
-                                                      width: 100,
-                                                      child: Text(
-                                                        "Totals :",
-                                                        style: TextStyle(
+                                                                      1]["w"]
+                                                                  .toString() +
+                                                              "(" +
+                                                              data["score"][data[
+                                                                              "score"]
+                                                                          .length -
+                                                                      1]["o"]
+                                                                  .toString() +
+                                                              ")",
+                                                          style: TextStyle(
+                                                            fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Container(width: 220,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment.end,
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          Text(
-                                                            data["score"].length > 1
-                                                                ? data["score"][
-                                                                        data["score"]
-                                                                                .length -
-                                                                            1]["r"]
-                                                                    .toString()
-                                                                : data["score"][
-                                                                        data["score"]
-                                                                                .length -
-                                                                            1]["r"]
-                                                                    .toString(),
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  Color(0xFFFF4D00),
-                                                            ),
+                                                            color:
+                                                                Color(0xFFFF4D00),
                                                           ),
-                                                          data["score"].length > 1 ? Text(
-                                                            "/" +
-                                                                data["score"][data[
-                                                                                "score"]
-                                                                            .length -
-                                                                        1]["w"]
-                                                                    .toString() +
-                                                                "(" +
-                                                                data["score"][data[
-                                                                                "score"]
-                                                                            .length -
-                                                                        1]["o"]
-                                                                    .toString() +
-                                                                ")",
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  Color(0xFFFF4D00),
-                                                            ),
-                                                          ): Text(
-                                                            "/" +
-                                                                data["score"][data[
-                                                                                "score"]
-                                                                            .length -
-                                                                        1]["w"]
-                                                                    .toString() +
-                                                                "(" +
-                                                                data["score"][data[
-                                                                                "score"]
-                                                                            .length -
-                                                                        1]["o"]
-                                                                    .toString() +
-                                                                ")",
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  Color(0xFFFF4D00),
-                                                            ),
+                                                        ): Text(
+                                                          "/" +
+                                                              data["score"][data[
+                                                                              "score"]
+                                                                          .length -
+                                                                      1]["w"]
+                                                                  .toString() +
+                                                              "(" +
+                                                              data["score"][data[
+                                                                              "score"]
+                                                                          .length -
+                                                                      1]["o"]
+                                                                  .toString() +
+                                                              ")",
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Color(0xFFFF4D00),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                height: 1.5,
+                                                width: 360,
+                                                color: Colors.blueGrey,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: 35,
+                                          width: 350,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              // ignore: prefer_const_literals_to_create_immutables
+                                              children: [
+                                                Text(
+                                                  'Bowler',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
-                                                Container(
-                                                  height: 1.5,
-                                                  width: 360,
-                                                  color: Colors.blueGrey,
+                                                SizedBox(
+                                                  width: 105,
+                                                ),
+                                                Text(
+                                                  'O',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Text(
+                                                  'M',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 35,
+                                                ),
+                                                Text(
+                                                  'R',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 22,
+                                                ),
+                                                Text(
+                                                  'W',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 33,
+                                                ),
+                                                Text(
+                                                  'Eco',
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFF4D00),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: 35,
-                                            width: 350,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 5),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                // ignore: prefer_const_literals_to_create_immutables
-                                                children: [
-                                                  Text(
-                                                    'Bowler',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 105,
-                                                  ),
-                                                  Text(
-                                                    'O',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    'M',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 35,
-                                                  ),
-                                                  Text(
-                                                    'R',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 22,
-                                                  ),
-                                                  Text(
-                                                    'W',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 33,
-                                                  ),
-                                                  Text(
-                                                    'Eco',
-                                                    style: TextStyle(
-                                                        color: Color(0xFFFF4D00),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(left: 5),
-                                            child: Column(
-                                              children: [
-                                                ListView.builder(
-                                                  scrollDirection: Axis.vertical,
-                                                  physics:
-                                                      ClampingScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount: data["scorecard"][
-                                                          data["scorecard"]
-                                                                  .length -
-                                                              1]["batting"]
-                                                      .length,
-                                                  itemBuilder: (context, index) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5,
-                                                              top: 5,
-                                                              bottom: 10),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          // ignore: sized_box_for_whitespace
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                width: 130,
-                                                                child: Text(
-                                                                  data["scorecard"]
-                                                                              [
-                                                                              data["scorecard"].length -
-                                                                                  1]
-                                                                          [
-                                                                          "batting"][index]
-                                                                      [
-                                                                      "batsman"]["name"],
-                                                                  style: TextStyle(
-                                                                      color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            width: 42,
-                                                            child: Center(
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 5),
+                                          child: Column(
+                                            children: [
+                                              ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                physics:
+                                                    ClampingScrollPhysics(),
+                                                shrinkWrap: true,
+                                                itemCount: data["scorecard"][
+                                                        data["scorecard"]
+                                                                .length -
+                                                            1]["batting"]
+                                                    .length,
+                                                itemBuilder: (context, index) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5,
+                                                            top: 5,
+                                                            bottom: 10),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        // ignore: sized_box_for_whitespace
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 130,
                                                               child: Text(
-                                                                data["scorecard"][data["scorecard"].length -
-                                                                                1]
+                                                                data["scorecard"]
                                                                             [
-                                                                            "batting"]
+                                                                            data["scorecard"].length -
+                                                                                1]
                                                                         [
-                                                                        index]["r"]
-                                                                    .toString(),
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "batsman"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                      ? Colors.white
+                                      : Colors.black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
                                                               ),
                                                             ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          width: 42,
+                                                          child: Center(
                                                             child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
-                                                                      [index]["b"]
+                                                              data["scorecard"][data["scorecard"].length -
+                                                                              1]
+                                                                          [
+                                                                          "batting"]
+                                                                      [
+                                                                      index]["r"]
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                      ? Colors.white
+                                      : Colors.black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
                                                             ),
                                                           ),
-                                                          SizedBox(
-                                                            width: 1.5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [index]["b"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
-                                                                      [
-                                                                      index]["4s"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["4s"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          SizedBox(
-                                                            width: 1.5,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 42,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["6s"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color:  isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 42,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
-                                                                      [
-                                                                      index]["6s"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 1.5,
+                                                        ),
+                                                        Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: 44,
+                                                          child: Text(
+                                                            data["scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"]
+                                                                    [
+                                                                    index]["sr"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          SizedBox(
-                                                            width: 1.5,
-                                                          ),
-                                                          Container(
-                                                            alignment:
-                                                                Alignment.center,
-                                                            width: 44,
-                                                            child: Text(
-                                                              data["scorecard"][data["scorecard"]
-                                                                              .length -
-                                                                          1]["batting"]
-                                                                      [
-                                                                      index]["sr"]
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                                SizedBox(
-                                                  height: 25,
-                                                ),
-                                                Container(
-                                                  height: 1.5,
-                                                  width: 350,
-                                                  color: Colors.blueGrey,
-                                                ),
-                                              ],
-                                            ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                              Container(
+                                                height: 1.5,
+                                                width: 350,
+                                                color: Colors.blueGrey,
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ]),

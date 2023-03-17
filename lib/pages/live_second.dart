@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, camel_case_types, sized_box_for_whitespace, prefer_typing_uninitialized_variables
 
+import 'dart:math';
+
 import 'package:crex/pages/speech_settings.dart';
 import 'package:crex/pages/win_prediction.dart';
 import 'package:crex/provider/theme_changer.dart';
+import 'package:floating/floating.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert';
@@ -10,7 +14,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class live_second extends StatefulWidget {
-  const live_second({Key? key, required this.id, required this.theme}) : super(key: key);
+  const live_second({Key? key, required this.id, required this.theme})
+      : super(key: key);
 
   final String id;
   final String theme;
@@ -19,8 +24,47 @@ class live_second extends StatefulWidget {
   State<live_second> createState() => _live_secondState();
 }
 
-class _live_secondState extends State<live_second> {
+class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   var map, data, sugamWicket, wicketOrderData, bbbmap, bbbData;
+  final floating = Floating();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    floating.dispose();
+    super.dispose();
+  }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState lifecycleState) {
+  //   if (lifecycleState == AppLifecycleState.inactive) {
+  //     floating.enable(aspectRatio: Rational.square());
+  //   }
+  // }
+
+  Future<void> enablePip(BuildContext context) async {
+    final rational = Rational.square();
+    final screenSize =
+        MediaQuery.of(context).size * MediaQuery.of(context).devicePixelRatio;
+
+    final status = await floating.enable(
+      aspectRatio: rational,      
+      sourceRectHint: Rectangle<int>(
+        0,
+        0,
+        screenSize.width.toInt(),
+        screenSize.width ~/ rational.aspectRatio,
+
+      ),
+    );
+    debugPrint('PiP enabled? $status');
+  }
 
   getSingleCricketMatchDetails() async {
     try {
@@ -73,1097 +117,1298 @@ class _live_secondState extends State<live_second> {
 
   bool flag = false;
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: FutureBuilder(
-        future: getSingleCricketMatchDetails(),
-        builder: (context, snapshot) {
-          if (data == null) {
-            return Center(child: CircularProgressIndicator());
-          } else {
-            return FutureBuilder(
-              future: getBallByBall(),
-              builder: (context, snapshot) {
-                if (bbbData == null) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
-                  return Container(
-                    alignment: Alignment.center,
-                    // ignore: prefer_const_constructors
-                    decoration: BoxDecoration(
-                        // ignore: prefer_const_constructors
-                        image: DecorationImage(
+        backgroundColor: Colors.black,
+        body: FutureBuilder(
+          future: getSingleCricketMatchDetails(),
+          builder: (context, snapshot) {
+            if (data == null) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return FutureBuilder(
+                future: getBallByBall(),
+                builder: (context, snapshot) {
+                  if (bbbData == null) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
+                    );
+                  } else {
+                    return Container(
+                      alignment: Alignment.center,
                       // ignore: prefer_const_constructors
-                      image: isDarkMode
-                          ? AssetImage('assets/background.jpeg')
-                          : AssetImage("assets/bgLightMode.png"),
-                      fit: BoxFit.cover,
-                    )),
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        Container(
-                          height: 1,
-                          width: 350,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  color: isDarkMode
-                                      ? Color(0xff258D50)
-                                      : const Color(0xFFDFDFDF),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 15),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            alignment: Alignment.topRight,
-                                            margin: EdgeInsets.only(right: 25),
-                                            child: isDarkMode
-                                                ? Image.asset(
-                                                    "assets/volume.png")
-                                                : Image.asset(
-                                                    "assets/volume.png",
-                                                    color: Colors.grey,
-                                                  )),
-                                        Container(
+                      decoration: BoxDecoration(
+                          // ignore: prefer_const_constructors
+                          image: DecorationImage(
+                        // ignore: prefer_const_constructors
+                        image: isDarkMode
+                            ? AssetImage('assets/background.jpeg')
+                            : AssetImage("assets/bgLightMode.png"),
+                        fit: BoxFit.cover,
+                      )),
+                      child: SingleChildScrollView(
+                        child: Column(children: [
+                          Container(
+                            height: 1,
+                            width: 350,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                color: isDarkMode
+                                    ? Color(0xff258D50)
+                                    : const Color(0xFFDFDFDF),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          alignment: Alignment.topRight,
                                           margin: EdgeInsets.only(right: 25),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      CircleAvatar(
-                                                        radius: 25,
-                                                        backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
-                                                                    0,
-                                                                    (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                        ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                                                            " ")
-                                                                        : data["score"][data["score"].length - 1]["inning"]
-                                                                            .length) ==
-                                                                data["teamInfo"][0]
-                                                                        ["name"]
-                                                                    .substring(
-                                                                        0,
-                                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                            ? data["teamInfo"][0]["name"].indexOf(" ")
-                                                                            : data["teamInfo"][0]["name"].length)
-                                                            ? data["teamInfo"][0]["img"]
-                                                            : data["teamInfo"][1]["img"]),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Column(
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          Text(
-                                                            data["score"][data["score"].length - 1]["inning"].substring(
-                                                                        0,
-                                                                        (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                            ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                                                                " ")
-                                                                            : data["score"][data["score"].length - 1]["inning"]
-                                                                                .length) ==
-                                                                    data["teamInfo"][0]["name"].substring(
-                                                                        0,
-                                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                            ? data["teamInfo"][0]["name"].indexOf(
-                                                                                " ")
-                                                                            : data["teamInfo"][0]["name"]
-                                                                                .length)
-                                                                ? data["teamInfo"]
-                                                                        [0]
-                                                                    ["shortname"]
-                                                                : data["teamInfo"][1]["shortname"],
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          Text(
-                                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Column(
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          Text(
-                                                            ((data["score"].length /
-                                                                            2)
-                                                                        .round()) ==
-                                                                    1
-                                                                ? '${(data["score"].length / 2).round()}st inn'
-                                                                : '${(data["score"].length / 2).round()}nd inn',
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12),
-                                                          ),
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Text(
-                                                            data["score"][(data[
-                                                                            "score"]
-                                                                        .length) -
-                                                                    1]["o"]
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 80,
-                                              ),
-                                              Text(
-                                               bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      1][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  1]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: isDarkMode
-                                                        ? Colors.amber
-                                                        : Colors.blueGrey,
-                                                    fontSize: 50),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Container(
-                                            height: 1,
-                                            width: 400,
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.grey),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          child: isDarkMode
+                                              ? Image.asset("assets/volume.png")
+                                              : Image.asset(
+                                                  "assets/volume.png",
+                                                  color: Colors.grey,
+                                                )),
+                                      Container(
+                                        margin: EdgeInsets.only(right: 25),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
-                                            Text(
-                                              'CCR : ' +
-                                                  (data["score"][(data["score"]
-                                                                  .length) -
-                                                              1]["r"] /
-                                                          data["score"][
-                                                              (data["score"]
+                                            Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      radius: 25,
+                                                      backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
+                                                                  0,
+                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                      ? data["score"][data["score"].length - 1]["inning"]
+                                                                          .indexOf(
+                                                                              " ")
+                                                                      : data["score"][data["score"].length - 1]["inning"]
+                                                                          .length) ==
+                                                              data["teamInfo"][0]["name"].substring(
+                                                                  0,
+                                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                      ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                      : data["teamInfo"][0]["name"].length)
+                                                          ? data["teamInfo"][0]["img"]
+                                                          : data["teamInfo"][1]["img"]),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Column(
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        Text(
+                                                          data["score"][data["score"].length - 1]["inning"].substring(
+                                                                      0,
+                                                                      (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                          ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                              " ")
+                                                                          : data["score"][data["score"].length - 1]["inning"]
+                                                                              .length) ==
+                                                                  data["teamInfo"][0]["name"].substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(
+                                                                              " ")
+                                                                          : data["teamInfo"][0]["name"]
+                                                                              .length)
+                                                              ? data["teamInfo"]
+                                                                  [0]["shortname"]
+                                                              : data["teamInfo"][1]["shortname"],
+                                                          style: TextStyle(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                          style: TextStyle(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Column(
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        Text(
+                                                          ((data["score"].length /
+                                                                          2)
+                                                                      .round()) ==
+                                                                  1
+                                                              ? '${(data["score"].length / 2).round()}st inn'
+                                                              : '${(data["score"].length / 2).round()}nd inn',
+                                                          style: TextStyle(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              fontSize: 12),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Text(
+                                                          data["score"][(data[
+                                                                          "score"]
                                                                       .length) -
-                                                                  1]["o"])
-                                                      .toStringAsFixed(2),
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 15.5),
+                                                                  1]["o"]
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ],
                                             ),
                                             SizedBox(
-                                              width: 20,
+                                              width: 80,
                                             ),
                                             Text(
-                                              data["matchType"] != "test"
-                                                  ? 'RRR : 8.58'
-                                                  : "",
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 15.5),
-                                            ),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
-                                            Image.asset('assets/live_tv.png')
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.all(5),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    bbbData != "failure"
-                                                    ? ('Over ' +
-                                                        bbbData["bbb"][bbbData[
-                                                                        "bbb"]
-                                                                    .length -
-                                                                8]["over"]
-                                                            .toString())
-                                                    : "Over 15",
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  12]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  11]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  10]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  9]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  8]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  7]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    '=',
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 2,
-                                                  ),
-                                                  Text(
-                                                    bbbData != "failure" ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      1][
-                                                                  "dismissal"] ==
-                                                              null ? (bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  7]["runs"] + 
-                                                             bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  8]["runs"] + bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  9]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  10]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  11]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  12]["runs"]).toString()
-                                                          : "8"
-                                                      : "1",
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              height: 20,
-                                              width: 1,
-                                              color: Colors.blueGrey,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    bbbData != "failure"
-                                                    ? ('Over ' +
-                                                        bbbData["bbb"][bbbData[
-                                                                        "bbb"]
-                                                                    .length -
-                                                                1]["over"]
-                                                            .toString())
-                                                    : "Over 15",
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      6][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  6]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      5][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  5]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      4][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  4]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      3][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  3]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                      bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      2][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  2]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundColor: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    radius: 5,
-                                                    child: Text(
-                                                     bbbData != "failure"
-                                                      ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      1][
-                                                                  "dismissal"] ==
-                                                              null
-                                                          ? bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
+                                              bbbData != "failure"
+                                                  ? bbbData["bbb"][bbbData["bbb"]
+                                                                  .length -
+                                                              1]["dismissal"] ==
+                                                          null
+                                                      ? bbbData["bbb"][
+                                                              bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
-                                                              .toString()
-                                                          : "W"
-                                                      : "1",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.black
-                                                              : Colors.white,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    '=',
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 2,
-                                                  ),
-                                                  Text(                                                    
-                                                    bbbData != "failure" ? bbbData["bbb"][bbbData[
-                                                                              "bbb"]
-                                                                          .length -
-                                                                      1][
-                                                                  "dismissal"] ==
-                                                              null ? (bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  1]["runs"] + 
-                                                             bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  2]["runs"] + bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  3]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  4]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  5]["runs"] + 
-                                                                  bbbData[
-                                                                  "bbb"][bbbData[
-                                                                          "bbb"]
-                                                                      .length -
-                                                                  6]["runs"]).toString()
-                                                          : "8"
-                                                      : "1",
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )
-                                                ],
-                                              ),
+                                                          .toString()
+                                                      : "W"
+                                                  : "1",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: isDarkMode
+                                                      ? Colors.amber
+                                                      : Colors.blueGrey,
+                                                  fontSize: 50),
                                             )
                                           ],
                                         ),
-                                        SizedBox(height: 10),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Container(
+                                          height: 1,
+                                          width: 400,
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.grey),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'CCR : ' +
+                                                (data["score"][(data["score"]
+                                                                .length) -
+                                                            1]["r"] /
+                                                        data["score"][
+                                                            (data["score"]
+                                                                    .length) -
+                                                                1]["o"])
+                                                    .toStringAsFixed(2),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 15.5),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text(
+                                            data["matchType"] != "test"
+                                                ? 'RRR : 8.58'
+                                                : "",
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 15.5),
+                                          ),
+                                          SizedBox(
+                                            width: 70,
+                                          ),
+                                          Image.asset('assets/live_tv.png')
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  bbbData != "failure"
+                                                      ? ('Over ' +
+                                                          bbbData["bbb"][bbbData[
+                                                                          "bbb"]
+                                                                      .length -
+                                                                  8]["over"]
+                                                              .toString())
+                                                      : "Over 15",
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    12]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    11]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    10]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    9]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    8]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    7]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  '=',
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 2,
+                                                ),
+                                                Text(
+                                                  bbbData != "failure"
+                                                      ? bbbData["bbb"][bbbData["bbb"].length - 1]
+                                                                  ["dismissal"] ==
+                                                              null
+                                                          ? (bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 7]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 8]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 9]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 10]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 11]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 12]
+                                                                      ["runs"])
+                                                              .toString()
+                                                          : "8"
+                                                      : "1",
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 20,
+                                            width: 1,
+                                            color: Colors.blueGrey,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  bbbData != "failure"
+                                                      ? ('Over ' +
+                                                          bbbData["bbb"][bbbData[
+                                                                          "bbb"]
+                                                                      .length -
+                                                                  1]["over"]
+                                                              .toString())
+                                                      : "Over 15",
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        6][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    6]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        5][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    5]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        4][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    4]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        3][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    3]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        2][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    2]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  radius: 5,
+                                                  child: Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                                "bbb"]
+                                                                            .length -
+                                                                        1][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? bbbData[
+                                                                    "bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    1]["runs"]
+                                                                .toString()
+                                                            : "W"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  '=',
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black),
+                                                ),
+                                                SizedBox(
+                                                  width: 2,
+                                                ),
+                                                Text(
+                                                  bbbData != "failure"
+                                                      ? bbbData["bbb"][bbbData["bbb"].length - 1]
+                                                                  ["dismissal"] ==
+                                                              null
+                                                          ? (bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 1]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 2]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 3]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 4]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 5]
+                                                                      ["runs"] +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 6]
+                                                                      ["runs"])
+                                                              .toString()
+                                                          : "8"
+                                                      : "1",
+                                                  style: TextStyle(
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 35,
-                              color: isDarkMode
-                                  ? Color(0xffFF8A00)
-                                  : const Color(0xFFDFDFDF),
-                              child: Text(
-                                data["status"].toString(),
-                                style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 35,
+                                color: isDarkMode
+                                    ? Color(0xffFF8A00)
+                                    : const Color(0xFFDFDFDF),
+                                child: Text(
+                                  data["status"].toString(),
+                                  style: TextStyle(
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Opacity(
-                            opacity: 0.8,
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(color: Colors.white, width: 0.5)
-
-                                color: isDarkMode
-                                    ? Colors.blueGrey[900]
-                                    : const Color(0xFFDFDFDF),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: 100,
-                                      child: data["score"].length > 1
-                                          ? Text(
-                                              data["score"][1]["inning"]
-                                                  .substring(
-                                                      0,
-                                                      ((data["score"][1]
-                                                                  ["inning"]
-                                                              .indexOf(
-                                                                  "Inning")) -
-                                                          1)),
-                                              style: TextStyle(
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // border: Border.all(color: Colors.white, width: 0.5)
+    
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[900]
+                                      : const Color(0xFFDFDFDF),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        width: 100,
+                                        child: data["score"].length > 1
+                                            ? Text(
+                                                data["score"][1]["inning"]
+                                                    .substring(
+                                                        0,
+                                                        ((data["score"][1]
+                                                                    ["inning"]
+                                                                .indexOf(
+                                                                    "Inning")) -
+                                                            1)),
+                                                style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                            )
-                                          : Text(
-                                              data["score"][0]["inning"]
-                                                  .substring(
-                                                      0,
-                                                      ((data["score"][0]
-                                                                  ["inning"]
-                                                              .indexOf(
-                                                                  "Inning")) -
-                                                          1)),
-                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
+                                              )
+                                            : Text(
+                                                data["score"][0]["inning"]
+                                                    .substring(
+                                                        0,
+                                                        ((data["score"][0]
+                                                                    ["inning"]
+                                                                .indexOf(
+                                                                    "Inning")) -
+                                                            1)),
+                                                style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                            ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
+                                              ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        height: 25,
+                                        width: 55,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(2.5),
+                                            border: Border.all(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                width: 0.5)),
+                                        child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              data["score"].length > 1
+                                                  ? Text(
+                                                      (data["score"][1]["inning"].substring(
+                                                              0,
+                                                              ((data["score"][1][
+                                                                          "inning"]
+                                                                      .indexOf(
+                                                                          "Inning")) -
+                                                                  1)))
+                                                          .substring(0, 3),
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      (data["score"][0]["inning"].substring(
+                                                              0,
+                                                              ((data["score"][0][
+                                                                          "inning"]
+                                                                      .indexOf(
+                                                                          "Inning")) -
+                                                                  1)))
+                                                          .substring(0, 3),
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                      ),
+                                                    ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Image.asset(
+                                                "assets/matches.png",
+                                                scale: 1.5,
+                                              )
+                                            ]),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 25,
+                                        width: 55,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          // border: Border.all(
+                                          //     color: Colors.white, width: 0.5)
+    
+                                          color: Colors.black45,
+                                        ),
+                                        child: Text(
+                                          '16',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 25,
+                                        width: 55,
+                                        decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(2.5),
-                                          border: Border.all(
+                                          // border: Border.all(
+                                          //     color: Colors.white, width: 0.5)
+    
+                                          color: isDarkMode
+                                              ? Color(0xffFF8A00)
+                                              : Colors.black26,
+                                        ),
+                                        child: Text(
+                                          '22',
+                                          style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Text(
+                                        'View',
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontStyle: FontStyle.italic),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // border: Border.all(color: Colors.white, width: 0.5)
+    
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[900]
+                                      : const Color(0xFFDFDFDF),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          data["scorecard"].length > 1
+                                              ? Text(
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                          SizedBox(
+                                            width: 75,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+    
+                                              color: Colors.black45,
+                                            ),
+                                            child: Text(
+                                              'NO 79',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2.5),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+    
+                                              color: isDarkMode
+                                                  ? Color(0xffFF8A00)
+                                                  : Colors.black26,
+                                            ),
+                                            child: Text(
+                                              'YES 200',
+                                              style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, bottom: 10),
+                                      child: Container(
+                                        height: 1,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.blueGrey,
+                                      ),
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Open 150',
+                                          style: TextStyle(
                                               color: isDarkMode
                                                   ? Colors.white
                                                   : Colors.black,
-                                              width: 0.5)),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            data["score"].length > 1
-                                                ? Text(
-                                                    (data["score"][1]["inning"].substring(
-                                                            0,
-                                                            ((data["score"][1][
-                                                                        "inning"]
-                                                                    .indexOf(
-                                                                        "Inning")) -
-                                                                1)))
-                                                        .substring(0, 3),
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                                  )
-                                                : Text(
-                                                    (data["score"][0]["inning"].substring(
-                                                            0,
-                                                            ((data["score"][0][
-                                                                        "inning"]
-                                                                    .indexOf(
-                                                                        "Inning")) -
-                                                                1)))
-                                                        .substring(0, 3),
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                                  ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Image.asset(
-                                              "assets/matches.png",
-                                              scale: 1.5,
-                                            )
-                                          ]),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(3),
-                                        // border: Border.all(
-                                        //     color: Colors.white, width: 0.5)
-
-                                        color: Colors.black45,
-                                      ),
-                                      child: Text(
-                                        '16',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
+                                              fontSize: 12),
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(2.5),
-                                        // border: Border.all(
-                                        //     color: Colors.white, width: 0.5)
-
-                                        color: isDarkMode
-                                            ? Color(0xffFF8A00)
-                                            : Colors.black26,
-                                      ),
-                                      child: Text(
-                                        '22',
-                                        style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontWeight: FontWeight.bold,
+                                        SizedBox(
+                                          width: 12,
                                         ),
-                                      ),
+                                        Text(
+                                          'Min 120',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Max 150',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          width: 45,
+                                        ),
+                                        Text(
+                                          '10 runs in 9 balls',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      'View',
-                                      style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontStyle: FontStyle.italic),
+                                      height: 8,
                                     )
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Opacity(
-                            opacity: 0.8,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 35,
+                                color: isDarkMode
+                                    ? Color(0xffFF8A00)
+                                    : Colors.black26,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Batter',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 115,
+                                      ),
+                                      Text(
+                                        'R',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'B',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        '4s',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 25,
+                                      ),
+                                      Text(
+                                        '6s',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 25,
+                                      ),
+                                      Text(
+                                        'SR',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 5,
+                              right: 5,
+                            ),
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                // borderRadius: BorderRadius.circular(0),
                                 // border: Border.all(color: Colors.white, width: 0.5)
-
                                 color: isDarkMode
                                     ? Colors.blueGrey[900]
                                     : const Color(0xFFDFDFDF),
@@ -1171,33 +1416,711 @@ class _live_secondState extends State<live_second> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.only(
+                                        left: 10, top: 10, bottom: 10),
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
                                       children: [
-                                        data["scorecard"].length > 1
-                                            ? Text(
-                                                "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                              )
-                                            : Text(
-                                                "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,),
-                                              ),
-                                        SizedBox(
-                                          width: 75,
+                                        Container(
+                                          width: 132,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"][data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["batsman"]["name"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["name"],
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["r"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["r"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["b"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["b"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["4s"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["4s"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["6s"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["6s"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["sr"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["sr"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 350,
+                                    decoration: BoxDecoration(
+                                      // borderRadius: BorderRadius.circular(0),
+                                      // border: Border.all(color: Colors.white, width: 0.5)
+                                      color: isDarkMode
+                                          ? Colors.black45
+                                          : const Color(0xFFDFDFDF),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 10, bottom: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 145,
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 125,
+                                                  child: Text(
+                                                    data["scorecard"][data["scorecard"].length - 1]
+                                                                    ["batting"]
+                                                                .where((element) =>
+                                                                    element["dismissal-text"] ==
+                                                                    "not out")
+                                                                .map((element) =>
+                                                                    element["batsman"]
+                                                                        ["name"])
+                                                                .toList()
+                                                                .length >
+                                                            1
+                                                        ? data["scorecard"]
+                                                                    [data["scorecard"].length - 1]
+                                                                ["batting"]
+                                                            .where((element) =>
+                                                                element["dismissal-text"] == "not out")
+                                                            .map((element) => element["batsman"]["name"])
+                                                            .toList()[1]
+                                                            .toString()
+                                                        : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 1,
+                                                ),
+                                                Image.asset(
+                                                  "assets/matches.png",
+                                                  scale: 1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 1.5,
+                                          ),
+                                          Container(
+                                            width: 40,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              data["scorecard"][data["scorecard"].length - 1]
+                                                              ["batting"]
+                                                          .where((element) =>
+                                                              element["dismissal-text"] ==
+                                                              "not out")
+                                                          .map((element) =>
+                                                              element["batsman"]
+                                                                  ["name"])
+                                                          .toList()
+                                                          .length >
+                                                      1
+                                                  ? data["scorecard"]
+                                                              [data["scorecard"].length - 1]
+                                                          ["batting"]
+                                                      .where((element) =>
+                                                          element["dismissal-text"] == "not out")
+                                                      .map((element) => element["r"])
+                                                      .toList()[1]
+                                                      .toString()
+                                                  : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["r"].toString(),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 1.5,
+                                          ),
+                                          Container(
+                                            width: 40,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              data["scorecard"][data["scorecard"].length - 1]
+                                                              ["batting"]
+                                                          .where((element) =>
+                                                              element["dismissal-text"] ==
+                                                              "not out")
+                                                          .map((element) =>
+                                                              element["batsman"]
+                                                                  ["name"])
+                                                          .toList()
+                                                          .length >
+                                                      1
+                                                  ? data["scorecard"]
+                                                              [data["scorecard"].length - 1]
+                                                          ["batting"]
+                                                      .where((element) =>
+                                                          element["dismissal-text"] == "not out")
+                                                      .map((element) => element["b"])
+                                                      .toList()[1]
+                                                      .toString()
+                                                  : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["b"].toString(),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 1.5,
+                                          ),
+                                          Container(
+                                            width: 32,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              data["scorecard"][data["scorecard"].length - 1]
+                                                              ["batting"]
+                                                          .where((element) =>
+                                                              element["dismissal-text"] ==
+                                                              "not out")
+                                                          .map((element) =>
+                                                              element["batsman"]
+                                                                  ["name"])
+                                                          .toList()
+                                                          .length >
+                                                      1
+                                                  ? data["scorecard"]
+                                                              [data["scorecard"].length - 1]
+                                                          ["batting"]
+                                                      .where((element) =>
+                                                          element["dismissal-text"] == "not out")
+                                                      .map((element) => element["4s"])
+                                                      .toList()[1]
+                                                      .toString()
+                                                  : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["4s"].toString(),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 1.5,
+                                          ),
+                                          Container(
+                                            width: 32,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              data["scorecard"][data["scorecard"].length - 1]
+                                                              ["batting"]
+                                                          .where((element) =>
+                                                              element["dismissal-text"] ==
+                                                              "not out")
+                                                          .map((element) =>
+                                                              element["batsman"]
+                                                                  ["name"])
+                                                          .toList()
+                                                          .length >
+                                                      1
+                                                  ? data["scorecard"]
+                                                              [data["scorecard"].length - 1]
+                                                          ["batting"]
+                                                      .where((element) =>
+                                                          element["dismissal-text"] == "not out")
+                                                      .map((element) => element["6s"])
+                                                      .toList()[1]
+                                                      .toString()
+                                                  : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["6s"].toString(),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 1.5,
+                                          ),
+                                          Container(
+                                            width: 40,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              data["scorecard"][data["scorecard"].length - 1]
+                                                              ["batting"]
+                                                          .where((element) =>
+                                                              element["dismissal-text"] ==
+                                                              "not out")
+                                                          .map((element) =>
+                                                              element["batsman"]
+                                                                  ["name"])
+                                                          .toList()
+                                                          .length >
+                                                      1
+                                                  ? data["scorecard"]
+                                                              [data["scorecard"].length - 1]
+                                                          ["batting"]
+                                                      .where((element) =>
+                                                          element["dismissal-text"] == "not out")
+                                                      .map((element) => element["sr"])
+                                                      .toList()[1]
+                                                      .toString()
+                                                  : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["sr"].toString(),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 35,
+                                color: isDarkMode
+                                    ? Color(0xffFF8A00)
+                                    : Colors.black26,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Bowler',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 100,
+                                      ),
+                                      Text(
+                                        'O',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'M',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'R',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'W',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'Eco',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, right: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                // borderRadius: BorderRadius.circular(0),
+                                // border: Border.all(color: Colors.white, width: 0.5)
+    
+                                color: isDarkMode
+                                    ? Colors.blueGrey[900]
+                                    : const Color(0xFFDFDFDF),
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 5, top: 10, bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: 135,
+                                          child: Text(
+                                            wicketOrderData[0]["bowler"]["name"],
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            wicketOrderData[0]["o"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            wicketOrderData[0]["m"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            wicketOrderData[0]["r"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            wicketOrderData[0]["w"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5,
+                                        ),
+                                        Container(
+                                          width: 40,
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            wicketOrderData[0]["eco"].toString(),
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // border: Border.all(color: Colors.white, width: 0.5)
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[900]
+                                      : const Color(0xFFDFDFDF),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Who will win ?',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: isDarkMode
+                                                    ? Colors.blueGrey[100]
+                                                    : Colors.black45),
+                                          ),
+                                          SizedBox(
+                                            width: 45,
+                                          ),
+                                          Text(
+                                            'Total Votes:2,25,222',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: isDarkMode
+                                                    ? Colors.blueGrey[100]
+                                                    : Colors.black45),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Container(
+                                        height: 1,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.blueGrey,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
                                         Container(
                                           alignment: Alignment.center,
                                           height: 30,
@@ -1207,36 +2130,38 @@ class _live_secondState extends State<live_second> {
                                                 BorderRadius.circular(3),
                                             // border: Border.all(
                                             //     color: Colors.white, width: 0.5)
-
-                                            color: Colors.black45,
+                                            color: isDarkMode
+                                                ? Colors.amber
+                                                : Colors.black26,
                                           ),
                                           child: Text(
-                                            'NO 79',
+                                            data["teamInfo"][0]["shortname"]
+                                                .toString(),
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 5,
+                                          width: 20,
                                         ),
                                         Container(
                                           alignment: Alignment.center,
                                           height: 30,
                                           width: 80,
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2.5),
-                                            // border: Border.all(
-                                            //     color: Colors.white, width: 0.5)
-
-                                            color: isDarkMode
-                                                ? Color(0xffFF8A00)
-                                                : Colors.black26,
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(2.5),
+                                              border: Border.all(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  width: 1)),
                                           child: Text(
-                                            'YES 200',
+                                            'DRAW',
                                             style: TextStyle(
                                               color: isDarkMode
                                                   ? Colors.white
@@ -1245,1655 +2170,792 @@ class _live_secondState extends State<live_second> {
                                             ),
                                           ),
                                         ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: 30,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2.5),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+                                              color: isDarkMode
+                                                  ? Colors.green
+                                                  : Colors.grey),
+                                          child: Text(
+                                            data["teamInfo"][1]["shortname"]
+                                                .toString(),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, bottom: 10),
-                                    child: Container(
-                                      height: 1,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.blueGrey,
-                                    ),
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Open 150',
-                                        style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontSize: 12),
-                                      ),
-                                      SizedBox(
-                                        width: 12,
-                                      ),
-                                      Text(
-                                        'Min 120',
-                                        style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontSize: 12),
-                                      ),
-                                      SizedBox(
-                                        width: 12,
-                                      ),
-                                      Text(
-                                        'Max 150',
-                                        style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontSize: 12),
-                                      ),
-                                      SizedBox(
-                                        width: 45,
-                                      ),
-                                      Text(
-                                        '10 runs in 9 balls',
-                                        style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontSize: 12),
-                                      ),
-                                    ],
+                                    SizedBox(
+                                      height: 15,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                // border: Border.all(color: Colors.white, width: 0.5)
+    
+                                color: isDarkMode
+                                    ? Color(0xffFF8A00)
+                                    : const Color(0xFFDFDFDF),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.share_sharp,
+                                    color:
+                                        isDarkMode ? Colors.white : Colors.black,
+                                    size: 18,
                                   ),
                                   SizedBox(
-                                    height: 8,
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Share Application',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black),
                                   )
                                 ],
                               ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10)),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 35,
-                              color: isDarkMode
-                                  ? Color(0xffFF8A00)
-                                  : Colors.black26,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Batter',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 115,
-                                    ),
-                                    Text(
-                                      'R',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      'B',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      '4s',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 25,
-                                    ),
-                                    Text(
-                                      '6s',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 25,
-                                    ),
-                                    Text(
-                                      'SR',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 5,
-                            right: 5,
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(0),
-                              // border: Border.all(color: Colors.white, width: 0.5)
-                              color: isDarkMode
-                                  ? Colors.blueGrey[900]
-                                  : const Color(0xFFDFDFDF),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                     width: 132,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["batsman"]["name"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["name"],
-                                          style: TextStyle(
-                                              color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["r"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["r"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["b"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["b"].toString(),
-                                          style: TextStyle(
-                                              color:  isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["4s"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["4s"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40,alignment: Alignment.center,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["6s"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["6s"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["sr"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["sr"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 350,
-                                  decoration: BoxDecoration(
-                                    // borderRadius: BorderRadius.circular(0),
-                                    // border: Border.all(color: Colors.white, width: 0.5)
-                                    color: isDarkMode
-                                        ? Colors.black45
-                                        : const Color(0xFFDFDFDF),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, top: 10, bottom: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 145,
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: 125,
-                                                child: Text(
-                                                  data["scorecard"][data["scorecard"].length - 1]
-                                                                  ["batting"]
-                                                              .where((element) =>
-                                                                  element["dismissal-text"] ==
-                                                                  "not out")
-                                                              .map((element) =>
-                                                                  element["batsman"]
-                                                                      ["name"])
-                                                              .toList()
-                                                              .length >
-                                                          1
-                                                      ? data["scorecard"]
-                                                                  [data["scorecard"].length - 1]
-                                                              ["batting"]
-                                                          .where((element) =>
-                                                              element["dismissal-text"] == "not out")
-                                                          .map((element) => element["batsman"]["name"])
-                                                          .toList()[1]
-                                                          .toString()
-                                                      : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
-                                                  style: TextStyle(
-                                                      color: isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 1,
-                                              ),
-                                              Image.asset(
-                                                "assets/matches.png",
-                                                scale: 1,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1.5,
-                                        ),
-                                        Container(width: 40, alignment: Alignment.center,
-                                          child: Text(
-                                            data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["name"])
-                                                        .toList()
-                                                        .length >
-                                                    1
-                                                ? data["scorecard"]
-                                                            [data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["r"])
-                                                    .toList()[1]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["r"].toString(),
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1.5,
-                                        ),
-                                        Container(width: 40, alignment: Alignment.center,
-                                          child: Text(
-                                            data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["name"])
-                                                        .toList()
-                                                        .length >
-                                                    1
-                                                ? data["scorecard"]
-                                                            [data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["b"])
-                                                    .toList()[1]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["b"].toString(),
-                                            style: TextStyle(
-                                                color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1.5,
-                                        ),
-                                        Container(width: 32,  alignment: Alignment.center,
-                                          child: Text(
-                                            data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["name"])
-                                                        .toList()
-                                                        .length >
-                                                    1
-                                                ? data["scorecard"]
-                                                            [data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["4s"])
-                                                    .toList()[1]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["4s"].toString(),
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1.5,
-                                        ),
-                                        Container(width: 32,alignment: Alignment.center,
-                                          child: Text(
-                                            data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["name"])
-                                                        .toList()
-                                                        .length >
-                                                    1
-                                                ? data["scorecard"]
-                                                            [data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["6s"])
-                                                    .toList()[1]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["6s"].toString(),
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 1.5,
-                                        ),
-                                        Container(width: 40,  alignment: Alignment.center,
-                                          child: Text(
-                                            data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["name"])
-                                                        .toList()
-                                                        .length >
-                                                    1
-                                                ? data["scorecard"]
-                                                            [data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["sr"])
-                                                    .toList()[1]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["sr"].toString(),
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10)),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 35,
-                              color: isDarkMode
-                                  ? Color(0xffFF8A00)
-                                  : Colors.black26,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Bowler',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 100,
-                                    ),
-                                    Text(
-                                      'O',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      'M',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      'R',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      'W',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(
-                                      'Eco',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 5),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(0),
-                              // border: Border.all(color: Colors.white, width: 0.5)
-
-                              color: isDarkMode
-                                  ? Colors.blueGrey[900]
-                                  : const Color(0xFFDFDFDF),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 5, top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 135,
-                                        child: Text(
-                                          wicketOrderData[0]["bowler"]["name"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          wicketOrderData[0]["o"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          wicketOrderData[0]["m"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          wicketOrderData[0]["r"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40,  alignment: Alignment.center,
-                                        child: Text(
-                                          wicketOrderData[0]["w"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 1.5,
-                                      ),
-                                      Container(width: 40, alignment: Alignment.center,
-                                        child: Text(
-                                          wicketOrderData[0]["eco"].toString(),
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Opacity(
+                          Opacity(
                             opacity: 0.8,
                             child: Container(
-                              alignment: Alignment.center,
+                              height: 45,
+                              width: 350,
+                              color: isDarkMode
+                                  ? Colors.blueGrey[900]
+                                  : const Color(0xFFDFDFDF),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(
+                                      () {
+                                        flag = flag ? false : true;
+                                      },
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.settings,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Match Settings',
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
+                          //   child: Container(
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.only(
+                          //           bottomLeft: Radius.circular(5),
+                          //           bottomRight: Radius.circular(5),
+                          //           topLeft: Radius.circular(5),
+                          //           topRight: Radius.circular(5)),
+                          //       // border: Border.all(color: Colors.white, width: 0.5)
+    
+                          //       color: Colors.blueGrey[900],
+                          //     ),
+                          //     child: Column(
+                          //       children: [
+                          //         Padding(
+                          //           padding: const EdgeInsets.all(12),
+                          //           child: Row(
+                          //             children: [
+                          //               Text(
+                          //                 'LOGO',
+                          //                 style: TextStyle(
+                          //                     fontWeight: FontWeight.bold,
+                          //                     color: Colors.white,
+                          //                     fontSize: 25),
+                          //               ),
+                          //               SizedBox(
+                          //                 width: 10,
+                          //               ),
+                          //               Container(
+                          //                 decoration: BoxDecoration(
+                          //                   borderRadius: BorderRadius.circular(5),
+                          //                   color: Colors.amber,
+                          //                 ),
+                          //                 alignment: Alignment.center,
+                          //                 height: 22,
+                          //                 width: 60,
+                          //                 child: Text(
+                          //                   'PREMIUM',
+                          //                   style: TextStyle(
+                          //                       fontSize: 12, fontWeight: FontWeight.bold),
+                          //                 ),
+                          //               ),
+                          //               SizedBox(
+                          //                 width: 130,
+                          //               ),
+                          //               Container(
+                          //                   height: 25,
+                          //                   width: 25,
+                          //                   decoration: BoxDecoration(
+                          //                     borderRadius: BorderRadius.circular(2),
+                          //                     color: Colors.white,
+                          //                   ),
+                          //                   child: Icon(
+                          //                     Icons.close,
+                          //                   ))
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         Container(
+                          //           height: 1,
+                          //           width: 350,
+                          //           color: Colors.white,
+                          //         ),
+                          //         Padding(
+                          //           padding: const EdgeInsets.all(15),
+                          //           child: Column(
+                          //             children: [
+                          //               Row(
+                          //                 children: [
+                          //                   Icon(Icons.ad_units_sharp),
+                          //                   SizedBox(
+                          //                     width: 5,
+                          //                   ),
+                          //                   Text(
+                          //                     'Get ad-free experience',
+                          //                     style: TextStyle(color: Colors.white),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //               SizedBox(
+                          //                 height: 10,
+                          //               ),
+                          //               Row(
+                          //                 children: [
+                          //                   Icon(Icons.auto_graph),
+                          //                   SizedBox(
+                          //                     width: 5,
+                          //                   ),
+                          //                   Flexible(
+                          //                     child: Text(
+                          //                       'Analyse like a pro with win probablity, worm & more graph',
+                          //                       style: TextStyle(color: Colors.white),
+                          //                     ),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //               SizedBox(
+                          //                 height: 10,
+                          //               ),
+                          //               Row(
+                          //                 children: [
+                          //                   Icon(Icons.pinch),
+                          //                   SizedBox(
+                          //                     width: 5,
+                          //                   ),
+                          //                   Text(
+                          //                     'Pin Score with PRO analytics',
+                          //                     style: TextStyle(color: Colors.white),
+                          //                   )
+                          //                 ],
+                          //               )
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         Container(
+                          //           margin: EdgeInsets.only(left: 20),
+                          //           alignment: Alignment.centerLeft,
+                          //           child: ClipRRect(
+                          //             borderRadius: BorderRadius.only(
+                          //                 topLeft: Radius.circular(30),
+                          //                 bottomLeft: Radius.circular(30),
+                          //                 topRight: Radius.circular(45)),
+                          //             child: Container(
+                          //               height: 30,
+                          //               width: 110,
+                          //               decoration: BoxDecoration(
+                          //                 gradient: LinearGradient(
+                          //                     colors: [
+                          //                       Color(0xFFFF4D00),
+                          //                       Colors.orange,
+                          //                       Color(0x00ff7a00)
+                          //                     ],
+                          //                     end: Alignment.bottomRight,
+                          //                     stops: [
+                          //                       0.4,
+                          //                       1,
+                          //                       1,
+                          //                     ]),
+                          //               ),
+                          //               child: Row(
+                          //                 crossAxisAlignment: CrossAxisAlignment.center,
+                          //                 mainAxisAlignment: MainAxisAlignment.center,
+                          //                 children: [
+                          //                   Text(
+                          //                     'See all plans',
+                          //                     style: TextStyle(
+                          //                         color: Colors.white,
+                          //                         fontWeight: FontWeight.bold,
+                          //                         fontSize: 12),
+                          //                   )
+                          //                 ],
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //         SizedBox(
+                          //           height: 25,
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          Visibility(
+                            visible: flag,
+                            child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                ),
                                 // border: Border.all(color: Colors.white, width: 0.5)
                                 color: isDarkMode
                                     ? Colors.blueGrey[900]
                                     : const Color(0xFFDFDFDF),
                               ),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Who will win ?',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: isDarkMode
-                                                  ? Colors.blueGrey[100]
-                                                  : Colors.black45),
-                                        ),
-                                        SizedBox(
-                                          width: 45,
-                                        ),
-                                        Text(
-                                          'Total Votes:2,25,222',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: isDarkMode
-                                                  ? Colors.blueGrey[100]
-                                                  : Colors.black45),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 5),
-                                    child: Container(
-                                      height: 1,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.blueGrey,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                              child: Column(children: [
+                                Container(
+                                  height: 1,
+                                  width: 350,
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[200]
+                                      : const Color(0xFFDFDFDF),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 15, left: 20),
+                                  child: Column(
                                     children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 30,
-                                        width: 80,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(3),
-                                          // border: Border.all(
-                                          //     color: Colors.white, width: 0.5)
-                                          color: isDarkMode
-                                              ? Colors.amber
-                                              : Colors.black26,
-                                        ),
-                                        child: Text(
-                                          data["teamInfo"][0]["shortname"]
-                                              .toString(),
-                                          style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 30,
-                                        width: 80,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2.5),
-                                            border: Border.all(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                width: 1)),
-                                        child: Text(
-                                          'DRAW',
-                                          style: TextStyle(
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const win_prediction(),
+                                              ));
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.emoji_events,
+                                              color: isDarkMode
+                                                  ? Colors.white70
+                                                  : Colors.black,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Win Probability View',
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black),
+                                            )
+                                          ],
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 20,
+                                        height: 10,
                                       ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 30,
-                                        width: 80,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2.5),
-                                            // border: Border.all(
-                                            //     color: Colors.white, width: 0.5)
-                                            color: isDarkMode
-                                                ? Colors.green
-                                                : Colors.grey),
-                                        child: Text(
-                                          data["teamInfo"][1]["shortname"]
-                                              .toString(),
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const speech_settings(),
+                                              ));
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.record_voice_over,
+                                              color: isDarkMode
+                                                  ? Colors.white70
+                                                  : Colors.black,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Speech Settings (Accessibility)',
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black),
+                                            )
+                                          ],
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          // showModalBottomSheet(
+                                          //     isScrollControlled: true,
+                                          //     // shape: RoundedRectangleBorder(
+                                          //     //   borderRadius: BorderRadiusDirectional.only(
+                                          //     //       topStart: Radius.circular(45), topEnd: Radius.circular(45)),
+                                          //     // ),
+                                          //     elevation: 5,
+                                          //     context: context,
+                                          //     builder: (BuildContext context) {
+                                          //       return StatefulBuilder(
+                                          //           builder: (context, setState) {
+                                          //         return SizedBox(
+                                          //           height: 375,
+                                          //           child: DefaultTabController(
+                                          //             length: 2,
+                                          //             child: Scaffold(
+                                          //               appBar: AppBar(
+                                          //                 backgroundColor: Colors.black,
+                                          //                 automaticallyImplyLeading:
+                                          //                     false,
+                                          //                 title: TabBar(
+                                          //                   // labelColor: Colors.amber,
+                                          //                   indicatorColor:
+                                          //                       Color(0xFFFF4D00),
+                                          //                   tabs: [
+                                          //                     Tab(
+                                          //                       text: "Live Match",
+                                          //                     ),
+                                          //                     Tab(
+                                          //                         text:
+                                          //                             "Series Updates"),
+                                          //                   ],
+                                          //                 ),
+                                          //                 actions: [
+                                          //                   Padding(
+                                          //                     padding:
+                                          //                         const EdgeInsets.all(
+                                          //                             10),
+                                          //                     child: IconButton(
+                                          //                         onPressed: () {
+                                          //                           Navigator.pop(
+                                          //                               context);
+                                          //                         },
+                                          //                         icon: Icon(
+                                          //                           Icons.close,
+                                          //                           color: Colors.white,
+                                          //                         )),
+                                          //                   )
+                                          //                 ],
+                                          //               ),
+                                          //               body: Container(
+                                          //                 color: Colors.black,
+                                          //                 child: TabBarView(
+                                          //                   children: [
+                                          //                     Column(
+                                          //                       children: [
+                                          //                         Row(
+                                          //                           mainAxisAlignment:
+                                          //                               MainAxisAlignment
+                                          //                                   .center,
+                                          //                           children: [
+                                          //                             // ignore: prefer_const_constructors
+                                          //                             Container(
+                                          //                               margin: EdgeInsets
+                                          //                                   .only(
+                                          //                                       left:
+                                          //                                           25),
+                                          //                               width: 200,
+                                          //                               child: Text(
+                                          //                                 "IND vs PAK Notifications",
+                                          //                                 // ignore: prefer_const_constructors
+                                          //                                 style: TextStyle(
+                                          //                                     color: Colors
+                                          //                                         .white),
+                                          //                               ),
+                                          //                             ),
+                                          //                             // ignore: prefer_const_constructors
+                                          //                             SizedBox(
+                                          //                               width: 75,
+                                          //                             ),
+                                          //                             Switch(
+                                          //                               activeColor:
+                                          //                                   Colors
+                                          //                                       .blueGrey,
+                                          //                               activeTrackColor:
+                                          //                                   Colors.grey,
+                                          //                               inactiveThumbColor:
+                                          //                                   Colors
+                                          //                                       .white,
+                                          //                               inactiveTrackColor:
+                                          //                                   Colors.grey,
+                                          //                               value: status,
+                                          //                               onChanged:
+                                          //                                   (value) {
+                                          //                                 // ignore: avoid_print
+                                          //                                 print(
+                                          //                                     "VALUE : $value");
+                                          //                                 setState(() {
+                                          //                                   status =
+                                          //                                       value;
+                                          //                                 });
+                                          //                               },
+                                          //                             ),
+                                          //                           ],
+                                          //                         ),
+                                          //                         SizedBox(
+                                          //                           height: 10,
+                                          //                         ),
+                                          //                         Container(
+                                          //                           alignment: Alignment
+                                          //                               .center,
+                                          //                           height: 200,
+                                          //                           child: ListView
+                                          //                               .builder(
+                                          //                                   scrollDirection:
+                                          //                                       Axis
+                                          //                                           .horizontal,
+                                          //                                   itemCount:
+                                          //                                       5,
+                                          //                                   itemBuilder:
+                                          //                                       (context,
+                                          //                                           index) {
+                                          //                                     return Column(
+                                          //                                       children: [
+                                          //                                         Container(
+                                          //                                           // ignore: prefer_const_constructors
+                                          //                                           margin: EdgeInsets.only(
+                                          //                                               left: 20,
+                                          //                                               right: 10,
+                                          //                                               top: 25),
+                                          //                                           child:
+                                          //                                               Stack(
+                                          //                                             clipBehavior: Clip.none,
+                                          //                                             children: [
+                                          //                                               Container(
+                                          //                                                 transform: Matrix4.rotationX(0),
+                                          //                                                 height: 125,
+                                          //                                                 width: 125,
+                                          //                                                 // padding: EdgeInsets.symmetric(
+                                          //                                                 //     vertical: 1, horizontal: 1),
+                                          //                                                 decoration: BoxDecoration(
+                                          //                                                   border: Border.all(color: Colors.blue),
+                                          //                                                   color: Colors.black,
+                                          //                                                   borderRadius: BorderRadius.circular(25),
+                                          //                                                   boxShadow: [
+                                          //                                                     BoxShadow(
+                                          //                                                       color: Colors.white38.withOpacity(0.5),
+                                          //                                                       offset: Offset(0, -5),
+                                          //                                                       // blurRadius: 5,
+                                          //                                                       spreadRadius: 1,
+                                          //                                                     )
+                                          //                                                   ],
+                                          //                                                 ),
+                                          //                                                 child: Container(
+                                          //                                                   margin: EdgeInsets.all(12),
+                                          //                                                   child: Image.asset(
+                                          //                                                     'assets/tennis_background.jpeg',
+                                          //                                                   ),
+                                          //                                                 ),
+                                          //                                               ),
+                                          //                                               Positioned(
+                                          //                                                 bottom: 120,
+                                          //                                                 left: 85,
+                                          //                                                 child: CircleAvatar(
+                                          //                                                   backgroundColor: Colors.amber,
+                                          //                                                   radius: 12,
+                                          //                                                   child: Icon(
+                                          //                                                     Icons.done,
+                                          //                                                     size: 12,
+                                          //                                                   ),
+                                          //                                                 ),
+                                          //                                               ),
+                                          //                                             ],
+                                          //                                           ),
+                                          //                                         ),
+                                          //                                         SizedBox(
+                                          //                                           height:
+                                          //                                               8,
+                                          //                                         ),
+                                          //                                         Container(
+                                          //                                           width:
+                                          //                                               100,
+    
+                                          //                                           // ignore: prefer_const_constructors
+                                          //                                           child:
+                                          //                                               Text(
+                                          //                                             textAlign: TextAlign.center,
+                                          //                                             "Weckets",
+                                          //                                             style: TextStyle(color: Colors.white, fontSize: 18),
+                                          //                                           ),
+                                          //                                         )
+                                          //                                       ],
+                                          //                                     );
+                                          //                                   }),
+                                          //                         ),
+                                          //                       ],
+                                          //                     ),
+                                          //                     Column(
+                                          //                       children: [
+                                          //                         Row(
+                                          //                           mainAxisAlignment:
+                                          //                               MainAxisAlignment
+                                          //                                   .center,
+                                          //                           children: [
+                                          //                             // ignore: prefer_const_constructors
+                                          //                             Container(
+                                          //                               margin: EdgeInsets
+                                          //                                   .only(
+                                          //                                       left:
+                                          //                                           25),
+                                          //                               width: 200,
+                                          //                               child: Text(
+                                          //                                 "INDIA tour of PAKISTAN 2022 Notifications",
+                                          //                                 // ignore: prefer_const_constructors
+                                          //                                 style: TextStyle(
+                                          //                                     color: Colors
+                                          //                                         .white),
+                                          //                               ),
+                                          //                             ),
+                                          //                             // ignore: prefer_const_constructors
+                                          //                             SizedBox(
+                                          //                               width: 75,
+                                          //                             ),
+                                          //                             Switch(
+                                          //                               activeColor:
+                                          //                                   Colors
+                                          //                                       .blueGrey,
+                                          //                               activeTrackColor:
+                                          //                                   Colors.grey,
+                                          //                               inactiveThumbColor:
+                                          //                                   Colors
+                                          //                                       .white,
+                                          //                               inactiveTrackColor:
+                                          //                                   Colors.grey,
+                                          //                               value: status1,
+                                          //                               onChanged:
+                                          //                                   (value) {
+                                          //                                 // ignore: avoid_print
+                                          //                                 print(
+                                          //                                     "VALUE : $value");
+                                          //                                 setState(() {
+                                          //                                   status1 =
+                                          //                                       value;
+                                          //                                 });
+                                          //                               },
+                                          //                             ),
+                                          //                           ],
+                                          //                         ),
+                                          //                         SizedBox(
+                                          //                           height: 10,
+                                          //                         ),
+                                          //                         Container(
+                                          //                           alignment: Alignment
+                                          //                               .center,
+                                          //                           height: 200,
+                                          //                           child: ListView
+                                          //                               .builder(
+                                          //                                   scrollDirection:
+                                          //                                       Axis
+                                          //                                           .horizontal,
+                                          //                                   itemCount:
+                                          //                                       5,
+                                          //                                   itemBuilder:
+                                          //                                       (context,
+                                          //                                           index) {
+                                          //                                     return Column(
+                                          //                                       children: [
+                                          //                                         Container(
+                                          //                                           // ignore: prefer_const_constructors
+                                          //                                           margin: EdgeInsets.only(
+                                          //                                               left: 20,
+                                          //                                               right: 10,
+                                          //                                               top: 25),
+                                          //                                           child:
+                                          //                                               Stack(
+                                          //                                             clipBehavior: Clip.none,
+                                          //                                             children: [
+                                          //                                               Container(
+                                          //                                                 transform: Matrix4.rotationX(0),
+                                          //                                                 height: 125,
+                                          //                                                 width: 125,
+                                          //                                                 // padding: EdgeInsets.symmetric(
+                                          //                                                 //     vertical: 1, horizontal: 1),
+                                          //                                                 decoration: BoxDecoration(
+                                          //                                                   border: Border.all(color: Colors.blue),
+                                          //                                                   color: Colors.black,
+                                          //                                                   borderRadius: BorderRadius.circular(25),
+                                          //                                                   boxShadow: [
+                                          //                                                     BoxShadow(
+                                          //                                                       color: Colors.white38.withOpacity(0.5),
+                                          //                                                       offset: Offset(0, -5),
+                                          //                                                       // blurRadius: 5,
+                                          //                                                       spreadRadius: 1,
+                                          //                                                     )
+                                          //                                                   ],
+                                          //                                                 ),
+                                          //                                                 child: Container(
+                                          //                                                   margin: EdgeInsets.all(12),
+                                          //                                                   child: Image.asset(
+                                          //                                                     'assets/tennis_background.jpeg',
+                                          //                                                   ),
+                                          //                                                 ),
+                                          //                                               ),
+                                          //                                               Positioned(
+                                          //                                                 bottom: 120,
+                                          //                                                 left: 85,
+                                          //                                                 child: CircleAvatar(
+                                          //                                                   backgroundColor: Colors.amber,
+                                          //                                                   radius: 12,
+                                          //                                                   child: Icon(
+                                          //                                                     Icons.done,
+                                          //                                                     size: 12,
+                                          //                                                   ),
+                                          //                                                 ),
+                                          //                                               ),
+                                          //                                             ],
+                                          //                                           ),
+                                          //                                         ),
+                                          //                                         SizedBox(
+                                          //                                           height:
+                                          //                                               8,
+                                          //                                         ),
+                                          //                                         Container(
+                                          //                                           width:
+                                          //                                               100,
+    
+                                          //                                           // ignore: prefer_const_constructors
+                                          //                                           child:
+                                          //                                               Text(
+                                          //                                             textAlign: TextAlign.center,
+                                          //                                             "Toss",
+                                          //                                             style: TextStyle(color: Colors.white, fontSize: 18),
+                                          //                                           ),
+                                          //                                         )
+                                          //                                       ],
+                                          //                                     );
+                                          //                                   }),
+                                          //                         ),
+                                          //                       ],
+                                          //                     ),
+                                          //                   ],
+                                          //                 ),
+                                          //               ),
+                                          //             ),
+                                          //           ),
+                                          //         );
+                                          //       });
+                                          //     });
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.notifications,
+                                              color: isDarkMode
+                                                  ? Colors.white70
+                                                  : Colors.black,
+                                            ),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                              'Notification Settings',
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black),
+                                            )
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 15,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              // border: Border.all(color: Colors.white, width: 0.5)
-
-                              color: isDarkMode
-                                  ? Color(0xffFF8A00)
-                                  : const Color(0xFFDFDFDF),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.share_sharp,
-                                  color:
-                                      isDarkMode ? Colors.white : Colors.black,
-                                  size: 18,
                                 ),
                                 SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  'Share Application',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black),
+                                  height: 25,
                                 )
-                              ],
+                              ]),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Opacity(
-                          opacity: 0.8,
-                          child: Container(
-                            height: 45,
-                            width: 350,
-                            color: isDarkMode
-                                ? Colors.blueGrey[900]
-                                : const Color(0xFFDFDFDF),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: InkWell(
-                                onTap: () {
-                                  setState(
-                                    () {
-                                      flag = flag ? false : true;
-                                    },
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.settings,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Match Settings',
-                                      style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.only(
-                        //           bottomLeft: Radius.circular(5),
-                        //           bottomRight: Radius.circular(5),
-                        //           topLeft: Radius.circular(5),
-                        //           topRight: Radius.circular(5)),
-                        //       // border: Border.all(color: Colors.white, width: 0.5)
-
-                        //       color: Colors.blueGrey[900],
-                        //     ),
-                        //     child: Column(
-                        //       children: [
-                        //         Padding(
-                        //           padding: const EdgeInsets.all(12),
-                        //           child: Row(
-                        //             children: [
-                        //               Text(
-                        //                 'LOGO',
-                        //                 style: TextStyle(
-                        //                     fontWeight: FontWeight.bold,
-                        //                     color: Colors.white,
-                        //                     fontSize: 25),
-                        //               ),
-                        //               SizedBox(
-                        //                 width: 10,
-                        //               ),
-                        //               Container(
-                        //                 decoration: BoxDecoration(
-                        //                   borderRadius: BorderRadius.circular(5),
-                        //                   color: Colors.amber,
-                        //                 ),
-                        //                 alignment: Alignment.center,
-                        //                 height: 22,
-                        //                 width: 60,
-                        //                 child: Text(
-                        //                   'PREMIUM',
-                        //                   style: TextStyle(
-                        //                       fontSize: 12, fontWeight: FontWeight.bold),
-                        //                 ),
-                        //               ),
-                        //               SizedBox(
-                        //                 width: 130,
-                        //               ),
-                        //               Container(
-                        //                   height: 25,
-                        //                   width: 25,
-                        //                   decoration: BoxDecoration(
-                        //                     borderRadius: BorderRadius.circular(2),
-                        //                     color: Colors.white,
-                        //                   ),
-                        //                   child: Icon(
-                        //                     Icons.close,
-                        //                   ))
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         Container(
-                        //           height: 1,
-                        //           width: 350,
-                        //           color: Colors.white,
-                        //         ),
-                        //         Padding(
-                        //           padding: const EdgeInsets.all(15),
-                        //           child: Column(
-                        //             children: [
-                        //               Row(
-                        //                 children: [
-                        //                   Icon(Icons.ad_units_sharp),
-                        //                   SizedBox(
-                        //                     width: 5,
-                        //                   ),
-                        //                   Text(
-                        //                     'Get ad-free experience',
-                        //                     style: TextStyle(color: Colors.white),
-                        //                   )
-                        //                 ],
-                        //               ),
-                        //               SizedBox(
-                        //                 height: 10,
-                        //               ),
-                        //               Row(
-                        //                 children: [
-                        //                   Icon(Icons.auto_graph),
-                        //                   SizedBox(
-                        //                     width: 5,
-                        //                   ),
-                        //                   Flexible(
-                        //                     child: Text(
-                        //                       'Analyse like a pro with win probablity, worm & more graph',
-                        //                       style: TextStyle(color: Colors.white),
-                        //                     ),
-                        //                   )
-                        //                 ],
-                        //               ),
-                        //               SizedBox(
-                        //                 height: 10,
-                        //               ),
-                        //               Row(
-                        //                 children: [
-                        //                   Icon(Icons.pinch),
-                        //                   SizedBox(
-                        //                     width: 5,
-                        //                   ),
-                        //                   Text(
-                        //                     'Pin Score with PRO analytics',
-                        //                     style: TextStyle(color: Colors.white),
-                        //                   )
-                        //                 ],
-                        //               )
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         Container(
-                        //           margin: EdgeInsets.only(left: 20),
-                        //           alignment: Alignment.centerLeft,
-                        //           child: ClipRRect(
-                        //             borderRadius: BorderRadius.only(
-                        //                 topLeft: Radius.circular(30),
-                        //                 bottomLeft: Radius.circular(30),
-                        //                 topRight: Radius.circular(45)),
-                        //             child: Container(
-                        //               height: 30,
-                        //               width: 110,
-                        //               decoration: BoxDecoration(
-                        //                 gradient: LinearGradient(
-                        //                     colors: [
-                        //                       Color(0xFFFF4D00),
-                        //                       Colors.orange,
-                        //                       Color(0x00ff7a00)
-                        //                     ],
-                        //                     end: Alignment.bottomRight,
-                        //                     stops: [
-                        //                       0.4,
-                        //                       1,
-                        //                       1,
-                        //                     ]),
-                        //               ),
-                        //               child: Row(
-                        //                 crossAxisAlignment: CrossAxisAlignment.center,
-                        //                 mainAxisAlignment: MainAxisAlignment.center,
-                        //                 children: [
-                        //                   Text(
-                        //                     'See all plans',
-                        //                     style: TextStyle(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.bold,
-                        //                         fontSize: 12),
-                        //                   )
-                        //                 ],
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //         SizedBox(
-                        //           height: 25,
-                        //         )
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
-                        Visibility(
-                          visible: flag,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                              // border: Border.all(color: Colors.white, width: 0.5)
-                              color: isDarkMode
-                                  ? Colors.blueGrey[900]
-                                  : const Color(0xFFDFDFDF),
-                            ),
-                            child: Column(children: [
-                              Container(
-                                height: 1,
-                                width: 350,
-                                color: isDarkMode
-                                    ? Colors.blueGrey[200]
-                                    : const Color(0xFFDFDFDF),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 15, left: 20),
-                                child: Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const win_prediction(),
-                                            ));
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.emoji_events,
-                                            color: isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            'Win Probability View',
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white70
-                                                    : Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const speech_settings(),
-                                            ));
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.record_voice_over,
-                                            color: isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            'Speech Settings (Accessibility)',
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white70
-                                                    : Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        // showModalBottomSheet(
-                                        //     isScrollControlled: true,
-                                        //     // shape: RoundedRectangleBorder(
-                                        //     //   borderRadius: BorderRadiusDirectional.only(
-                                        //     //       topStart: Radius.circular(45), topEnd: Radius.circular(45)),
-                                        //     // ),
-                                        //     elevation: 5,
-                                        //     context: context,
-                                        //     builder: (BuildContext context) {
-                                        //       return StatefulBuilder(
-                                        //           builder: (context, setState) {
-                                        //         return SizedBox(
-                                        //           height: 375,
-                                        //           child: DefaultTabController(
-                                        //             length: 2,
-                                        //             child: Scaffold(
-                                        //               appBar: AppBar(
-                                        //                 backgroundColor: Colors.black,
-                                        //                 automaticallyImplyLeading:
-                                        //                     false,
-                                        //                 title: TabBar(
-                                        //                   // labelColor: Colors.amber,
-                                        //                   indicatorColor:
-                                        //                       Color(0xFFFF4D00),
-                                        //                   tabs: [
-                                        //                     Tab(
-                                        //                       text: "Live Match",
-                                        //                     ),
-                                        //                     Tab(
-                                        //                         text:
-                                        //                             "Series Updates"),
-                                        //                   ],
-                                        //                 ),
-                                        //                 actions: [
-                                        //                   Padding(
-                                        //                     padding:
-                                        //                         const EdgeInsets.all(
-                                        //                             10),
-                                        //                     child: IconButton(
-                                        //                         onPressed: () {
-                                        //                           Navigator.pop(
-                                        //                               context);
-                                        //                         },
-                                        //                         icon: Icon(
-                                        //                           Icons.close,
-                                        //                           color: Colors.white,
-                                        //                         )),
-                                        //                   )
-                                        //                 ],
-                                        //               ),
-                                        //               body: Container(
-                                        //                 color: Colors.black,
-                                        //                 child: TabBarView(
-                                        //                   children: [
-                                        //                     Column(
-                                        //                       children: [
-                                        //                         Row(
-                                        //                           mainAxisAlignment:
-                                        //                               MainAxisAlignment
-                                        //                                   .center,
-                                        //                           children: [
-                                        //                             // ignore: prefer_const_constructors
-                                        //                             Container(
-                                        //                               margin: EdgeInsets
-                                        //                                   .only(
-                                        //                                       left:
-                                        //                                           25),
-                                        //                               width: 200,
-                                        //                               child: Text(
-                                        //                                 "IND vs PAK Notifications",
-                                        //                                 // ignore: prefer_const_constructors
-                                        //                                 style: TextStyle(
-                                        //                                     color: Colors
-                                        //                                         .white),
-                                        //                               ),
-                                        //                             ),
-                                        //                             // ignore: prefer_const_constructors
-                                        //                             SizedBox(
-                                        //                               width: 75,
-                                        //                             ),
-                                        //                             Switch(
-                                        //                               activeColor:
-                                        //                                   Colors
-                                        //                                       .blueGrey,
-                                        //                               activeTrackColor:
-                                        //                                   Colors.grey,
-                                        //                               inactiveThumbColor:
-                                        //                                   Colors
-                                        //                                       .white,
-                                        //                               inactiveTrackColor:
-                                        //                                   Colors.grey,
-                                        //                               value: status,
-                                        //                               onChanged:
-                                        //                                   (value) {
-                                        //                                 // ignore: avoid_print
-                                        //                                 print(
-                                        //                                     "VALUE : $value");
-                                        //                                 setState(() {
-                                        //                                   status =
-                                        //                                       value;
-                                        //                                 });
-                                        //                               },
-                                        //                             ),
-                                        //                           ],
-                                        //                         ),
-                                        //                         SizedBox(
-                                        //                           height: 10,
-                                        //                         ),
-                                        //                         Container(
-                                        //                           alignment: Alignment
-                                        //                               .center,
-                                        //                           height: 200,
-                                        //                           child: ListView
-                                        //                               .builder(
-                                        //                                   scrollDirection:
-                                        //                                       Axis
-                                        //                                           .horizontal,
-                                        //                                   itemCount:
-                                        //                                       5,
-                                        //                                   itemBuilder:
-                                        //                                       (context,
-                                        //                                           index) {
-                                        //                                     return Column(
-                                        //                                       children: [
-                                        //                                         Container(
-                                        //                                           // ignore: prefer_const_constructors
-                                        //                                           margin: EdgeInsets.only(
-                                        //                                               left: 20,
-                                        //                                               right: 10,
-                                        //                                               top: 25),
-                                        //                                           child:
-                                        //                                               Stack(
-                                        //                                             clipBehavior: Clip.none,
-                                        //                                             children: [
-                                        //                                               Container(
-                                        //                                                 transform: Matrix4.rotationX(0),
-                                        //                                                 height: 125,
-                                        //                                                 width: 125,
-                                        //                                                 // padding: EdgeInsets.symmetric(
-                                        //                                                 //     vertical: 1, horizontal: 1),
-                                        //                                                 decoration: BoxDecoration(
-                                        //                                                   border: Border.all(color: Colors.blue),
-                                        //                                                   color: Colors.black,
-                                        //                                                   borderRadius: BorderRadius.circular(25),
-                                        //                                                   boxShadow: [
-                                        //                                                     BoxShadow(
-                                        //                                                       color: Colors.white38.withOpacity(0.5),
-                                        //                                                       offset: Offset(0, -5),
-                                        //                                                       // blurRadius: 5,
-                                        //                                                       spreadRadius: 1,
-                                        //                                                     )
-                                        //                                                   ],
-                                        //                                                 ),
-                                        //                                                 child: Container(
-                                        //                                                   margin: EdgeInsets.all(12),
-                                        //                                                   child: Image.asset(
-                                        //                                                     'assets/tennis_background.jpeg',
-                                        //                                                   ),
-                                        //                                                 ),
-                                        //                                               ),
-                                        //                                               Positioned(
-                                        //                                                 bottom: 120,
-                                        //                                                 left: 85,
-                                        //                                                 child: CircleAvatar(
-                                        //                                                   backgroundColor: Colors.amber,
-                                        //                                                   radius: 12,
-                                        //                                                   child: Icon(
-                                        //                                                     Icons.done,
-                                        //                                                     size: 12,
-                                        //                                                   ),
-                                        //                                                 ),
-                                        //                                               ),
-                                        //                                             ],
-                                        //                                           ),
-                                        //                                         ),
-                                        //                                         SizedBox(
-                                        //                                           height:
-                                        //                                               8,
-                                        //                                         ),
-                                        //                                         Container(
-                                        //                                           width:
-                                        //                                               100,
-
-                                        //                                           // ignore: prefer_const_constructors
-                                        //                                           child:
-                                        //                                               Text(
-                                        //                                             textAlign: TextAlign.center,
-                                        //                                             "Weckets",
-                                        //                                             style: TextStyle(color: Colors.white, fontSize: 18),
-                                        //                                           ),
-                                        //                                         )
-                                        //                                       ],
-                                        //                                     );
-                                        //                                   }),
-                                        //                         ),
-                                        //                       ],
-                                        //                     ),
-                                        //                     Column(
-                                        //                       children: [
-                                        //                         Row(
-                                        //                           mainAxisAlignment:
-                                        //                               MainAxisAlignment
-                                        //                                   .center,
-                                        //                           children: [
-                                        //                             // ignore: prefer_const_constructors
-                                        //                             Container(
-                                        //                               margin: EdgeInsets
-                                        //                                   .only(
-                                        //                                       left:
-                                        //                                           25),
-                                        //                               width: 200,
-                                        //                               child: Text(
-                                        //                                 "INDIA tour of PAKISTAN 2022 Notifications",
-                                        //                                 // ignore: prefer_const_constructors
-                                        //                                 style: TextStyle(
-                                        //                                     color: Colors
-                                        //                                         .white),
-                                        //                               ),
-                                        //                             ),
-                                        //                             // ignore: prefer_const_constructors
-                                        //                             SizedBox(
-                                        //                               width: 75,
-                                        //                             ),
-                                        //                             Switch(
-                                        //                               activeColor:
-                                        //                                   Colors
-                                        //                                       .blueGrey,
-                                        //                               activeTrackColor:
-                                        //                                   Colors.grey,
-                                        //                               inactiveThumbColor:
-                                        //                                   Colors
-                                        //                                       .white,
-                                        //                               inactiveTrackColor:
-                                        //                                   Colors.grey,
-                                        //                               value: status1,
-                                        //                               onChanged:
-                                        //                                   (value) {
-                                        //                                 // ignore: avoid_print
-                                        //                                 print(
-                                        //                                     "VALUE : $value");
-                                        //                                 setState(() {
-                                        //                                   status1 =
-                                        //                                       value;
-                                        //                                 });
-                                        //                               },
-                                        //                             ),
-                                        //                           ],
-                                        //                         ),
-                                        //                         SizedBox(
-                                        //                           height: 10,
-                                        //                         ),
-                                        //                         Container(
-                                        //                           alignment: Alignment
-                                        //                               .center,
-                                        //                           height: 200,
-                                        //                           child: ListView
-                                        //                               .builder(
-                                        //                                   scrollDirection:
-                                        //                                       Axis
-                                        //                                           .horizontal,
-                                        //                                   itemCount:
-                                        //                                       5,
-                                        //                                   itemBuilder:
-                                        //                                       (context,
-                                        //                                           index) {
-                                        //                                     return Column(
-                                        //                                       children: [
-                                        //                                         Container(
-                                        //                                           // ignore: prefer_const_constructors
-                                        //                                           margin: EdgeInsets.only(
-                                        //                                               left: 20,
-                                        //                                               right: 10,
-                                        //                                               top: 25),
-                                        //                                           child:
-                                        //                                               Stack(
-                                        //                                             clipBehavior: Clip.none,
-                                        //                                             children: [
-                                        //                                               Container(
-                                        //                                                 transform: Matrix4.rotationX(0),
-                                        //                                                 height: 125,
-                                        //                                                 width: 125,
-                                        //                                                 // padding: EdgeInsets.symmetric(
-                                        //                                                 //     vertical: 1, horizontal: 1),
-                                        //                                                 decoration: BoxDecoration(
-                                        //                                                   border: Border.all(color: Colors.blue),
-                                        //                                                   color: Colors.black,
-                                        //                                                   borderRadius: BorderRadius.circular(25),
-                                        //                                                   boxShadow: [
-                                        //                                                     BoxShadow(
-                                        //                                                       color: Colors.white38.withOpacity(0.5),
-                                        //                                                       offset: Offset(0, -5),
-                                        //                                                       // blurRadius: 5,
-                                        //                                                       spreadRadius: 1,
-                                        //                                                     )
-                                        //                                                   ],
-                                        //                                                 ),
-                                        //                                                 child: Container(
-                                        //                                                   margin: EdgeInsets.all(12),
-                                        //                                                   child: Image.asset(
-                                        //                                                     'assets/tennis_background.jpeg',
-                                        //                                                   ),
-                                        //                                                 ),
-                                        //                                               ),
-                                        //                                               Positioned(
-                                        //                                                 bottom: 120,
-                                        //                                                 left: 85,
-                                        //                                                 child: CircleAvatar(
-                                        //                                                   backgroundColor: Colors.amber,
-                                        //                                                   radius: 12,
-                                        //                                                   child: Icon(
-                                        //                                                     Icons.done,
-                                        //                                                     size: 12,
-                                        //                                                   ),
-                                        //                                                 ),
-                                        //                                               ),
-                                        //                                             ],
-                                        //                                           ),
-                                        //                                         ),
-                                        //                                         SizedBox(
-                                        //                                           height:
-                                        //                                               8,
-                                        //                                         ),
-                                        //                                         Container(
-                                        //                                           width:
-                                        //                                               100,
-
-                                        //                                           // ignore: prefer_const_constructors
-                                        //                                           child:
-                                        //                                               Text(
-                                        //                                             textAlign: TextAlign.center,
-                                        //                                             "Toss",
-                                        //                                             style: TextStyle(color: Colors.white, fontSize: 18),
-                                        //                                           ),
-                                        //                                         )
-                                        //                                       ],
-                                        //                                     );
-                                        //                                   }),
-                                        //                         ),
-                                        //                       ],
-                                        //                     ),
-                                        //                   ],
-                                        //                 ),
-                                        //               ),
-                                        //             ),
-                                        //           ),
-                                        //         );
-                                        //       });
-                                        //     });
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.notifications,
-                                            color: isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            'Notification Settings',
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white70
-                                                    : Colors.black),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              )
-                            ]),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        )
-                      ]),
+                          SizedBox(
+                            height: 25,
+                          )
+                        ]),
+                      ),
+                    );
+                  }
+                },
+              );
+            }
+          },
+        ),
+        floatingActionButton: FutureBuilder<bool>(
+            future: floating.isPipAvailable,
+            initialData: true,
+            builder: (context, snapshot) => snapshot.data ?? false
+                ? PiPSwitcher(
+                    childWhenDisabled: FloatingActionButton.extended(
+                      onPressed: () => enablePip(context),
+                      label: const Text('Enable PiP'),
+                      icon: const Icon(Icons.picture_in_picture),
                     ),
-                  );
-                }
-              },
-            );
-          }
-        },
-      ),
+                    childWhenEnabled: const SizedBox(),
+                  )
+                : const Card(
+                    child: Text('PiP unavailable'),
+                  ),
+          ),
     );
   }
 }

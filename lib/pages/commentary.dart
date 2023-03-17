@@ -1945,7 +1945,10 @@ class _commententaryState extends State<commententary> {
                                                       Container(
                                                         width: 200,
                                                         child: Text(
-                                                          bbbData != "failure"?  reversebbbData[index]["bowler"]["name"] + " to " + reversebbbData[index]["batsman"]["name"]:"Ball by ball data is not Available" 
+                                                          bbbData != "failure"?  reversebbbData[index]["bowler"]["name"] + " to " + reversebbbData[index]["batsman"]["name"]:"Ball by ball data is not Available",
+                                                          style: TextStyle(
+                                                            color: isDarkMode ? Colors.white : Colors.black,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
