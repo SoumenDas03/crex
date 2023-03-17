@@ -4,8 +4,10 @@ import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crex/dashboard/infoTabviews.dart';
+import 'package:crex/provider/theme_changer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class cricket_home extends StatefulWidget {
@@ -96,6 +98,8 @@ class _cricket_homeState extends State<cricket_home> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChanger = Provider.of<ThemeChanger>(context);
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
@@ -218,12 +222,14 @@ class _cricket_homeState extends State<cricket_home> {
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                      image: AssetImage(
-                                        "assets/background.jpeg",
-                                      ),
-                                      fit: BoxFit.cover,
-                                    )),
+                                      image: DecorationImage(
+                                          image: isDarkMode
+                                              ? AssetImage(
+                                                  'assets/background.jpeg')
+                                              : AssetImage(
+                                                  "assets/bgLightMode.png"),
+                                          fit: BoxFit.fill),
+                                    ),
                                     child: DefaultTabController(
                                       length: 4,
                                       child: Column(
@@ -234,7 +240,9 @@ class _cricket_homeState extends State<cricket_home> {
                                             width: 340,
                                             height: 40,
                                             decoration: BoxDecoration(
-                                                color: Color(0xFFFF4D00),
+                                                color: isDarkMode
+                                                    ? const Color(0xFFFF2E00)
+                                                    : const Color(0xFFDFDFDF),
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             child: Padding(
@@ -244,13 +252,19 @@ class _cricket_homeState extends State<cricket_home> {
                                                   labelPadding:
                                                       EdgeInsets.all(5),
                                                   indicator: BoxDecoration(
-                                                      color: Colors.black,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Color(0xFF494949),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               25)),
                                                   unselectedLabelColor:
-                                                      Colors.white,
-                                                  labelColor: Colors.white,
+                                                      isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                  labelColor: isDarkMode
+                                                      ? Colors.black
+                                                      : Colors.white,
                                                   tabs: [
                                                     Tab(
                                                       text: ('Live'),
@@ -268,9 +282,10 @@ class _cricket_homeState extends State<cricket_home> {
                                             ),
                                           ),
                                           Container(
+                                           
                                             padding:
                                                 EdgeInsets.only(bottom: 45),
-                                            height: 500,
+                                            height: 450,
                                             child: TabBarView(children: [
                                               Container(
                                                 margin: EdgeInsets.only(
@@ -290,17 +305,20 @@ class _cricket_homeState extends State<cricket_home> {
                                                           Navigator.of(context)
                                                               .push(
                                                             MaterialPageRoute(
-                                                              builder: (context) => infoTabViews(
-                                                                  id: data[
-                                                                          index]
-                                                                      ["id"],
-                                                                  seriesId: data[
-                                                                          index]
-                                                                      [
-                                                                      "series_id"],
-                                                                      theme: Theme.of(context).brightness.name,),
+                                                              builder: (context) =>
+                                                                  infoTabViews(
+                                                                id: data[index]
+                                                                    ["id"],
+                                                                seriesId: data[
+                                                                        index][
+                                                                    "series_id"],
+                                                                theme: Theme.of(
+                                                                        context)
+                                                                    .brightness
+                                                                    .name,
+                                                              ),
                                                             ),
-                                                          );                                                        
+                                                          );
                                                         },
                                                         child: Padding(
                                                           padding:
@@ -533,15 +551,21 @@ class _cricket_homeState extends State<cricket_home> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder: (context) => infoTabViews(
-                                                                    id: data[
-                                                                            index]
-                                                                        ["id"],
-                                                                    seriesId: data[
-                                                                            index]
-                                                                        [
-                                                                        "series_id"], 
-                                                                        theme: Theme.of(context).brightness.name,),
+                                                                builder:
+                                                                    (context) =>
+                                                                        infoTabViews(
+                                                                  id: data[
+                                                                          index]
+                                                                      ["id"],
+                                                                  seriesId: data[
+                                                                          index]
+                                                                      [
+                                                                      "series_id"],
+                                                                  theme: Theme.of(
+                                                                          context)
+                                                                      .brightness
+                                                                      .name,
+                                                                ),
                                                               ));
                                                         },
                                                         child: Padding(
@@ -987,15 +1011,21 @@ class _cricket_homeState extends State<cricket_home> {
                                                           Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder: (context) => infoTabViews(
-                                                                    id: newData[
-                                                                            index]
-                                                                        ["id"],
-                                                                    seriesId: data[
-                                                                            index]
-                                                                        [
-                                                                        "series_id"],
-                                                                        theme: Theme.of(context).brightness.name,),
+                                                                builder:
+                                                                    (context) =>
+                                                                        infoTabViews(
+                                                                  id: newData[
+                                                                          index]
+                                                                      ["id"],
+                                                                  seriesId: data[
+                                                                          index]
+                                                                      [
+                                                                      "series_id"],
+                                                                  theme: Theme.of(
+                                                                          context)
+                                                                      .brightness
+                                                                      .name,
+                                                                ),
                                                               ));
                                                         },
                                                         child: Padding(

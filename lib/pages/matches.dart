@@ -167,7 +167,9 @@ class _matchesState extends State<matches> {
                                                 data[index]["name"].toString(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontSize: 16),
                                               ),
                                             ),
@@ -255,7 +257,8 @@ class _matchesState extends State<matches> {
                                                           MainAxisAlignment
                                                               .start,
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Visibility(
                                                           visible: scoreFirst,
@@ -403,7 +406,9 @@ class _matchesState extends State<matches> {
                                             child: Text(
                                               data[index]["status"],
                                               style: TextStyle(
-                                                  color: Colors.white70,
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black45,
                                                   fontSize: 12,
                                                   fontStyle: FontStyle.italic),
                                             ),
@@ -719,7 +724,9 @@ class _matchesState extends State<matches> {
                                                     .toString(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontSize: 16),
                                               ),
                                             ),
@@ -819,7 +826,9 @@ class _matchesState extends State<matches> {
                                             child: Text(
                                               upcomingData[index]["status"],
                                               style: TextStyle(
-                                                  color: Colors.white70,
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black45,
                                                   fontSize: 12,
                                                   fontStyle: FontStyle.italic),
                                             ),
@@ -857,7 +866,9 @@ class _matchesState extends State<matches> {
                                                     .toString(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontSize: 16),
                                               ),
                                             ),
@@ -961,7 +972,9 @@ class _matchesState extends State<matches> {
                                             child: Text(
                                               newData[index]["status"],
                                               style: TextStyle(
-                                                  color: Colors.white70,
+                                                  color: isDarkMode
+                                                      ? Colors.white70
+                                                      : Colors.black45,
                                                   fontSize: 12,
                                                   fontStyle: FontStyle.italic),
                                             ),

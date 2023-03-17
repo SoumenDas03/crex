@@ -943,7 +943,7 @@ class _graphState extends State<graph> {
                                   Container(
                                     height: 200,
                                     width: 320,
-                                    color: Color.fromARGB(255, 58, 58, 58),
+                                    color:isDarkMode? Color.fromARGB(255, 58, 58, 58):Colors.black12,
                                     child: SfSparkLineChart(
                                       //Enable the trackball
                                       trackball: SparkChartTrackball(
@@ -984,7 +984,9 @@ class _graphState extends State<graph> {
                             child: Text(
                               'Win Percentage graph is no available for test matches',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                                  TextStyle(color:  isDarkMode
+                                        ? Colors.white
+                                        : Colors.black, fontSize: 16),
                             ),
                           )
                         ],
