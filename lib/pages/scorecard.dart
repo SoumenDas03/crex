@@ -942,7 +942,28 @@ class _scorecardState extends State<scorecard> {
                                 ),
                               ),
                               Container(
-                                height: (data["scorecard"].length > 1) ? (data["scorecard"][data["scorecard"].length - 2]["batting"].length > data["scorecard"][data["scorecard"].length - 1]["batting"].length) ?( 120 * data["scorecard"][data["scorecard"].length - 2]["batting"].length).toDouble() : (120 * data["scorecard"][data["scorecard"].length - 1]["batting"].length).toDouble() : (120*data["scorecard"][data["scorecard"].length - 1]["batting"].length).toDouble(),
+                                height: (data["scorecard"].length > 1)
+                                    ? (data["scorecard"][data["scorecard"].length - 2]
+                                                    ["batting"]
+                                                .length >
+                                            data["scorecard"]
+                                                        [data["scorecard"].length - 1]
+                                                    ["batting"]
+                                                .length)
+                                        ? (120 * data["scorecard"][data["scorecard"].length - 2]["batting"].length)
+                                            .toDouble()
+                                        : (120 *
+                                                data["scorecard"]
+                                                            [data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .length)
+                                            .toDouble()
+                                    : (120 *
+                                            data["scorecard"]
+                                                        [data["scorecard"].length - 1]
+                                                    ["batting"]
+                                                .length)
+                                        .toDouble(),
                                 child: TabBarView(children: [
                                   SingleChildScrollView(
                                     physics: NeverScrollableScrollPhysics(),
@@ -1090,8 +1111,10 @@ class _scorecardState extends State<scorecard> {
                                                                         1]["batting"][index]["batsman"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -1115,8 +1138,10 @@ class _scorecardState extends State<scorecard> {
                                                                         1]["batting"][index]["dismissal-text"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
@@ -1148,8 +1173,10 @@ class _scorecardState extends State<scorecard> {
                                                                       .toString(),
                                                               style: TextStyle(
                                                                   color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -1180,8 +1207,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1211,8 +1240,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1242,8 +1273,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1273,8 +1306,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1308,9 +1343,9 @@ class _scorecardState extends State<scorecard> {
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15),
                                                     ),
                                                   ),
@@ -1324,9 +1359,9 @@ class _scorecardState extends State<scorecard> {
                                                     children: [
                                                       CircleAvatar(
                                                         backgroundColor:
-                                                             isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                            isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black,
                                                         radius: 10,
                                                         child: Text(
                                                           data["scorecard"]
@@ -1364,10 +1399,9 @@ class _scorecardState extends State<scorecard> {
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color:
-                                                                 isDarkMode
-                                        ? Colors.white
-                                        : Colors.black),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black),
                                                       ),
                                                       SizedBox(
                                                         width: 5,
@@ -1381,10 +1415,9 @@ class _scorecardState extends State<scorecard> {
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color:
-                                                                 isDarkMode
-                                        ? Colors.white
-                                        : Colors.black),
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black),
                                                       ),
                                                     ],
                                                   ),
@@ -1418,28 +1451,29 @@ class _scorecardState extends State<scorecard> {
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15),
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Container(width: 220,
-                                          
+                                                  Container(
+                                                    width: 220,
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       // ignore: prefer_const_literals_to_create_immutables
                                                       children: [
                                                         Text(
-                                                          data["score"].length > 1
-                                                              ? data["score"][
-                                                                      data["score"]
-                                                                              .length -
-                                                                          2]["r"]
+                                                          data["score"].length >
+                                                                  1
+                                                              ? data["score"][data[
+                                                                              "score"]
+                                                                          .length -
+                                                                      2]["r"]
                                                                   .toString()
                                                               : data["score"][
                                                                       data["score"]
@@ -1450,53 +1484,59 @@ class _scorecardState extends State<scorecard> {
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
+                                                            color: Color(
+                                                                0xFFFF4D00),
                                                           ),
                                                         ),
-                                                        data["score"].length > 1 ? Text(
-                                                          "/" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      2]["w"]
-                                                                  .toString() +
-                                                              "(" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      2]["o"]
-                                                                  .toString() +
-                                                              ")",
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
-                                                          ),
-                                                        ): Text(
-                                                          "/" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["w"]
-                                                                  .toString() +
-                                                              "(" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["o"]
-                                                                  .toString() +
-                                                              ")",
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
-                                                          ),
-                                                        ),
+                                                        data["score"].length > 1
+                                                            ? Text(
+                                                                "/" +
+                                                                    data["score"][data["score"].length -
+                                                                                2]
+                                                                            [
+                                                                            "w"]
+                                                                        .toString() +
+                                                                    "(" +
+                                                                    data["score"]
+                                                                            [
+                                                                            data["score"].length -
+                                                                                2]["o"]
+                                                                        .toString() +
+                                                                    ")",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Color(
+                                                                      0xFFFF4D00),
+                                                                ),
+                                                              )
+                                                            : Text(
+                                                                "/" +
+                                                                    data["score"][data["score"].length -
+                                                                                1]
+                                                                            [
+                                                                            "w"]
+                                                                        .toString() +
+                                                                    "(" +
+                                                                    data["score"]
+                                                                            [
+                                                                            data["score"].length -
+                                                                                1]["o"]
+                                                                        .toString() +
+                                                                    ")",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Color(
+                                                                      0xFFFF4D00),
+                                                                ),
+                                                              ),
                                                       ],
                                                     ),
                                                   ),
@@ -1644,8 +1684,10 @@ class _scorecardState extends State<scorecard> {
                                                                         1]["bowling"][index]["bowler"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -1674,9 +1716,11 @@ class _scorecardState extends State<scorecard> {
                                                                               1]["bowling"][index]["o"]
                                                                       .toString(),
                                                               style: TextStyle(
-                                                                  color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                  color: isDarkMode
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -1707,8 +1751,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1738,8 +1784,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1768,9 +1816,11 @@ class _scorecardState extends State<scorecard> {
                                                                             1]["bowling"][index]["w"]
                                                                     .toString(),
                                                             style: TextStyle(
-                                                                color:  isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1800,8 +1850,10 @@ class _scorecardState extends State<scorecard> {
                                                                     .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1826,8 +1878,8 @@ class _scorecardState extends State<scorecard> {
                                       ],
                                     ),
                                   ),
-                                  SingleChildScrollView( 
-                                    physics: NeverScrollableScrollPhysics(),                                     
+                                  SingleChildScrollView(
+                                    physics: NeverScrollableScrollPhysics(),
                                     child: Column(
                                       children: [
                                         SizedBox(
@@ -1962,8 +2014,10 @@ class _scorecardState extends State<scorecard> {
                                                                     "batsman"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -1984,8 +2038,10 @@ class _scorecardState extends State<scorecard> {
                                                                     "dismissal-text"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
@@ -2011,8 +2067,10 @@ class _scorecardState extends State<scorecard> {
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -2034,8 +2092,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2057,8 +2117,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2080,8 +2142,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2103,8 +2167,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2139,15 +2205,16 @@ class _scorecardState extends State<scorecard> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15),
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Container(width: 220,
+                                                  Container(
+                                                    width: 220,
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
@@ -2156,8 +2223,9 @@ class _scorecardState extends State<scorecard> {
                                                         CircleAvatar(
                                                           backgroundColor:
                                                               isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
                                                           radius: 10,
                                                           child: Text(
                                                             data["scorecard"][data[
@@ -2167,7 +2235,8 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                               color: Color(
                                                                   0xFFFF4D00),
                                                             ),
@@ -2179,12 +2248,12 @@ class _scorecardState extends State<scorecard> {
                                                         Text(
                                                           ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
                                                           style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                          ),
                                                         ),
                                                         SizedBox(
                                                           width: 5,
@@ -2192,12 +2261,12 @@ class _scorecardState extends State<scorecard> {
                                                         Text(
                                                           "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
                                                           style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight.bold,
-                                                              color:
-                                                                  isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,),
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: isDarkMode
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -2209,7 +2278,9 @@ class _scorecardState extends State<scorecard> {
                                                 width: 360,
                                                 color: Colors.blueGrey,
                                               ),
-                                              SizedBox(height: 15,),
+                                              SizedBox(
+                                                height: 15,
+                                              ),
                                               Container(
                                                 height: 1.5,
                                                 width: 350,
@@ -2231,26 +2302,28 @@ class _scorecardState extends State<scorecard> {
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           fontSize: 15),
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Container(width: 220,
+                                                  Container(
+                                                    width: 220,
                                                     child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment.end,
                                                       // ignore: prefer_const_literals_to_create_immutables
                                                       children: [
                                                         Text(
-                                                          data["score"].length > 1
-                                                              ? data["score"][
-                                                                      data["score"]
-                                                                              .length -
-                                                                          1]["r"]
+                                                          data["score"].length >
+                                                                  1
+                                                              ? data["score"][data[
+                                                                              "score"]
+                                                                          .length -
+                                                                      1]["r"]
                                                                   .toString()
                                                               : data["score"][
                                                                       data["score"]
@@ -2261,53 +2334,59 @@ class _scorecardState extends State<scorecard> {
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
+                                                            color: Color(
+                                                                0xFFFF4D00),
                                                           ),
                                                         ),
-                                                        data["score"].length > 1 ? Text(
-                                                          "/" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["w"]
-                                                                  .toString() +
-                                                              "(" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["o"]
-                                                                  .toString() +
-                                                              ")",
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
-                                                          ),
-                                                        ): Text(
-                                                          "/" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["w"]
-                                                                  .toString() +
-                                                              "(" +
-                                                              data["score"][data[
-                                                                              "score"]
-                                                                          .length -
-                                                                      1]["o"]
-                                                                  .toString() +
-                                                              ")",
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color(0xFFFF4D00),
-                                                          ),
-                                                        ),
+                                                        data["score"].length > 1
+                                                            ? Text(
+                                                                "/" +
+                                                                    data["score"][data["score"].length -
+                                                                                1]
+                                                                            [
+                                                                            "w"]
+                                                                        .toString() +
+                                                                    "(" +
+                                                                    data["score"]
+                                                                            [
+                                                                            data["score"].length -
+                                                                                1]["o"]
+                                                                        .toString() +
+                                                                    ")",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Color(
+                                                                      0xFFFF4D00),
+                                                                ),
+                                                              )
+                                                            : Text(
+                                                                "/" +
+                                                                    data["score"][data["score"].length -
+                                                                                1]
+                                                                            [
+                                                                            "w"]
+                                                                        .toString() +
+                                                                    "(" +
+                                                                    data["score"]
+                                                                            [
+                                                                            data["score"].length -
+                                                                                1]["o"]
+                                                                        .toString() +
+                                                                    ")",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Color(
+                                                                      0xFFFF4D00),
+                                                                ),
+                                                              ),
                                                       ],
                                                     ),
                                                   ),
@@ -2445,8 +2524,10 @@ class _scorecardState extends State<scorecard> {
                                                                     "batsman"]["name"],
                                                                 style: TextStyle(
                                                                     color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),
@@ -2470,8 +2551,10 @@ class _scorecardState extends State<scorecard> {
                                                                   .toString(),
                                                               style: TextStyle(
                                                                   color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
@@ -2493,8 +2576,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2516,8 +2601,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2538,9 +2625,11 @@ class _scorecardState extends State<scorecard> {
                                                                     index]["6s"]
                                                                 .toString(),
                                                             style: TextStyle(
-                                                                color:  isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -2562,8 +2651,10 @@ class _scorecardState extends State<scorecard> {
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
