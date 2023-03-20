@@ -26,7 +26,7 @@ class _scorecardState extends State<scorecard> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -46,7 +46,7 @@ class _scorecardState extends State<scorecard> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());

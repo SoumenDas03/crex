@@ -70,7 +70,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -99,7 +99,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -2950,24 +2950,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                     context,
                     MaterialPageRoute(
                       builder: (context) => pipPage(
-                        teamName: 
-                          data["score"][data["score"].length - 1]["inning"].substring(
-                                      0,
-                                      (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                          ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                              " ")
-                                          : data["score"][data["score"].length - 1]["inning"]
-                                              .length) ==
-                                  data["teamInfo"][0]["name"].substring(
-                                      0,
-                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                          ? data["teamInfo"][0]["name"].indexOf(
-                                              " ")
-                                          : data["teamInfo"][0]["name"]
-                                              .length)
-                              ? data["teamInfo"]
-                                  [0]["shortname"]
-                              : data["teamInfo"][1]["shortname"],                                                                                                              
+                        id: widget.id,
                       ),
                     ),
                   ),

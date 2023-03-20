@@ -23,7 +23,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/series?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&offset=0'),
+            'https://api.cricapi.com/v1/series?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -118,8 +118,8 @@ class _fixtures_seriesState extends State<fixtures_series> {
                                         ),
                                         // ignore: prefer_const_constructors
                                         Text(
-                                         "${DateFormat.yMMMEd().format(DateTime.parse(
-                                            data[index]["startDate"]))}-" + data[index]["endDate"],
+                                          "${DateFormat.yMMMEd().format(DateTime.parse(data[index]["startDate"]))}-" +
+                                              data[index]["endDate"],
                                           // ignore: prefer_const_constructors
                                           style: TextStyle(
                                             fontSize: 12.5,

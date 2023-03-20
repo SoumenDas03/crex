@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:crex/pages/infoPlaying_xi_team.dart';
 import 'package:crex/pages/playingXI.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 
 class info extends StatefulWidget {
-  const info({Key? key, required this.id, required this.theme}) : super(key: key);
+  const info({Key? key, required this.id, required this.theme})
+      : super(key: key);
 
   final String id;
   final String theme;
@@ -34,7 +36,7 @@ class _infoState extends State<info> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -56,7 +58,7 @@ class _infoState extends State<info> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -1215,12 +1217,14 @@ class _infoState extends State<info> {
                                   ),
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const playingXI(),
-                                          ));
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              infoPlaying_xi_team(
+                                            id: widget.id,
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(

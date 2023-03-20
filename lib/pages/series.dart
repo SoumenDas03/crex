@@ -29,7 +29,7 @@ class _seriesState extends State<series> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/series?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&offset=0'),
+            'https://api.cricapi.com/v1/series?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -50,7 +50,7 @@ class _seriesState extends State<series> {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
         // backgroundColor: Colors.black,
-      body: FutureBuilder(
+        body: FutureBuilder(
       future: getSeriesList(),
       builder: (context, snapshot) {
         if (data == null) {
@@ -77,7 +77,7 @@ class _seriesState extends State<series> {
                       child: Text(
                         'Trending Series',
                         style: TextStyle(
-                            color:isDarkMode? Colors.white: Colors.black,
+                            color: isDarkMode ? Colors.white : Colors.black,
                             fontWeight: FontWeight.w600,
                             fontSize: 17),
                       ),
@@ -106,8 +106,12 @@ class _seriesState extends State<series> {
                             ],
                             // ignore: prefer_const_literals_to_create_immutables
                             colors: [
-                             isDarkMode? Color.fromARGB(255, 230, 98, 42):  const Color(0xFFDFDFDF),
-                             isDarkMode? Color.fromARGB(255, 246, 75, 1): const Color(0xFFDFDFDF),
+                              isDarkMode
+                                  ? Color.fromARGB(255, 230, 98, 42)
+                                  : const Color(0xFFDFDFDF),
+                              isDarkMode
+                                  ? Color.fromARGB(255, 246, 75, 1)
+                                  : const Color(0xFFDFDFDF),
                             ],
                           ),
                         ),
@@ -118,7 +122,8 @@ class _seriesState extends State<series> {
                               padding: const EdgeInsets.only(
                                   top: 15, bottom: 10, left: 10, right: 7),
                               child: CircleAvatar(
-                                backgroundColor: isDarkMode? Colors.white: Colors.black,
+                                backgroundColor:
+                                    isDarkMode ? Colors.white : Colors.black,
                                 radius: 25,
                                 child: Column(
                                   // ignore: prefer_const_literals_to_create_immutables
@@ -129,7 +134,9 @@ class _seriesState extends State<series> {
                                     Text(
                                       data[0]["matches"].toString(),
                                       style: TextStyle(
-                                          color:isDarkMode? Colors.black: Colors.white,
+                                          color: isDarkMode
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
@@ -137,7 +144,9 @@ class _seriesState extends State<series> {
                                       style: TextStyle(
                                           fontSize: 8,
                                           fontWeight: FontWeight.w600,
-                                          color:isDarkMode? Colors.black: Colors.white),
+                                          color: isDarkMode
+                                              ? Colors.black
+                                              : Colors.white),
                                     )
                                   ],
                                 ),
@@ -154,8 +163,9 @@ class _seriesState extends State<series> {
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
-                                        color:
-                                           isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black),
+                                        color: isDarkMode
+                                            ? Color.fromARGB(255, 246, 242, 242)
+                                            : Colors.black),
                                   ),
                                 ),
                                 Container(
@@ -170,7 +180,9 @@ class _seriesState extends State<series> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                      color: isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black,
+                                      color: isDarkMode
+                                          ? Color.fromARGB(255, 246, 242, 242)
+                                          : Colors.black,
                                     ),
                                   ),
                                 ),
@@ -188,15 +200,19 @@ class _seriesState extends State<series> {
                             margin: const EdgeInsets.only(left: 30),
                             height: 60,
                             width: 330,
-                            color:isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                            color: isDarkMode
+                                ? const Color.fromARGB(255, 91, 85, 85)
+                                : Color.fromARGB(77, 141, 90, 90),
                             child: Container(
                               margin: const EdgeInsets.only(left: 30, top: 00),
                               child: Row(
                                 children: [
-                                   Text(
+                                  Text(
                                     'Series',
                                     style: TextStyle(
-                                        color: isDarkMode? Colors.white: Colors.black,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -206,7 +222,9 @@ class _seriesState extends State<series> {
                                     child: Text(
                                       data[0]["name"].toString(),
                                       style: TextStyle(
-                                        color: isDarkMode? Colors.white: Colors.black,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),
@@ -224,16 +242,20 @@ class _seriesState extends State<series> {
                             margin: const EdgeInsets.only(left: 30),
                             height: 60,
                             width: 330,
-                            color: isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                            color: isDarkMode
+                                ? const Color.fromARGB(255, 91, 85, 85)
+                                : Color.fromARGB(77, 141, 90, 90),
                             child: Row(
                               children: [
                                 Container(
                                   margin:
                                       const EdgeInsets.only(left: 30, top: 00),
-                                  child:  Text(
+                                  child: Text(
                                     'Duration',
                                     style: TextStyle(
-                                        color: isDarkMode? Colors.white: Colors.black,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -247,8 +269,10 @@ class _seriesState extends State<series> {
                                           style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w500,
-                                              color: isDarkMode? Color.fromARGB(
-                                                  255, 246, 242, 242): Colors.black),
+                                              color: isDarkMode
+                                                  ? Color.fromARGB(
+                                                      255, 246, 242, 242)
+                                                  : Colors.black),
                                         )
                                       : Text(
                                           data[0]["startDate"] +
@@ -272,7 +296,8 @@ class _seriesState extends State<series> {
                               margin: const EdgeInsets.only(left: 30),
                               height: 1,
                               width: 330,
-                              color:isDarkMode? Colors.white: Colors.blueGrey),
+                              color:
+                                  isDarkMode ? Colors.white : Colors.blueGrey),
                           Container(
                             margin: const EdgeInsets.only(left: 30),
                             child: ClipRRect(
@@ -281,15 +306,19 @@ class _seriesState extends State<series> {
                               child: Container(
                                 height: 60,
                                 width: 330,
-                                color: isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                                color: isDarkMode
+                                    ? const Color.fromARGB(255, 91, 85, 85)
+                                    : Color.fromARGB(77, 141, 90, 90),
                                 child: Row(
                                   children: [
                                     Container(
                                       margin: const EdgeInsets.only(left: 30),
-                                      child:  Text(
+                                      child: Text(
                                         'Format',
                                         style: TextStyle(
-                                            color: isDarkMode? Colors.white: Colors.black,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500),
                                       ),
@@ -304,7 +333,9 @@ class _seriesState extends State<series> {
                                             data[0]["test"].toString() +
                                             " Tests",
                                         style: TextStyle(
-                                          color: isDarkMode? Colors.white: Colors.black,
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                           fontSize: 13,
                                         ),
                                       ),
@@ -343,7 +374,9 @@ class _seriesState extends State<series> {
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(30),
                                       bottomLeft: Radius.circular(30)),
-                                  color:isDarkMode? Color.fromARGB(255, 39, 38, 38):  const Color(0xFFDFDFDF),
+                                  color: isDarkMode
+                                      ? Color.fromARGB(255, 39, 38, 38)
+                                      : const Color(0xFFDFDFDF),
                                 ),
                                 child: Column(
                                   children: [
@@ -354,7 +387,9 @@ class _seriesState extends State<series> {
                                         Padding(
                                           padding: const EdgeInsets.all(7),
                                           child: CircleAvatar(
-                                            backgroundColor:isDarkMode? Colors.white: Colors.black,
+                                            backgroundColor: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
                                             child: Column(
                                               // ignore: prefer_const_literals_to_create_immutables
                                               children: [
@@ -365,7 +400,9 @@ class _seriesState extends State<series> {
                                                   data[index + 1]["matches"]
                                                       .toString(),
                                                   style: TextStyle(
-                                                     color:isDarkMode? Colors.black: Colors.white,
+                                                      color: isDarkMode
+                                                          ? Colors.black
+                                                          : Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
@@ -375,7 +412,9 @@ class _seriesState extends State<series> {
                                                       fontSize: 8,
                                                       fontWeight:
                                                           FontWeight.w600,
-                                                       color:isDarkMode? Colors.black: Colors.white),
+                                                      color: isDarkMode
+                                                          ? Colors.black
+                                                          : Colors.white),
                                                 )
                                               ],
                                             ),
@@ -395,7 +434,10 @@ class _seriesState extends State<series> {
                                                 style: TextStyle(
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w500,
-                                                    color: isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black),
+                                                    color: isDarkMode
+                                                        ? Color.fromARGB(
+                                                            255, 246, 242, 242)
+                                                        : Colors.black),
                                               ),
                                             ),
                                             Container(
@@ -410,7 +452,13 @@ class _seriesState extends State<series> {
                                                           fontSize: 11,
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          color: isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black),
+                                                          color: isDarkMode
+                                                              ? Color.fromARGB(
+                                                                  255,
+                                                                  246,
+                                                                  242,
+                                                                  242)
+                                                              : Colors.black),
                                                     )
                                                   : Text(
                                                       data[index + 1]
@@ -454,17 +502,20 @@ class _seriesState extends State<series> {
                                     margin: const EdgeInsets.only(left: 30),
                                     height: 60,
                                     width: 330,
-                                    color:
-                                       isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                                    color: isDarkMode
+                                        ? const Color.fromARGB(255, 91, 85, 85)
+                                        : Color.fromARGB(77, 141, 90, 90),
                                     child: Container(
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 00),
                                       child: Row(
                                         children: [
-                                           Text(
+                                          Text(
                                             'Series',
                                             style: TextStyle(
-                                                color: isDarkMode? Colors.white: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -476,7 +527,9 @@ class _seriesState extends State<series> {
                                               data[index + 1]["name"]
                                                   .toString(),
                                               style: TextStyle(
-                                                color: isDarkMode? Colors.white: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 13,
                                               ),
                                             ),
@@ -494,17 +547,20 @@ class _seriesState extends State<series> {
                                     margin: const EdgeInsets.only(left: 30),
                                     height: 60,
                                     width: 330,
-                                    color:
-                                        isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                                    color: isDarkMode
+                                        ? const Color.fromARGB(255, 91, 85, 85)
+                                        : Color.fromARGB(77, 141, 90, 90),
                                     child: Row(
                                       children: [
                                         Container(
                                           margin: const EdgeInsets.only(
                                               left: 30, top: 00),
-                                          child:  Text(
+                                          child: Text(
                                             'Duration',
                                             style: TextStyle(
-                                                color: isDarkMode? Colors.white: Colors.black,
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -521,7 +577,10 @@ class _seriesState extends State<series> {
                                                       fontSize: 11,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      color: isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black),
+                                                      color: isDarkMode
+                                                          ? Color.fromARGB(255,
+                                                              246, 242, 242)
+                                                          : Colors.black),
                                                 )
                                               : Text(
                                                   data[index + 1]["startDate"] +
@@ -538,9 +597,12 @@ class _seriesState extends State<series> {
                                                       fontSize: 11,
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      color:isDarkMode? Color.fromARGB(255, 246, 242, 242): Colors.black
+                                                      color: isDarkMode
+                                                          ? Color.fromARGB(255,
+                                                              246, 242, 242)
+                                                          : Colors.black),
                                                 ),
-                                        ),)
+                                        )
                                       ],
                                     ),
                                   ),
@@ -557,16 +619,21 @@ class _seriesState extends State<series> {
                                       child: Container(
                                         height: 60,
                                         width: 330,
-                                        color: isDarkMode? const Color.fromARGB(255, 91, 85, 85): Color.fromARGB(77, 141, 90, 90),
+                                        color: isDarkMode
+                                            ? const Color.fromARGB(
+                                                255, 91, 85, 85)
+                                            : Color.fromARGB(77, 141, 90, 90),
                                         child: Row(
                                           children: [
                                             Container(
                                               margin: const EdgeInsets.only(
                                                   left: 30),
-                                              child:  Text(
+                                              child: Text(
                                                 'Format',
                                                 style: TextStyle(
-                                                    color: isDarkMode? Colors.white: Colors.black,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                     fontSize: 15,
                                                     fontWeight:
                                                         FontWeight.w500),
@@ -586,7 +653,9 @@ class _seriesState extends State<series> {
                                                         .toString() +
                                                     " Tests",
                                                 style: TextStyle(
-                                                  color:isDarkMode? Colors.white: Colors.black,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 13,
                                                 ),
                                               ),

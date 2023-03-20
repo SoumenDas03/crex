@@ -21,7 +21,7 @@ class _matchesState extends State<matches> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/currentMatches?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&offset=0'),
+            'https://api.cricapi.com/v1/currentMatches?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -49,7 +49,7 @@ class _matchesState extends State<matches> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/matches?apikey=2c9a814a-4d49-468a-a7a7-63a76b3eb491&offset=0'),
+            'https://api.cricapi.com/v1/matches?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
       );
 
       upcomingMap = jsonDecode(response.body.toString());
