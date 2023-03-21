@@ -638,22 +638,22 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             null
                                                         ? (bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 7]
-                                                                    ["runs"] +
+                                                                    ["runs"] ?? 1+
                                                                 bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 8]
-                                                                    ["runs"] +
+                                                                    ["runs"] ?? 1 +
                                                                 bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 9]
-                                                                    ["runs"] +
+                                                                    ["runs"] ?? 1 +
                                                                 bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 10]
-                                                                    ["runs"] +
+                                                                    ["runs"] ?? 1 +
                                                                 bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 11]
-                                                                    ["runs"] +
+                                                                    ["runs"] ?? 1+
                                                                 bbbData["bbb"]
                                                                         [bbbData["bbb"].length - 12]
-                                                                    ["runs"])
+                                                                    ["runs"] ?? 1)
                                                             .toString()
                                                         : "8"
                                                     : "1",
@@ -982,7 +982,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          "IND",
+                                          data["teamInfo"][0]["shortname"],
                                           style: TextStyle(
                                               color: isDarkMode
                                                   ? Colors.white
@@ -1011,7 +1011,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           width: 8,
                                         ),
                                         Text(
-                                          "AUS",
+                                          data["teamInfo"][1]["shortname"],
                                           style: TextStyle(
                                               color: isDarkMode
                                                   ? Colors.white
@@ -3340,7 +3340,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           // ignore: prefer_const_literals_to_create_immutables
                           children: [
                             Text(
-                              'PAK 25%',
+                              data["teamInfo"][0]["shortname"] +'25%',
                               style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold),
                             ),
@@ -3356,7 +3356,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               width: 50,
                             ),
                             Text(
-                              'IND 40%',
+                              data["teamInfo"][1]["shortname"] +'40%',
                               style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold),
                             ),
@@ -3426,7 +3426,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'PAK',
+                          data["teamInfo"][0]["shortname"],
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -3482,7 +3482,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           width: 15,
                         ),
                         Text(
-                          'IND',
+                          data["teamInfo"][1]["shortname"],
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,

@@ -235,6 +235,10 @@ class _pipPageState extends State<pipPage> with WidgetsBindingObserver {
               ),
             ),
             childWhenDisabled: Scaffold(
+              appBar: AppBar(
+                backgroundColor: const Color.fromARGB(163, 17, 17, 17),
+                title: const Text("Go Back to Live Page"),
+              ),
               body: Container(
                 margin: const EdgeInsets.only(top: 350),
                 child: Center(

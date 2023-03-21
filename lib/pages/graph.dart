@@ -853,22 +853,22 @@ class _graphState extends State<graph> {
                                                               null
                                                           ? (bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 1]
-                                                                      ["runs"] +
+                                                                      ["runs"] ?? 1+
                                                                   bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 2]
-                                                                      ["runs"] +
+                                                                      ["runs"] ?? 1 +
                                                                   bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 3]
-                                                                      ["runs"] +
+                                                                      ["runs"] ?? 1 +
                                                                   bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 4]
-                                                                      ["runs"] +
+                                                                      ["runs"] ?? 1 +
                                                                   bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 5]
-                                                                      ["runs"] +
+                                                                      ["runs"] ?? 1 +
                                                                   bbbData["bbb"]
                                                                           [bbbData["bbb"].length - 6]
-                                                                      ["runs"])
+                                                                      ["runs"] ?? 1)
                                                               .toString()
                                                           : "8"
                                                       : "1",

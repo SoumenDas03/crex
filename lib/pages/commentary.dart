@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, unnecessary_import, prefer_interpolation_to_compose_strings, prefer_typing_uninitialized_variables, avoid_print
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, unnecessary_import, prefer_interpolation_to_compose_strings, prefer_typing_uninitialized_variables, avoid_print, unnecessary_null_comparison
 
 import 'dart:convert';
 import 'dart:ui';
@@ -362,11 +362,11 @@ class _commententaryState extends State<commententary> {
                                                                         1][
                                                                     "dismissal"] ==
                                                                 null
-                                                            ? bbbData[
+                                                            ? (bbbData[
                                                                     "bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    1]["runs"]
+                                                                    1]["runs"] ?? 1)
                                                                 .toString()
                                                             : "W"
                                                         : "1",
@@ -974,20 +974,20 @@ class _commententaryState extends State<commententary> {
                                                             ? bbbData["bbb"][bbbData["bbb"].length - 1][
                                                                         "dismissal"] ==
                                                                     null
-                                                                ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] +
+                                                                ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] ?? 1 +
                                                                         bbbData["bbb"][bbbData["bbb"].length - 2][
-                                                                            "runs"] +
+                                                                            "runs"] ?? 1 +
                                                                         bbbData["bbb"][bbbData["bbb"].length - 3]
                                                                             [
-                                                                            "runs"] +
+                                                                            "runs"] ?? 1 +
                                                                         bbbData["bbb"][bbbData["bbb"].length - 4]
                                                                             [
-                                                                            "runs"] +
+                                                                            "runs"] ?? 1 +
                                                                         bbbData["bbb"][bbbData["bbb"].length - 5]
                                                                             [
-                                                                            "runs"] +
+                                                                            "runs"] ?? "1" +
                                                                         bbbData["bbb"][bbbData["bbb"].length - 6]
-                                                                            ["runs"])
+                                                                            ["runs"] ?? 1)
                                                                     .toString()
                                                                 : "8"
                                                             : "1",
@@ -1951,13 +1951,22 @@ class _commententaryState extends State<commententary> {
                                                               ? reversebbbData[
                                                                               index]
                                                                           [
+                                                                          "bowler"] != null ? reversebbbData[
+                                                                              index]
+                                                                          [
                                                                           "bowler"]
-                                                                      ["name"] +
+                                                                      ["name"] + "to" + reversebbbData[
+                                                                          index]
+                                                                      [
+                                                                      "batsman"]["name"]: "Bowler" +
                                                                   " to " +
                                                                   reversebbbData[
                                                                           index]
                                                                       [
-                                                                      "batsman"]["name"]
+                                                                      "batsman"]["name"] != null ? reversebbbData[
+                                                                          index]
+                                                                      [
+                                                                      "batsman"]["name"] : "Batsman"
                                                               : "Ball by ball data is not Available",
                                                           style: TextStyle(
                                                             color: isDarkMode
@@ -1997,7 +2006,20 @@ class _commententaryState extends State<commententary> {
                                                                   color: Color.fromARGB(255, 236, 219, 63),
                                                                 ),
                                                                 child: Text(
-                                                                  'AUS',
+                                                                  data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                                        data["teamInfo"][0]["name"].substring(
+                                                                            0,
+                                                                            (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                                ? data["teamInfo"][0]["name"].indexOf(
+                                                                                    " ")
+                                                                                : data["teamInfo"][0]["name"]
+                                                                                    .length)
+                                                                    ? data["teamInfo"]
+                                                                            [0][
+                                                                        "shortname"]
+                                                                    : data["teamInfo"]
+                                                                            [1][
+                                                                        "shortname"],
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           12,
