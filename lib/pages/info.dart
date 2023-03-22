@@ -1345,60 +1345,72 @@ class _infoState extends State<info> {
                                         child: Container(
                                             height: 1, color: Colors.white),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 5, right: 5),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10),
-                                          ),
-                                          child: Container(
-                                            height: 60,
-                                            color: isDarkMode
-                                                ? Color.fromARGB(
-                                                    255, 66, 63, 63)
-                                                : const Color(0xFFDFDFDF),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 10),
-                                                  child: CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                            data["teamInfo"][1]
-                                                                ["img"]),
-                                                  ),
+                                      InkWell(
+                                        onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    infoPlaying_xi_team(
+                                                  id: widget.id,
                                                 ),
-                                                Container(
-                                                  width: 225,
-                                                  margin:
-                                                      EdgeInsets.only(left: 10),
-                                                  child: Text(
-                                                    (data["teamInfo"][1]
-                                                        ["shortname"]),
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                              ),
+                                            );
+                                          },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
+                                            ),
+                                            child: Container(
+                                              height: 60,
+                                              color: isDarkMode
+                                                  ? Color.fromARGB(
+                                                      255, 66, 63, 63)
+                                                  : const Color(0xFFDFDFDF),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    margin:
+                                                        EdgeInsets.only(left: 10),
+                                                    child: CircleAvatar(
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              data["teamInfo"][1]
+                                                                  ["img"]),
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: Icon(
-                                                    Icons.keyboard_arrow_right,
-                                                    size: 35,
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
+                                                  Container(
+                                                    width: 225,
+                                                    margin:
+                                                        EdgeInsets.only(left: 10),
+                                                    child: Text(
+                                                      (data["teamInfo"][1]
+                                                          ["shortname"]),
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    child: Icon(
+                                                      Icons.keyboard_arrow_right,
+                                                      size: 35,
+                                                      color: isDarkMode
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

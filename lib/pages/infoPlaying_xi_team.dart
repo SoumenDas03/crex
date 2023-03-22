@@ -25,8 +25,8 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
 
       map = jsonDecode(response.body.toString());
       data = map["data"];
-      newData = data[0]["players"].getRange(11, 15).toList();
-      secondNewData = data[1]["players"].getRange(11, 15).toList();
+      newData = data[0]["players"].getRange(11, data[0]["players"].length).toList();
+      secondNewData = data[1]["players"].getRange(11, data[1]["players"].length).toList();
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
@@ -105,7 +105,7 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 15),
-                                height: 820,
+                                height: 835,
                                 child: TabBarView(children: [
                                   Column(
                                     children: [
