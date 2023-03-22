@@ -50,7 +50,11 @@ class _cricket_homeState extends State<cricket_home> {
               element["status"] !=
                   "No result (rain) - CSG and LKK joint-winners" &&
               element["status"] != "New Zealand Legends opt to bowl" &&
-              element["status"] != "Day 1: Stumps - Sri Lanka opt to bowl")
+              element["status"] != "Day 1: Stumps - Sri Lanka opt to bowl" &&
+              element["status"] != "No result(due to rain)" &&
+              element["status"] != "Day 2: Stumps - Wellington trail by 239 runs" && 
+              element["status"] != "Day 3: 3rd Session - Central Districts trail by 135 runs" && 
+              element["status"] != "Day 2: 3rd Session - Northern Knights opt to bowl")
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)

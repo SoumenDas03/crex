@@ -69,7 +69,7 @@ class _fantasyState extends State<fantasy> {
       fantasyData = fantasyMap["data"];
       sugam = fantasyData["totals"];
       sugam.sort((a, b) {
-        return a['points'].compareTo(b['points']) as int;
+        return int.parse(a['points']).compareTo(int.parse(b['points']));
       });
       pointsOrderData = sugam.reversed.toList();
       if (response.statusCode == 200) {
@@ -97,28 +97,28 @@ class _fantasyState extends State<fantasy> {
               scoreData["scorecard"][1]["batting"])
           : scoreData["scorecard"][0]["batting"];
       sugamScore.sort((a, b) {
-        return a['r'].compareTo(b['r']) as int;
+        return int.parse(a['r']).compareTo(int.parse(b['r']));
       });
       sugamWicket = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["bowling"] +
               scoreData["scorecard"][1]["bowling"])
           : scoreData["scorecard"][0]["bowling"];
       sugamWicket.sort((a, b) {
-        return a['w'].compareTo(b['w']) as int;
+        return int.parse(a['w']).compareTo(int.parse(b['w']));
       });
       sugamSixes = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["batting"] +
               scoreData["scorecard"][1]["batting"])
           : scoreData["scorecard"][0]["batting"];
       sugamSixes.sort((a, b) {
-        return a['6s'].compareTo(b['6s']) as int;
+        return int.parse(a['6s']).compareTo(int.parse(b['6s']));
       });
       economySugam = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["bowling"] +
               scoreData["scorecard"][1]["bowling"])
           : scoreData["scorecard"][0]["bowling"];
       economySugam.sort((a, b) {
-        return b['eco'].compareTo(a['eco']) as int;
+        return int.parse(b['eco']).compareTo(int.parse(a['eco']));
       });
       scoreOrderData = sugamScore.reversed.toList();
       wicketOrderData = sugamWicket.reversed.toList();
@@ -142,7 +142,7 @@ class _fantasyState extends State<fantasy> {
       );
 
       bbbmap = jsonDecode(response.body.toString());
-      bbbData = bbbmap["data"] != null ? bbbmap["data"] : bbbmap["status"];
+      bbbData = bbbmap["data"] ?? bbbmap["status"];
       if (response.statusCode == 200) {
         return bbbData;
         // ignore: use_build_context_synchronously
@@ -2286,14 +2286,14 @@ class _fantasyState extends State<fantasy> {
                                                           CircleAvatar(
                                                             radius: 12,
                                                             backgroundImage:
-                                                                AssetImage(
-                                                                    "assets/pakistan.jpg"),
+                                                                NetworkImage(
+                                                                    data["teamInfo"][0]["img"].toString()),
                                                           ),
                                                           SizedBox(
                                                             width: 8,
                                                           ),
                                                           Text(
-                                                            "PAK",
+                                                            data["teamInfo"][0]["shortname"].toString(),
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
@@ -2324,14 +2324,14 @@ class _fantasyState extends State<fantasy> {
                                                           CircleAvatar(
                                                             radius: 12,
                                                             backgroundImage:
-                                                                AssetImage(
-                                                                    "assets/india.png"),
+                                                                NetworkImage(
+                                                                    data["teamInfo"][1]["img"].toString()),
                                                           ),
                                                           SizedBox(
                                                             width: 8,
                                                           ),
                                                           Text(
-                                                            "IND",
+                                                            data["teamInfo"][1]["shortname"].toString(),
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
