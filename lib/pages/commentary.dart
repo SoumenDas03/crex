@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:crex/pages/singlePlayer_info.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -1033,175 +1034,195 @@ class _commententaryState extends State<commententary> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(32),
-                                                        border: Border.all(
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: scoreData[0]["batsman"]["id"].toString()),));
+                                                },
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(32),
+                                                          border: Border.all(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              width: 0.5)),
+                                                      child: FutureBuilder(
+                                                        future: getPlayerInfo(
+                                                            scoreData[0][
+                                                                        "batsman"]
+                                                                    ["id"]
+                                                                .toString()),
+                                                        builder:
+                                                            (context, snapshot) {
+                                                          if (playerInfoData ==
+                                                              null) {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                            );
+                                                          } else {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      playerInfoData[
+                                                                          "playerImg"]),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Center(
+                                                      child: Text(
+                                                        scoreData[0]["batsman"]
+                                                            ["name"],
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             color: isDarkMode
                                                                 ? Colors.white
                                                                 : Colors.black,
-                                                            width: 0.5)),
-                                                    child: FutureBuilder(
-                                                      future: getPlayerInfo(
-                                                          scoreData[0][
-                                                                      "batsman"]
-                                                                  ["id"]
-                                                              .toString()),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (playerInfoData ==
-                                                            null) {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                                          );
-                                                        } else {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    playerInfoData[
-                                                                        "playerImg"]),
-                                                          );
-                                                        }
-                                                      },
+                                                            fontSize: 15),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Center(
-                                                    child: Text(
-                                                      scoreData[0]["batsman"]
-                                                          ["name"],
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      scoreData[0]["r"]
+                                                              .toString() +
+                                                          "(" +
+                                                          scoreData[0]["b"]
+                                                              .toString() +
+                                                          ")" +
+                                                          '*',
                                                       style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
                                                           color: isDarkMode
                                                               ? Colors.white
                                                               : Colors.black,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    scoreData[0]["r"]
-                                                            .toString() +
-                                                        "(" +
-                                                        scoreData[0]["b"]
-                                                            .toString() +
-                                                        ")" +
-                                                        '*',
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12),
-                                                  )
-                                                ],
+                                                          fontSize: 12),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                               SizedBox(
                                                 width: 45,
                                               ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(32),
-                                                        border: Border.all(
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: scoreData
+                                                                    .length >
+                                                                1
+                                                            ? scoreData[1][
+                                                                        "batsman"]
+                                                                    ["id"]
+                                                                .toString()
+                                                            : scoreData[0][
+                                                                        "batsman"]
+                                                                    ["id"]
+                                                                .toString()),));
+                                                },
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(32),
+                                                          border: Border.all(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              width: 0.5)),
+                                                      child: FutureBuilder(
+                                                        future: getPlayerInfo(scoreData
+                                                                    .length >
+                                                                1
+                                                            ? scoreData[1][
+                                                                        "batsman"]
+                                                                    ["id"]
+                                                                .toString()
+                                                            : scoreData[0][
+                                                                        "batsman"]
+                                                                    ["id"]
+                                                                .toString()),
+                                                        builder:
+                                                            (context, snapshot) {
+                                                          if (playerInfoData ==
+                                                              null) {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                            );
+                                                          } else {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      playerInfoData[
+                                                                          "playerImg"]),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Center(
+                                                      child: Text(
+                                                        scoreData.length > 1
+                                                            ? scoreData[1]
+                                                                    ["batsman"]
+                                                                ["name"]
+                                                            : scoreData[0]
+                                                                    ["batsman"]
+                                                                ["name"],
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             color: isDarkMode
                                                                 ? Colors.white
                                                                 : Colors.black,
-                                                            width: 0.5)),
-                                                    child: FutureBuilder(
-                                                      future: getPlayerInfo(scoreData
-                                                                  .length >
-                                                              1
-                                                          ? scoreData[1][
-                                                                      "batsman"]
-                                                                  ["id"]
-                                                              .toString()
-                                                          : scoreData[0][
-                                                                      "batsman"]
-                                                                  ["id"]
-                                                              .toString()),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (playerInfoData ==
-                                                            null) {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                                          );
-                                                        } else {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    playerInfoData[
-                                                                        "playerImg"]),
-                                                          );
-                                                        }
-                                                      },
+                                                            fontSize: 15),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Center(
-                                                    child: Text(
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
                                                       scoreData.length > 1
-                                                          ? scoreData[1]
-                                                                  ["batsman"]
-                                                              ["name"]
-                                                          : scoreData[0]
-                                                                  ["batsman"]
-                                                              ["name"],
+                                                          ? scoreData[1]["r"]
+                                                                  .toString() +
+                                                              "(" +
+                                                              scoreData[1]["b"]
+                                                                  .toString() +
+                                                              ")"
+                                                          : scoreData[0]["r"]
+                                                                  .toString() +
+                                                              "(" +
+                                                              scoreData[0]["b"]
+                                                                  .toString() +
+                                                              ")",
                                                       style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
                                                           color: isDarkMode
                                                               ? Colors.white
                                                               : Colors.black,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    scoreData.length > 1
-                                                        ? scoreData[1]["r"]
-                                                                .toString() +
-                                                            "(" +
-                                                            scoreData[1]["b"]
-                                                                .toString() +
-                                                            ")"
-                                                        : scoreData[0]["r"]
-                                                                .toString() +
-                                                            "(" +
-                                                            scoreData[0]["b"]
-                                                                .toString() +
-                                                            ")",
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12),
-                                                  )
-                                                ],
+                                                          fontSize: 12),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -1212,94 +1233,105 @@ class _commententaryState extends State<commententary> {
                                                   color: Colors.blueGrey,
                                                 ),
                                               ),
-                                              Column(
-                                                children: [
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(32),
-                                                        border: Border.all(
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: wicketData[wicketData
+                                                                        .indexOf(
+                                                                            wicketData
+                                                                                .last)]
+                                                                    [
+                                                                    "bowler"]["id"]
+                                                                .toString()),),);
+                                                },
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(32),
+                                                          border: Border.all(
+                                                              color: isDarkMode
+                                                                  ? Colors.white
+                                                                  : Colors.black,
+                                                              width: 0.5)),
+                                                      child: FutureBuilder(
+                                                        future: getPlayerInfo(
+                                                            wicketData[wicketData
+                                                                        .indexOf(
+                                                                            wicketData
+                                                                                .last)]
+                                                                    [
+                                                                    "bowler"]["id"]
+                                                                .toString()),
+                                                        builder:
+                                                            (context, snapshot) {
+                                                          if (playerInfoData ==
+                                                              null) {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
+                                                            );
+                                                          } else {
+                                                            return CircleAvatar(
+                                                              radius: 32,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      playerInfoData[
+                                                                          "playerImg"]),
+                                                            );
+                                                          }
+                                                        },
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Center(
+                                                      child: Text(
+                                                        wicketData[wicketData
+                                                                .indexOf(
+                                                                    wicketData
+                                                                        .last)]
+                                                            ["bowler"]["name"],
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             color: isDarkMode
                                                                 ? Colors.white
                                                                 : Colors.black,
-                                                            width: 0.5)),
-                                                    child: FutureBuilder(
-                                                      future: getPlayerInfo(
-                                                          wicketData[wicketData
-                                                                      .indexOf(
-                                                                          wicketData
-                                                                              .last)]
-                                                                  [
-                                                                  "bowler"]["id"]
-                                                              .toString()),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (playerInfoData ==
-                                                            null) {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    'https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg'),
-                                                          );
-                                                        } else {
-                                                          return CircleAvatar(
-                                                            radius: 32,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    playerInfoData[
-                                                                        "playerImg"]),
-                                                          );
-                                                        }
-                                                      },
+                                                            fontSize: 15),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Center(
-                                                    child: Text(
-                                                      wicketData[wicketData
-                                                              .indexOf(
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Text(
+                                                      wicketData[wicketData.indexOf(
                                                                   wicketData
-                                                                      .last)]
-                                                          ["bowler"]["name"],
+                                                                      .last)]["r"]
+                                                              .toString() +
+                                                          '-' +
+                                                          wicketData[wicketData
+                                                                  .indexOf(wicketData
+                                                                      .last)]["w"]
+                                                              .toString() +
+                                                          '(' +
+                                                          wicketData[wicketData
+                                                                  .indexOf(wicketData
+                                                                      .last)]["o"]
+                                                              .toString() +
+                                                          ')',
                                                       style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
                                                           color: isDarkMode
                                                               ? Colors.white
                                                               : Colors.black,
-                                                          fontSize: 15),
+                                                          fontSize: 12),
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Text(
-                                                    wicketData[wicketData.indexOf(
-                                                                wicketData
-                                                                    .last)]["r"]
-                                                            .toString() +
-                                                        '-' +
-                                                        wicketData[wicketData
-                                                                .indexOf(wicketData
-                                                                    .last)]["w"]
-                                                            .toString() +
-                                                        '(' +
-                                                        wicketData[wicketData
-                                                                .indexOf(wicketData
-                                                                    .last)]["o"]
-                                                            .toString() +
-                                                        ')',
-                                                    style: TextStyle(
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),

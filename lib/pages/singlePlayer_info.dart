@@ -194,12 +194,12 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                   Container(
                                     margin: EdgeInsets.only(left: 6, top: 3),
                                     child: Text(
-                                      (int.parse(totalRunList[0]["value"]) +
+                                      totalRunList != null ? (int.parse(totalRunList[0]["value"]) +
                                               int.parse(
                                                   totalRunList[1]["value"]) +
                                               int.parse(
                                                   totalRunList[2]["value"]))
-                                          .toString(),
+                                          .toString() : "No Data to show",
                                       style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 189, 184, 184),
@@ -220,7 +220,7 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    "${"${highestScoreList[0]["value"]} (" + highestScoreList[0]["matchtype"].toUpperCase()})",
+                                    highestScoreList != null ? "${"${highestScoreList[0]["value"]} (" + highestScoreList[0]["matchtype"].toUpperCase()})" : "No Data to show",
                                     style: TextStyle(
                                         color:
                                             Color.fromARGB(255, 189, 184, 184),
@@ -495,10 +495,10 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    odiMatchListBatting[0]
+                                                                    odiMatchListBatting != null ? odiMatchListBatting[0]
                                                                             [
                                                                             "value"]
-                                                                        .toString(),
+                                                                        .toString() : "No Data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -552,10 +552,10 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    odiMatchListBatting[1]
+                                                                    odiMatchListBatting != null ?  odiMatchListBatting[1]
                                                                             [
                                                                             "value"]
-                                                                        .toString(),
+                                                                        .toString() : "No Data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -609,14 +609,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                    odiMatchListBatting != null ? (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[3]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[4]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No Data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -675,14 +675,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                   odiMatchListBatting != null ? (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[4]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[5]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No Data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -735,14 +735,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 18,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                   odiMatchListBatting != null ?  (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[8]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[11]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No Data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -795,14 +795,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 18,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                    odiMatchListBatting != null ? (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[10]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[10]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -855,14 +855,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 18,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                    odiMatchListBowling != null ? (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[7]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[7]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "no data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -915,14 +915,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 18,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                    odiMatchListBatting != null ?  (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? odiMatchListBatting[5]["value"]
                                                                             .toString()
                                                                         : odiMatchListBowling[8]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -972,10 +972,10 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    testMatchListBatting[0]
+                                                                    testMatchListBatting != null ? testMatchListBatting[0]
                                                                             [
                                                                             "value"]
-                                                                        .toString(),
+                                                                        .toString() : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -1029,10 +1029,10 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    testMatchListBatting[1]
+                                                                   testMatchListBatting != null ?  testMatchListBatting[1]
                                                                             [
                                                                             "value"]
-                                                                        .toString(),
+                                                                        .toString() : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -1086,14 +1086,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                    testMatchListBatting != null ? (data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? testMatchListBatting[3]["value"]
                                                                             .toString()
                                                                         : testMatchListBowling[4]["value"]
-                                                                            .toString(),
+                                                                            .toString()) : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -1152,14 +1152,14 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
                                                                     height: 22,
                                                                   ),
                                                                   Text(
-                                                                    data["role"] ==
+                                                                   testMatchListBatting != null ?  data["role"] ==
                                                                                 "WK-Batsman" ||
                                                                             data["role"] ==
                                                                                 "Batsman"
                                                                         ? testMatchListBatting[4]["value"]
                                                                             .toString()
                                                                         : testMatchListBowling[5]["value"]
-                                                                            .toString(),
+                                                                            .toString() : "No data to show",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,

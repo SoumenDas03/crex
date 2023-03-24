@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:crex/pages/pipPage.dart';
+import 'package:crex/pages/singlePlayer_info.dart';
 import 'package:crex/pages/speech_settings.dart';
 import 'package:crex/pages/win_prediction.dart';
 import 'package:crex/provider/theme_changer.dart';
@@ -1771,33 +1772,56 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        width: 132,
-                                        child: Text(
-                                          data["scorecard"][data["scorecard"].length - 1]
-                                                          ["batting"]
-                                                      .where((element) =>
-                                                          element["dismissal-text"] ==
-                                                          "not out")
-                                                      .map((element) =>
-                                                          element["batsman"]
-                                                              ["name"])
-                                                      .toList()
-                                                      .length >
-                                                  0
-                                              ? data["scorecard"][data["scorecard"].length - 1]
-                                                      ["batting"]
-                                                  .where((element) =>
-                                                      element["dismissal-text"] == "not out")
-                                                  .map((element) => element["batsman"]["name"])
-                                                  .toList()[0]
-                                                  .toString()
-                                              : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["name"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["id"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"][data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["batsman"]["id"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["id"]),));
+                                        },
+                                        child: Container(
+                                          width: 132,
+                                          child: Text(
+                                            data["scorecard"][data["scorecard"].length - 1]
+                                                            ["batting"]
+                                                        .where((element) =>
+                                                            element["dismissal-text"] ==
+                                                            "not out")
+                                                        .map((element) =>
+                                                            element["batsman"]
+                                                                ["name"])
+                                                        .toList()
+                                                        .length >
+                                                    0
+                                                ? data["scorecard"][data["scorecard"].length - 1]
+                                                        ["batting"]
+                                                    .where((element) =>
+                                                        element["dismissal-text"] == "not out")
+                                                    .map((element) => element["batsman"]["name"])
+                                                    .toList()[0]
+                                                    .toString()
+                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["name"],
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -1993,17 +2017,16 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           width: 145,
                                           child: Row(
                                             children: [
-                                              Container(
-                                                width: 125,
-                                                child: Text(
-                                                  data["scorecard"][data["scorecard"].length - 1]
+                                              InkWell(
+                                                onTap: () {
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"][data["scorecard"].length - 1]
                                                                   ["batting"]
                                                               .where((element) =>
                                                                   element["dismissal-text"] ==
                                                                   "not out")
                                                               .map((element) =>
                                                                   element["batsman"]
-                                                                      ["name"])
+                                                                      ["id"])
                                                               .toList()
                                                               .length >
                                                           1
@@ -2012,16 +2035,41 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               ["batting"]
                                                           .where((element) =>
                                                               element["dismissal-text"] == "not out")
-                                                          .map((element) => element["batsman"]["name"])
+                                                          .map((element) => element["batsman"]["id"])
                                                           .toList()[1]
                                                           .toString()
-                                                      : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
-                                                  style: TextStyle(
-                                                      color: isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                      : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["id"].toString()),));
+                                                },
+                                                child: Container(
+                                                  width: 125,
+                                                  child: Text(
+                                                    data["scorecard"][data["scorecard"].length - 1]
+                                                                    ["batting"]
+                                                                .where((element) =>
+                                                                    element["dismissal-text"] ==
+                                                                    "not out")
+                                                                .map((element) =>
+                                                                    element["batsman"]
+                                                                        ["name"])
+                                                                .toList()
+                                                                .length >
+                                                            1
+                                                        ? data["scorecard"]
+                                                                    [data["scorecard"].length - 1]
+                                                                ["batting"]
+                                                            .where((element) =>
+                                                                element["dismissal-text"] == "not out")
+                                                            .map((element) => element["batsman"]["name"])
+                                                            .toList()[1]
+                                                            .toString()
+                                                        : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                               ),
                                               SizedBox(
@@ -2311,15 +2359,20 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width: 135,
-                                        child: Text(
-                                          wicketOrderData[0]["bowler"]["name"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: wicketOrderData[0]["bowler"]["id"]),));
+                                        },
+                                        child: Container(
+                                          width: 135,
+                                          child: Text(
+                                            wicketOrderData[0]["bowler"]["name"],
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
                                       ),
                                       SizedBox(

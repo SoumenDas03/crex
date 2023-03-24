@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_interpolation_to_compose_strings
 
 import 'dart:convert';
+import 'package:crex/pages/singlePlayer_info.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -1095,68 +1096,82 @@ class _scorecardState extends State<scorecard> {
                                                             .start,
                                                     children: [
                                                       // ignore: sized_box_for_whitespace
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Container(
-                                                            width: 130,
-                                                            child: Text(
-                                                              data["score"]
-                                                                          .length >
-                                                                      1
-                                                                  ? data["scorecard"][data["scorecard"].length - 2]["batting"][index]
-                                                                          ["batsman"]
-                                                                      ["name"]
-                                                                  : data[
-                                                                      "scorecard"][data["scorecard"]
-                                                                          .length -
-                                                                      1]["batting"][index]["batsman"]["name"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["score"]
+                                                                            .length >
+                                                                        1
+                                                                    ? data["scorecard"][data["scorecard"].length - 2]["batting"][index]
+                                                                            ["batsman"]
+                                                                        ["id"]
+                                                                    : data[
+                                                                        "scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"][index]["batsman"]["id"]),));
+                                                        },
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 130,
+                                                              child: Text(
+                                                                data["score"]
+                                                                            .length >
+                                                                        1
+                                                                    ? data["scorecard"][data["scorecard"].length - 2]["batting"][index]
+                                                                            ["batsman"]
+                                                                        ["name"]
+                                                                    : data[
+                                                                        "scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"][index]["batsman"]["name"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Container(
-                                                            width: 130,
-                                                            margin: EdgeInsets
-                                                                .only(top: 7),
-                                                            child: Text(
-                                                              data["score"]
-                                                                          .length >
-                                                                      1
-                                                                  ? data["scorecard"][data["scorecard"].length - 2]["batting"]
-                                                                          [index]
-                                                                      [
-                                                                      "dismissal-text"]
-                                                                  : data[
-                                                                      "scorecard"][data["scorecard"]
-                                                                          .length -
-                                                                      1]["batting"][index]["dismissal-text"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  fontSize:
-                                                                      10),
+                                                            Container(
+                                                              width: 130,
+                                                              margin: EdgeInsets
+                                                                  .only(top: 7),
+                                                              child: Text(
+                                                                data["score"]
+                                                                            .length >
+                                                                        1
+                                                                    ? data["scorecard"][data["scorecard"].length - 2]["batting"]
+                                                                            [index]
+                                                                        [
+                                                                        "dismissal-text"]
+                                                                    : data[
+                                                                        "scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["batting"][index]["dismissal-text"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                       SizedBox(
                                                         width: 1.5,
@@ -1668,39 +1683,53 @@ class _scorecardState extends State<scorecard> {
                                                             .start,
                                                     children: [
                                                       // ignore: sized_box_for_whitespace
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Container(
-                                                            width: 130,
-                                                            child: Text(
-                                                              data["scorecard"]
-                                                                          .length >
-                                                                      1
-                                                                  ? data["scorecard"][data["scorecard"].length - 2]
-                                                                          ["bowling"][index]["bowler"]
-                                                                      ["name"]
-                                                                  : data[
-                                                                      "scorecard"][data["scorecard"]
-                                                                          .length -
-                                                                      1]["bowling"][index]["bowler"]["name"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"]
+                                                                            .length >
+                                                                        1
+                                                                    ? data["scorecard"][data["scorecard"].length - 2]
+                                                                            ["bowling"][index]["bowler"]
+                                                                        ["id"]
+                                                                    : data[
+                                                                        "scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["bowling"][index]["bowler"]["id"]),));
+                                                        },
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 130,
+                                                              child: Text(
+                                                                data["scorecard"]
+                                                                            .length >
+                                                                        1
+                                                                    ? data["scorecard"][data["scorecard"].length - 2]
+                                                                            ["bowling"][index]["bowler"]
+                                                                        ["name"]
+                                                                    : data[
+                                                                        "scorecard"][data["scorecard"]
+                                                                            .length -
+                                                                        1]["bowling"][index]["bowler"]["name"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                       SizedBox(
                                                         width: 1.5,
@@ -1992,63 +2021,75 @@ class _scorecardState extends State<scorecard> {
                                                             .start,
                                                     children: [
                                                       // ignore: sized_box_for_whitespace
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Container(
-                                                            width: 130,
-                                                            child: Text(
-                                                              data["scorecard"]
-                                                                          [
-                                                                          data["scorecard"].length -
-                                                                              1]
-                                                                      [
-                                                                      "batting"][index]
-                                                                  [
-                                                                  "batsman"]["name"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "batsman"]["id"]),));
+                                                        },
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 130,
+                                                              child: Text(
+                                                                data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "batsman"]["name"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Container(
-                                                            width: 130,
-                                                            margin: EdgeInsets
-                                                                .only(top: 7),
-                                                            child: Text(
-                                                              data["scorecard"]
-                                                                          [
-                                                                          data["scorecard"].length -
-                                                                              1]
-                                                                      [
-                                                                      "batting"][index]
-                                                                  [
-                                                                  "dismissal-text"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  fontSize:
-                                                                      10),
+                                                            Container(
+                                                              width: 130,
+                                                              margin: EdgeInsets
+                                                                  .only(top: 7),
+                                                              child: Text(
+                                                                data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "batting"][index]
+                                                                    [
+                                                                    "dismissal-text"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                       SizedBox(
                                                         width: 1.5,
@@ -2487,7 +2528,7 @@ class _scorecardState extends State<scorecard> {
                                               itemCount: data["scorecard"][
                                                       data["scorecard"]
                                                               .length -
-                                                          1]["batting"]
+                                                          1]["bowling"]
                                                   .length,
                                               itemBuilder: (context, index) {
                                                 return Padding(
@@ -2510,26 +2551,38 @@ class _scorecardState extends State<scorecard> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Container(
-                                                            width: 130,
-                                                            child: Text(
-                                                              data["scorecard"]
-                                                                          [
-                                                                          data["scorecard"].length -
-                                                                              1]
-                                                                      [
-                                                                      "batting"][index]
-                                                                  [
-                                                                  "batsman"]["name"],
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "bowling"][index]
+                                                                    [
+                                                                    "bowler"]["id"]),));
+                                                            },
+                                                            child: SizedBox(
+                                                              width: 130,
+                                                              child: Text(
+                                                                data["scorecard"]
+                                                                            [
+                                                                            data["scorecard"].length -
+                                                                                1]
+                                                                        [
+                                                                        "bowling"][index]
+                                                                    [
+                                                                    "bowler"]["name"],
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -2544,9 +2597,9 @@ class _scorecardState extends State<scorecard> {
                                                             data["scorecard"][data["scorecard"].length -
                                                                             1]
                                                                         [
-                                                                        "batting"]
+                                                                        "bowling"]
                                                                     [
-                                                                    index]["r"]
+                                                                    index]["o"]
                                                                 .toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
@@ -2570,8 +2623,8 @@ class _scorecardState extends State<scorecard> {
                                                         child: Text(
                                                           data["scorecard"][data["scorecard"]
                                                                           .length -
-                                                                      1]["batting"]
-                                                                  [index]["b"]
+                                                                      1]["bowling"]
+                                                                  [index]["m"]
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: isDarkMode
@@ -2594,9 +2647,9 @@ class _scorecardState extends State<scorecard> {
                                                         child: Text(
                                                           data["scorecard"][data["scorecard"]
                                                                           .length -
-                                                                      1]["batting"]
+                                                                      1]["bowling"]
                                                                   [
-                                                                  index]["4s"]
+                                                                  index]["r"]
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: isDarkMode
@@ -2619,9 +2672,9 @@ class _scorecardState extends State<scorecard> {
                                                         child: Text(
                                                           data["scorecard"][data["scorecard"]
                                                                           .length -
-                                                                      1]["batting"]
+                                                                      1]["bowling"]
                                                                   [
-                                                                  index]["6s"]
+                                                                  index]["w"]
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: isDarkMode
@@ -2644,9 +2697,9 @@ class _scorecardState extends State<scorecard> {
                                                         child: Text(
                                                           data["scorecard"][data["scorecard"]
                                                                           .length -
-                                                                      1]["batting"]
+                                                                      1]["bowling"]
                                                                   [
-                                                                  index]["sr"]
+                                                                  index]["eco"]
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: isDarkMode

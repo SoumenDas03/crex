@@ -1,7 +1,8 @@
-// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, prefer_typing_uninitialized_variables, avoid_print
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, duplicate_ignore, prefer_typing_uninitialized_variables, avoid_print, prefer_interpolation_to_compose_strings
 
 import 'dart:convert';
 
+import 'package:crex/pages/singlePlayer_info.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -69,7 +70,8 @@ class _fantasyState extends State<fantasy> {
       fantasyData = fantasyMap["data"];
       sugam = fantasyData["totals"];
       sugam.sort((a, b) {
-        return int.parse(a['points']).compareTo(int.parse(b['points']));
+        return (int.parse(a['points'].toString()))
+            .compareTo(int.parse(b['points'].toString()));
       });
       pointsOrderData = sugam.reversed.toList();
       if (response.statusCode == 200) {
@@ -97,28 +99,32 @@ class _fantasyState extends State<fantasy> {
               scoreData["scorecard"][1]["batting"])
           : scoreData["scorecard"][0]["batting"];
       sugamScore.sort((a, b) {
-        return int.parse(a['r']).compareTo(int.parse(b['r']));
+        return (int.parse(a['r'].toString()))
+            .compareTo(int.parse(b['r'].toString()));
       });
       sugamWicket = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["bowling"] +
               scoreData["scorecard"][1]["bowling"])
           : scoreData["scorecard"][0]["bowling"];
       sugamWicket.sort((a, b) {
-        return int.parse(a['w']).compareTo(int.parse(b['w']));
+        return (int.parse(a['w'].toString()))
+            .compareTo(int.parse(b['w'].toString()));
       });
       sugamSixes = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["batting"] +
               scoreData["scorecard"][1]["batting"])
           : scoreData["scorecard"][0]["batting"];
       sugamSixes.sort((a, b) {
-        return int.parse(a['6s']).compareTo(int.parse(b['6s']));
+        return (int.parse(a['6s'].toString()))
+            .compareTo(int.parse(b['6s'].toString()));
       });
       economySugam = scoreData["scorecard"].length > 1
           ? (scoreData["scorecard"][0]["bowling"] +
               scoreData["scorecard"][1]["bowling"])
           : scoreData["scorecard"][0]["bowling"];
       economySugam.sort((a, b) {
-        return int.parse(b['eco']).compareTo(int.parse(a['eco']));
+        return (double.parse(b['eco'].toString()))
+            .compareTo(double.parse(a['eco'].toString()));
       });
       scoreOrderData = sugamScore.reversed.toList();
       wicketOrderData = sugamWicket.reversed.toList();
@@ -427,14 +433,26 @@ class _fantasyState extends State<fantasy> {
                                                           SizedBox(
                                                             width: 70,
                                                           ),
-                                                         isDarkMode? Container(
-                                          //color: Color(0xff096A31),
-                                          color: Colors.white,
-                                        alignment: Alignment.center,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset('assets/live_tv.png'),
-                                          ),):Image.asset('assets/live_tv.png'),
+                                                          isDarkMode
+                                                              ? Container(
+                                                                  //color: Color(0xff096A31),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            5.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                            'assets/live_tv.png'),
+                                                                  ),
+                                                                )
+                                                              : Image.asset(
+                                                                  'assets/live_tv.png'),
                                                         ],
                                                       ),
                                                       SizedBox(
@@ -460,9 +478,7 @@ class _fantasyState extends State<fantasy> {
                                                                 Text(
                                                                   bbbData !=
                                                                           "failure"
-                                                                      ? ('Over ' +
-                                                                          bbbData["bbb"][bbbData["bbb"].length - 8]["over"]
-                                                                              .toString())
+                                                                      ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}')
                                                                       : "Over 15",
                                                                   style: TextStyle(
                                                                       color: isDarkMode
@@ -716,9 +732,7 @@ class _fantasyState extends State<fantasy> {
                                                                 Text(
                                                                   bbbData !=
                                                                           "failure"
-                                                                      ? ('Over ' +
-                                                                          bbbData["bbb"][bbbData["bbb"].length - 1]["over"]
-                                                                              .toString())
+                                                                      ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                                       : "Over 15",
                                                                   style: TextStyle(
                                                                       color: isDarkMode
@@ -976,7 +990,7 @@ class _fantasyState extends State<fantasy> {
                                                       color: isDarkMode
                                                           ? Colors.white
                                                           : Colors.black,
-                                                      fontSize: 9),
+                                                      fontSize: 14),
                                                 ),
                                               ),
                                               Container(
@@ -1023,85 +1037,90 @@ class _fantasyState extends State<fantasy> {
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
-                                                return Opacity(
-                                                  opacity: 0.8,
-                                                  child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        right: 10),
-                                                    width: 80,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      color:
-                                                          Colors.blueGrey[900],
-                                                    ),
-                                                    child: Stack(
-                                                      children: [
-                                                        Positioned(
-                                                          right: -6,
-                                                          child: Image.network(
-                                                            "https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg",
-                                                            height: 125,
-                                                            fit: BoxFit.fill,
+                                                return InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: pointsOrderData[index]["id"].toString()),));
+                                                  },
+                                                  child: Opacity(
+                                                    opacity: 0.8,
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          right: 10),
+                                                      width: 80,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                8),
+                                                        color:
+                                                            Colors.blueGrey[900],
+                                                      ),
+                                                      child: Stack(
+                                                        children: [
+                                                          Positioned(
+                                                            right: -6,
+                                                            child: Image.network(
+                                                              "https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg",
+                                                              height: 125,
+                                                              fit: BoxFit.fill,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        Positioned(
-                                                            left: 28,
-                                                            top: 25,
-                                                            child: Column(
-                                                              // ignore: prefer_const_literals_to_create_immutables
-                                                              children: [
-                                                                Container(
-                                                                  width: 55,
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      pointsOrderData[index]
-                                                                              [
-                                                                              "name"]
-                                                                          .substring(
-                                                                              0,
-                                                                              pointsOrderData[index]["name"].indexOf(" "))
-                                                                          .toString(),
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontSize:
-                                                                              10,
-                                                                          fontWeight:
-                                                                              FontWeight.w600),
+                                                          Positioned(
+                                                              left: 28,
+                                                              top: 25,
+                                                              child: Column(
+                                                                // ignore: prefer_const_literals_to_create_immutables
+                                                                children: [
+                                                                  Container(
+                                                                    width: 55,
+                                                                    child: Center(
+                                                                      child: Text(
+                                                                        pointsOrderData[index]
+                                                                                [
+                                                                                "name"]
+                                                                            .substring(
+                                                                                0,
+                                                                                pointsOrderData[index]["name"].indexOf(" "))
+                                                                            .toString(),
+                                                                        style: TextStyle(
+                                                                            color: Colors
+                                                                                .white,
+                                                                            fontSize:
+                                                                                10,
+                                                                            fontWeight:
+                                                                                FontWeight.w600),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                Text(
-                                                                  pointsOrderData[
-                                                                              index]
-                                                                          [
-                                                                          "points"]
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                                Text(
-                                                                  "Pts",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          10,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                )
-                                                              ],
-                                                            ))
-                                                      ],
+                                                                  Text(
+                                                                    pointsOrderData[
+                                                                                index]
+                                                                            [
+                                                                            "points"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600),
+                                                                  ),
+                                                                  Text(
+                                                                    "Pts",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            10,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600),
+                                                                  )
+                                                                ],
+                                                              ))
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 );
@@ -1422,10 +1441,15 @@ class _fantasyState extends State<fantasy> {
                                                                             CrossAxisAlignment.start,
                                                                         // ignore: prefer_const_literals_to_create_immutables
                                                                         children: [
-                                                                          Text(
-                                                                            pointsOrderData[index]["name"],
-                                                                            style:
-                                                                                TextStyle(color: isDarkMode ? Colors.white : Colors.black, fontSize: 12),
+                                                                          InkWell(
+                                                                            onTap: () {
+                                                                              Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: pointsOrderData[index]["id"].toString()),));                                                                              
+                                                                            },
+                                                                            child: Text(
+                                                                              pointsOrderData[index]["name"],
+                                                                              style:
+                                                                                  TextStyle(color: isDarkMode ? Colors.white : Colors.black, fontSize: 12),
+                                                                            ),
                                                                           ),
                                                                         ],
                                                                       ),
@@ -2291,15 +2315,19 @@ class _fantasyState extends State<fantasy> {
                                                         children: [
                                                           CircleAvatar(
                                                             radius: 12,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    data["teamInfo"][0]["img"].toString()),
+                                                            backgroundImage: NetworkImage(
+                                                                data["teamInfo"]
+                                                                            [0]
+                                                                        ["img"]
+                                                                    .toString()),
                                                           ),
                                                           SizedBox(
                                                             width: 8,
                                                           ),
                                                           Text(
-                                                            data["teamInfo"][0]["shortname"].toString(),
+                                                            data["teamInfo"][0][
+                                                                    "shortname"]
+                                                                .toString(),
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
@@ -2329,15 +2357,19 @@ class _fantasyState extends State<fantasy> {
                                                         children: [
                                                           CircleAvatar(
                                                             radius: 12,
-                                                            backgroundImage:
-                                                                NetworkImage(
-                                                                    data["teamInfo"][1]["img"].toString()),
+                                                            backgroundImage: NetworkImage(
+                                                                data["teamInfo"]
+                                                                            [1]
+                                                                        ["img"]
+                                                                    .toString()),
                                                           ),
                                                           SizedBox(
                                                             width: 8,
                                                           ),
                                                           Text(
-                                                            data["teamInfo"][1]["shortname"].toString(),
+                                                            data["teamInfo"][1][
+                                                                    "shortname"]
+                                                                .toString(),
                                                             style: TextStyle(
                                                                 fontWeight:
                                                                     FontWeight

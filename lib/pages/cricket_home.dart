@@ -182,7 +182,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                             .symmetric(
                                                         horizontal: 5.0),
                                                     child: Image.network(
-                                                      "http://99skyex.com/banner_image/" +
+                                                      "https://playexch.us/banner_image/" +
                                                           i,
                                                       fit: BoxFit.fill,
                                                     ),
