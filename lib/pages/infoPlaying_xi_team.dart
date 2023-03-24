@@ -108,7 +108,7 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
                                 height: 835,
                                 child: TabBarView(children: [
                                   Column(
-                                    children: [
+                                    children: [    
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 25, right: 25),
