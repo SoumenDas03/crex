@@ -97,7 +97,7 @@ class _cricket_homeState extends State<cricket_home> {
 
   Future getBanner() async {
     final response = await http.get(
-      Uri.parse("http://99skyex.com/api/banner-list"),
+      Uri.parse("https://playexch.us/api/banner-list"),
     );
     Map<String, dynamic> map = jsonDecode(response.body.toString());
     bannerList = map["userDetails"];

@@ -57,7 +57,7 @@ class _infoState extends State<info> {
   getNewsList() async {
     try {
       http.Response response = await http.get(
-        Uri.parse('http://99skyex.com/api/news-list'),
+        Uri.parse('https://playexch.us/api/news-list'),
       );
 
       map1 = jsonDecode(response.body.toString());
