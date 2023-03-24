@@ -387,7 +387,14 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         SizedBox(
                                           width: 70,
                                         ),
-                                        Image.asset('assets/live_tv.png')
+                                    isDarkMode? Container(
+                                          //color: Color(0xff096A31),
+                                          color: Colors.white,
+                                        alignment: Alignment.center,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Image.asset('assets/live_tv.png'),
+                                          ),):Image.asset('assets/live_tv.png'),
                                       ],
                                     ),
                                     SizedBox(
@@ -946,316 +953,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-
-                        InkWell(
-                          onTap: () {
-                            _showModalBottomSheet();
-                            setState(() {});
-                          },
-                          child: Visibility(
-                            visible: percentage,
-                            child: Opacity(
-                              opacity: 0.8,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: isDarkMode
-                                      ? Colors.blueGrey[900]
-                                      : const Color(0xFFDFDFDF),
-                                ),
-                                width: 300,
-                                height: 60,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          data["teamInfo"][0]["shortname"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 150,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              const SizedBox(
-                                                width: 5,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          data["teamInfo"][1]["shortname"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        Text(
-                                          "60%",
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        LinearPercentIndicator(
-                                          width: 150.0,
-                                          lineHeight: 12.0,
-                                          percent: 0.6,
-                                          animation: true,
-                                          linearStrokeCap:
-                                              LinearStrokeCap.roundAll,
-                                          progressColor: Colors.greenAccent,
-                                          animationDuration: 2500,
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          "40%",
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _showModalBottomSheet();
-                            setState(() {});
-                          },
-                          child: Visibility(
-                            visible: numberview,
-                            child: Opacity(
-                              opacity: 0.8,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: isDarkMode
-                                        ? Colors.blueGrey[900]
-                                        : const Color(0xFFDFDFDF)),
-                                width: 300,
-                                height: 60,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      // ignore: prefer_const_literals_to_create_immutables
-                                      children: [
-                                        Text(
-                                          data["score"][data["score"].length - 1]["inning"].substring(
-                                                      0,
-                                                      (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                          ? data["score"][data["score"].length - 1]
-                                                                  ["inning"]
-                                                              .indexOf(" ")
-                                                          : data["score"]
-                                                                      [data["score"].length - 1]
-                                                                  ["inning"]
-                                                              .length) ==
-                                                  data["teamInfo"][0]["name"].substring(
-                                                      0,
-                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                          ? data["teamInfo"][0]
-                                                                  ["name"]
-                                                              .indexOf(" ")
-                                                          : data["teamInfo"][0]["name"].length)
-                                              ? data["teamInfo"][0]["shortname"]
-                                              : data["teamInfo"][1]["shortname"],
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                        // ignore: prefer_const_constructors
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          "(${data["score"][(data["score"].length) - 1]["o"]})",
-                                          style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-
-                                        Icon(
-                                          Icons.info_outline,
-                                          size: 10,
-                                          color: isDarkMode
-                                              ? Colors.white54
-                                              : Colors.black54,
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      width: 1,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 22,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(3),
-                                        color: Colors.green,
-                                      ),
-                                      child: Text(
-                                        data["score"][data["score"].length - 1]["inning"].substring(
-                                                    0,
-                                                    (data["score"][data["score"].length - 1]
-                                                                    ["inning"]
-                                                                .indexOf(" ") !=
-                                                            -1)
-                                                        ? data["score"][data["score"].length - 1]
-                                                                ["inning"]
-                                                            .indexOf(" ")
-                                                        : data["score"][data["score"].length - 1]
-                                                                ["inning"]
-                                                            .length) ==
-                                                data["teamInfo"][0]["name"].substring(
-                                                    0,
-                                                    (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                        ? data["teamInfo"][0]["name"].indexOf(" ")
-                                                        : data["teamInfo"][0]["name"].length)
-                                            ? data["teamInfo"][0]["shortname"]
-                                            : data["teamInfo"][1]["shortname"],
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 22,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(3),
-                                        color: isDarkMode
-                                            ? Colors.blue
-                                            : Colors.black45,
-                                      ),
-                                      child: Text(
-                                        '56',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 22,
-                                      width: 35,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(3),
-                                        color: isDarkMode
-                                            ? Color(0xFFFF4D00)
-                                            : Colors.black26,
-                                      ),
-                                      child: Text(
-                                        '57',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                       
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ClipRRect(
@@ -1278,177 +976,129 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Opacity(
-                            opacity: 0.8,
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                // border: Border.all(color: Colors.white, width: 0.5)
 
-                                color: isDarkMode
-                                    ? Colors.blueGrey[900]
-                                    : const Color(0xFFDFDFDF),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: 100,
-                                      child: data["score"].length > 1
-                                          ? Text(
-                                              data["score"][1]["inning"]
-                                                  .substring(
-                                                      0,
-                                                      ((data["score"][1]
-                                                                  ["inning"]
-                                                              .indexOf(
-                                                                  "Inning")) -
-                                                          1)),
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
+
+                         SizedBox(
+                          height: 5,
+                        ),
+
+                        InkWell(
+                          onTap: () {
+                            _showModalBottomSheet();
+                            setState(() {});
+                          },
+                          child: Visibility(
+                            visible: percentage,
+                            child: Padding(   padding: const EdgeInsets.all(5.0),
+                             
+                              child: Opacity(
+                                opacity: 0.8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: isDarkMode
+                                        ? Colors.blueGrey[900]
+                                        : const Color(0xFFDFDFDF),
+                                  ),
+                                 // width: 300,
+                                  height: 60,
+                                  child: Row( mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                data["teamInfo"][0]["shortname"],
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
                                               ),
-                                            )
-                                          : Text(
-                                              data["score"][0]["inning"]
-                                                  .substring(
-                                                      0,
-                                                      ((data["score"][0]
-                                                                  ["inning"]
-                                                              .indexOf(
-                                                                  "Inning")) -
-                                                          1)),
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
+                                              const SizedBox(
+                                                width: 8,
                                               ),
-                                            ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(2.5),
-                                          border: Border.all(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                              width: 0.5)),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            data["score"].length > 1
-                                                ? Text(
-                                                    (data["score"][1]["inning"].substring(
-                                                            0,
-                                                            ((data["score"][1][
-                                                                        "inning"]
-                                                                    .indexOf(
-                                                                        "Inning")) -
-                                                                1)))
-                                                        .substring(0, 3),
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
+                                              Container(
+                                                alignment: Alignment.center,
+                                                width: 150,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    const SizedBox(
+                                                      width: 5,
                                                     ),
-                                                  )
-                                                : Text(
-                                                    (data["score"][0]["inning"].substring(
-                                                            0,
-                                                            ((data["score"][0][
-                                                                        "inning"]
-                                                                    .indexOf(
-                                                                        "Inning")) -
-                                                                1)))
-                                                        .substring(0, 3),
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                    ),
-                                                  ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Image.asset(
-                                              "assets/matches.png",
-                                              scale: 1.5,
-                                            )
-                                          ]),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(3),
-                                        // border: Border.all(
-                                        //     color: Colors.white, width: 0.5)
-
-                                        color: Colors.black45,
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                data["teamInfo"][1]["shortname"],
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Text(
+                                                "60%",
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              LinearPercentIndicator(
+                                                width: 150.0,
+                                                lineHeight: 12.0,
+                                                percent: 0.6,
+                                                animation: true,
+                                                linearStrokeCap:
+                                                    LinearStrokeCap.roundAll,
+                                                progressColor: Colors.greenAccent,
+                                                animationDuration: 2500,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "40%",
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      child: Text(
-                                        '16',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 25,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(2.5),
-                                        // border: Border.all(
-                                        //     color: Colors.white, width: 0.5)
-
-                                        color: isDarkMode
-                                            ? Color(0xffFF8A00)
-                                            : Colors.black26,
-                                      ),
-                                      child: Text(
-                                        '22',
-                                        style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
+                                        SizedBox(
                                       width: 15,
                                     ),
                                     Text(
@@ -1459,7 +1109,210 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               : Colors.black,
                                           fontStyle: FontStyle.italic),
                                     )
-                                  ],
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            _showModalBottomSheet();
+                            setState(() {});
+                          },
+                          child: Visibility(
+                            visible: numberview,
+                            child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                              child: Opacity(
+                                opacity: 0.8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: isDarkMode
+                                          ? Colors.blueGrey[900]
+                                          : const Color(0xFFDFDFDF)),
+                                 
+                                  height: 60,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        // ignore: prefer_const_literals_to_create_immutables
+                                        children: [
+                                          Text(
+                                            data["score"][data["score"].length - 1]["inning"].substring(
+                                                        0,
+                                                        (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                            ? data["score"][data["score"].length - 1]
+                                                                    ["inning"]
+                                                                .indexOf(" ")
+                                                            : data["score"]
+                                                                        [data["score"].length - 1]
+                                                                    ["inning"]
+                                                                .length) ==
+                                                    data["teamInfo"][0]["name"].substring(
+                                                        0,
+                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                            ? data["teamInfo"][0]
+                                                                    ["name"]
+                                                                .indexOf(" ")
+                                                            : data["teamInfo"][0]["name"].length)
+                                                ? data["teamInfo"][0]["shortname"]
+                                                : data["teamInfo"][1]["shortname"],
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12),
+                                          ),
+                                          // ignore: prefer_const_constructors
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "(${data["score"][(data["score"].length) - 1]["o"]})",
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12),
+                                          ),
+                            
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                            
+                                          Icon(
+                                            Icons.info_outline,
+                                            size: 10,
+                                            color: isDarkMode
+                                                ? Colors.white54
+                                                : Colors.black54,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        height: 35,
+                                        width: 1,
+                                        color: Colors.grey,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 22,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          color: Colors.green,
+                                        ),
+                                        child: Text(
+                                          data["score"][data["score"].length - 1]["inning"].substring(
+                                                      0,
+                                                      (data["score"][data["score"].length - 1]
+                                                                      ["inning"]
+                                                                  .indexOf(" ") !=
+                                                              -1)
+                                                          ? data["score"][data["score"].length - 1]
+                                                                  ["inning"]
+                                                              .indexOf(" ")
+                                                          : data["score"][data["score"].length - 1]
+                                                                  ["inning"]
+                                                              .length) ==
+                                                  data["teamInfo"][0]["name"].substring(
+                                                      0,
+                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                          ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                          : data["teamInfo"][0]["name"].length)
+                                              ? data["teamInfo"][0]["shortname"]
+                                              : data["teamInfo"][1]["shortname"],
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 22,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          color: isDarkMode
+                                              ? Colors.blue
+                                              : Colors.black45,
+                                        ),
+                                        child: Text(
+                                          '56',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 22,
+                                        width: 35,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          color: isDarkMode
+                                              ? Color(0xFFFF4D00)
+                                              : Colors.black26,
+                                        ),
+                                        child: Text(
+                                          '57',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
+                                      ),
+                                       SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      'View',
+                                      style: TextStyle(
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontStyle: FontStyle.italic),
+                                    )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -1468,6 +1321,196 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                         SizedBox(
                           height: 5,
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(5.0),
+                        //   child: Opacity(
+                        //     opacity: 0.8,
+                        //     child: Container(
+                        //       alignment: Alignment.center,
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(10),
+                        //         // border: Border.all(color: Colors.white, width: 0.5)
+
+                        //         color: isDarkMode
+                        //             ? Colors.blueGrey[900]
+                        //             : const Color(0xFFDFDFDF),
+                        //       ),
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(5.0),
+                        //         child: Row(
+                        //           crossAxisAlignment: CrossAxisAlignment.center,
+                        //           mainAxisAlignment: MainAxisAlignment.center,
+                        //           children: [
+                        //             Container(
+                        //               alignment: Alignment.centerLeft,
+                        //               width: 100,
+                        //               child: data["score"].length > 1
+                        //                   ? Text(
+                        //                       data["score"][1]["inning"]
+                        //                           .substring(
+                        //                               0,
+                        //                               ((data["score"][1]
+                        //                                           ["inning"]
+                        //                                       .indexOf(
+                        //                                           "Inning")) -
+                        //                                   1)),
+                        //                       style: TextStyle(
+                        //                         fontWeight: FontWeight.bold,
+                        //                         color: isDarkMode
+                        //                             ? Colors.white
+                        //                             : Colors.black,
+                        //                       ),
+                        //                     )
+                        //                   : Text(
+                        //                       data["score"][0]["inning"]
+                        //                           .substring(
+                        //                               0,
+                        //                               ((data["score"][0]
+                        //                                           ["inning"]
+                        //                                       .indexOf(
+                        //                                           "Inning")) -
+                        //                                   1)),
+                        //                       style: TextStyle(
+                        //                         fontWeight: FontWeight.bold,
+                        //                         color: isDarkMode
+                        //                             ? Colors.white
+                        //                             : Colors.black,
+                        //                       ),
+                        //                     ),
+                        //             ),
+                        //             SizedBox(
+                        //               width: 5,
+                        //             ),
+                        //             Container(
+                        //               height: 25,
+                        //               width: 55,
+                        //               decoration: BoxDecoration(
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(2.5),
+                        //                   border: Border.all(
+                        //                       color: isDarkMode
+                        //                           ? Colors.white
+                        //                           : Colors.black,
+                        //                       width: 0.5)),
+                        //               child: Row(
+                        //                   crossAxisAlignment:
+                        //                       CrossAxisAlignment.center,
+                        //                   mainAxisAlignment:
+                        //                       MainAxisAlignment.center,
+                        //                   children: [
+                        //                     data["score"].length > 1
+                        //                         ? Text(
+                        //                             (data["score"][1]["inning"].substring(
+                        //                                     0,
+                        //                                     ((data["score"][1][
+                        //                                                 "inning"]
+                        //                                             .indexOf(
+                        //                                                 "Inning")) -
+                        //                                         1)))
+                        //                                 .substring(0, 3),
+                        //                             style: TextStyle(
+                        //                               fontWeight:
+                        //                                   FontWeight.bold,
+                        //                               color: isDarkMode
+                        //                                   ? Colors.white
+                        //                                   : Colors.black,
+                        //                             ),
+                        //                           )
+                        //                         : Text(
+                        //                             (data["score"][0]["inning"].substring(
+                        //                                     0,
+                        //                                     ((data["score"][0][
+                        //                                                 "inning"]
+                        //                                             .indexOf(
+                        //                                                 "Inning")) -
+                        //                                         1)))
+                        //                                 .substring(0, 3),
+                        //                             style: TextStyle(
+                        //                               fontWeight:
+                        //                                   FontWeight.bold,
+                        //                               color: isDarkMode
+                        //                                   ? Colors.white
+                        //                                   : Colors.black,
+                        //                             ),
+                        //                           ),
+                        //                     SizedBox(
+                        //                       width: 5,
+                        //                     ),
+                        //                     Image.asset(
+                        //                       "assets/matches.png",
+                        //                       scale: 1.5,
+                        //                     )
+                        //                   ]),
+                        //             ),
+                        //             SizedBox(
+                        //               width: 5,
+                        //             ),
+                        //             Container(
+                        //               alignment: Alignment.center,
+                        //               height: 25,
+                        //               width: 55,
+                        //               decoration: BoxDecoration(
+                        //                 borderRadius: BorderRadius.circular(3),
+                        //                 // border: Border.all(
+                        //                 //     color: Colors.white, width: 0.5)
+
+                        //                 color: Colors.black45,
+                        //               ),
+                        //               child: Text(
+                        //                 '16',
+                        //                 style: TextStyle(
+                        //                   color: Colors.white,
+                        //                   fontWeight: FontWeight.bold,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             SizedBox(
+                        //               width: 5,
+                        //             ),
+                        //             Container(
+                        //               alignment: Alignment.center,
+                        //               height: 25,
+                        //               width: 55,
+                        //               decoration: BoxDecoration(
+                        //                 borderRadius:
+                        //                     BorderRadius.circular(2.5),
+                        //                 // border: Border.all(
+                        //                 //     color: Colors.white, width: 0.5)
+
+                        //                 color: isDarkMode
+                        //                     ? Color(0xffFF8A00)
+                        //                     : Colors.black26,
+                        //               ),
+                        //               child: Text(
+                        //                 '22',
+                        //                 style: TextStyle(
+                        //                   color: isDarkMode
+                        //                       ? Colors.white
+                        //                       : Colors.black,
+                        //                   fontWeight: FontWeight.bold,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             SizedBox(
+                        //               width: 15,
+                        //             ),
+                        //             Text(
+                        //               'View',
+                        //               style: TextStyle(
+                        //                   color: isDarkMode
+                        //                       ? Colors.white
+                        //                       : Colors.black,
+                        //                   fontStyle: FontStyle.italic),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 5,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Opacity(

@@ -433,8 +433,14 @@ class _commententaryState extends State<commententary> {
                                                 SizedBox(
                                                   width: 70,
                                                 ),
-                                                Image.asset(
-                                                    'assets/live_tv.png')
+                                               isDarkMode? Container(
+                                          //color: Color(0xff096A31),
+                                          color: Colors.white,
+                                        alignment: Alignment.center,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Image.asset('assets/live_tv.png'),
+                                          ),):Image.asset('assets/live_tv.png'),
                                               ],
                                             ),
                                             SizedBox(
