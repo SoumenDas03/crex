@@ -171,13 +171,21 @@ class _infoState extends State<info> {
                                                       margin: EdgeInsets.only(
                                                           right: 25),
                                                       child: isDarkMode
-                                                          ? Image.asset(
-                                                              "assets/volume.png")
-                                                          : Image.asset(
-                                                              "assets/volume.png",
-                                                              color:
-                                                                  Colors.grey,
-                                                            )),
+                                                    ? Container(width: 60,
+                                                        //color: Color(0xff096A31),
+                                                        color: Colors.white,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
+                                                          child: Image.asset(
+                                                              'assets/live_tv.png'),
+                                                        ),
+                                                      )
+                                                    : Image.asset(
+                                                        'assets/live_tv.png'),),
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         right: 25),
@@ -375,16 +383,12 @@ class _infoState extends State<info> {
                                                             fontSize: 15.5),
                                                       ),
                                                       SizedBox(
-                                                        width: 70,
-                                                      ),
-isDarkMode? Container(
-                                          //color: Color(0xff096A31),
-                                          color: Colors.white,
-                                        alignment: Alignment.center,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset('assets/live_tv.png'),
-                                          ),):Image.asset('assets/live_tv.png'),
+                                                        width: 70,),
+                                                        isDarkMode? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -962,7 +966,7 @@ isDarkMode? Container(
                                                       )
                                                     ],
                                                   ),
-                                                  SizedBox(height: 10),
+                                                SizedBox(height: 10),
                                                 ],
                                               ),
                                             ),
@@ -1010,9 +1014,9 @@ isDarkMode? Container(
                                         ),
                                       ),
 
-                                      SizedBox(
-                                        height: 20,
-                                      ),
+                                      // SizedBox(
+                                      //   height: 20,
+                                      // ),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 5, right: 5),
@@ -1056,7 +1060,7 @@ isDarkMode? Container(
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 10,
+                                        height: 5,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
@@ -1096,9 +1100,9 @@ isDarkMode? Container(
                                                                 )
                                                               : Text(""),
                                                     ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
+                                                    // SizedBox(
+                                                    //   height: 5,
+                                                    // ),
                                                     Container(
                                                       alignment:
                                                           Alignment.bottomLeft,
@@ -1145,7 +1149,7 @@ isDarkMode? Container(
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 10,
+                                        height: 5,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
@@ -1422,7 +1426,7 @@ isDarkMode? Container(
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 8,
+                                        height: 5,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(
@@ -3342,12 +3346,12 @@ isDarkMode? Container(
                                           ),
                                         ),
                                       ),
-                                      Row(
+                                      Row(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.center,
                                         // ignore: prefer_const_literals_to_create_immutables
                                         children: [
                                           Container(
                                             margin: EdgeInsets.only(
-                                                left: 30, top: 30, bottom: 26),
+                                                left: 30, top: 20, bottom: 26),
                                             child: Icon(
                                               Icons.location_on,
                                               color: isDarkMode

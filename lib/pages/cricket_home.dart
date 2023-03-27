@@ -159,37 +159,40 @@ class _cricket_homeState extends State<cricket_home> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(5),
-                                          child: CarouselSlider(
-                                            options: CarouselOptions(
-                                              height: 150,
-                                              enlargeCenterPage: true,
-                                              autoPlay: true,
-                                              aspectRatio: 16 / 9,
-                                              autoPlayCurve:
-                                                  Curves.fastOutSlowIn,
-                                              enableInfiniteScroll: true,
-                                              autoPlayAnimationDuration:
-                                                  Duration(milliseconds: 800),
-                                              viewportFraction: 0.8,
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            child: CarouselSlider(
+                                              options: CarouselOptions(
+                                                initialPage: 1,
+                                                height: 150,                                                                                            
+                                                autoPlay: true,
+                                                aspectRatio: 16/9,                                                                                            
+                                                autoPlayCurve:
+                                                    Curves.fastOutSlowIn,
+                                                enableInfiniteScroll: true,
+                                                autoPlayAnimationDuration:
+                                                    Duration(milliseconds: 800),
+                                                viewportFraction: 0.8,                                              
+                                              ),
+                                              items: dataList.map<Widget>((i) {
+                                                return Builder(
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return Container(
+                                                      width: 800,
+                                                      margin: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 5.0),
+                                                      child: Image.network(
+                                                        "https://playexch.us/banner_image/" +
+                                                            i,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              }).toList(),
                                             ),
-                                            items: dataList.map<Widget>((i) {
-                                              return Builder(
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return Container(
-                                                    width: 800,
-                                                    margin: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 5.0),
-                                                    child: Image.network(
-                                                      "https://playexch.us/banner_image/" +
-                                                          i,
-                                                      fit: BoxFit.fill,
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            }).toList(),
                                           ),
                                         ),
                                       ),
@@ -235,6 +238,9 @@ class _cricket_homeState extends State<cricket_home> {
                                           ))
                                     ],
                                   ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
                                   Container(
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
@@ -244,7 +250,7 @@ class _cricket_homeState extends State<cricket_home> {
                                               : AssetImage(
                                                   "assets/bgLightMode.png"),
                                           fit: BoxFit.fill),
-                                    ),
+                                    ),                                    
                                     child: DefaultTabController(
                                       length: 4,
                                       child: Column(

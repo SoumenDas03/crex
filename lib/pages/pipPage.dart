@@ -92,166 +92,162 @@ class _pipPageState extends State<pipPage> with WidgetsBindingObserver {
         } else {
           return ClipRRect(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
             child: PiPSwitcher(
-              childWhenEnabled: Container( color: Colors.transparent,
-                //width: 300,
-               
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5),
-                            ),
-                            color: Colors.blueGrey,
+              childWhenEnabled: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
                           ),
-                          height: 30,
-                          width: 125,
-                          child: Center(
-                            child: Text(
-                              '${data["teamInfo"][0]["shortname"]} vs ${data["teamInfo"][1]["shortname"]}',
-                              style: const TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.none),
-                            ),
+                          color: Colors.blueGrey,
+                        ),
+                        height: 30,
+                        width: 125,
+                        child: Center(
+                          child: Text(
+                            '${data["teamInfo"][0]["shortname"]} vs ${data["teamInfo"][1]["shortname"]}',
+                            style: const TextStyle(
+                                fontSize: 13,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.none),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15),
-                        child: Container(
-                          clipBehavior: Clip.none,
-                          width: 300,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.green,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 8.0, right: 8.0, top: 2.0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.all(5),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 15,
-                                        backgroundImage: NetworkImage(data["score"]
-                                                            [data["score"].length - 1]
-                                                        ["inning"]
-                                                    .substring(
-                                                        0,
-                                                        (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                            ? data["score"][data["score"].length - 1]["inning"]
-                                                                .indexOf(" ")
-                                                            : data["score"][data["score"].length - 1]["inning"]
-                                                                .length) ==
-                                                data["teamInfo"][0]["name"].substring(
-                                                    0,
-                                                    (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                        ? data["teamInfo"][0]["name"].indexOf(" ")
-                                                        : data["teamInfo"][0]["name"].length)
-                                            ? data["teamInfo"][0]["img"]
-                                            : data["teamInfo"][1]["img"]),
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                "${data["score"][data["score"].length - 1]["r"]}-${data["score"][data["score"].length - 1]["w"]}",
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: Container(
+                        clipBehavior: Clip.none,
+                        width: 300,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8.0, right: 8.0, top: 2.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(5),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 15,
+                                      backgroundImage: NetworkImage(data["score"]
+                                                          [data["score"].length - 1]
+                                                      ["inning"]
+                                                  .substring(
+                                                      0,
+                                                      (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                          ? data["score"][data["score"].length - 1]["inning"]
+                                                              .indexOf(" ")
+                                                          : data["score"][data["score"].length - 1]["inning"]
+                                                              .length) ==
+                                              data["teamInfo"][0]["name"].substring(
+                                                  0,
+                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                      ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                      : data["teamInfo"][0]["name"].length)
+                                          ? data["teamInfo"][0]["img"]
+                                          : data["teamInfo"][1]["img"]),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "${data["score"][data["score"].length - 1]["r"]}-${data["score"][data["score"].length - 1]["w"]}",
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const SizedBox(
+                                              width: 8,
+                                            ),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 2),
+                                              child: Text(
+                                                data["score"][
+                                                        data["score"].length -
+                                                            1]["o"]
+                                                    .toString(),
                                                 style: const TextStyle(
-                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 13,
                                                     decoration:
                                                         TextDecoration.none,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold),
+                                                    color: Colors.white),
                                               ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Text(
-                                                  data["score"][
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          "CRR: " +
+                                              (data["score"][
                                                           data["score"].length -
-                                                              1]["o"]
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                      fontWeight: FontWeight.w300,
-                                                      fontSize: 13,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "CRR: " +
-                                                (data["score"][
-                                                            data["score"].length -
-                                                                1]["r"] /
-                                                        data["score"][
-                                                            data["score"].length -
-                                                                1]["o"])
-                                                    .toStringAsFixed(2),
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 13,
-                                                decoration: TextDecoration.none,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                                              1]["r"] /
+                                                      data["score"][
+                                                          data["score"].length -
+                                                              1]["o"])
+                                                  .toStringAsFixed(2),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 13,
+                                              decoration: TextDecoration.none,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 10,
-                                    top: 2,
-                                  ),
-                                  child: Text(
-                                    data["status"],
-                                    style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.none,
-                                        color: Colors.white),
-                                  ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                  left: 10,
+                                  top: 2,
                                 ),
-                              ],
-                            ),
+                                child: Text(
+                                  data["status"],
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      decoration: TextDecoration.none,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               childWhenDisabled: Scaffold(

@@ -122,11 +122,21 @@ class _scorecardState extends State<scorecard> {
                                       alignment: Alignment.topRight,
                                       margin: EdgeInsets.only(right: 25),
                                       child: isDarkMode
-                                          ? Image.asset("assets/volume.png")
-                                          : Image.asset(
-                                              "assets/volume.png",
-                                              color: Colors.grey,
-                                            )),
+                                                    ? Container(width: 60,
+                                                        //color: Color(0xff096A31),
+                                                        color: Colors.white,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
+                                                          child: Image.asset(
+                                                              'assets/live_tv.png'),
+                                                        ),
+                                                      )
+                                                    : Image.asset(
+                                                        'assets/live_tv.png'),),
                                   Container(
                                     margin: EdgeInsets.only(right: 25),
                                     child: Row(
@@ -325,14 +335,12 @@ class _scorecardState extends State<scorecard> {
                                       SizedBox(
                                         width: 70,
                                       ),
-                                    isDarkMode? Container(
-                                          //color: Color(0xff096A31),
-                                          color: Colors.white,
-                                        alignment: Alignment.center,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset('assets/live_tv.png'),
-                                          ),):Image.asset('assets/live_tv.png'),
+                                 isDarkMode
+                                            ? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )
                                     ],
                                   ),
                                   SizedBox(
@@ -901,7 +909,7 @@ class _scorecardState extends State<scorecard> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       DefaultTabController(
                         // initialIndex: 0,
@@ -948,14 +956,14 @@ class _scorecardState extends State<scorecard> {
                               ),
                             ),
                              SizedBox(
-                                        height: 25,
+                                        height: 5,
                                       ),
                                       Container(
                                         height: 1,
                                         width: 360,
                                         color: Colors.blueGrey,
                                       ),
-                            Container(height: 300,
+                            Container(height: 400,
                               // height: (data["scorecard"].length > 1)
                               //     ? (data["scorecard"][data["scorecard"].length - 2]
                               //                     ["batting"]

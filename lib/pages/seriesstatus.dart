@@ -157,12 +157,21 @@ class _seriesstatusState extends State<seriesstatus> {
                                                 margin:
                                                     EdgeInsets.only(right: 25),
                                                 child: isDarkMode
-                                                    ? Image.asset(
-                                                        "assets/volume.png")
+                                                    ? Container(width: 60,
+                                                        //color: Color(0xff096A31),
+                                                        color: Colors.white,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
+                                                          child: Image.asset(
+                                                              'assets/live_tv.png'),
+                                                        ),
+                                                      )
                                                     : Image.asset(
-                                                        "assets/volume.png",
-                                                        color: Colors.grey,
-                                                      )),
+                                                        'assets/live_tv.png'),),
                                             Container(
                                               margin:
                                                   EdgeInsets.only(right: 25),
@@ -373,14 +382,12 @@ class _seriesstatusState extends State<seriesstatus> {
                                                 SizedBox(
                                                   width: 70,
                                                 ),
-                                                isDarkMode? Container(
-                                          //color: Color(0xff096A31),
-                                          color: Colors.white,
-                                        alignment: Alignment.center,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset('assets/live_tv.png'),
-                                          ),):Image.asset('assets/live_tv.png'),
+                                               isDarkMode
+                                            ? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )
                                               ],
                                             ),
                                             SizedBox(
@@ -959,7 +966,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 5,
                                 ),
                                 Text(
                                   data1["info"]["name"],
@@ -971,7 +978,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height:5,
                                 ),
                                 Expanded(
                                   child: ListView.builder(

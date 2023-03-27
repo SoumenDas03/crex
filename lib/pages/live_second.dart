@@ -10,7 +10,7 @@ import 'package:crex/provider/theme_changer.dart';
 import 'package:floating/floating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -28,14 +28,14 @@ class live_second extends StatefulWidget {
 }
 
 class _live_secondState extends State<live_second> with WidgetsBindingObserver {
-  int _value = 0;
-
+  int _value = 1;
   bool status = false;
   bool status2 = true;
   var map, data, sugamWicket, wicketOrderData, bbbmap, bbbData;
   final floating = Floating();
   bool numberview = false;
   bool percentage = true;
+
   @override
   void initState() {
     super.initState();
@@ -184,11 +184,21 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         alignment: Alignment.topRight,
                                         margin: EdgeInsets.only(right: 25),
                                         child: isDarkMode
-                                            ? Image.asset("assets/volume.png")
-                                            : Image.asset(
-                                                "assets/volume.png",
-                                                color: Colors.grey,
-                                              )),
+                                                    ? Container(width: 60,
+                                                        //color: Color(0xff096A31),
+                                                        color: Colors.white,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
+                                                          child: Image.asset(
+                                                              'assets/live_tv.png'),
+                                                        ),
+                                                      )
+                                                    : Image.asset(
+                                                        'assets/live_tv.png'),),
                                     Container(
                                       margin: EdgeInsets.only(right: 25),
                                       child: Row(
@@ -388,14 +398,12 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         SizedBox(
                                           width: 70,
                                         ),
-                                    isDarkMode? Container(
-                                          //color: Color(0xff096A31),
-                                          color: Colors.white,
-                                        alignment: Alignment.center,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Image.asset('assets/live_tv.png'),
-                                          ),):Image.asset('assets/live_tv.png'),
+                                    isDarkMode
+                                            ? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )
                                       ],
                                     ),
                                     SizedBox(
@@ -979,144 +987,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                         ),
 
 
-                         SizedBox(
-                          height: 5,
-                        ),
+                        
 
-                        InkWell(
-                          onTap: () {
-                            _showModalBottomSheet();
-                            setState(() {});
-                          },
-                          child: Visibility(
-                            visible: percentage,
-                            child: Padding(   padding: const EdgeInsets.all(5.0),
-                             
-                              child: Opacity(
-                                opacity: 0.8,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: isDarkMode
-                                        ? Colors.blueGrey[900]
-                                        : const Color(0xFFDFDFDF),
-                                  ),
-                                 // width: 300,
-                                  height: 60,
-                                  child: Row( mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                data["teamInfo"][0]["shortname"],
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: 150,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                data["teamInfo"][1]["shortname"],
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            // ignore: prefer_const_literals_to_create_immutables
-                                            children: [
-                                              Text(
-                                                "60%",
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              LinearPercentIndicator(
-                                                width: 150.0,
-                                                lineHeight: 12.0,
-                                                percent: 0.6,
-                                                animation: true,
-                                                linearStrokeCap:
-                                                    LinearStrokeCap.roundAll,
-                                                progressColor: Colors.greenAccent,
-                                                animationDuration: 2500,
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                "40%",
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                        SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      'View',
-                                      style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontStyle: FontStyle.italic),
-                                    )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                       
                         InkWell(
                           onTap: () {
                             _showModalBottomSheet();
@@ -1319,9 +1192,141 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
+                         InkWell(
+                          onTap: () {
+                            _showModalBottomSheet();
+                            setState(() {});
+                          },
+                          child: Visibility(
+                            visible: percentage,
+                            child: Padding(   padding: const EdgeInsets.all(5.0),
+                             
+                              child: Opacity(
+                                opacity: 0.8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: isDarkMode
+                                        ? Colors.blueGrey[900]
+                                        : const Color(0xFFDFDFDF),
+                                  ),
+                                 // width: 300,
+                                  height: 60,
+                                  child: Row( mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                data["teamInfo"][0]["shortname"],
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Container(
+                                                alignment: Alignment.center,
+                                                width: 150,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                  children: [
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                data["teamInfo"][1]["shortname"],
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            // ignore: prefer_const_literals_to_create_immutables
+                                            children: [
+                                              Text(
+                                                "60%",
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              LinearPercentIndicator(
+                                                width: 150.0,
+                                                lineHeight: 12.0,
+                                                percent: 0.6,
+                                                animation: true,
+                                                linearStrokeCap:
+                                                    LinearStrokeCap.roundAll,
+                                                progressColor: Colors.greenAccent,
+                                                animationDuration: 2500,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "40%",
+                                                style: TextStyle(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                        SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      'View',
+                                      style: TextStyle(
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontStyle: FontStyle.italic),
+                                    )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
+                     
                         // Padding(
                         //   padding: const EdgeInsets.all(5.0),
                         //   child: Opacity(
@@ -1804,7 +1809,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                                )
                                                         .toList()
                                                         .length >
                                                     0
@@ -1812,8 +1817,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                         ["batting"]
                                                     .where((element) =>
                                                         element["dismissal-text"] == "not out")
-                                                    .map((element) => element["batsman"]["name"])
-                                                    .toList()[0]
+                                                    .map((element) => element["batsman"])
+                                                    .toList()[0]["name"]
                                                     .toString()
                                                 : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["name"],
                                             style: TextStyle(
@@ -1838,7 +1843,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           "not out")
                                                       .map((element) =>
                                                           element["batsman"]
-                                                              ["name"])
+                                                              )
                                                       .toList()
                                                       .length >
                                                   0
@@ -1872,7 +1877,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           "not out")
                                                       .map((element) =>
                                                           element["batsman"]
-                                                              ["name"])
+                                                          )
                                                       .toList()
                                                       .length >
                                                   0
@@ -1906,7 +1911,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           "not out")
                                                       .map((element) =>
                                                           element["batsman"]
-                                                              ["name"])
+                                                          )
                                                       .toList()
                                                       .length >
                                                   0
@@ -1940,7 +1945,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           "not out")
                                                       .map((element) =>
                                                           element["batsman"]
-                                                              ["name"])
+                                                              )
                                                       .toList()
                                                       .length >
                                                   0
@@ -1974,7 +1979,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           "not out")
                                                       .map((element) =>
                                                           element["batsman"]
-                                                              ["name"])
+                                                              )
                                                       .toList()
                                                       .length >
                                                   0
@@ -2049,8 +2054,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                     element["dismissal-text"] ==
                                                                     "not out")
                                                                 .map((element) =>
-                                                                    element["batsman"]
-                                                                        ["name"])
+                                                                    element["batsman"])
                                                                 .toList()
                                                                 .length >
                                                             1
@@ -2059,7 +2063,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                 ["batting"]
                                                             .where((element) =>
                                                                 element["dismissal-text"] == "not out")
-                                                            .map((element) => element["batsman"]["name"])
+                                                            .map((element) => element["batsman"])
                                                             .toList()[1]
                                                             .toString()
                                                         : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
@@ -2096,7 +2100,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                          )
                                                         .toList()
                                                         .length >
                                                     1
@@ -2130,7 +2134,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                        )
                                                         .toList()
                                                         .length >
                                                     1
@@ -2164,7 +2168,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                        )
                                                         .toList()
                                                         .length >
                                                     1
@@ -2198,7 +2202,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                        )
                                                         .toList()
                                                         .length >
                                                     1
@@ -2232,7 +2236,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             "not out")
                                                         .map((element) =>
                                                             element["batsman"]
-                                                                ["name"])
+                                                        )
                                                         .toList()
                                                         .length >
                                                     1
@@ -2264,7 +2268,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
@@ -2458,7 +2462,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -2605,9 +2609,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        // SizedBox(
+                        //   height: 5,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Container(
@@ -2647,7 +2651,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 5,
                         ),
                         Opacity(
                           opacity: 0.8,
@@ -3435,12 +3439,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               fillColor: MaterialStatePropertyAll(Colors.white),
                               value: 1,
                               groupValue: _value,
-                              onChanged: (value) {
+                              onChanged: (value) async {
                                 setState(() {
                                   _value = 1;
                                   numberview = false;
-                                  percentage = true;
+                                  percentage = true;                                  
                                 });
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.setString('value', _value.toString());
                               }),
                           Text(
                             'Win Percentage View',
