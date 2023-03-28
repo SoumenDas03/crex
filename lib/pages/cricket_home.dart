@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crex/dashboard/infoTabviews.dart';
 import 'package:crex/provider/theme_changer.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,9 +53,12 @@ class _cricket_homeState extends State<cricket_home> {
               element["status"] != "New Zealand Legends opt to bowl" &&
               element["status"] != "Day 1: Stumps - Sri Lanka opt to bowl" &&
               element["status"] != "No result(due to rain)" &&
-              element["status"] != "Day 2: Stumps - Wellington trail by 239 runs" && 
-              element["status"] != "Day 3: 3rd Session - Central Districts trail by 135 runs" && 
-              element["status"] != "Day 2: 3rd Session - Northern Knights opt to bowl")
+              element["status"] !=
+                  "Day 2: Stumps - Wellington trail by 239 runs" &&
+              element["status"] !=
+                  "Day 3: 3rd Session - Central Districts trail by 135 runs" &&
+              element["status"] !=
+                  "Day 2: 3rd Session - Northern Knights opt to bowl")
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)
@@ -82,7 +86,7 @@ class _cricket_homeState extends State<cricket_home> {
           .where((element) =>
               element["matchStarted"] == false &&
               element["teams"][0] != "Tbc" &&
-              element["teamInfo"].length > 1)
+              element["teamInfo"] != null)
           .toList();
       if (response.statusCode == 200) {
         return upcomingData;
@@ -111,6 +115,8 @@ class _cricket_homeState extends State<cricket_home> {
     }
   }
 
+  final CarouselController carouselController = CarouselController();
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
@@ -152,94 +158,94 @@ class _cricket_homeState extends State<cricket_home> {
                                   Stack(
                                     clipBehavior: Clip.none,
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(20),
-                                            bottomRight: Radius.circular(20)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
+                                      CarouselSlider(
+                                        carouselController: carouselController,
+                                        options: CarouselOptions(
+                                            height: 150,
+                                            autoPlay: true,
+                                            aspectRatio: 2,
+                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                            enableInfiniteScroll: true,
+                                            autoPlayAnimationDuration:
+                                                Duration(milliseconds: 800),
+                                            viewportFraction: 1,
+                                            scrollPhysics:
+                                                BouncingScrollPhysics(),
+                                            onPageChanged: (index, reason) {
+                                              setState(() {
+                                                currentIndex = index;
+                                              });                                              
+                                            }),
+                                        items: dataList.map<Widget>((i) {
+                                          return Builder(
+                                            builder: (BuildContext context) {
+                                              return Image.network(
+                                                "https://playexch.us/banner_image/" +
+                                                    i,
+                                                fit: BoxFit.cover,
+                                                width: double.infinity,
+                                              );
+                                            },
+                                          );
+                                        }).toList(),
+                                      ),
+                                      Positioned(
+                                        bottom: 8,
+                                        left: 0,
+                                        right: 0,
+                                        child: DotsIndicator(
+                                          dotsCount: dataList.length,
+                                          position: currentIndex.toDouble(),
+                                          decorator: DotsDecorator(
+                                            size: const Size.square(9.0),
+                                            activeSize: const Size(18.0, 9.0),
+                                            activeShape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0)),
+                                          ),
+                                        ), 
+                                      ),
+                                      Positioned(
+                                        right: 5,
+                                        child: Container(
+                                          alignment: Alignment.topRight,
                                           child: Container(
-                                            width: MediaQuery.of(context).size.width,
-                                            child: CarouselSlider(
-                                              options: CarouselOptions(
-                                                initialPage: 1,
-                                                height: 150,                                                                                            
-                                                autoPlay: true,
-                                                aspectRatio: 16/9,                                                                                            
-                                                autoPlayCurve:
-                                                    Curves.fastOutSlowIn,
-                                                enableInfiniteScroll: true,
-                                                autoPlayAnimationDuration:
-                                                    Duration(milliseconds: 800),
-                                                viewportFraction: 0.8,                                              
-                                              ),
-                                              items: dataList.map<Widget>((i) {
-                                                return Builder(
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return Container(
-                                                      width: 800,
-                                                      margin: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 5.0),
-                                                      child: Image.network(
-                                                        "https://playexch.us/banner_image/" +
-                                                            i,
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              }).toList(),
+                                            alignment: Alignment.centerLeft,
+                                            height: 25,
+                                            width: 85,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.blueGrey,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Image.asset('assets/game.png'),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Container(
+                                                  height: 15,
+                                                  width: 55,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      color: Colors.white),
+                                                  child: Center(
+                                                      child: Text(
+                                                    "Play Now",
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: Colors.black),
+                                                  )),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
                                       ),
-                                      Positioned(
-                                          right: 5,
-                                          child: Container(
-                                            alignment: Alignment.topRight,
-                                            child: Container(
-                                              alignment: Alignment.centerLeft,
-                                              height: 25,
-                                              width: 85,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.blueGrey,
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Image.asset(
-                                                      'assets/game.png'),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Container(
-                                                    height: 15,
-                                                    width: 55,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        color: Colors.white),
-                                                    child: Center(
-                                                        child: Text(
-                                                      "Play Now",
-                                                      style: TextStyle(
-                                                          fontSize: 10,
-                                                          color: Colors.black),
-                                                    )),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ))
                                     ],
-                                  ),
-                                  SizedBox(
-                                    height: 20,
                                   ),
                                   Container(
                                     decoration: BoxDecoration(
@@ -250,12 +256,13 @@ class _cricket_homeState extends State<cricket_home> {
                                               : AssetImage(
                                                   "assets/bgLightMode.png"),
                                           fit: BoxFit.fill),
-                                    ),                                    
+                                    ),
                                     child: DefaultTabController(
                                       length: 4,
                                       child: Column(
                                         children: [
                                           Container(
+                                            margin: EdgeInsets.only(top: 15),
                                             alignment: Alignment.center,
                                             // margin: EdgeInsets.only(left: 10),
                                             width: 340,

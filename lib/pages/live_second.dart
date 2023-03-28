@@ -40,6 +40,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    noob();
   }
 
   @override
@@ -47,6 +48,20 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     floating.dispose();
     super.dispose();
+    noob();
+  }
+
+  noob() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    _value = int.parse(sharedPreferences.getString('value')!); 
+    if(_value == 1) {
+      numberview = false;
+      percentage = true;
+    } else {
+      numberview = true;
+      percentage = false;
+    }
   }
 
   // @override
@@ -984,12 +999,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               ),
                             ),
                           ),
-                        ),
-
-
-                        
-
-                       
+                        ),                
                         InkWell(
                           onTap: () {
                             _showModalBottomSheet();
@@ -2064,7 +2074,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             .where((element) =>
                                                                 element["dismissal-text"] == "not out")
                                                             .map((element) => element["batsman"])
-                                                            .toList()[1]
+                                                            .toList()[1]["name"]
                                                             .toString()
                                                         : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["name"].toString(),
                                                     style: TextStyle(
@@ -3441,9 +3451,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               groupValue: _value,
                               onChanged: (value) async {
                                 setState(() {
-                                  _value = 1;
+                                  _value = 1;    
                                   numberview = false;
-                                  percentage = true;                                  
+                                  percentage = true;                                                                
                                 });
                                 final SharedPreferences sharedPreferences =
                                     await SharedPreferences.getInstance();
@@ -3543,12 +3553,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               fillColor: MaterialStatePropertyAll(Colors.white),
                               value: 2,
                               groupValue: _value,
-                              onChanged: (value) {
+                              onChanged: (value) async {
                                 setState(() {
-                                  _value = 2;
+                                  _value = 2;    
                                   numberview = true;
-                                  percentage = false;
+                                  percentage = false;                             
                                 });
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.setString('value', _value.toString());
                               }),
                           Text(
                             'Number View',
