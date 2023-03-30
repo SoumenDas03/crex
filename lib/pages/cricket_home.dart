@@ -247,6 +247,7 @@ class _cricket_homeState extends State<cricket_home> {
                                       ),
                                     ],
                                   ),
+                                  
                                   Container(
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
@@ -262,7 +263,7 @@ class _cricket_homeState extends State<cricket_home> {
                                       child: Column(
                                         children: [
                                           Container(
-                                            margin: EdgeInsets.only(top: 15),
+                                            margin: EdgeInsets.only(top: 5),
                                             alignment: Alignment.center,
                                             // margin: EdgeInsets.only(left: 10),
                                             width: 340,
@@ -275,10 +276,10 @@ class _cricket_homeState extends State<cricket_home> {
                                                     BorderRadius.circular(20)),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(2.5),
+                                                  const EdgeInsets.all(2),
                                               child: TabBar(
                                                   labelPadding:
-                                                      EdgeInsets.all(5),
+                                                      EdgeInsets.all(4),
                                                   indicator: BoxDecoration(
                                                       color: isDarkMode
                                                           ? Colors.white

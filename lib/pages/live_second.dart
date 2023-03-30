@@ -179,7 +179,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           color: Colors.white,
                         ),
                         SizedBox(
-                          height: 8,
+                          height: 4,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -970,16 +970,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         )
                                       ],
                                     ),
-                                    SizedBox(height: 10),
+                                    SizedBox(height: 5),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                       
+                        ),                       
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.only(right:5.0, left: 5.0, bottom: 3.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Container(
@@ -1018,7 +1017,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           ? Colors.blueGrey[900]
                                           : const Color(0xFFDFDFDF)),
                                  
-                                  height: 60,
+                                  height: 45,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -1054,7 +1053,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? Colors.white
                                                     : Colors.black,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 12),
+                                                fontSize: 18),
                                           ),
                                           const SizedBox(
                                             width: 5,
@@ -1066,7 +1065,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? Colors.white
                                                     : Colors.black,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 12),
+                                                fontSize: 18),
                                           ),
                                           // ignore: prefer_const_constructors
                                           SizedBox(
@@ -1079,7 +1078,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? Colors.white
                                                     : Colors.black,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 12),
+                                                fontSize: 15),
                                           ),
                             
                                           SizedBox(
@@ -1088,7 +1087,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             
                                           Icon(
                                             Icons.info_outline,
-                                            size: 10,
+                                            size: 12,
                                             color: isDarkMode
                                                 ? Colors.white54
                                                 : Colors.black54,
@@ -1135,7 +1134,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               ? data["teamInfo"][0]["shortname"]
                                               : data["teamInfo"][1]["shortname"],
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white),
                                         ),
@@ -1156,7 +1155,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         child: Text(
                                           '56',
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white),
                                         ),
@@ -1177,7 +1176,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         child: Text(
                                           '57',
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: isDarkMode
                                                   ? Colors.white
@@ -1193,7 +1192,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           color: isDarkMode
                                               ? Colors.white
                                               : Colors.black,
-                                          fontStyle: FontStyle.italic),
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 15),
                                     )
                                     ],
                                   ),
@@ -1209,8 +1209,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           },
                           child: Visibility(
                             visible: percentage,
-                            child: Padding(   padding: const EdgeInsets.all(5.0),
-                             
+                            child: Padding(   padding: const EdgeInsets.all(5.0),                             
                               child: Opacity(
                                 opacity: 0.8,
                                 child: Container(
@@ -1221,7 +1220,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         : const Color(0xFFDFDFDF),
                                   ),
                                  // width: 300,
-                                  height: 60,
+                                  height: 45,
                                   child: Row( mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                     children: [
@@ -1239,7 +1238,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                         ? Colors.white
                                                         : Colors.black,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
+                                                    fontSize: 18),
                                               ),
                                               const SizedBox(
                                                 width: 8,
@@ -1268,7 +1267,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                         ? Colors.white
                                                         : Colors.black,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 12),
+                                                    fontSize: 18),
                                               ),
                                             ],
                                           ),
@@ -1303,7 +1302,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 animationDuration: 2500,
                                               ),
                                               const SizedBox(
-                                                width: 8,
+                                                width: 15,
                                               ),
                                               Text(
                                                 "40%",
@@ -1327,7 +1326,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           color: isDarkMode
                                               ? Colors.white
                                               : Colors.black,
-                                          fontStyle: FontStyle.italic),
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 17),
                                     )
                                     ],
                                   ),
