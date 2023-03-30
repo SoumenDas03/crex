@@ -246,27 +246,22 @@ class _fantasyState extends State<fantasy> {
                                                             .start,
                                                     children: [
                                                       Container(
-                                                          alignment: Alignment
-                                                              .topRight,
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  right: 25),
-                                                          child: isDarkMode
-                                                    ? Container(width: 60,
-                                                        //color: Color(0xff096A31),
-                                                        color: Colors.white,
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5.0),
-                                                          child: Image.asset(
-                                                              'assets/live_tv.png'),
-                                                        ),
-                                                      )
-                                                    : Image.asset(
-                                                        'assets/live_tv.png'),),
+                                        alignment: Alignment.topRight,
+                                        margin: EdgeInsets.only(right: 25),
+                                        child: Container(width: 60,
+                                                          //color: Color(0xff096A31),
+                                                          color: Colors.red,
+                                                          alignment:
+                                                              Alignment.topRight,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5.0),
+                                                            child: Image.asset(
+                                                                'assets/live_tv.png', color: Colors.yellow,),
+                                                          ),
+                                                        )
+                                                      ),
                                                       Container(
                                                         margin: EdgeInsets.only(
                                                             right: 25),
@@ -382,9 +377,15 @@ class _fantasyState extends State<fantasy> {
                                                           ],
                                                         ),
                                                       ),
-                                                      SizedBox(
-                                                        height: 15,
-                                                      ),
+                                                     Container(
+                                        alignment: Alignment.topRight,
+                                        margin: EdgeInsets.only(right: 25, bottom: 12),
+                                        child:  isDarkMode
+                                            ? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )),
                                                       Container(
                                                           height: 1,
                                                           width: 400,
@@ -441,12 +442,7 @@ class _fantasyState extends State<fantasy> {
                                                           SizedBox(
                                                             width: 70,
                                                           ),
-                                                          isDarkMode
-                                            ? Image.asset("assets/volume.png")
-                                            : Image.asset(
-                                                "assets/volume.png",
-                                                color: Colors.grey,
-                                              )
+                                                         
                                                         ],
                                                       ),
                                                       SizedBox(

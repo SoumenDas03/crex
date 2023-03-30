@@ -201,7 +201,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         child: isDarkMode
                                                     ? Container(width: 60,
                                                         //color: Color(0xff096A31),
-                                                        color: Colors.white,
+                                                        color: Colors.red,
                                                         alignment:
                                                             Alignment.topRight,
                                                         child: Padding(
@@ -209,11 +209,18 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               const EdgeInsets
                                                                   .all(5.0),
                                                           child: Image.asset(
-                                                              'assets/live_tv.png'),
+                                                              'assets/live_tv.png', color: Colors.yellow,),
                                                         ),
                                                       )
-                                                    : Image.asset(
-                                                        'assets/live_tv.png'),),
+                                                    : Container(width: 60,color: Colors.red,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(5.0),
+                                                        child: Image.asset(
+                                                            'assets/live_tv.png',color: Colors.yellow,),
+                                                      ),
+                                                    ),),
                                     Container(
                                       margin: EdgeInsets.only(right: 25),
                                       child: Row(
@@ -358,13 +365,24 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? Colors.amber
                                                     : Colors.blueGrey,
                                                 fontSize: 50),
-                                          )
+                                          ),
+                                         
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
+                                    Container(
+                                        alignment: Alignment.topRight,
+                                        margin: EdgeInsets.only(right: 25, bottom: 12),
+                                        child:  isDarkMode
+                                            ? Image.asset("assets/volume.png")
+                                            : Image.asset(
+                                                "assets/volume.png",
+                                                color: Colors.grey,
+                                              )),
+
+                                    // SizedBox(
+                                    //   height: 15,
+                                    // ),
                                     Container(
                                         height: 1,
                                         width: 400,
@@ -413,12 +431,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         SizedBox(
                                           width: 70,
                                         ),
-                                    isDarkMode
-                                            ? Image.asset("assets/volume.png")
-                                            : Image.asset(
-                                                "assets/volume.png",
-                                                color: Colors.grey,
-                                              )
+                                   
                                       ],
                                     ),
                                     SizedBox(
@@ -1583,7 +1596,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                             // border: Border.all(
                                             //     color: Colors.white, width: 0.5)
 
-                                            color: Colors.black45,
+                                            color:isDarkMode? Colors.blue:Colors.black45,
                                           ),
                                           child: Text(
                                             'NO 79',
@@ -1607,7 +1620,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                             //     color: Colors.white, width: 0.5)
 
                                             color: isDarkMode
-                                                ? Color(0xffFF8A00)
+                                                ? Colors.red
                                                 : Colors.black26,
                                           ),
                                           child: Text(
@@ -1689,6 +1702,170 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
+                         Visibility(visible: true,
+                           child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Opacity(
+                              opacity: 0.8,
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  // border: Border.all(color: Colors.white, width: 0.5)
+                         
+                                  color: isDarkMode
+                                      ? Colors.blueGrey[900]
+                                      : const Color(0xFFDFDFDF),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          data["scorecard"].length > 1
+                                              ? Text(
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                          SizedBox(
+                                            width: 75,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+                         
+                                              color:isDarkMode? Colors.blue:Colors.black45,
+                                            ),
+                                            child: Text(
+                                              'NO 79',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2.5),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+                         
+                                              color: isDarkMode
+                                                  ? Colors.red
+                                                  : Colors.black26,
+                                            ),
+                                            child: Text(
+                                              'YES 200',
+                                              style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, bottom: 10),
+                                      child: Container(
+                                        height: 1,
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.blueGrey,
+                                      ),
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Open 150',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Min 120',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          width: 12,
+                                        ),
+                                        Text(
+                                          'Max 150',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                        SizedBox(
+                                          width: 45,
+                                        ),
+                                        Text(
+                                          '10 runs in 9 balls',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 12),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                                                 ),
+                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           child: ClipRRect(
@@ -1771,8 +1948,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(0),
-                              // border: Border.all(color: Colors.white, width: 0.5)
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
                               color: isDarkMode
                                   ? Colors.blueGrey[900]
                                   : const Color(0xFFDFDFDF),
@@ -2015,8 +2193,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                 Container(
                                   width: 350,
                                   decoration: BoxDecoration(
-                                    // borderRadius: BorderRadius.circular(0),
-                                    // border: Border.all(color: Colors.white, width: 0.5)
+                                    borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)),
                                     color: isDarkMode
                                         ? Colors.black45
                                         : const Color(0xFFDFDFDF),
