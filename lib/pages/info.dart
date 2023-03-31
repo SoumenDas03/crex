@@ -165,23 +165,28 @@ class _infoState extends State<info> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                 Container(
-                                        alignment: Alignment.topRight,
-                                        margin: EdgeInsets.only(right: 25),
-                                        child: Container(width: 60,
-                                                          //color: Color(0xff096A31),
-                                                          color: Colors.red,
-                                                          alignment:
-                                                              Alignment.topRight,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(5.0),
-                                                            child: Image.asset(
-                                                                'assets/live_tv.png', color: Colors.yellow,),
+                                                  Container(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      margin: EdgeInsets.only(
+                                                          right: 25),
+                                                      child: Container(
+                                                        width: 60,
+                                                        //color: Color(0xff096A31),
+                                                        color: Colors.red,
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5.0),
+                                                          child: Image.asset(
+                                                            'assets/live_tv.png',
+                                                            color:
+                                                                Colors.yellow,
                                                           ),
-                                                        )
-                                                      ),
+                                                        ),
+                                                      )),
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         right: 25),
@@ -328,14 +333,19 @@ class _infoState extends State<info> {
                                                     ),
                                                   ),
                                                   Container(
-                                        alignment: Alignment.topRight,
-                                        margin: EdgeInsets.only(right: 25, bottom: 12),
-                                        child:  isDarkMode
-                                            ? Image.asset("assets/volume.png")
-                                            : Image.asset(
-                                                "assets/volume.png",
-                                                color: Colors.grey,
-                                              )),
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      margin: EdgeInsets.only(
+                                                          right: 25,
+                                                          bottom: 12),
+                                                      child: isDarkMode
+                                                          ? Image.asset(
+                                                              "assets/volume.png")
+                                                          : Image.asset(
+                                                              "assets/volume.png",
+                                                              color:
+                                                                  Colors.grey,
+                                                            )),
                                                   Container(
                                                       height: 1,
                                                       width: 400,
@@ -385,8 +395,33 @@ class _infoState extends State<info> {
                                                             fontSize: 15.5),
                                                       ),
                                                       SizedBox(
-                                                        width: 70,),
-                                                       
+                                                        width: 50,
+                                                      ),
+                                                      Text(
+                                                        data["score"].length >
+                                                              1
+                                                          ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                                  data["teamInfo"][0]["name"].substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(
+                                                                              " ")
+                                                                          : data["teamInfo"][0]["name"]
+                                                                              .length)
+                                                              ? data["teamInfo"][data["score"].length - 1]["shortname"] +
+                                                                  " " +
+                                                                  data["score"][data["score"].length - 1]["r"]
+                                                                      .toString() +
+                                                                  "-" +
+                                                                  data["score"][data["score"].length - 1]["w"]
+                                                                      .toString() +
+                                                                  "(" +
+                                                                  data["score"][data["score"].length - 1]
+                                                                          ["o"]
+                                                                      .toString() +
+                                                                  ")"
+                                                              : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                                          : "" , style: TextStyle(color: Colors.white),),
                                                     ],
                                                   ),
                                                   SizedBox(
@@ -964,7 +999,7 @@ class _infoState extends State<info> {
                                                       )
                                                     ],
                                                   ),
-                                                SizedBox(height: 10),
+                                                  SizedBox(height: 10),
                                                 ],
                                               ),
                                             ),
@@ -999,8 +1034,8 @@ class _infoState extends State<info> {
                                                       Duration(seconds: 2),
                                                   pauseAfterRound:
                                                       Duration(seconds: 2),
-                                                  text:
-                                                      data1[0]["news"].toString(),
+                                                  text: data1[0]["news"]
+                                                      .toString(),
                                                   style: TextStyle(
                                                       color: isDarkMode
                                                           ? Colors.white
@@ -1355,15 +1390,15 @@ class _infoState extends State<info> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    infoPlaying_xi_team(
-                                                  id: widget.id,
-                                                ),
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  infoPlaying_xi_team(
+                                                id: widget.id,
                                               ),
-                                            );
-                                          },
+                                            ),
+                                          );
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.only(
                                               left: 5, right: 5),
@@ -1381,19 +1416,19 @@ class _infoState extends State<info> {
                                               child: Row(
                                                 children: [
                                                   Container(
-                                                    margin:
-                                                        EdgeInsets.only(left: 10),
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
                                                     child: CircleAvatar(
                                                       backgroundImage:
                                                           NetworkImage(
-                                                              data["teamInfo"][1]
-                                                                  ["img"]),
+                                                              data["teamInfo"]
+                                                                  [1]["img"]),
                                                     ),
                                                   ),
                                                   Container(
                                                     width: 225,
-                                                    margin:
-                                                        EdgeInsets.only(left: 10),
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
                                                     child: Text(
                                                       (data["teamInfo"][1]
                                                           ["shortname"]),
@@ -1410,7 +1445,8 @@ class _infoState extends State<info> {
                                                     alignment:
                                                         Alignment.centerRight,
                                                     child: Icon(
-                                                      Icons.keyboard_arrow_right,
+                                                      Icons
+                                                          .keyboard_arrow_right,
                                                       size: 35,
                                                       color: isDarkMode
                                                           ? Colors.white
@@ -3344,7 +3380,11 @@ class _infoState extends State<info> {
                                           ),
                                         ),
                                       ),
-                                      Row(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.center,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         // ignore: prefer_const_literals_to_create_immutables
                                         children: [
                                           Container(

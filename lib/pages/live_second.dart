@@ -428,10 +428,34 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   : Colors.black,
                                               fontSize: 15.5),
                                         ),
-                                        SizedBox(
-                                          width: 70,
-                                        ),
-                                   
+                                       SizedBox(
+                                                        width: 50,
+                                                      ),
+                                                      Text(
+                                                        data["score"].length >
+                                                              1
+                                                          ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                                  data["teamInfo"][0]["name"].substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(
+                                                                              " ")
+                                                                          : data["teamInfo"][0]["name"]
+                                                                              .length)
+                                                              ? data["teamInfo"][data["score"].length - 1]["shortname"] +
+                                                                  " " +
+                                                                  data["score"][data["score"].length - 1]["r"]
+                                                                      .toString() +
+                                                                  "-" +
+                                                                  data["score"][data["score"].length - 1]["w"]
+                                                                      .toString() +
+                                                                  "(" +
+                                                                  data["score"][data["score"].length - 1]
+                                                                          ["o"]
+                                                                      .toString() +
+                                                                  ")"
+                                                              : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                                          : "" , style: TextStyle(color: Colors.white),),
                                       ],
                                     ),
                                     SizedBox(
@@ -1071,28 +1095,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           const SizedBox(
                                             width: 5,
                                           ),
-                                          Text(
-                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18),
-                                          ),
-                                          // ignore: prefer_const_constructors
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            "(${data["score"][(data["score"].length) - 1]["o"]})",
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
+                                          
                             
                                           SizedBox(
                                             width: 5,
@@ -1234,8 +1237,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   ),
                                  // width: 300,
                                   height: 45,
-                                  child: Row( mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                  child: Row( 
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
@@ -1575,7 +1578,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 ),
                                               )
                                             : Text(
-                                                "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                "Over: " + (data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2).toString(),
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: isDarkMode
@@ -1702,7 +1705,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                         Visibility(visible: true,
+                         Visibility(visible: data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] > 10 ? true : false,
                            child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Opacity(
@@ -1729,7 +1732,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         children: [
                                           data["scorecard"].length > 1
                                               ? Text(
-                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2}",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: isDarkMode
@@ -1738,7 +1741,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   ),
                                                 )
                                               : Text(
-                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
+                                                  "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2}",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: isDarkMode

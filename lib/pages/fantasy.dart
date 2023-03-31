@@ -440,8 +440,33 @@ class _fantasyState extends State<fantasy> {
                                                                 fontSize: 15.5),
                                                           ),
                                                           SizedBox(
-                                                            width: 70,
-                                                          ),
+                                                        width: 50,
+                                                      ),
+                                                      Text(
+                                                        data["score"].length >
+                                                              1
+                                                          ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                                  data["teamInfo"][0]["name"].substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(
+                                                                              " ")
+                                                                          : data["teamInfo"][0]["name"]
+                                                                              .length)
+                                                              ? data["teamInfo"][data["score"].length - 1]["shortname"] +
+                                                                  " " +
+                                                                  data["score"][data["score"].length - 1]["r"]
+                                                                      .toString() +
+                                                                  "-" +
+                                                                  data["score"][data["score"].length - 1]["w"]
+                                                                      .toString() +
+                                                                  "(" +
+                                                                  data["score"][data["score"].length - 1]
+                                                                          ["o"]
+                                                                      .toString() +
+                                                                  ")"
+                                                              : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                                          : "" , style: TextStyle(color: Colors.white),),
                                                          
                                                         ],
                                                       ),
