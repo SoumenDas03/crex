@@ -1066,9 +1066,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                               // ignore: prefer_interpolation_to_compose_strings
                                                                               newData[index]["score"][(newData[index]["score"].length) - 1]["r"].toString() + "-" + newData[index]["score"][(newData[index]["score"].length) - 1]["w"].toString() + "/",
                                                                               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
-                                                                            ),
-
-                                                                            
+                                                                            ),                                                                            
                                                                             Container(
                                                                               margin: EdgeInsets.only(top: 12),
                                                                               child: Text(
