@@ -174,7 +174,7 @@ class _cricket_homeState extends State<cricket_home> {
                                             onPageChanged: (index, reason) {
                                               setState(() {
                                                 currentIndex = index;
-                                              });                                              
+                                              });
                                             }),
                                         items: dataList.map<Widget>((i) {
                                           return Builder(
@@ -203,7 +203,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                 borderRadius:
                                                     BorderRadius.circular(5.0)),
                                           ),
-                                        ), 
+                                        ),
                                       ),
                                       Positioned(
                                         right: 5,
@@ -247,7 +247,6 @@ class _cricket_homeState extends State<cricket_home> {
                                       ),
                                     ],
                                   ),
-                                  
                                   Container(
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
@@ -275,8 +274,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2),
+                                              padding: const EdgeInsets.all(2),
                                               child: TabBar(
                                                   labelPadding:
                                                       EdgeInsets.all(4),
@@ -1066,7 +1064,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                               // ignore: prefer_interpolation_to_compose_strings
                                                                               newData[index]["score"][(newData[index]["score"].length) - 1]["r"].toString() + "-" + newData[index]["score"][(newData[index]["score"].length) - 1]["w"].toString() + "/",
                                                                               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
-                                                                            ),                                                                            
+                                                                            ),
                                                                             Container(
                                                                               margin: EdgeInsets.only(top: 12),
                                                                               child: Text(
