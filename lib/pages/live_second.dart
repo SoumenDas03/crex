@@ -56,8 +56,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   noob() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    _value = int.parse(sharedPreferences.getString('value')!); 
-    if(_value == 1) {
+    _value = int.parse(sharedPreferences.getString('value')!);
+    if (_value == 1) {
       numberview = false;
       percentage = true;
     } else {
@@ -209,13 +209,14 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               groupValue: _value,
                               onChanged: (value) async {
                                 setState(() {
-                                  _value = 1;    
+                                  _value = 1;
                                   numberview = false;
-                                  percentage = true;                                                                
+                                  percentage = true;
                                 });
                                 final SharedPreferences sharedPreferences =
                                     await SharedPreferences.getInstance();
-                                sharedPreferences.setString('value', _value.toString());
+                                sharedPreferences.setString(
+                                    'value', _value.toString());
                               }),
                           Text(
                             'Win Percentage View',
@@ -313,13 +314,14 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               groupValue: _value,
                               onChanged: (value) async {
                                 setState(() {
-                                  _value = 2;    
+                                  _value = 2;
                                   numberview = true;
-                                  percentage = false;                             
+                                  percentage = false;
                                 });
                                 final SharedPreferences sharedPreferences =
                                     await SharedPreferences.getInstance();
-                                sharedPreferences.setString('value', _value.toString());
+                                sharedPreferences.setString(
+                                    'value', _value.toString());
                               }),
                           Text(
                             'Number View',
@@ -777,15 +779,22 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [SizedBox(height: 5,),
+                                children: [
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Container(
-                                    height: 35,
-                                     alignment: Alignment.centerRight,
+                                      height: 35,
+                                      alignment: Alignment.centerRight,
                                       margin: EdgeInsets.only(left: 25),
-                                      child: Container(width: 90,
-                                        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/liveStreaming.png"), fit: BoxFit.cover)),
-                                       )
-                                    ),
+                                      child: Container(
+                                        width: 90,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/liveStreaming.png"),
+                                                fit: BoxFit.cover)),
+                                      )),
                                   Container(
                                     margin: EdgeInsets.only(right: 25),
                                     child: Row(
@@ -803,15 +812,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
                                                               0,
                                                               (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                  ? data["score"][data["score"].length - 1]["inning"]
-                                                                      .indexOf(
-                                                                          " ")
+                                                                  ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                      " ")
                                                                   : data["score"][data["score"].length - 1]["inning"]
                                                                       .length) ==
                                                           data["teamInfo"][0]["name"].substring(
                                                               0,
                                                               (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                  ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                  ? data["teamInfo"][0]["name"]
+                                                                      .indexOf(" ")
                                                                   : data["teamInfo"][0]["name"].length)
                                                       ? data["teamInfo"][0]["img"]
                                                       : data["teamInfo"][1]["img"]),
@@ -825,21 +834,22 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     Text(
                                                       data["score"][data["score"].length - 1]["inning"].substring(
                                                                   0,
-                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                      ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                                                          " ")
+                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") !=
+                                                                          -1)
+                                                                      ? data["score"][data["score"].length - 1]["inning"]
+                                                                          .indexOf(
+                                                                              " ")
                                                                       : data["score"][data["score"].length - 1]["inning"]
                                                                           .length) ==
-                                                              data["teamInfo"][0]["name"].substring(
-                                                                  0,
-                                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                      ? data["teamInfo"][0]["name"].indexOf(
-                                                                          " ")
-                                                                      : data["teamInfo"][0]["name"]
-                                                                          .length)
-                                                          ? 
-                                                          data["teamInfo"]
-                                                              [0 ]["shortname"]
+                                                              data["teamInfo"]
+                                                                          [0]
+                                                                      ["name"]
+                                                                  .substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                          : data["teamInfo"][0]["name"].length)
+                                                          ? data["teamInfo"][0]["shortname"]
                                                           : data["teamInfo"][1]["shortname"],
                                                       style: TextStyle(
                                                           color: isDarkMode
@@ -847,8 +857,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                     Text(
                                                       '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
@@ -858,8 +867,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                   ],
                                                 ),
@@ -886,10 +894,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       height: 10,
                                                     ),
                                                     Text(
-                                                      data["score"][(data[
-                                                                      "score"]
-                                                                  .length) -
-                                                              1]["o"]
+                                                      data["score"][
+                                                              (data["score"]
+                                                                      .length) -
+                                                                  1]["o"]
                                                           .toString(),
                                                       style: TextStyle(
                                                           color: isDarkMode
@@ -897,8 +905,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               : Colors.black,
                                                           fontSize: 12,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                   ],
                                                 ),
@@ -910,36 +917,68 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           ],
                                         ),
                                         SizedBox(
-                                          width: 80,
-                                        ),
-                                        Text(
-                                          bbbData != "failure"
+                                          width: bbbData != "failure"
                                               ? bbbData["bbb"][bbbData["bbb"]
                                                               .length -
                                                           1]["dismissal"] ==
                                                       null
-                                                  ? bbbData["bbb"][
-                                                          bbbData["bbb"]
+                                                  ? 80
+                                                  : 60
+                                              : 80,
+                                        ),
+                                        bbbData != "failure"
+                                            ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "6" ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "4" 
+                                            ? bbbData["bbb"][
+                                                  bbbData["bbb"].length -
+                                                      1]["dismissal"] ==
+                                              null
+                                          ? Text(
+                                              bbbData != "failure"
+                                                  ?  bbbData["bbb"][bbbData["bbb"]
+                                                                      .length -
+                                                                  1][
+                                                              "dismissal"] ==
+                                                          null
+                                                      ? bbbData[
+                                                              "bbb"][bbbData[
+                                                                      "bbb"]
                                                                   .length -
                                                               1]["runs"]
-                                                      .toString()
-                                                  : "W"
-                                              : "1",
+                                                          .toString()
+                                                      : "W"
+                                                  : "1",
+                                              style: TextStyle(
+                                                    fontWeight:
+                                                      FontWeight.bold,
+                                                  color: isDarkMode
+                                                      ? Colors.amber
+                                                      : Colors.blueGrey,
+                                                  fontSize: 50),
+                                            )
+                                          : Image.asset(
+                                              "assets/wicket.gif",
+                                              scale: 5,
+                                              height: 50,
+                                            )
+                                      : Text(
+                                          "1",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: isDarkMode
                                                   ? Colors.amber
                                                   : Colors.blueGrey,
                                               fontSize: 50),
-                                        ),
-                                       
+                                        ):
+                                        Image.asset("assets/4.gif", scale: 5)
+                                        : Image.asset("assets/6.gif", scale: 5,),
                                       ],
                                     ),
                                   ),
                                   Container(
                                       alignment: Alignment.topRight,
-                                      margin: EdgeInsets.only(right: 25, bottom: 12),
-                                      child:  isDarkMode
+                                      margin: EdgeInsets.only(
+                                          right: 25, bottom: 12),
+                                      child: isDarkMode
                                           ? Image.asset("assets/volume.png")
                                           : Image.asset(
                                               "assets/volume.png",
@@ -961,18 +1000,16 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         // ignore: prefer_interpolation_to_compose_strings
                                         'CCR : ' +
-                                            (data["score"][(data["score"]
-                                                            .length) -
-                                                        1]["r"] /
+                                            (data["score"][
+                                                        (data["score"].length) -
+                                                            1]["r"] /
                                                     data["score"][
-                                                        (data["score"]
-                                                                .length) -
+                                                        (data["score"].length) -
                                                             1]["o"])
                                                 .toStringAsFixed(2),
                                         style: TextStyle(
@@ -994,55 +1031,55 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 : Colors.black,
                                             fontSize: 15.5),
                                       ),
-                                     SizedBox(
-                                    width: 50,
-                                  ),
-                                  Text(
-                                    data["score"].length >
-                                          1
-                                      ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                              data["teamInfo"][0]["name"].substring(
-                                                  0,
-                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                      ? data["teamInfo"][0]["name"].indexOf(
-                                                          " ")
-                                                      : data["teamInfo"][0]["name"]
-                                                          .length)
-                                          ? data["score"].length > 2 
-                                          ? data["teamInfo"][data["score"].length - 3]["shortname"] +
-                                              " " +
-                                              data["score"][data["score"].length - 3]["r"]
-                                                  .toString() +
-                                              "-" +
-                                              data["score"][data["score"].length - 3]["w"]
-                                                  .toString() +
-                                              "(" +
-                                              data["score"][data["score"].length - 3]
-                                                      ["o"]
-                                                  .toString() +
-                                              ")"                                          
-                                          : data["teamInfo"][data["score"].length - 1]["shortname"] +
-                                              " " +
-                                              data["score"][data["score"].length - 2]["r"]
-                                                  .toString() +
-                                              "-" +
-                                              data["score"][data["score"].length - 2]["w"]
-                                                  .toString() +
-                                              "(" +
-                                              data["score"][data["score"].length - 2]
-                                                      ["o"]
-                                                  .toString() +
-                                              ")"
-                                          : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
-                                      : "" , style: TextStyle(color: isDarkMode ? Colors.white: Colors.black),),
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                      Text(
+                                        data["score"].length > 1
+                                            ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                    data["teamInfo"][0]["name"].substring(
+                                                        0,
+                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                            ? data["teamInfo"][0]["name"]
+                                                                .indexOf(" ")
+                                                            : data["teamInfo"][0]["name"]
+                                                                .length)
+                                                ? data["score"].length > 2
+                                                    ? data["teamInfo"][data["score"].length - 3]
+                                                            ["shortname"] +
+                                                        " " +
+                                                        data["score"][data["score"].length - 3]["r"]
+                                                            .toString() +
+                                                        "-" +
+                                                        data["score"][data["score"].length - 3]["w"]
+                                                            .toString() +
+                                                        "(" +
+                                                        data["score"][data["score"].length - 3]["o"]
+                                                            .toString() +
+                                                        ")"
+                                                    : data["teamInfo"][data["score"].length - 1]
+                                                            ["shortname"] +
+                                                        " " +
+                                                        data["score"][data["score"].length - 2]["r"].toString() +
+                                                        "-" +
+                                                        data["score"][data["score"].length - 2]["w"].toString() +
+                                                        "(" +
+                                                        data["score"][data["score"].length - 2]["o"].toString() +
+                                                        ")"
+                                                : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                            : "",
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
@@ -1061,8 +1098,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               width: 5,
@@ -1077,8 +1113,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1110,8 +1146,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1143,8 +1179,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1176,8 +1212,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1209,8 +1245,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1242,8 +1278,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1307,8 +1343,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
@@ -1333,8 +1368,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               width: 5,
@@ -1349,8 +1383,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    6][
-                                                                "dismissal"] ==
+                                                                    6]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1382,8 +1416,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1415,8 +1449,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    4][
-                                                                "dismissal"] ==
+                                                                    4]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1448,8 +1482,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    3][
-                                                                "dismissal"] ==
+                                                                    3]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1481,8 +1515,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    2][
-                                                                "dismissal"] ==
+                                                                    2]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1514,8 +1548,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    1][
-                                                                "dismissal"] ==
+                                                                    1]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -1578,8 +1612,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             )
                                           ],
                                         ),
@@ -1591,9 +1624,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               ),
                             ),
                           ),
-                        ),                       
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(right:5.0, left: 5.0, bottom: 3.0),
+                          padding: const EdgeInsets.only(
+                              right: 5.0, left: 5.0, bottom: 3.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Container(
@@ -1613,7 +1647,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               ),
                             ),
                           ),
-                        ),                
+                        ),
                         InkWell(
                           onTap: () {
                             _showModalBottomSheet();
@@ -1622,7 +1656,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           child: Visibility(
                             visible: numberview,
                             child: Padding(
-                                padding: const EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Opacity(
                                 opacity: 0.8,
                                 child: Container(
@@ -1631,7 +1665,6 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                       color: isDarkMode
                                           ? Colors.blueGrey[900]
                                           : const Color(0xFFDFDFDF)),
-                                 
                                   height: 45,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1650,17 +1683,17 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             ? data["score"][data["score"].length - 1]
                                                                     ["inning"]
                                                                 .indexOf(" ")
-                                                            : data["score"]
-                                                                        [data["score"].length - 1]
+                                                            : data["score"][data["score"].length - 1]
                                                                     ["inning"]
                                                                 .length) ==
                                                     data["teamInfo"][0]["name"].substring(
                                                         0,
                                                         (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                            ? data["teamInfo"][0]
-                                                                    ["name"]
+                                                            ? data["teamInfo"][0]["name"]
                                                                 .indexOf(" ")
-                                                            : data["teamInfo"][0]["name"].length)
+                                                            : data["teamInfo"]
+                                                                    [0]["name"]
+                                                                .length)
                                                 ? data["teamInfo"][0]["shortname"]
                                                 : data["teamInfo"][1]["shortname"],
                                             style: TextStyle(
@@ -1673,12 +1706,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           const SizedBox(
                                             width: 5,
                                           ),
-                                          
-                            
                                           SizedBox(
                                             width: 5,
                                           ),
-                            
                                           Icon(
                                             Icons.info_outline,
                                             size: 12,
@@ -1704,26 +1734,27 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         height: 22,
                                         width: 35,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(3),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
                                           color: Colors.green,
                                         ),
                                         child: Text(
                                           data["score"][data["score"].length - 1]["inning"].substring(
                                                       0,
-                                                      (data["score"][data["score"].length - 1]
-                                                                      ["inning"]
-                                                                  .indexOf(" ") !=
-                                                              -1)
+                                                      (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
                                                           ? data["score"][data["score"].length - 1]
                                                                   ["inning"]
                                                               .indexOf(" ")
-                                                          : data["score"][data["score"].length - 1]
+                                                          : data["score"]
+                                                                      [data["score"].length - 1]
                                                                   ["inning"]
                                                               .length) ==
                                                   data["teamInfo"][0]["name"].substring(
                                                       0,
                                                       (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                          ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                          ? data["teamInfo"][0]
+                                                                  ["name"]
+                                                              .indexOf(" ")
                                                           : data["teamInfo"][0]["name"].length)
                                               ? data["teamInfo"][0]["shortname"]
                                               : data["teamInfo"][1]["shortname"],
@@ -1741,7 +1772,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         height: 22,
                                         width: 35,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(3),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
                                           color: isDarkMode
                                               ? Colors.blue
                                               : Colors.black45,
@@ -1762,7 +1794,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         height: 22,
                                         width: 35,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(3),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
                                           color: isDarkMode
                                               ? Color(0xFFFF4D00)
                                               : Colors.black26,
@@ -1777,18 +1810,18 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   : Colors.black),
                                         ),
                                       ),
-                                       SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      'View',
-                                      style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontStyle: FontStyle.italic,
-                                          fontSize: 15),
-                                    )
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Text(
+                                        'View',
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 15),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -1796,14 +1829,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                         InkWell(
+                        InkWell(
                           onTap: () {
                             _showModalBottomSheet();
                             setState(() {});
                           },
                           child: Visibility(
                             visible: percentage,
-                            child: Padding(   padding: const EdgeInsets.all(5.0),                             
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
                               child: Opacity(
                                 opacity: 0.8,
                                 child: Container(
@@ -1813,20 +1847,22 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         ? Colors.blueGrey[900]
                                         : const Color(0xFFDFDFDF),
                                   ),
-                                 // width: 300,
+                                  // width: 300,
                                   height: 45,
-                                  child: Row( 
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                data["teamInfo"][0]["shortname"],
+                                                data["teamInfo"][0]
+                                                    ["shortname"],
                                                 style: TextStyle(
                                                     color: isDarkMode
                                                         ? Colors.white
@@ -1855,7 +1891,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 width: 8,
                                               ),
                                               Text(
-                                                data["teamInfo"][1]["shortname"],
+                                                data["teamInfo"][1]
+                                                    ["shortname"],
                                                 style: TextStyle(
                                                     color: isDarkMode
                                                         ? Colors.white
@@ -1892,7 +1929,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 animation: true,
                                                 linearStrokeCap:
                                                     LinearStrokeCap.roundAll,
-                                                progressColor: Colors.greenAccent,
+                                                progressColor:
+                                                    Colors.greenAccent,
                                                 animationDuration: 2500,
                                               ),
                                               const SizedBox(
@@ -1911,18 +1949,18 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                           ),
                                         ],
                                       ),
-                                        SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      'View',
-                                      style: TextStyle(
-                                          color: isDarkMode
-                                              ? Colors.white
-                                              : Colors.black,
-                                          fontStyle: FontStyle.italic,
-                                          fontSize: 17),
-                                    )
+                                      SizedBox(
+                                        width: 15,
+                                      ),
+                                      Text(
+                                        'View',
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 17),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -1930,7 +1968,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                     
+
                         // Padding(
                         //   padding: const EdgeInsets.all(5.0),
                         //   child: Opacity(
@@ -2156,7 +2194,13 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 ),
                                               )
                                             : Text(
-                                                "Over: " + (data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2).toString(),
+                                                "Over: " +
+                                                    (data["scorecard"][data[
+                                                                        "scorecard"]
+                                                                    .length -
+                                                                1]["totals"]["O"] *
+                                                            2)
+                                                        .toString(),
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: isDarkMode
@@ -2177,7 +2221,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                             // border: Border.all(
                                             //     color: Colors.white, width: 0.5)
 
-                                            color:isDarkMode? Colors.blue:Colors.black45,
+                                            color: isDarkMode
+                                                ? Colors.blue
+                                                : Colors.black45,
                                           ),
                                           child: Text(
                                             'NO 79',
@@ -2283,8 +2329,14 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             ),
                           ),
                         ),
-                         Visibility(visible: data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] > 10 ? true : false,
-                           child: Padding(
+                        Visibility(
+                          visible: data["scorecard"]
+                                          [data["scorecard"].length - 1]
+                                      ["totals"]["O"] >
+                                  10
+                              ? true
+                              : false,
+                          child: Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Opacity(
                               opacity: 0.8,
@@ -2293,7 +2345,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   // border: Border.all(color: Colors.white, width: 0.5)
-                         
+
                                   color: isDarkMode
                                       ? Colors.blueGrey[900]
                                       : const Color(0xFFDFDFDF),
@@ -2339,8 +2391,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   BorderRadius.circular(3),
                                               // border: Border.all(
                                               //     color: Colors.white, width: 0.5)
-                         
-                                              color:isDarkMode? Colors.blue:Colors.black45,
+
+                                              color: isDarkMode
+                                                  ? Colors.blue
+                                                  : Colors.black45,
                                             ),
                                             child: Text(
                                               'NO 79',
@@ -2362,7 +2416,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   BorderRadius.circular(2.5),
                                               // border: Border.all(
                                               //     color: Colors.white, width: 0.5)
-                         
+
                                               color: isDarkMode
                                                   ? Colors.red
                                                   : Colors.black26,
@@ -2393,7 +2447,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                     Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           'Open 150',
@@ -2445,8 +2500,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                 ),
                               ),
                             ),
-                                                 ),
-                         ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 5, right: 5),
                           child: ClipRRect(
@@ -2530,8 +2585,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
                               color: isDarkMode
                                   ? Colors.blueGrey[900]
                                   : const Color(0xFFDFDFDF),
@@ -2548,25 +2603,29 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"][data["scorecard"].length - 1]
-                                                            ["batting"]
-                                                        .where((element) =>
-                                                            element["dismissal-text"] ==
-                                                            "not out")
-                                                        .map((element) =>
-                                                            element["batsman"]
-                                                                ["id"])
-                                                        .toList()
-                                                        .length >
-                                                    0
-                                                ? data["scorecard"][data["scorecard"].length - 1]
-                                                        ["batting"]
-                                                    .where((element) =>
-                                                        element["dismissal-text"] == "not out")
-                                                    .map((element) => element["batsman"]["id"])
-                                                    .toList()[0]
-                                                    .toString()
-                                                : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["id"]),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => singlePlayer_info(
+                                                    playerId: data["scorecard"][data["scorecard"].length - 1]
+                                                                    ["batting"]
+                                                                .where((element) =>
+                                                                    element["dismissal-text"] ==
+                                                                    "not out")
+                                                                .map((element) =>
+                                                                    element["batsman"]
+                                                                        ["id"])
+                                                                .toList()
+                                                                .length >
+                                                            0
+                                                        ? data["scorecard"][data["scorecard"].length - 1]
+                                                                ["batting"]
+                                                            .where((element) => element["dismissal-text"] == "not out")
+                                                            .map((element) => element["batsman"]["id"])
+                                                            .toList()[0]
+                                                            .toString()
+                                                        : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 2]["batsman"]["id"]),
+                                              ));
                                         },
                                         child: Container(
                                           width: 132,
@@ -2577,15 +2636,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                                )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     0
                                                 ? data["scorecard"][data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["batsman"])
                                                     .toList()[0]["name"]
                                                     .toString()
@@ -2611,8 +2670,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           element["dismissal-text"] ==
                                                           "not out")
                                                       .map((element) =>
-                                                          element["batsman"]
-                                                              )
+                                                          element["batsman"])
                                                       .toList()
                                                       .length >
                                                   0
@@ -2620,7 +2678,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           [data["scorecard"].length - 1]
                                                       ["batting"]
                                                   .where((element) =>
-                                                      element["dismissal-text"] == "not out")
+                                                      element["dismissal-text"] ==
+                                                      "not out")
                                                   .map((element) => element["r"])
                                                   .toList()[0]
                                                   .toString()
@@ -2645,8 +2704,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           element["dismissal-text"] ==
                                                           "not out")
                                                       .map((element) =>
-                                                          element["batsman"]
-                                                          )
+                                                          element["batsman"])
                                                       .toList()
                                                       .length >
                                                   0
@@ -2654,7 +2712,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           [data["scorecard"].length - 1]
                                                       ["batting"]
                                                   .where((element) =>
-                                                      element["dismissal-text"] == "not out")
+                                                      element["dismissal-text"] ==
+                                                      "not out")
                                                   .map((element) => element["b"])
                                                   .toList()[0]
                                                   .toString()
@@ -2679,8 +2738,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           element["dismissal-text"] ==
                                                           "not out")
                                                       .map((element) =>
-                                                          element["batsman"]
-                                                          )
+                                                          element["batsman"])
                                                       .toList()
                                                       .length >
                                                   0
@@ -2688,7 +2746,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           [data["scorecard"].length - 1]
                                                       ["batting"]
                                                   .where((element) =>
-                                                      element["dismissal-text"] == "not out")
+                                                      element["dismissal-text"] ==
+                                                      "not out")
                                                   .map((element) => element["4s"])
                                                   .toList()[0]
                                                   .toString()
@@ -2713,8 +2772,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           element["dismissal-text"] ==
                                                           "not out")
                                                       .map((element) =>
-                                                          element["batsman"]
-                                                              )
+                                                          element["batsman"])
                                                       .toList()
                                                       .length >
                                                   0
@@ -2722,7 +2780,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           [data["scorecard"].length - 1]
                                                       ["batting"]
                                                   .where((element) =>
-                                                      element["dismissal-text"] == "not out")
+                                                      element["dismissal-text"] ==
+                                                      "not out")
                                                   .map((element) => element["6s"])
                                                   .toList()[0]
                                                   .toString()
@@ -2747,8 +2806,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           element["dismissal-text"] ==
                                                           "not out")
                                                       .map((element) =>
-                                                          element["batsman"]
-                                                              )
+                                                          element["batsman"])
                                                       .toList()
                                                       .length >
                                                   0
@@ -2756,7 +2814,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           [data["scorecard"].length - 1]
                                                       ["batting"]
                                                   .where((element) =>
-                                                      element["dismissal-text"] == "not out")
+                                                      element["dismissal-text"] ==
+                                                      "not out")
                                                   .map((element) => element["sr"])
                                                   .toList()[0]
                                                   .toString()
@@ -2775,8 +2834,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   width: 350,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
                                     color: isDarkMode
                                         ? Colors.black45
                                         : const Color(0xFFDFDFDF),
@@ -2794,26 +2853,25 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: data["scorecard"][data["scorecard"].length - 1]
-                                                                  ["batting"]
-                                                              .where((element) =>
-                                                                  element["dismissal-text"] ==
-                                                                  "not out")
-                                                              .map((element) =>
-                                                                  element["batsman"]
-                                                                      ["id"])
-                                                              .toList()
-                                                              .length >
-                                                          1
-                                                      ? data["scorecard"]
-                                                                  [data["scorecard"].length - 1]
-                                                              ["batting"]
-                                                          .where((element) =>
-                                                              element["dismissal-text"] == "not out")
-                                                          .map((element) => element["batsman"]["id"])
-                                                          .toList()[1]
-                                                          .toString()
-                                                      : data["scorecard"][data["scorecard"].length - 1]["batting"][data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]["batsman"]["id"].toString()),));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => singlePlayer_info(
+                                                            playerId: data["scorecard"][data["scorecard"].length - 1]["batting"].where((element) => element["dismissal-text"] == "not out").map((element) => element["batsman"]["id"]).toList().length > 1
+                                                                ? data["scorecard"][data["scorecard"].length - 1][
+                                                                        "batting"]
+                                                                    .where((element) =>
+                                                                        element["dismissal-text"] ==
+                                                                        "not out")
+                                                                    .map((element) => element["batsman"]
+                                                                        ["id"])
+                                                                    .toList()[1]
+                                                                    .toString()
+                                                                : data["scorecard"][data["scorecard"].length - 1]["batting"]
+                                                                            [data["scorecard"][data["scorecard"].length - 1]["batting"].length - 1]
+                                                                        ["batsman"]["id"]
+                                                                    .toString()),
+                                                      ));
                                                 },
                                                 child: Container(
                                                   width: 125,
@@ -2824,7 +2882,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                     element["dismissal-text"] ==
                                                                     "not out")
                                                                 .map((element) =>
-                                                                    element["batsman"])
+                                                                    element[
+                                                                        "batsman"])
                                                                 .toList()
                                                                 .length >
                                                             1
@@ -2869,8 +2928,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                          )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     1
@@ -2878,7 +2936,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             [data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["r"])
                                                     .toList()[1]
                                                     .toString()
@@ -2903,8 +2962,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                        )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     1
@@ -2912,7 +2970,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             [data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["b"])
                                                     .toList()[1]
                                                     .toString()
@@ -2937,8 +2996,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                        )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     1
@@ -2946,7 +3004,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             [data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["4s"])
                                                     .toList()[1]
                                                     .toString()
@@ -2971,8 +3030,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                        )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     1
@@ -2980,7 +3038,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             [data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["6s"])
                                                     .toList()[1]
                                                     .toString()
@@ -3005,8 +3064,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             element["dismissal-text"] ==
                                                             "not out")
                                                         .map((element) =>
-                                                            element["batsman"]
-                                                        )
+                                                            element["batsman"])
                                                         .toList()
                                                         .length >
                                                     1
@@ -3014,7 +3072,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             [data["scorecard"].length - 1]
                                                         ["batting"]
                                                     .where((element) =>
-                                                        element["dismissal-text"] == "not out")
+                                                        element["dismissal-text"] ==
+                                                        "not out")
                                                     .map((element) => element["sr"])
                                                     .toList()[1]
                                                     .toString()
@@ -3135,12 +3194,22 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => singlePlayer_info(playerId: wicketOrderData[0]["bowler"]["id"]),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    singlePlayer_info(
+                                                        playerId:
+                                                            wicketOrderData[0]
+                                                                    ["bowler"]
+                                                                ["id"]),
+                                              ));
                                         },
                                         child: Container(
                                           width: 135,
                                           child: Text(
-                                            wicketOrderData[0]["bowler"]["name"],
+                                            wicketOrderData[0]["bowler"]
+                                                ["name"],
                                             style: TextStyle(
                                                 color: isDarkMode
                                                     ? Colors.white
