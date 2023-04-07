@@ -28,26 +28,28 @@ class live_second extends StatefulWidget {
 }
 
 class _live_secondState extends State<live_second> with WidgetsBindingObserver {
-  int _value = 1;
-  bool status = false;
-  bool status2 = true;
   var map, data, sugamWicket, wicketOrderData, bbbmap, bbbData;
+  bool flag = false;
   final floating = Floating();
   bool numberview = false;
   bool percentage = true;
+  bool status = false;
+  bool status2 = true;
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    noob();
-  }
+  int _value = 1;
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     floating.dispose();
     super.dispose();
+    noob();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     noob();
   }
 
@@ -137,7 +139,590 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     }
   }
 
-  bool flag = false;
+  _showModalBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return SingleChildScrollView(
+            child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          "assets/background.jpeg",
+                        ),
+                        fit: BoxFit.fill)),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 35, left: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'Real-time Win Probability ',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 100,
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              )),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Container(
+                        height: 1,
+                        width: 350,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 30),
+                      child: Text(
+                        'Select a view of your choice',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFF4D00)),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Radio(
+                              fillColor: MaterialStatePropertyAll(Colors.white),
+                              value: 1,
+                              groupValue: _value,
+                              onChanged: (value) async {
+                                setState(() {
+                                  _value = 1;    
+                                  numberview = false;
+                                  percentage = true;                                                                
+                                });
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.setString('value', _value.toString());
+                              }),
+                          Text(
+                            'Win Percentage View',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.info_outline_rounded,
+                            color: Colors.grey,
+                            size: 15,
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 40),
+                      height: 60,
+                      width: 260,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(
+                                data["teamInfo"][0]["shortname"] + '25%',
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 25,
+                              ),
+                              Text(
+                                'DRAW 35%',
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              Text(
+                                data["teamInfo"][1]["shortname"] + '40%',
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 10,
+                                width: 60,
+                                color: Colors.orangeAccent,
+                              ),
+                              Container(
+                                height: 10,
+                                width: 85,
+                                color: Colors.green[900],
+                              ),
+                              Container(
+                                height: 10,
+                                width: 95,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Radio(
+                              fillColor: MaterialStatePropertyAll(Colors.white),
+                              value: 2,
+                              groupValue: _value,
+                              onChanged: (value) async {
+                                setState(() {
+                                  _value = 2;    
+                                  numberview = true;
+                                  percentage = false;                             
+                                });
+                                final SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.setString('value', _value.toString());
+                              }),
+                          Text(
+                            'Number View',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Icon(
+                            Icons.info_outline_rounded,
+                            color: Colors.grey,
+                            size: 15,
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 35),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            data["teamInfo"][0]["shortname"],
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Color(0xFFFF4D00),
+                            ),
+                            child: Text(
+                              '17',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Text(
+                              '17.5',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 22,
+                          ),
+                          Container(
+                            height: 35,
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            data["teamInfo"][1]["shortname"],
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Color(0xFFFF4D00),
+                            ),
+                            child: Text(
+                              '17',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Text(
+                              '17.5',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Container(
+                      height: 1,
+                      width: 350,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 30),
+                      child: Text(
+                        'Realtime Score Projection',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFF4D00)),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'Mid Ov Score Projection',
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 95,
+                          ),
+                          Switch(
+                            activeColor: Colors.blueGrey,
+                            activeTrackColor: Colors.grey,
+                            inactiveThumbColor: Colors.white,
+                            inactiveTrackColor: Colors.grey,
+                            value: status,
+                            onChanged: (value) {
+                              // ignore: avoid_print
+                              print("VALUE : $value");
+                              setState(() {
+                                status = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 35,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '50 Ov Runs',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 80,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'NO',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  height: 10,
+                                  width: 10,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 55,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'YES',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  height: 10,
+                                  width: 10,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Text(
+                            'Full Match Score Projection',
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 75,
+                          ),
+                          Switch(
+                            activeColor: Colors.blueGrey,
+                            activeTrackColor: Colors.grey,
+                            inactiveThumbColor: Colors.white,
+                            inactiveTrackColor: Colors.grey,
+                            value: status2,
+                            onChanged: (value) {
+                              // ignore: avoid_print
+                              print("VALUE : $value");
+                              setState(() {
+                                status2 = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 35,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '100 Ov Runs',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 80,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'NO',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  height: 10,
+                                  width: 10,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 22,
+                            width: 55,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              color: Colors.orange,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'YES',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  height: 10,
+                                  width: 10,
+                                  color: Colors.grey,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    )
+                  ],
+                )),
+          );
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
@@ -252,8 +837,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                           " ")
                                                                       : data["teamInfo"][0]["name"]
                                                                           .length)
-                                                          ? data["teamInfo"]
-                                                              [0]["shortname"]
+                                                          ? 
+                                                          data["teamInfo"]
+                                                              [0 ]["shortname"]
                                                           : data["teamInfo"][1]["shortname"],
                                                       style: TextStyle(
                                                           color: isDarkMode
@@ -409,33 +995,46 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                             fontSize: 15.5),
                                       ),
                                      SizedBox(
-                                                      width: 50,
-                                                    ),
-                                                    Text(
-                                                      data["score"].length >
-                                                            1
-                                                        ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                                                data["teamInfo"][0]["name"].substring(
-                                                                    0,
-                                                                    (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                        ? data["teamInfo"][0]["name"].indexOf(
-                                                                            " ")
-                                                                        : data["teamInfo"][0]["name"]
-                                                                            .length)
-                                                            ? data["teamInfo"][data["score"].length - 1]["shortname"] +
-                                                                " " +
-                                                                data["score"][data["score"].length - 1]["r"]
-                                                                    .toString() +
-                                                                "-" +
-                                                                data["score"][data["score"].length - 1]["w"]
-                                                                    .toString() +
-                                                                "(" +
-                                                                data["score"][data["score"].length - 1]
-                                                                        ["o"]
-                                                                    .toString() +
-                                                                ")"
-                                                            : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
-                                                        : "" , style: TextStyle(color: Colors.white),),
+                                    width: 50,
+                                  ),
+                                  Text(
+                                    data["score"].length >
+                                          1
+                                      ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                              data["teamInfo"][0]["name"].substring(
+                                                  0,
+                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                      ? data["teamInfo"][0]["name"].indexOf(
+                                                          " ")
+                                                      : data["teamInfo"][0]["name"]
+                                                          .length)
+                                          ? data["score"].length > 2 
+                                          ? data["teamInfo"][data["score"].length - 3]["shortname"] +
+                                              " " +
+                                              data["score"][data["score"].length - 3]["r"]
+                                                  .toString() +
+                                              "-" +
+                                              data["score"][data["score"].length - 3]["w"]
+                                                  .toString() +
+                                              "(" +
+                                              data["score"][data["score"].length - 3]
+                                                      ["o"]
+                                                  .toString() +
+                                              ")"                                          
+                                          : data["teamInfo"][data["score"].length - 1]["shortname"] +
+                                              " " +
+                                              data["score"][data["score"].length - 2]["r"]
+                                                  .toString() +
+                                              "-" +
+                                              data["score"][data["score"].length - 2]["w"]
+                                                  .toString() +
+                                              "(" +
+                                              data["score"][data["score"].length - 2]
+                                                      ["o"]
+                                                  .toString() +
+                                              ")"
+                                          : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                      : "" , style: TextStyle(color: isDarkMode ? Colors.white: Colors.black),),
                                     ],
                                   ),
                                   SizedBox(
@@ -3539,590 +4138,6 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                 child: Text('PiP unavailable'),
               ),
       ),
-    );
-  }
-
-  _showModalBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(builder: (context, setState) {
-          return SingleChildScrollView(
-            child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "assets/background.jpeg",
-                        ),
-                        fit: BoxFit.fill)),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 35, left: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'Real-time Win Probability ',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 100,
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                              )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: Container(
-                        height: 1,
-                        width: 350,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 30),
-                      child: Text(
-                        'Select a view of your choice',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFFF4D00)),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Radio(
-                              fillColor: MaterialStatePropertyAll(Colors.white),
-                              value: 1,
-                              groupValue: _value,
-                              onChanged: (value) async {
-                                setState(() {
-                                  _value = 1;    
-                                  numberview = false;
-                                  percentage = true;                                                                
-                                });
-                                final SharedPreferences sharedPreferences =
-                                    await SharedPreferences.getInstance();
-                                sharedPreferences.setString('value', _value.toString());
-                              }),
-                          Text(
-                            'Win Percentage View',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.info_outline_rounded,
-                            color: Colors.grey,
-                            size: 15,
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 40),
-                      height: 60,
-                      width: 260,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            // ignore: prefer_const_literals_to_create_immutables
-                            children: [
-                              Text(
-                                data["teamInfo"][0]["shortname"] + '25%',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 25,
-                              ),
-                              Text(
-                                'DRAW 35%',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 50,
-                              ),
-                              Text(
-                                data["teamInfo"][1]["shortname"] + '40%',
-                                style: TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 60,
-                                color: Colors.orangeAccent,
-                              ),
-                              Container(
-                                height: 10,
-                                width: 85,
-                                color: Colors.green[900],
-                              ),
-                              Container(
-                                height: 10,
-                                width: 95,
-                                color: Colors.blue,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Radio(
-                              fillColor: MaterialStatePropertyAll(Colors.white),
-                              value: 2,
-                              groupValue: _value,
-                              onChanged: (value) async {
-                                setState(() {
-                                  _value = 2;    
-                                  numberview = true;
-                                  percentage = false;                             
-                                });
-                                final SharedPreferences sharedPreferences =
-                                    await SharedPreferences.getInstance();
-                                sharedPreferences.setString('value', _value.toString());
-                              }),
-                          Text(
-                            'Number View',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.info_outline_rounded,
-                            color: Colors.grey,
-                            size: 15,
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 35),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            data["teamInfo"][0]["shortname"],
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Color(0xFFFF4D00),
-                            ),
-                            child: Text(
-                              '17',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Text(
-                              '17.5',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 22,
-                          ),
-                          Container(
-                            height: 35,
-                            width: 1,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            data["teamInfo"][1]["shortname"],
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Color(0xFFFF4D00),
-                            ),
-                            child: Text(
-                              '17',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Text(
-                              '17.5',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Container(
-                      height: 1,
-                      width: 350,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 30),
-                      child: Text(
-                        'Realtime Score Projection',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFFF4D00)),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'Mid Ov Score Projection',
-                            style: TextStyle(fontSize: 15, color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 95,
-                          ),
-                          Switch(
-                            activeColor: Colors.blueGrey,
-                            activeTrackColor: Colors.grey,
-                            inactiveThumbColor: Colors.white,
-                            inactiveTrackColor: Colors.grey,
-                            value: status,
-                            onChanged: (value) {
-                              // ignore: avoid_print
-                              print("VALUE : $value");
-                              setState(() {
-                                status = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '50 Ov Runs',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 45,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'NO',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  color: Colors.grey,
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 25,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'YES',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  color: Colors.grey,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      margin: EdgeInsets.only(left: 15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            'Full Match Score Projection',
-                            style: TextStyle(fontSize: 15, color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 75,
-                          ),
-                          Switch(
-                            activeColor: Colors.blueGrey,
-                            activeTrackColor: Colors.grey,
-                            inactiveThumbColor: Colors.white,
-                            inactiveTrackColor: Colors.grey,
-                            value: status2,
-                            onChanged: (value) {
-                              // ignore: avoid_print
-                              print("VALUE : $value");
-                              setState(() {
-                                status2 = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 35,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '100 Ov Runs',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 45,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'NO',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  color: Colors.grey,
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 25,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: Colors.orange,
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'YES',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  color: Colors.grey,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                    )
-                  ],
-                )),
-          );
-        });
-      },
     );
   }
 }
