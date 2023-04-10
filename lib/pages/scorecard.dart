@@ -117,22 +117,28 @@ class _scorecardState extends State<scorecard> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 5,),
-                                Container(
-                                  height: 35,
-                                   alignment: Alignment.centerRight,
-                                    margin: EdgeInsets.only(left: 25),
-                                    child: Container(width: 90,
-                                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/liveStreaming.png"), fit: BoxFit.cover)),
-                                     )
+                                  SizedBox(
+                                    height: 5,
                                   ),
+                                  Container(
+                                      height: 35,
+                                      alignment: Alignment.centerRight,
+                                      margin: EdgeInsets.only(left: 25),
+                                      child: Container(
+                                        width: 90,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/liveStreaming.png"),
+                                                fit: BoxFit.cover)),
+                                      )),
                                   Container(
                                     margin: EdgeInsets.only(right: 25),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Column(
                                           children: [
@@ -143,15 +149,15 @@ class _scorecardState extends State<scorecard> {
                                                   backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
                                                               0,
                                                               (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                  ? data["score"][data["score"].length - 1]["inning"]
-                                                                      .indexOf(
-                                                                          " ")
+                                                                  ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                      " ")
                                                                   : data["score"][data["score"].length - 1]["inning"]
                                                                       .length) ==
                                                           data["teamInfo"][0]["name"].substring(
                                                               0,
                                                               (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                  ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                  ? data["teamInfo"][0]["name"]
+                                                                      .indexOf(" ")
                                                                   : data["teamInfo"][0]["name"].length)
                                                       ? data["teamInfo"][0]["img"]
                                                       : data["teamInfo"][1]["img"]),
@@ -165,20 +171,22 @@ class _scorecardState extends State<scorecard> {
                                                     Text(
                                                       data["score"][data["score"].length - 1]["inning"].substring(
                                                                   0,
-                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                      ? data["score"][data["score"].length - 1]["inning"].indexOf(
-                                                                          " ")
+                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") !=
+                                                                          -1)
+                                                                      ? data["score"][data["score"].length - 1]["inning"]
+                                                                          .indexOf(
+                                                                              " ")
                                                                       : data["score"][data["score"].length - 1]["inning"]
                                                                           .length) ==
-                                                              data["teamInfo"][0]["name"].substring(
-                                                                  0,
-                                                                  (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                      ? data["teamInfo"][0]["name"].indexOf(
-                                                                          " ")
-                                                                      : data["teamInfo"][0]["name"]
-                                                                          .length)
-                                                          ? data["teamInfo"]
-                                                              [0]["shortname"]
+                                                              data["teamInfo"]
+                                                                          [0]
+                                                                      ["name"]
+                                                                  .substring(
+                                                                      0,
+                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                          ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                          : data["teamInfo"][0]["name"].length)
+                                                          ? data["teamInfo"][0]["shortname"]
                                                           : data["teamInfo"][1]["shortname"],
                                                       style: TextStyle(
                                                           color: isDarkMode
@@ -186,8 +194,7 @@ class _scorecardState extends State<scorecard> {
                                                               : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                     Text(
                                                       '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
@@ -197,8 +204,7 @@ class _scorecardState extends State<scorecard> {
                                                               : Colors.black,
                                                           fontSize: 20,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                   ],
                                                 ),
@@ -225,10 +231,10 @@ class _scorecardState extends State<scorecard> {
                                                       height: 10,
                                                     ),
                                                     Text(
-                                                      data["score"][(data[
-                                                                      "score"]
-                                                                  .length) -
-                                                              1]["o"]
+                                                      data["score"][
+                                                              (data["score"]
+                                                                      .length) -
+                                                                  1]["o"]
                                                           .toString(),
                                                       style: TextStyle(
                                                           color: isDarkMode
@@ -236,8 +242,7 @@ class _scorecardState extends State<scorecard> {
                                                               : Colors.black,
                                                           fontSize: 12,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                   ],
                                                 ),
@@ -249,40 +254,78 @@ class _scorecardState extends State<scorecard> {
                                           ],
                                         ),
                                         SizedBox(
-                                          width: 80,
-                                        ),
-                                        Text(
-                                          bbbData != "failure"
+                                          width: bbbData != "failure"
                                               ? bbbData["bbb"][bbbData["bbb"]
                                                               .length -
                                                           1]["dismissal"] ==
                                                       null
-                                                  ? bbbData["bbb"][
-                                                          bbbData["bbb"]
+                                                  ? 80
+                                                  : 80
+                                              : 60,
+                                        ),
+                                        bbbData != "failure"
+                                            ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "6" ? 
+                                            Image.asset("assets/6.gif", scale: 5,) :
+                                            bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "4" 
+                                            ? Image.asset("assets/4.gif", scale: 5) 
+                                            :bbbData["bbb"][
+                                                  bbbData["bbb"].length -
+                                                      1]["dismissal"] ==
+                                              null
+                                          ? Text(
+                                              bbbData != "failure"
+                                                  ?  bbbData["bbb"][bbbData["bbb"]
+                                                                      .length -
+                                                                  1][
+                                                              "dismissal"] ==
+                                                          null
+                                                      ? bbbData[
+                                                              "bbb"][bbbData[
+                                                                      "bbb"]
                                                                   .length -
                                                               1]["runs"]
-                                                      .toString()
-                                                  : "W"
-                                              : "1",
+                                                          .toString()
+                                                      : "W"
+                                                  : "1",
+                                              style: TextStyle(
+                                                    fontWeight:
+                                                      FontWeight.bold,
+                                                  color: isDarkMode
+                                                      ? Colors.amber
+                                                      : Colors.blueGrey,
+                                                  fontSize: 50),
+                                            )
+                                          : Image.asset(
+                                              "assets/wicket.gif",
+                                              scale: 5,
+                                              height: 50,
+                                            )                                          
+                                      : Text(
+                                          "1",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: isDarkMode
                                                   ? Colors.amber
                                                   : Colors.blueGrey,
                                               fontSize: 50),
-                                        )
+                                        ),                                        
                                       ],
                                     ),
                                   ),
-                                 Container(
+                                  Container(
                                       alignment: Alignment.topRight,
-                                      margin: EdgeInsets.only(right: 25, bottom: 12),
-                                      child:  isDarkMode
+                                      margin: EdgeInsets.only(
+                                          right: 25, bottom: 12, top: 10),
+                                      child: isDarkMode
                                           ? Image.asset("assets/volume.png")
                                           : Image.asset(
                                               "assets/volume.png",
                                               color: Colors.grey,
                                             )),
+
+                                  // SizedBox(
+                                  //   height: 15,
+                                  // ),
                                   Container(
                                       height: 1,
                                       width: 400,
@@ -295,17 +338,16 @@ class _scorecardState extends State<scorecard> {
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
+                                        // ignore: prefer_interpolation_to_compose_strings
                                         'CCR : ' +
-                                            (data["score"][(data["score"]
-                                                            .length) -
-                                                        1]["r"] /
+                                            (data["score"][
+                                                        (data["score"].length) -
+                                                            1]["r"] /
                                                     data["score"][
-                                                        (data["score"]
-                                                                .length) -
+                                                        (data["score"].length) -
                                                             1]["o"])
                                                 .toStringAsFixed(2),
                                         style: TextStyle(
@@ -327,43 +369,55 @@ class _scorecardState extends State<scorecard> {
                                                 : Colors.black,
                                             fontSize: 15.5),
                                       ),
-                                    SizedBox(
-                                                      width: 50,
-                                                    ),
-                                                    Text(
-                                                      data["score"].length >
-                                                            1
-                                                        ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                                                data["teamInfo"][0]["name"].substring(
-                                                                    0,
-                                                                    (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                        ? data["teamInfo"][0]["name"].indexOf(
-                                                                            " ")
-                                                                        : data["teamInfo"][0]["name"]
-                                                                            .length)
-                                                            ? data["teamInfo"][data["score"].length - 1]["shortname"] +
-                                                                " " +
-                                                                data["score"][data["score"].length - 1]["r"]
-                                                                    .toString() +
-                                                                "-" +
-                                                                data["score"][data["score"].length - 1]["w"]
-                                                                    .toString() +
-                                                                "(" +
-                                                                data["score"][data["score"].length - 1]
-                                                                        ["o"]
-                                                                    .toString() +
-                                                                ")"
-                                                            : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
-                                                        : "" , style: TextStyle(color: Colors.white),),
-                               
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                      Text(
+                                        data["score"].length > 1
+                                            ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                    data["teamInfo"][0]["name"].substring(
+                                                        0,
+                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                            ? data["teamInfo"][0]["name"]
+                                                                .indexOf(" ")
+                                                            : data["teamInfo"][0]["name"]
+                                                                .length)
+                                                ? data["score"].length > 2
+                                                    ? data["teamInfo"][data["score"].length - 3]
+                                                            ["shortname"] +
+                                                        " " +
+                                                        data["score"][data["score"].length - 3]["r"]
+                                                            .toString() +
+                                                        "-" +
+                                                        data["score"][data["score"].length - 3]["w"]
+                                                            .toString() +
+                                                        "(" +
+                                                        data["score"][data["score"].length - 3]["o"]
+                                                            .toString() +
+                                                        ")"
+                                                    : data["teamInfo"][data["score"].length - 1]
+                                                            ["shortname"] +
+                                                        " " +
+                                                        data["score"][data["score"].length - 2]["r"].toString() +
+                                                        "-" +
+                                                        data["score"][data["score"].length - 2]["w"].toString() +
+                                                        "(" +
+                                                        data["score"][data["score"].length - 2]["o"].toString() +
+                                                        ")"
+                                                : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                            : "",
+                                        style: TextStyle(
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.black),
+                                      ),
                                     ],
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
@@ -375,20 +429,14 @@ class _scorecardState extends State<scorecard> {
                                           children: [
                                             Text(
                                               bbbData != "failure"
-                                                  ? ('Over ' +
-                                                      bbbData["bbb"][bbbData[
-                                                                      "bbb"]
-                                                                  .length -
-                                                              8]["over"]
-                                                          .toString())
+                                                  ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}')
                                                   : "Over 15",
                                               style: TextStyle(
                                                   color: isDarkMode
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               width: 5,
@@ -403,8 +451,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -436,8 +484,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -469,8 +517,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -502,8 +550,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -535,8 +583,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -568,8 +616,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -606,24 +654,25 @@ class _scorecardState extends State<scorecard> {
                                                   ? bbbData["bbb"][bbbData["bbb"].length - 1]
                                                               ["dismissal"] ==
                                                           null
-                                                      ? (bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 7]
-                                                                  ["runs"] +
-                                                              bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 8]
-                                                                  ["runs"] +
-                                                              bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 9]
-                                                                  ["runs"] +
-                                                              bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 10]
-                                                                  ["runs"] +
-                                                              bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 11]
-                                                                  ["runs"] +
-                                                              bbbData["bbb"]
-                                                                      [bbbData["bbb"].length - 12]
-                                                                  ["runs"])
+                                                      ? (bbbData["bbb"][bbbData["bbb"].length - 7]
+                                                                  ["runs"] ??
+                                                              1 +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 8]
+                                                                      [
+                                                                      "runs"] ??
+                                                              1 +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 9]
+                                                                      [
+                                                                      "runs"] ??
+                                                              1 +
+                                                                  bbbData["bbb"]
+                                                                          [bbbData["bbb"].length - 10]
+                                                                      ["runs"] ??
+                                                              1 + bbbData["bbb"][bbbData["bbb"].length - 11]["runs"] ??
+                                                              1 + bbbData["bbb"][bbbData["bbb"].length - 12]["runs"] ??
+                                                              1)
                                                           .toString()
                                                       : "8"
                                                   : "1",
@@ -632,8 +681,7 @@ class _scorecardState extends State<scorecard> {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
@@ -651,20 +699,14 @@ class _scorecardState extends State<scorecard> {
                                           children: [
                                             Text(
                                               bbbData != "failure"
-                                                  ? ('Over ' +
-                                                      bbbData["bbb"][bbbData[
-                                                                      "bbb"]
-                                                                  .length -
-                                                              1]["over"]
-                                                          .toString())
+                                                  ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                   : "Over 15",
                                               style: TextStyle(
                                                   color: isDarkMode
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                             SizedBox(
                                               width: 5,
@@ -679,8 +721,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    6][
-                                                                "dismissal"] ==
+                                                                    6]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -712,8 +754,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    5][
-                                                                "dismissal"] ==
+                                                                    5]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -745,8 +787,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    4][
-                                                                "dismissal"] ==
+                                                                    4]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -778,8 +820,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    3][
-                                                                "dismissal"] ==
+                                                                    3]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -811,8 +853,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    2][
-                                                                "dismissal"] ==
+                                                                    2]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -844,8 +886,8 @@ class _scorecardState extends State<scorecard> {
                                                     ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
-                                                                    1][
-                                                                "dismissal"] ==
+                                                                    1]
+                                                                ["dismissal"] ==
                                                             null
                                                         ? bbbData[
                                                                 "bbb"][bbbData[
@@ -884,22 +926,22 @@ class _scorecardState extends State<scorecard> {
                                                           null
                                                       ? (bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 1]
-                                                                  ["runs"] ?? 1 +
+                                                                  ["runs"] +
                                                               bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 2]
-                                                                  ["runs"] ?? 1 +
+                                                                  ["runs"] +
                                                               bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 3]
-                                                                  ["runs"] ?? 1 +
+                                                                  ["runs"] +
                                                               bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 4]
-                                                                  ["runs"] ?? 1 +
+                                                                  ["runs"] +
                                                               bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 5]
-                                                                  ["runs"] ?? 1+
+                                                                  ["runs"] +
                                                               bbbData["bbb"]
                                                                       [bbbData["bbb"].length - 6]
-                                                                  ["runs"] ?? 1)
+                                                                  ["runs"])
                                                           .toString()
                                                       : "8"
                                                   : "1",
@@ -908,15 +950,14 @@ class _scorecardState extends State<scorecard> {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontSize: 12,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             )
                                           ],
                                         ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(height: 5),
                                 ],
                               ),
                             ),

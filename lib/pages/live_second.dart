@@ -923,12 +923,15 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           1]["dismissal"] ==
                                                       null
                                                   ? 80
-                                                  : 60
-                                              : 80,
+                                                  : 80
+                                              : 60,
                                         ),
                                         bbbData != "failure"
-                                            ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "6" ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "4" 
-                                            ? bbbData["bbb"][
+                                            ? bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "6" ? 
+                                            Image.asset("assets/6.gif", scale: 5,) :
+                                            bbbData[ "bbb"][bbbData["bbb"].length -1]["runs"].toString() == "4" 
+                                            ? Image.asset("assets/4.gif", scale: 5) 
+                                            :bbbData["bbb"][
                                                   bbbData["bbb"].length -
                                                       1]["dismissal"] ==
                                               null
@@ -959,7 +962,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               "assets/wicket.gif",
                                               scale: 5,
                                               height: 50,
-                                            )
+                                            )                                          
                                       : Text(
                                           "1",
                                           style: TextStyle(
@@ -968,16 +971,14 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   ? Colors.amber
                                                   : Colors.blueGrey,
                                               fontSize: 50),
-                                        ):
-                                        Image.asset("assets/4.gif", scale: 5)
-                                        : Image.asset("assets/6.gif", scale: 5,),
+                                        ),                                        
                                       ],
                                     ),
                                   ),
                                   Container(
                                       alignment: Alignment.topRight,
                                       margin: EdgeInsets.only(
-                                          right: 25, bottom: 12),
+                                          right: 25, bottom: 12, top: 10),
                                       child: isDarkMode
                                           ? Image.asset("assets/volume.png")
                                           : Image.asset(
