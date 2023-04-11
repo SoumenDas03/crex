@@ -61,6 +61,7 @@ import 'package:crex/pages/win_prediction.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() => runApp(const MyApp());
 
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           home: const home_dashboard(),   
         );
-      }),       
+      }),
     );
   }
 }
