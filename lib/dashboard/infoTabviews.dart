@@ -68,7 +68,7 @@ class _infoTabViewsState extends State<infoTabViews> {
                     text: 'Scorecard',
                   ),
                   Tab(
-                    text: 'Graphs',
+                    text: 'Live Chat',
                   ),
                   Tab(
                     text: 'Series Status',

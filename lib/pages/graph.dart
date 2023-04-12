@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:chat_bubbles/bubbles/bubble_special_one.dart';
+import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:crex/models/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -20,8 +22,33 @@ class graph extends StatefulWidget {
 
 class _graphState extends State<graph> {
   var map, data, bbbmap, bbbData, dataChat, chatMessage;
-  final TextEditingController _controller = TextEditingController();
   late IO.Socket socket;
+
+  late TextEditingController _controller;
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    _scrollController = ScrollController();
+    socket = IO.io(
+      'http://cricair.com:8011',
+      IO.OptionBuilder().setTransports(['websocket']).enableForceNew().build(),
+    );
+    connect();
+    getHistory();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    socket.disconnect();
+    MessagesModel.messages.clear();
+    socket.dispose();
+    super.dispose();
+  }
+
   getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
@@ -73,6 +100,10 @@ class _graphState extends State<graph> {
     _controller.clear();
   }
 
+  getHistory() {
+    socket.emit('get_history', {'room_id': widget.id});
+  }
+
   connect() {
     socket.onConnect((dataChat) {
       joined();
@@ -80,32 +111,31 @@ class _graphState extends State<graph> {
     socket.onConnectError((dataChat) => print("connect error" + dataChat));
     socket.onDisconnect((dataChat) => print("disconnect"));
     socket.on('joined', (dataChat) => print(dataChat));
-    socket.on('message_sent', (dataChat) => chatMessage = dataChat["message"]);
-    socket.on('incoming_message', (dataChat) => print(dataChat));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    socket = IO.io(
-      'http://cricair.com:8011',
-      IO.OptionBuilder().setTransports(['websocket']).build(),
-    );
-    connect();
-  }
-
-  @override
-  void dispose() {
-    socket.disconnect();
-    socket.dispose();
-    super.dispose();
+    socket.on('message_sent', (dataChat) {
+      print(dataChat);
+      setState(() {
+        MessagesModel.messages.add(dataChat);
+      });
+    });
+    socket.on('incoming_message', (dataChat) {
+      print(dataChat);
+      setState(() {
+        MessagesModel.messages.add(dataChat);
+      });
+    });
+    socket.on('get_history', (dataChat) {
+      print(dataChat);
+      setState(() {
+        MessagesModel.messages.addAll(dataChat);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: isDarkMode ? Colors.black : Colors.grey,
       body: FutureBuilder(
           future: getSingleCricketMatchDetails(),
           builder: (context, snapshot) {
@@ -1015,7 +1045,7 @@ class _graphState extends State<graph> {
                               ),
                             ),
                             SizedBox(
-                              height: 50,
+                              height: 5,
                             ),
                             // SingleChildScrollView(
                             //   child: Center(
@@ -1075,71 +1105,51 @@ class _graphState extends State<graph> {
                             Column(
                               children: [
                                 Container(
-                                  height: 355,
+                                  height: 400,
                                   child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, bottom: 5),
                                       child: ListView.builder(
-                                        itemCount: chatMessage.length,
+                                        controller: _scrollController,
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        reverse: true,
+                                        cacheExtent: 1000,
+                                        itemCount:
+                                            MessagesModel.messages.length,
                                         itemBuilder: (context, index) {
-                                          return Text(chatMessage.toString(), style: TextStyle(fontSize: 20, color: Colors.white),);
+                                          var message = MessagesModel.messages[
+                                              MessagesModel.messages.length -
+                                                  index -
+                                                  1];
+                                          return Container(
+                                            margin: EdgeInsets.only(bottom: 5),
+                                            child: Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      "https://cdn-icons-png.flaticon.com/512/149/149071.png"),
+                                                ),
+                                                BubbleSpecialOne(
+                                                  text: message["message"]
+                                                      .toString(),
+                                                  isSender: false,
+                                                  color: Colors.white,
+                                                  textStyle: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
                                         },
                                       )),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: 45,
-                                      width: 260,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.white12,
-                                      ),
-                                      child: Material(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25.0))),
-                                        elevation: 5,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Center(
-                                            child: TextFormField(
-                                              controller: _controller,
-                                              decoration: InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText: "Enter Massage"),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        if (_controller.text.isNotEmpty) {
-                                          sendMessage();
-                                        }
-                                      },
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.blue,
-                                        child: Center(
-                                          child: Icon(
-                                            Icons.send,
-                                            size: 20,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                                SizedBox(height: 20,),
+                              ],                         
                             ),
                           ],
                         ),
@@ -1150,6 +1160,60 @@ class _graphState extends State<graph> {
               );
             }
           }),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.only(bottom: 5, top: 5),
+        color: isDarkMode ? Colors.black : Colors.grey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 45,
+              width: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.white12,
+              ),
+              child: Material(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0))),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 15),
+                  child: Center(
+                    child: TextFormField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                          border: InputBorder.none, hintText: "  Enter Massage", 
+                          contentPadding: EdgeInsets.only(left: 15.0),),
+                          
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            InkWell(
+              onTap: () {
+                if (_controller.text.isNotEmpty) {
+                  sendMessage();
+                }
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.blue,
+                child: Center(
+                  child: Icon(
+                    Icons.send,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
