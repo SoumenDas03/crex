@@ -260,7 +260,7 @@ class _scorecardState extends State<scorecard> {
                                                           1]["dismissal"] ==
                                                       null
                                                   ? 80
-                                                  : 80
+                                                  : 60
                                               : 60,
                                         ),
                                         bbbData != "failure"

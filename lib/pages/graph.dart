@@ -330,7 +330,7 @@ class _graphState extends State<graph> {
                                                           1]["dismissal"] ==
                                                       null
                                                   ? 80
-                                                  : 80
+                                                  : 60
                                               : 60,
                                         ),
                                         bbbData != "failure"

@@ -302,7 +302,7 @@ class _infoState extends State<info> {
                                                           1]["dismissal"] ==
                                                       null
                                                   ? 80
-                                                  : 80
+                                                  : 60
                                               : 60,
                                         ),
                                         bbbData != "failure"

@@ -381,7 +381,7 @@ class _fantasyState extends State<fantasy> {
                                                           1]["dismissal"] ==
                                                       null
                                                   ? 80
-                                                  : 80
+                                                  : 60
                                               : 60,
                                         ),
                                         bbbData != "failure"
