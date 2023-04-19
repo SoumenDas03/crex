@@ -226,7 +226,7 @@ class _fantasyState extends State<fantasy> {
                                           SizedBox(
                                             height: 8,
                                           ),
-                                          Padding(
+                                        Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
@@ -550,7 +550,7 @@ class _fantasyState extends State<fantasy> {
                                           children: [
                                             Text(
                                               bbbData != "failure"
-                                                  ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}')
+                                                  ? bbbData["bbb"][bbbData["bbb"].length - 8] != null ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}') : "Over 1"
                                                   : "Over 15",
                                               style: TextStyle(
                                                   color: isDarkMode
@@ -575,14 +575,14 @@ class _fantasyState extends State<fantasy> {
                                                                     5]
                                                                 ["dismissal"] ==
                                                             null
-                                                        ? bbbData[
+                                                        ? bbbData["bbb"][bbbData["bbb"].length - 8] != null ? bbbData[
                                                                 "bbb"][bbbData[
                                                                         "bbb"]
                                                                     .length -
                                                                 12]["runs"]
                                                             .toString()
                                                         : "W"
-                                                    : "1",
+                                                    : "1" : "1",
                                                 style: TextStyle(
                                                     color: isDarkMode
                                                         ? Colors.black
