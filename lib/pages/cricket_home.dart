@@ -365,9 +365,9 @@ class _cricket_homeState extends State<cricket_home> {
                                                 ),
                                                 Container(
                                                   padding: EdgeInsets.only(
-                                                      bottom: 45),
+                                                      bottom: 25),
                                                   height: 450,
-                                                  child: TabBarView(children: [
+                                                  child: TabBarView(children: [    
                                                     data.length == 0
                                                         ? Center(
                                                             child: Text(
@@ -721,7 +721,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                             width: 42,
                                                                                             color: Colors.black54,
                                                                                             child: Text(
-                                                                                              '56',
+                                                                                              mapBetting["point"] != "" ?
+                                                                                              mapBetting["point"][6].toString():"56",
                                                                                               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                                                             ),
                                                                                           ),
@@ -737,7 +738,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                             width: 42,
                                                                                             color: Colors.black12,
                                                                                             child: Text(
-                                                                                              '22',
+                                                                                              mapBetting["point"] != "" ?
+                                                                                              mapBetting["point"][14].toString():"22",
                                                                                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                                             ),
                                                                                           ),
@@ -897,7 +899,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black54,
                                                                                 child: Text(
-                                                                                  '56',
+                                                                                  mapBetting["point"] != "" ?
+                                                                                  mapBetting["point"][6].toString():"56",
                                                                                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -913,7 +916,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black12,
                                                                                 child: Text(
-                                                                                  '22',
+                                                                                  mapBetting["point"] != "" ?
+                                                                                  mapBetting["point"][14].toString():"22",
                                                                                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -1101,7 +1105,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                   width: 42,
                                                                                   color: Colors.black54,
                                                                                   child: Text(
-                                                                                    '56',
+                                                                                    mapBetting["point"] != "" ?
+                                                                                    mapBetting["point"][6].toString():"56",
                                                                                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                                                   ),
                                                                                 ),
@@ -1117,7 +1122,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                   width: 42,
                                                                                   color: Colors.black12,
                                                                                   child: Text(
-                                                                                    '22',
+                                                                                    mapBetting["point"] != "" ?
+                                                                                    mapBetting["point"][14].toString():"22",
                                                                                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                                   ),
                                                                                 ),
