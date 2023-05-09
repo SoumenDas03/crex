@@ -1,4 +1,4 @@
-package com.example.crex
+package com.crex.crex
 
 import io.flutter.embedding.android.FlutterActivity
 

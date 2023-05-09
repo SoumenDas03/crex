@@ -34,7 +34,7 @@ class _cricket_homeState extends State<cricket_home> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/currentMatches?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
+            'https://api.cricapi.com/v1/currentMatches?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -63,7 +63,8 @@ class _cricket_homeState extends State<cricket_home> {
                   "Day 2: 3rd Session - Northern Knights opt to bowl")
           .toList();
       newData = map["data"]
-          .where((element) => element["matchEnded"] == true)
+          .where((element) => element["matchEnded"] == true &&
+          element["teamInfo"].length > 1)
           .toList();
       if (response.statusCode == 200) {
         return data;
@@ -80,7 +81,7 @@ class _cricket_homeState extends State<cricket_home> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-         'https://api.cricapi.com/v1/matches?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&offset=0'),
+         'https://api.cricapi.com/v1/matches?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&offset=0'),
       );
 
       upcomingMap = jsonDecode(response.body.toString());
@@ -88,7 +89,8 @@ class _cricket_homeState extends State<cricket_home> {
           .where((element) =>
               element["matchStarted"] == false &&
               element["teams"][0] != "Tbc" &&
-              element["teamInfo"] != null)
+              element["teamInfo"] != null && 
+              element["teamInfo"].length > 1)
           .toList();
       if (response.statusCode == 200) {
         return upcomingData;
@@ -247,52 +249,52 @@ class _cricket_homeState extends State<cricket_home> {
                                                 ),
                                               ),
                                             ),
-                                            Positioned(
-                                              right: 5,
-                                              child: Container(
-                                                alignment: Alignment.topRight,
-                                                child: Container(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  height: 25,
-                                                  width: 85,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color: Colors.blueGrey,
-                                                  ),
-                                                  child: Row(
-                                                    children: [
-                                                      Image.asset(
-                                                          'assets/game.png'),
-                                                      SizedBox(
-                                                        width: 5,
-                                                      ),
-                                                      Container(
-                                                        height: 15,
-                                                        width: 55,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10),
-                                                            color:
-                                                                Colors.white),
-                                                        child: Center(
-                                                            child: Text(
-                                                          "Play Now",
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              color:
-                                                                  Colors.black),
-                                                        )),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
+                                            // Positioned(
+                                            //   right: 5,
+                                            //   child: Container(
+                                            //     alignment: Alignment.topRight,
+                                            //     child: Container(
+                                            //       alignment:
+                                            //           Alignment.centerLeft,
+                                            //       height: 25,
+                                            //       width: 85,
+                                            //       decoration: BoxDecoration(
+                                            //         borderRadius:
+                                            //             BorderRadius.circular(
+                                            //                 5),
+                                            //         color: Colors.blueGrey,
+                                            //       ),
+                                            //       child: Row(
+                                            //         children: [
+                                            //           Image.asset(
+                                            //               'assets/game.png'),
+                                            //           SizedBox(
+                                            //             width: 5,
+                                            //           ),
+                                            //           Container(
+                                            //             height: 15,
+                                            //             width: 55,
+                                            //             decoration: BoxDecoration(
+                                            //                 borderRadius:
+                                            //                     BorderRadius
+                                            //                         .circular(
+                                            //                             10),
+                                            //                 color:
+                                            //                     Colors.white),
+                                            //             child: Center(
+                                            //                 child: Text(
+                                            //               "Play Now",
+                                            //               style: TextStyle(
+                                            //                   fontSize: 10,
+                                            //                   color:
+                                            //                       Colors.black),
+                                            //             )),
+                                            //           )
+                                            //         ],
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                         Container(

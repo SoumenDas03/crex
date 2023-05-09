@@ -54,6 +54,7 @@ import 'package:crex/pages/singlePlayer_matches.dart';
 import 'package:crex/pages/singlePlayer_news.dart';
 import 'package:crex/pages/singlePlayer_overview.dart';
 import 'package:crex/pages/speech_settings.dart';
+import 'package:crex/pages/splashScreen.dart';
 import 'package:crex/pages/team_ranking.dart';
 import 'package:crex/pages/tennis_home.dart';
 import 'package:crex/pages/topfantasypoints.dart';
@@ -89,7 +90,7 @@ class MyApp extends StatelessWidget {
               iconTheme: const IconThemeData(color: Colors.white)),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          home: const home_dashboard(),  
+          home: const splashScreen  (),
         );
       }),
     );

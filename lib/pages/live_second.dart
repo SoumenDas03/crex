@@ -35,7 +35,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   bool percentage = true;
   bool status = false;
   bool status2 = true;
-  int _value = 1;
+  int _value = 2;
 
   @override
   void dispose() {
@@ -55,7 +55,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   noob() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    _value = int.parse(sharedPreferences.getString('value')!);
+    _value = int.parse(sharedPreferences.getString('value') ?? "2");
     if (_value == 1) {
       numberview = false;
       percentage = true;
@@ -93,7 +93,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -122,7 +122,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -377,7 +377,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           ),
                           Container(
                             alignment: Alignment.center,
-                            height: 22,
+                            height: 22,    
                             width: 35,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
@@ -958,6 +958,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   ),
                                                 ],
                                               ),
+                                              SizedBox(width: 50,),
                                               SizedBox(
                                                 width: bbbData != "failure"
                                                     ? bbbData["bbb"][bbbData[
@@ -965,9 +966,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                     .length -
                                                                 1]["dismissal"] ==
                                                             null
-                                                        ? 80
-                                                        : 60
-                                                    : 60,
+                                                        ? 20
+                                                        : 40
+                                                    : 20,
                                               ),
                                               bbbData != "failure"
                                                   ? bbbData["bbb"][bbbData["bbb"]
@@ -1025,24 +1026,23 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               : Colors.blueGrey,
                                                           fontSize: 50),
                                                     ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
+                                                    Container(
                                             alignment: Alignment.topRight,
                                             margin: EdgeInsets.only(
-                                                right: 25, bottom: 12, top: 10),
+                                                left: 5, bottom: 12, top: 10),
                                             child: isDarkMode
                                                 ? Image.asset(
                                                     "assets/volume.png")
                                                 : Image.asset(
                                                     "assets/volume.png",
                                                     color: Colors.grey,
-                                                  )),
-
-                                        // SizedBox(
-                                        //   height: 15,
-                                        // ),
+                                                  ),),
+                                            ],
+                                          ),
+                                        ),                                        
+                                        SizedBox(
+                                          height: 15,
+                                        ),
                                         Container(
                                             height: 1,
                                             width: 400,
@@ -1724,15 +1724,16 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                         height: 45,
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.start,
                                               // ignore: prefer_const_literals_to_create_immutables
                                               children: [
+                                                SizedBox(width: 25),
                                                 Text(
                                                   data["score"][data["score"].length - 1]["inning"].substring(
                                                               0,
@@ -1759,13 +1760,13 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           : Colors.black,
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 18),
+                                                      fontSize: 22),
                                                 ),
                                                 const SizedBox(
-                                                  width: 5,
+                                                  width: 1,
                                                 ),
                                                 SizedBox(
-                                                  width: 5,
+                                                  width: 1,
                                                 ),
                                                 Icon(
                                                   Icons.info_outline,
@@ -1788,47 +1789,49 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               width: 10,
                                             ),
                                             Container(
-                                              alignment: Alignment.center,
-                                              height: 22,
-                                              width: 35,
+                                              alignment: Alignment.center,     
+                                              height: 35,                                                                                       
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(3),
                                                 color: Colors.green,
                                               ),
-                                              child: Text(
-                                                data["score"][data["score"].length - 1]
-                                                                ["inning"]
-                                                            .substring(
-                                                                0,
-                                                                (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                    ? data["score"][data["score"].length - 1]["inning"]
-                                                                        .indexOf(
-                                                                            " ")
-                                                                    : data["score"][data["score"].length - 1]["inning"]
-                                                                        .length) ==
-                                                        data["teamInfo"][0]["name"].substring(
-                                                            0,
-                                                            (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                ? data["teamInfo"][0]
-                                                                        ["name"]
-                                                                    .indexOf(" ")
-                                                                : data["teamInfo"][0]["name"].length)
-                                                    ? data["teamInfo"][0]["shortname"]
-                                                    : data["teamInfo"][1]["shortname"],
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(2.0),
+                                                child: Text(
+                                                  data["score"][data["score"].length - 1]
+                                                                  ["inning"]
+                                                              .substring(
+                                                                  0,
+                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                      ? data["score"][data["score"].length - 1]["inning"]
+                                                                          .indexOf(
+                                                                              " ")
+                                                                      : data["score"][data["score"].length - 1]["inning"]
+                                                                          .length) ==
+                                                          data["teamInfo"][0]["name"].substring(
+                                                              0,
+                                                              (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                  ? data["teamInfo"][0]
+                                                                          ["name"]
+                                                                      .indexOf(" ")
+                                                                  : data["teamInfo"][0]["name"].length)
+                                                      ? data["teamInfo"][0]["shortname"]
+                                                      : data["teamInfo"][1]["shortname"],
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.white),
+                                                ),
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 5,
+                                              width: 10,
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              height: 22,
-                                              width: 35,
+                                              height: 35,
+                                              width: 50,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(3),
@@ -1840,18 +1843,18 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 mapBetting["point"] != "" ?
                                                 mapBetting["point"][6].toString():"56",
                                                 style: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white),
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 5,
+                                              width: 10,
                                             ),
                                             Container(
                                               alignment: Alignment.center,
-                                              height: 22,
-                                              width: 35,
+                                              height: 35,
+                                              width: 50,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(3),
@@ -1863,7 +1866,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 mapBetting["point"] != "" ?
                                                 mapBetting["point"][14].toString():"57",
                                                 style: TextStyle(
-                                                    fontSize: 15,
+                                                    fontSize: 20,
                                                     fontWeight: FontWeight.bold,
                                                     color: isDarkMode
                                                         ? Colors.white
@@ -1871,7 +1874,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               ),
                                             ),
                                             SizedBox(
-                                              width: 15,
+                                              width: 10,
                                             ),
                                             Text(
                                               'View',
@@ -1880,7 +1883,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       ? Colors.white
                                                       : Colors.black,
                                                   fontStyle: FontStyle.italic,
-                                                  fontSize: 15),
+                                                  fontSize: 18),
                                             )
                                           ],
                                         ),

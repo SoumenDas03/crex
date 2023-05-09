@@ -20,13 +20,15 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_squad?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_squad?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
       data = map["data"];
-      newData = data[0]["players"].getRange(11, data[0]["players"].length).toList();
-      secondNewData = data[1]["players"].getRange(11, data[1]["players"].length).toList();
+      newData =
+          data[0]["players"].getRange(11, data[0]["players"].length).toList();
+      secondNewData =
+          data[1]["players"].getRange(11, data[1]["players"].length).toList();
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
@@ -108,7 +110,7 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
                                 height: 835,
                                 child: TabBarView(children: [
                                   Column(
-                                    children: [    
+                                    children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 25, right: 25),

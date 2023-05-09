@@ -39,7 +39,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -62,7 +62,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -84,7 +84,7 @@ class _commententaryState extends State<commententary> {
   getPlayerInfo(String id) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          'https://api.cricapi.com/v1/players_info?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=$id'));
+          'https://api.cricapi.com/v1/players_info?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=$id'));
 
       playerInfoMap = jsonDecode(response.body.toString());
       playerInfoData = playerInfoMap["data"];
@@ -103,7 +103,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=272ffee7-f333-43bd-babc-f9e045d698d3&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&id=${widget.id}'),
       );
 
       scoreMap = jsonDecode(response.body.toString());
@@ -206,19 +206,8 @@ class _commententaryState extends State<commententary> {
                             } else {
                               return SingleChildScrollView(
                                 child: Container(
-                                  alignment: Alignment.center,
-                                  // ignore: prefer_const_constructors
-                                  decoration: BoxDecoration(
-                                    // ignore: prefer_const_constructors
-                                    image: DecorationImage(
-                                      // ignore: prefer_const_constructors
-                                      image: isDarkMode
-                                          ? AssetImage('assets/background.jpeg')
-                                          : AssetImage(
-                                              "assets/bgLightMode.png"),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
+                                   // ignore: prefer_const_constructors
+                                  color: Colors.black,
                                   child: Column(
                                     children: [
                                       Container(
@@ -230,938 +219,888 @@ class _commententaryState extends State<commententary> {
                                         height: 8,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Container(
-                                            color: isDarkMode
-                                                ? Color(0xff258D50)
-                                                : const Color(0xFFDFDFDF),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Container(
-                                                    height: 35,
-                                                    alignment:
-                                                        Alignment.centerRight,
-                                                    margin: EdgeInsets.only(
-                                                        left: 25),
-                                                    child: Container(
-                                                      width: 90,
-                                                      decoration: BoxDecoration(
-                                                          image: DecorationImage(
-                                                              image: AssetImage(
-                                                                  "assets/liveStreaming.png"),
-                                                              fit: BoxFit
-                                                                  .cover)),
-                                                    )),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 25),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                padding: const EdgeInsets.all(5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    color: isDarkMode
+                                        ? Color(0xff258D50)
+                                        : const Color(0xFFDFDFDF),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                            height: 35,
+                                            alignment: Alignment.centerRight,
+                                            margin: EdgeInsets.only(left: 25),
+                                            child: Container(
+                                              width: 90,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          "assets/liveStreaming.png"),
+                                                      fit: BoxFit.cover)),
+                                            )),
+                                        Container(
+                                          margin: EdgeInsets.only(right: 25),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Row(
                                                     children: [
+                                                      CircleAvatar(
+                                                        radius: 25,
+                                                        backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(
+                                                                    0,
+                                                                    (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                        ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                            " ")
+                                                                        : data["score"][data["score"].length - 1]["inning"]
+                                                                            .length) ==
+                                                                data["teamInfo"][0]
+                                                                        ["name"]
+                                                                    .substring(
+                                                                        0,
+                                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                            ? data["teamInfo"][0]["name"].indexOf(" ")
+                                                                            : data["teamInfo"][0]["name"].length)
+                                                            ? data["teamInfo"][0]["img"]
+                                                            : data["teamInfo"][1]["img"]),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
                                                       Column(
+                                                        // ignore: prefer_const_literals_to_create_immutables
                                                         children: [
-                                                          Row(
-                                                            children: [
-                                                              CircleAvatar(
-                                                                radius: 25,
-                                                                backgroundImage: NetworkImage(data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                                                        data["teamInfo"][0]["name"].substring(
-                                                                            0,
-                                                                            (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                                ? data["teamInfo"][0]["name"].indexOf(
-                                                                                    " ")
-                                                                                : data["teamInfo"][0]["name"]
-                                                                                    .length)
-                                                                    ? data["teamInfo"]
-                                                                            [0]
-                                                                        ["img"]
-                                                                    : data["teamInfo"]
-                                                                            [1][
-                                                                        "img"]),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Column(
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                                  Text(
-                                                                    data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) == data["teamInfo"][0]["name"].substring(0, (data["teamInfo"][0]["name"].indexOf(" ") != -1) ? data["teamInfo"][0]["name"].indexOf(" ") : data["teamInfo"][0]["name"].length)
-                                                                        ? data["teamInfo"][0]
-                                                                            [
-                                                                            "shortname"]
-                                                                        : data["teamInfo"][1]
-                                                                            [
-                                                                            "shortname"],
-                                                                    style: TextStyle(
-                                                                        color: isDarkMode
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Colors
-                                                                                .black,
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                  Text(
-                                                                    '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
-                                                                    style: TextStyle(
-                                                                        color: isDarkMode
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Colors
-                                                                                .black,
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Column(
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                                  Text(
-                                                                    ((data["score"].length / 2).round()) ==
-                                                                            1
-                                                                        ? '${(data["score"].length / 2).round()}st inn'
-                                                                        : '${(data["score"].length / 2).round()}nd inn',
-                                                                    style: TextStyle(
-                                                                        color: isDarkMode
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Colors
-                                                                                .black,
-                                                                        fontSize:
-                                                                            12),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 10,
-                                                                  ),
-                                                                  Text(
-                                                                    data["score"]
-                                                                            [
-                                                                            (data["score"].length) -
-                                                                                1]["o"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: isDarkMode
-                                                                            ? Colors
-                                                                                .white
-                                                                            : Colors
-                                                                                .black,
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
+                                                          Text(
+                                                            data["score"][data["score"].length - 1]["inning"].substring(
+                                                                        0,
+                                                                        (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                            ? data["score"][data["score"].length - 1]["inning"].indexOf(
+                                                                                " ")
+                                                                            : data["score"][data["score"].length - 1]["inning"]
+                                                                                .length) ==
+                                                                    data["teamInfo"][0]["name"].substring(
+                                                                        0,
+                                                                        (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                            ? data["teamInfo"][0]["name"].indexOf(
+                                                                                " ")
+                                                                            : data["teamInfo"][0]["name"]
+                                                                                .length)
+                                                                ? data["teamInfo"]
+                                                                        [0]
+                                                                    ["shortname"]
+                                                                : data["teamInfo"][1]["shortname"],
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
-                                                          SizedBox(
-                                                            height: 10,
+                                                          Text(
+                                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
                                                           ),
                                                         ],
                                                       ),
                                                       SizedBox(
-                                                        width: bbbData !=
-                                                                "failure"
-                                                            ? bbbData["bbb"][bbbData["bbb"]
-                                                                            .length -
-                                                                        1]["dismissal"] ==
-                                                                    null
-                                                                ? 80
-                                                                : 60
-                                                            : 60,
+                                                        width: 10,
                                                       ),
-                                                      bbbData != "failure"
-                                                          ? bbbData["bbb"][bbbData["bbb"].length -
-                                                                              1][
-                                                                          "runs"]
-                                                                      .toString() ==
-                                                                  "6"
-                                                              ? Image.asset(
-                                                                  "assets/6.gif",
-                                                                  scale: 5,
-                                                                )
-                                                              : bbbData["bbb"][bbbData["bbb"].length - 1]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString() ==
-                                                                      "4"
-                                                                  ? Image.asset(
-                                                                      "assets/4.gif",
-                                                                      scale: 5)
-                                                                  : bbbData["bbb"][bbbData["bbb"].length - 1]
-                                                                              ["dismissal"] ==
-                                                                          null
-                                                                      ? Text(
-                                                                          bbbData != "failure"
-                                                                              ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] == null
-                                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 1]["runs"].toString()
-                                                                                  : "W"
-                                                                              : "1",
-                                                                          style: TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              color: isDarkMode ? Colors.amber : Colors.blueGrey,
-                                                                              fontSize: 50),
-                                                                        )
-                                                                      : Image.asset(
-                                                                          "assets/wicket.gif",
-                                                                          scale:
-                                                                              5,
-                                                                          height:
-                                                                              50,
-                                                                        )
-                                                          : Text(
-                                                              "1",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .amber
-                                                                      : Colors
-                                                                          .blueGrey,
-                                                                  fontSize: 50),
-                                                            ),
+                                                      Column(
+                                                        // ignore: prefer_const_literals_to_create_immutables
+                                                        children: [
+                                                          Text(
+                                                            ((data["score"].length /
+                                                                            2)
+                                                                        .round()) ==
+                                                                    1
+                                                                ? '${(data["score"].length / 2).round()}st inn'
+                                                                : '${(data["score"].length / 2).round()}nd inn',
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                                fontSize: 12),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Text(
+                                                            data["score"][(data[
+                                                                            "score"]
+                                                                        .length) -
+                                                                    1]["o"]
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                color: isDarkMode
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .black,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ],
                                                   ),
-                                                ),
-                                                Container(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    margin: EdgeInsets.only(
-                                                        right: 25,
-                                                        bottom: 12,
-                                                        top: 10),
-                                                    child: isDarkMode
-                                                        ? Image.asset(
-                                                            "assets/volume.png")
-                                                        : Image.asset(
-                                                            "assets/volume.png",
-                                                            color: Colors.grey,
-                                                          )),
-
-                                                // SizedBox(
-                                                //   height: 15,
-                                                // ),
-                                                Container(
-                                                    height: 1,
-                                                    width: 400,
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.grey),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      // ignore: prefer_interpolation_to_compose_strings
-                                                      'CCR : ' +
-                                                          (data["score"][(data[
-                                                                              "score"]
-                                                                          .length) -
-                                                                      1]["r"] /
-                                                                  data[
-                                                                      "score"][(data[
-                                                                              "score"]
-                                                                          .length) -
-                                                                      1]["o"])
-                                                              .toStringAsFixed(
-                                                                  2),
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontSize: 15.5),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    Text(
-                                                      data["matchType"] !=
-                                                              "test"
-                                                          ? 'RRR : 8.58'
-                                                          : "",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontSize: 15.5),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 50,
-                                                    ),
-                                                    Text(
-                                                      data["score"].length > 1
-                                                          ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
-                                                                  data["teamInfo"][0]["name"].substring(
-                                                                      0,
-                                                                      (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                          ? data["teamInfo"][0]["name"].indexOf(
-                                                                              " ")
-                                                                          : data["teamInfo"][0]["name"]
-                                                                              .length)
-                                                              ? data["score"].length >
-                                                                      2
-                                                                  ? data["teamInfo"][data["score"].length - 3]["shortname"] +
-                                                                      " " +
-                                                                      data["score"][data["score"].length - 3]["r"]
-                                                                          .toString() +
-                                                                      "-" +
-                                                                      data["score"][data["score"].length - 3]["w"]
-                                                                          .toString() +
-                                                                      "(" +
-                                                                      data["score"][data["score"].length - 3]["o"]
-                                                                          .toString() +
-                                                                      ")"
-                                                                  : data["teamInfo"][data["score"].length - 1]
-                                                                          ["shortname"] +
-                                                                      " " +
-                                                                      data["score"][data["score"].length - 2]["r"].toString() +
-                                                                      "-" +
-                                                                      data["score"][data["score"].length - 2]["w"].toString() +
-                                                                      "(" +
-                                                                      data["score"][data["score"].length - 2]["o"].toString() +
-                                                                      ")"
-                                                              : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
-                                                          : "",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            bbbData != "failure"
-                                                                ? bbbData["bbb"]
-                                                                            [
-                                                                            bbbData["bbb"].length -
-                                                                                8] !=
-                                                                        null
-                                                                    ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}')
-                                                                    : "Over 1"
-                                                                : "Over 15",
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 8] !=
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(width: 50,),
+                                              SizedBox(
+                                                width: bbbData != "failure"
+                                                    ? bbbData["bbb"][bbbData[
+                                                                        "bbb"]
+                                                                    .length -
+                                                                1]["dismissal"] ==
+                                                            null
+                                                        ? 20
+                                                        : 40
+                                                    : 20,
+                                              ),
+                                              bbbData != "failure"
+                                                  ? bbbData["bbb"][bbbData["bbb"]
+                                                                      .length -
+                                                                  1]["runs"]
+                                                              .toString() ==
+                                                          "6"
+                                                      ? Image.asset(
+                                                          "assets/6.gif",
+                                                          scale: 5,
+                                                        )
+                                                      : bbbData["bbb"][bbbData["bbb"].length -
+                                                                      1]["runs"]
+                                                                  .toString() ==
+                                                              "4"
+                                                          ? Image.asset(
+                                                              "assets/4.gif",
+                                                              scale: 5)
+                                                          : bbbData["bbb"][bbbData["bbb"].length - 1]
+                                                                      ["dismissal"] ==
+                                                                  null
+                                                              ? Text(
+                                                                  bbbData !=
+                                                                          "failure"
+                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] ==
                                                                               null
-                                                                          ? bbbData["bbb"][bbbData["bbb"].length - 12]["runs"]
+                                                                          ? bbbData["bbb"][bbbData["bbb"].length - 1]["runs"]
                                                                               .toString()
                                                                           : "W"
-                                                                      : "1"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 11]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 10]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 9]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 8]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 7]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            '=',
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 2,
-                                                          ),
-                                                          Text(
-                                                            bbbData != "failure"
-                                                                ? bbbData["bbb"][bbbData["bbb"].length -
-                                                                                1]
-                                                                            [
-                                                                            "dismissal"] ==
-                                                                        null
-                                                                    ? (bbbData["bbb"][bbbData["bbb"].length -
-                                                                                7]["runs"] ??
-                                                                            1 + bbbData["bbb"][bbbData["bbb"].length - 8]["runs"] ??
-                                                                            1 + bbbData["bbb"][bbbData["bbb"].length - 9]["runs"] ??
-                                                                            1 + bbbData["bbb"][bbbData["bbb"].length - 10]["runs"] ??
-                                                                            1 + bbbData["bbb"][bbbData["bbb"].length - 11]["runs"] ??
-                                                                            1 + bbbData["bbb"][bbbData["bbb"].length - 12]["runs"] ??
-                                                                            1)
-                                                                        .toString()
-                                                                    : "8"
-                                                                : "1",
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                                      : "1",
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: isDarkMode
+                                                                          ? Colors
+                                                                              .amber
+                                                                          : Colors
+                                                                              .blueGrey,
+                                                                      fontSize:
+                                                                          50),
+                                                                )
+                                                              : Image.asset(
+                                                                  "assets/wicket.gif",
+                                                                  scale: 5,
+                                                                  height: 50,
+                                                                )
+                                                  : Text(
+                                                      "1",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: isDarkMode
+                                                              ? Colors.amber
+                                                              : Colors.blueGrey,
+                                                          fontSize: 50),
                                                     ),
                                                     Container(
-                                                      height: 20,
-                                                      width: 1,
-                                                      color: Colors.blueGrey,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5.0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            bbbData != "failure"
-                                                                ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
-                                                                : "Over 15",
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 6]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 6]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 5]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 4]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 4]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 3]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 3]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 2]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 2]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          CircleAvatar(
-                                                            backgroundColor:
-                                                                isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                            radius: 5,
-                                                            child: Text(
-                                                              bbbData !=
-                                                                      "failure"
-                                                                  ? bbbData["bbb"][bbbData["bbb"].length - 1]
-                                                                              [
-                                                                              "dismissal"] ==
-                                                                          null
-                                                                      ? bbbData["bbb"][bbbData["bbb"].length - 1]
-                                                                              [
-                                                                              "runs"]
-                                                                          .toString()
-                                                                      : "W"
-                                                                  : "1",
-                                                              style: TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .black
-                                                                      : Colors
-                                                                          .white,
-                                                                  fontSize: 10,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            '=',
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 2,
-                                                          ),
-                                                          Text(
-                                                            bbbData != "failure"
-                                                                ? bbbData["bbb"][bbbData["bbb"].length -
-                                                                                1]
-                                                                            [
-                                                                            "dismissal"] ==
-                                                                        null
-                                                                    ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] +
-                                                                            bbbData["bbb"][bbbData["bbb"].length -
-                                                                                2]["runs"] +
-                                                                            bbbData["bbb"][bbbData["bbb"].length - 3]["runs"] +
-                                                                            bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] +
-                                                                            bbbData["bbb"][bbbData["bbb"].length - 5]["runs"] +
-                                                                            bbbData["bbb"][bbbData["bbb"].length - 6]["runs"])
-                                                                        .toString()
-                                                                    : "8"
-                                                                : "1",
-                                                            style: TextStyle(
-                                                                color: isDarkMode
-                                                                    ? Colors
-                                                                        .white
-                                                                    : Colors
-                                                                        .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(height: 5),
-                                              ],
-                                            ),
+                                            alignment: Alignment.topRight,
+                                            margin: EdgeInsets.only(
+                                                left: 5, bottom: 12, top: 10),
+                                            child: isDarkMode
+                                                ? Image.asset(
+                                                    "assets/volume.png")
+                                                : Image.asset(
+                                                    "assets/volume.png",
+                                                    color: Colors.grey,
+                                                  ),),
+                                            ],
                                           ),
+                                        ),                                        
+                                        SizedBox(
+                                          height: 15,
                                         ),
-                                      ),
+                                        Container(
+                                            height: 1,
+                                            width: 400,
+                                            color: isDarkMode
+                                                ? Colors.white
+                                                : Colors.grey),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              // ignore: prefer_interpolation_to_compose_strings
+                                              'CCR : ' +
+                                                  (data["score"][(data["score"]
+                                                                  .length) -
+                                                              1]["r"] /
+                                                          data["score"][
+                                                              (data["score"]
+                                                                      .length) -
+                                                                  1]["o"])
+                                                      .toStringAsFixed(2),
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 15.5),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              data["matchType"] != "test"
+                                                  ? 'RRR : 8.58'
+                                                  : "",
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 15.5),
+                                            ),
+                                            SizedBox(
+                                              width: 50,
+                                            ),
+                                            Text(
+                                              data["score"].length > 1
+                                                  ? data["score"][data["score"].length - 1]["inning"].substring(0, (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1) ? data["score"][data["score"].length - 1]["inning"].indexOf(" ") : data["score"][data["score"].length - 1]["inning"].length) ==
+                                                          data["teamInfo"][0]["name"].substring(
+                                                              0,
+                                                              (data["teamInfo"][0]["name"].indexOf(" ") != -1)
+                                                                  ? data["teamInfo"][0]["name"]
+                                                                      .indexOf(
+                                                                          " ")
+                                                                  : data["teamInfo"][0]["name"]
+                                                                      .length)
+                                                      ? data["score"].length > 2
+                                                          ? data["teamInfo"][data["score"].length - 3]["shortname"] +
+                                                              " " +
+                                                              data["score"][data["score"].length - 3]["r"]
+                                                                  .toString() +
+                                                              "-" +
+                                                              data["score"][data["score"].length - 3]["w"]
+                                                                  .toString() +
+                                                              "(" +
+                                                              data["score"][data["score"].length - 3]["o"]
+                                                                  .toString() +
+                                                              ")"
+                                                          : data["teamInfo"][data["score"].length - 1]
+                                                                  ["shortname"] +
+                                                              " " +
+                                                              data["score"][data["score"].length - 2]["r"].toString() +
+                                                              "-" +
+                                                              data["score"][data["score"].length - 2]["w"].toString() +
+                                                              "(" +
+                                                              data["score"][data["score"].length - 2]["o"].toString() +
+                                                              ")"
+                                                      : data["teamInfo"][data["score"].length - 2]["shortname"] + " " + data["score"][data["score"].length - 2]["r"].toString() + "-" + data["score"][data["score"].length - 2]["w"].toString() + "(" + data["score"][data["score"].length - 2]["o"].toString() + ")"
+                                                  : "",
+                                              style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(5),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData[
+                                                                            "bbb"]
+                                                                        .length -
+                                                                    8] !=
+                                                                null
+                                                            ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 8]["over"]}')
+                                                            : "Over 1"
+                                                        : "Over 15",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData["bbb"][
+                                                                          bbbData["bbb"].length -
+                                                                              8] !=
+                                                                      null
+                                                                  ? bbbData[
+                                                                          "bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          12]["runs"]
+                                                                      .toString()
+                                                                  : "W"
+                                                              : "1"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      11]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      10]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      9]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      8]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      7]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    '=',
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 2,
+                                                  ),
+                                                  Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData["bbb"]
+                                                                            .length -
+                                                                        1][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? (bbbData["bbb"][bbbData["bbb"].length - 7][
+                                                                        "runs"] ??
+                                                                    1 +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 8]
+                                                                            [
+                                                                            "runs"] ??
+                                                                    1 +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 9]
+                                                                            ["runs"] ??
+                                                                    1 + bbbData["bbb"][bbbData["bbb"].length - 10]["runs"] ??
+                                                                    1 + bbbData["bbb"][bbbData["bbb"].length - 11]["runs"] ??
+                                                                    1 + bbbData["bbb"][bbbData["bbb"].length - 12]["runs"] ??
+                                                                    1)
+                                                                .toString()
+                                                            : "8"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              height: 20,
+                                              width: 1,
+                                              color: Colors.blueGrey,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    bbbData != "failure"
+                                                        ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
+                                                        : "Over 15",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          6][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      6]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          5][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      5]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          4][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      4]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          3][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      3]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          2][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      2]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    radius: 5,
+                                                    child: Text(
+                                                      bbbData != "failure"
+                                                          ? bbbData["bbb"][bbbData["bbb"]
+                                                                              .length -
+                                                                          1][
+                                                                      "dismissal"] ==
+                                                                  null
+                                                              ? bbbData[
+                                                                      "bbb"][bbbData[
+                                                                              "bbb"]
+                                                                          .length -
+                                                                      1]["runs"]
+                                                                  .toString()
+                                                              : "W"
+                                                          : "1",
+                                                      style: TextStyle(
+                                                          color: isDarkMode
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    '=',
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 2,
+                                                  ),
+                                                  Text(
+                                                    bbbData != "failure"
+                                                        ? bbbData["bbb"][bbbData["bbb"].length - 1][
+                                                                    "dismissal"] ==
+                                                                null
+                                                            ? (bbbData["bbb"][bbbData["bbb"].length - 1][
+                                                                        "runs"] ??
+                                                                    1 +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 2]
+                                                                            [
+                                                                            "runs"] ??
+                                                                    1 +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 3]
+                                                                            [
+                                                                            "runs"] ??
+                                                                    1 +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 4]
+                                                                            ["runs"] +
+                                                                        bbbData["bbb"][bbbData["bbb"].length - 5]["runs"] ??
+                                                                    1 + bbbData["bbb"][bbbData["bbb"].length - 6]["runs"] ??
+                                                                    1)
+                                                                .toString()
+                                                            : "8"
+                                                        : "1",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 5),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -3882,7 +3821,7 @@ class _commententaryState extends State<commententary> {
                                                           "failure"
                                                       ? (reversebbbData.length >
                                                               50
-                                                          ? 50
+                                                          ? reversebbbData.length
                                                           : reversebbbData
                                                               .length)
                                                       : 5,
@@ -4065,8 +4004,10 @@ class _commententaryState extends State<commententary> {
                                                                       ),
                                                                       child:
                                                                           Text(
-                                                                        mapBetting["point"] != "" ?
-                                                                        mapBetting["point"][6].toString():"0",
+                                                                        mapBetting["point"] !=
+                                                                                ""
+                                                                            ? mapBetting["point"][6].toString()
+                                                                            : "0",
                                                                         style: TextStyle(
                                                                             fontSize:
                                                                                 12,
@@ -4092,8 +4033,10 @@ class _commententaryState extends State<commententary> {
                                                                               Colors.green),
                                                                       child:
                                                                           Text(
-                                                                        mapBetting["point"] != "" ?
-                                                                        mapBetting["point"][14].toString():"1",
+                                                                        mapBetting["point"] !=
+                                                                                ""
+                                                                            ? mapBetting["point"][14].toString()
+                                                                            : "1",
                                                                         style: TextStyle(
                                                                             fontSize:
                                                                                 12,
