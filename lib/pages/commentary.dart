@@ -3780,15 +3780,15 @@ class _commententaryState extends State<commententary> {
                                                                           null ||
                                                                       bbbData["bbb"][bbbData["bbb"].length - 6]["dismissal"] ==
                                                                           null
-                                                                  ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] +
+                                                                  ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] ?? 1 +
                                                                           bbbData["bbb"][bbbData["bbb"].length - 2]
                                                                               [
-                                                                              "runs"] +
+                                                                              "runs"] ?? 1 +
                                                                           bbbData["bbb"][bbbData["bbb"].length - 3]
-                                                                              ["runs"] +
-                                                                          bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] +
-                                                                          bbbData["bbb"][bbbData["bbb"].length - 5]["runs"] +
-                                                                          bbbData["bbb"][bbbData["bbb"].length - 6]["runs"])
+                                                                              ["runs"] ?? 1 +
+                                                                          bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] ?? 1 +
+                                                                          bbbData["bbb"][bbbData["bbb"].length - 5]["runs"] ?? 1 +
+                                                                          bbbData["bbb"][bbbData["bbb"].length - 6]["runs"] ?? 1)
                                                                       .toString()
                                                                   : "5"
                                                               : "8",

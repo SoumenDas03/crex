@@ -10,6 +10,7 @@ import 'package:crex/provider/theme_changer.dart';
 import 'package:floating/floating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -64,13 +65,6 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
       percentage = false;
     }
   }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState lifecycleState) {
-  //   if (lifecycleState == AppLifecycleState.inactive) {
-  //     floating.enable(aspectRatio: Rational.square());
-  //   }
-  // }
 
   Future<void> enablePip(BuildContext context) async {
     final rational = Rational.square();
@@ -377,7 +371,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                           ),
                           Container(
                             alignment: Alignment.center,
-                            height: 22,    
+                            height: 22,
                             width: 35,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
@@ -744,6 +738,27 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     );
   }
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()    
+    if(mounted)
+    setState(() {
+
+    });
+    _refreshController.loadComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
@@ -958,7 +973,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(width: 50,),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
                                               SizedBox(
                                                 width: bbbData != "failure"
                                                     ? bbbData["bbb"][bbbData[
@@ -967,11 +984,27 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                                 1]["dismissal"] ==
                                                             null
                                                         ? 20
-                                                        : 40
+                                                        : 0
                                                     : 20,
                                               ),
                                               bbbData != "failure"
                                                   ? bbbData["bbb"][bbbData["bbb"]
+                                                                      .length -
+                                                                  1]["runs"]
+                                                              .toString() ==
+                                                          "null" ? Text("1",
+                                                          style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: isDarkMode
+                                                                          ? Colors
+                                                                              .amber
+                                                                          : Colors
+                                                                              .blueGrey,
+                                                                      fontSize:
+                                                                          50))
+                                                  : bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
                                                               .toString() ==
@@ -1026,20 +1059,23 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                               : Colors.blueGrey,
                                                           fontSize: 50),
                                                     ),
-                                                    Container(
-                                            alignment: Alignment.topRight,
-                                            margin: EdgeInsets.only(
-                                                left: 5, bottom: 12, top: 10),
-                                            child: isDarkMode
-                                                ? Image.asset(
-                                                    "assets/volume.png")
-                                                : Image.asset(
-                                                    "assets/volume.png",
-                                                    color: Colors.grey,
-                                                  ),),
+                                              Container(
+                                                alignment: Alignment.topRight,
+                                                margin: EdgeInsets.only(
+                                                    left: 5,
+                                                    bottom: 12,
+                                                    top: 10),
+                                                child: isDarkMode
+                                                    ? Image.asset(
+                                                        "assets/volume.png")
+                                                    : Image.asset(
+                                                        "assets/volume.png",
+                                                        color: Colors.grey,
+                                                      ),
+                                              ),
                                             ],
                                           ),
-                                        ),                                        
+                                        ),
                                         SizedBox(
                                           height: 15,
                                         ),
@@ -1789,30 +1825,31 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               width: 10,
                                             ),
                                             Container(
-                                              alignment: Alignment.center,     
-                                              height: 35,                                                                                       
+                                              alignment: Alignment.center,
+                                              height: 35,
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(3),
                                                 color: Colors.green,
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(2.0),
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
                                                 child: Text(
-                                                  data["score"][data["score"].length - 1]
-                                                                  ["inning"]
-                                                              .substring(
-                                                                  0,
-                                                                  (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
-                                                                      ? data["score"][data["score"].length - 1]["inning"]
-                                                                          .indexOf(
-                                                                              " ")
-                                                                      : data["score"][data["score"].length - 1]["inning"]
-                                                                          .length) ==
+                                                  data["score"][data["score"].length - 1]["inning"].substring(
+                                                              0,
+                                                              (data["score"][data["score"].length - 1]["inning"].indexOf(" ") != -1)
+                                                                  ? data["score"][data["score"].length - 1]["inning"]
+                                                                      .indexOf(
+                                                                          " ")
+                                                                  : data["score"][data["score"].length - 1]["inning"]
+                                                                      .length) ==
                                                           data["teamInfo"][0]["name"].substring(
                                                               0,
-                                                              (data["teamInfo"][0]["name"].indexOf(" ") != -1)
-                                                                  ? data["teamInfo"][0]
+                                                              (data["teamInfo"][0]["name"].indexOf(" ") !=
+                                                                      -1)
+                                                                  ? data["teamInfo"]
+                                                                              [0]
                                                                           ["name"]
                                                                       .indexOf(" ")
                                                                   : data["teamInfo"][0]["name"].length)
@@ -1820,7 +1857,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       : data["teamInfo"][1]["shortname"],
                                                   style: TextStyle(
                                                       fontSize: 20,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       color: Colors.white),
                                                 ),
                                               ),
@@ -1840,8 +1878,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black45,
                                               ),
                                               child: Text(
-                                                mapBetting["point"] != "" ?
-                                                mapBetting["point"][6].toString():"56",
+                                                mapBetting["point"] != ""
+                                                    ? mapBetting["point"][6]
+                                                        .toString()
+                                                    : "56",
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
@@ -1863,8 +1903,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black26,
                                               ),
                                               child: Text(
-                                                mapBetting["point"] != "" ?
-                                                mapBetting["point"][14].toString():"57",
+                                                mapBetting["point"] != ""
+                                                    ? mapBetting["point"][14]
+                                                        .toString()
+                                                    : "57",
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
@@ -2040,7 +2082,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   ),
                                 ),
                               ),
-
+      
                               // Padding(
                               //   padding: const EdgeInsets.all(5.0),
                               //   child: Opacity(
@@ -2050,7 +2092,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               //       decoration: BoxDecoration(
                               //         borderRadius: BorderRadius.circular(10),
                               //         // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                               //         color: isDarkMode
                               //             ? Colors.blueGrey[900]
                               //             : const Color(0xFFDFDFDF),
@@ -2173,7 +2215,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               //                 borderRadius: BorderRadius.circular(3),
                               //                 // border: Border.all(
                               //                 //     color: Colors.white, width: 0.5)
-
+      
                               //                 color: Colors.black45,
                               //               ),
                               //               child: Text(
@@ -2196,7 +2238,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               //                     BorderRadius.circular(2.5),
                               //                 // border: Border.all(
                               //                 //     color: Colors.white, width: 0.5)
-
+      
                               //                 color: isDarkMode
                               //                     ? Color(0xffFF8A00)
                               //                     : Colors.black26,
@@ -2240,7 +2282,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                                       color: isDarkMode
                                           ? Colors.blueGrey[900]
                                           : const Color(0xFFDFDFDF),
@@ -2294,7 +2336,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       BorderRadius.circular(3),
                                                   // border: Border.all(
                                                   //     color: Colors.white, width: 0.5)
-
+      
                                                   color: isDarkMode
                                                       ? Colors.blue
                                                       : Colors.black45,
@@ -2320,7 +2362,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                           2.5),
                                                   // border: Border.all(
                                                   //     color: Colors.white, width: 0.5)
-
+      
                                                   color: isDarkMode
                                                       ? Colors.red
                                                       : Colors.black26,
@@ -2421,7 +2463,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                                         color: isDarkMode
                                             ? Colors.blueGrey[900]
                                             : const Color(0xFFDFDFDF),
@@ -2470,7 +2512,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             3),
                                                     // border: Border.all(
                                                     //     color: Colors.white, width: 0.5)
-
+      
                                                     color: isDarkMode
                                                         ? Colors.blue
                                                         : Colors.black45,
@@ -2497,7 +2539,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             2.5),
                                                     // border: Border.all(
                                                     //     color: Colors.white, width: 0.5)
-
+      
                                                     color: isDarkMode
                                                         ? Colors.red
                                                         : Colors.black26,
@@ -3267,7 +3309,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   decoration: BoxDecoration(
                                     // borderRadius: BorderRadius.circular(0),
                                     // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                                     color: isDarkMode
                                         ? Colors.blueGrey[900]
                                         : const Color(0xFFDFDFDF),
@@ -3564,7 +3606,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                                     color: isDarkMode
                                         ? Color(0xffFF8A00)
                                         : const Color(0xFFDFDFDF),
@@ -3652,7 +3694,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               //           topLeft: Radius.circular(5),
                               //           topRight: Radius.circular(5)),
                               //       // border: Border.all(color: Colors.white, width: 0.5)
-
+      
                               //       color: Colors.blueGrey[900],
                               //     ),
                               //     child: Column(
@@ -4081,7 +4123,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               //                                         Container(
                                               //                                           width:
                                               //                                               100,
-
+      
                                               //                                           // ignore: prefer_const_constructors
                                               //                                           child:
                                               //                                               Text(
@@ -4224,7 +4266,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               //                                         Container(
                                               //                                           width:
                                               //                                               100,
-
+      
                                               //                                           // ignore: prefer_const_constructors
                                               //                                           child:
                                               //                                               Text(

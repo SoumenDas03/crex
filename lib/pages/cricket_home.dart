@@ -3,9 +3,11 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crex/GetX/carouselManagment.dart';
 import 'package:crex/dashboard/infoTabviews.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,7 @@ class _cricket_homeState extends State<cricket_home> {
       dataList,
       mapBetting,
       dataBetting;
+  firstCarouselSlider exampleTwoController = Get.put(firstCarouselSlider());
   getCricketDetails() async {
     try {
       http.Response response = await http.get(
@@ -140,9 +143,6 @@ class _cricket_homeState extends State<cricket_home> {
       return bannerList;
     }
   }
-
-  final CarouselController carouselController = CarouselController();
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
@@ -189,113 +189,64 @@ class _cricket_homeState extends State<cricket_home> {
                                       // mainAxisAlignment: MainAxisAlignment.center,
                                       // mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Stack(
-                                          clipBehavior: Clip.none,
-                                          children: [
-                                            CarouselSlider(
-                                              carouselController:
-                                                  carouselController,
-                                              options: CarouselOptions(
-                                                  height: 150,
-                                                  autoPlay: true,
-                                                  aspectRatio: 2,
-                                                  autoPlayCurve:
-                                                      Curves.fastOutSlowIn,
-                                                  enableInfiniteScroll: true,
-                                                  autoPlayAnimationDuration:
-                                                      Duration(
-                                                          milliseconds: 800),
-                                                  viewportFraction: 1,
-                                                  scrollPhysics:
-                                                      BouncingScrollPhysics(),
-                                                  onPageChanged:
-                                                      (index, reason) {
-                                                    setState(() {
-                                                      currentIndex = index;
-                                                    });
-                                                  }),
-                                              items: dataList.map<Widget>((i) {
-                                                return Builder(
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return Image.network(
-                                                      "https://playexch.us/banner_image/" +
-                                                          i,
-                                                      fit: BoxFit.cover,
-                                                      width: double.infinity,
-                                                    );
-                                                  },
-                                                );
-                                              }).toList(),
-                                            ),
-                                            Positioned(
-                                              bottom: 8,
-                                              left: 0,
-                                              right: 0,
-                                              child: DotsIndicator(
-                                                dotsCount: dataList.length,
-                                                position:
-                                                    currentIndex.toDouble(),
-                                                decorator: DotsDecorator(
-                                                  size: const Size.square(9.0),
-                                                  activeSize:
-                                                      const Size(18.0, 9.0),
-                                                  activeShape:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0)),
-                                                ),
+                                        Obx(
+                                          ()=> Stack(
+                                            clipBehavior: Clip.none,
+                                            children: [
+                                              CarouselSlider(                                                                                              
+                                                options: CarouselOptions(
+                                                    height: 150,
+                                                    autoPlay: true,
+                                                    aspectRatio: 2,
+                                                    autoPlayCurve:
+                                                        Curves.fastOutSlowIn,
+                                                    enableInfiniteScroll: true,
+                                                    autoPlayAnimationDuration:
+                                                        Duration(
+                                                            milliseconds: 800),
+                                                    viewportFraction: 1,
+                                                    scrollPhysics:
+                                                        BouncingScrollPhysics(),
+                                                    onPageChanged:
+                                                        (index, reason) {
+                                                      exampleTwoController.setCurrentIndex(index.toDouble());
+                                                    }),
+                                                items: dataList.map<Widget>((i) {
+                                                  return Builder(
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return Image.network(
+                                                        "https://playexch.us/banner_image/" +
+                                                            i,
+                                                        fit: BoxFit.cover,
+                                                        width: double.infinity,
+                                                      );
+                                                    },
+                                                  );
+                                                }).toList(),
                                               ),
-                                            ),
-                                            // Positioned(
-                                            //   right: 5,
-                                            //   child: Container(
-                                            //     alignment: Alignment.topRight,
-                                            //     child: Container(
-                                            //       alignment:
-                                            //           Alignment.centerLeft,
-                                            //       height: 25,
-                                            //       width: 85,
-                                            //       decoration: BoxDecoration(
-                                            //         borderRadius:
-                                            //             BorderRadius.circular(
-                                            //                 5),
-                                            //         color: Colors.blueGrey,
-                                            //       ),
-                                            //       child: Row(
-                                            //         children: [
-                                            //           Image.asset(
-                                            //               'assets/game.png'),
-                                            //           SizedBox(
-                                            //             width: 5,
-                                            //           ),
-                                            //           Container(
-                                            //             height: 15,
-                                            //             width: 55,
-                                            //             decoration: BoxDecoration(
-                                            //                 borderRadius:
-                                            //                     BorderRadius
-                                            //                         .circular(
-                                            //                             10),
-                                            //                 color:
-                                            //                     Colors.white),
-                                            //             child: Center(
-                                            //                 child: Text(
-                                            //               "Play Now",
-                                            //               style: TextStyle(
-                                            //                   fontSize: 10,
-                                            //                   color:
-                                            //                       Colors.black),
-                                            //             )),
-                                            //           )
-                                            //         ],
-                                            //       ),
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                          ],
+                                              Positioned(
+                                                bottom: 8,
+                                                left: 0,
+                                                right: 0,
+                                                child: DotsIndicator(
+                                                  dotsCount: dataList.length,
+                                                  position: exampleTwoController.currentIndex.value,
+                                                  decorator: DotsDecorator(
+                                                    size: const Size.square(9.0),
+                                                    activeSize:
+                                                        const Size(18.0, 9.0),
+                                                    activeShape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0)),
+                                                  ),
+                                                ),
+                                              ),                                            
+                                            ],
+                                          ),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
