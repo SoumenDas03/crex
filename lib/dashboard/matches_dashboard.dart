@@ -171,7 +171,7 @@ class _matches_dashboardState extends State<matches_dashboard> {
                               child: Image.asset(
                                 'assets/series.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -203,7 +203,7 @@ class _matches_dashboardState extends State<matches_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/matches.png',
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -236,7 +236,7 @@ class _matches_dashboardState extends State<matches_dashboard> {
                               child: Image.asset(
                                 'assets/fixtures.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -269,7 +269,7 @@ class _matches_dashboardState extends State<matches_dashboard> {
                               child: Image.asset(
                                 'assets/more.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors

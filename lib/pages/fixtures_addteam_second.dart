@@ -482,7 +482,7 @@ class _fixtures_addteam_secondState extends State<fixtures_addteam_second> {
                             backgroundColor: Colors.white,
                             child: Image.asset(
                               'assets/matches.png',
-                              scale: 1.2,
+                              scale: 4,
                               color: Colors.black,
                             ),
                           ),

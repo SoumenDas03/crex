@@ -188,7 +188,11 @@ class _singlePlayer_overviewState extends State<singlePlayer_overview> {
                   children: [
                     Container(
                         margin: EdgeInsets.only(left: 30, top: 25),
-                        child: Image.asset('assets/matches.png')),
+                        child: Image.asset(
+                          'assets/matches.png',
+                          scale: 4,
+                          color: Color(0xFFFF4D00),
+                        )),
                     Container(
                       margin: EdgeInsets.only(left: 20, top: 25),
                       child: Text(

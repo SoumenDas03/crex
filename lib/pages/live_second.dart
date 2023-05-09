@@ -3031,8 +3031,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                       width: 1,
                                                     ),
                                                     Image.asset(
-                                                      "assets/matches.png",
-                                                      scale: 1,
+                                                      "assets/matches.png", color: Color(0xFFFF4D00),
+                                                      scale: 4.2,
                                                     ),
                                                   ],
                                                 ),

@@ -907,7 +907,7 @@ class _match_settingsState extends State<match_settings> {
                                 ),
                                 Image.asset(
                                   "assets/matches.png",
-                                  scale: 1.3,
+                                  scale: 4, color: Color(0xFFFF4D00)
                                 ),
                                 SizedBox(
                                   width: 60,

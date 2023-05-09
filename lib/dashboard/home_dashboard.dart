@@ -149,9 +149,10 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 child: Icon(
                                   Icons.home,
-                                  color: isDarkMode
-                                      ? const Color(0xFFFF2E00)
-                                      : const Color(0xFFFF4D00),
+                                  color: Colors.black,
+                                  // color: isDarkMode
+                                  //     ? const Color(0xFFFF2E00)
+                                  //     : const Color(0xFFFF4D00),
                                 ),
                               ),
                               // ignore: prefer_const_constructors
@@ -185,7 +186,7 @@ class _home_dashboardState extends State<home_dashboard> {
                                 child: Image.asset(
                                   'assets/series.png',
                                   color: Colors.black,
-                                  scale: 1.2,
+                                  scale: 4,
                                 ),
                               ),
                               // ignore: prefer_const_constructors
@@ -219,7 +220,7 @@ class _home_dashboardState extends State<home_dashboard> {
                                 child: Image.asset(
                                   'assets/matches.png',
                                   color: Colors.black,
-                                  scale: 1.2,
+                                  scale: 4,
                                 ),
                               ),
                               // ignore: prefer_const_constructors
@@ -253,7 +254,7 @@ class _home_dashboardState extends State<home_dashboard> {
                                 child: Image.asset(
                                   'assets/fixtures.png',
                                   color: Colors.black,
-                                  scale: 1.2,
+                                  scale: 4,
                                 ),
                               ),
                               // ignore: prefer_const_constructors
@@ -287,7 +288,7 @@ class _home_dashboardState extends State<home_dashboard> {
                                 child: Image.asset(
                                   'assets/more.png',
                                   color: Colors.black,
-                                  scale: 1.2,
+                                  scale: 4,
                                 ),
                               ),
                               // ignore: prefer_const_constructors

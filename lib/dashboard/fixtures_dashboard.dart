@@ -170,7 +170,7 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/series.png',
-                                scale: 1.2,
+                                scale: 4,
                                 color: Colors.black,
                               ),
                             ),
@@ -203,7 +203,7 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/matches.png',
-                                scale: 1.2,
+                                scale: 4,
                                 color: Colors.black,
                               ),
                             ),
@@ -236,8 +236,8 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/fixtures.png',
-                                scale: 1.2,
-                                color: const Color(0xFFFF4D00),
+                                scale: 4,
+                                // color: const Color(0xFFFF4D00),
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -269,7 +269,7 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/more.png',
-                                scale: 1.2,
+                                scale: 4,
                                 color: Colors.black,
                               ),
                             ),

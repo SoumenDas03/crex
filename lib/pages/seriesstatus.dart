@@ -136,7 +136,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                 SizedBox(
                                   height: 8,
                                 ),
-                                Padding(
+                               Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
@@ -297,7 +297,9 @@ class _seriesstatusState extends State<seriesstatus> {
                                                   ),
                                                 ],
                                               ),
-                                              SizedBox(width: 50,),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
                                               SizedBox(
                                                 width: bbbData != "failure"
                                                     ? bbbData["bbb"][bbbData[
@@ -306,11 +308,27 @@ class _seriesstatusState extends State<seriesstatus> {
                                                                 1]["dismissal"] ==
                                                             null
                                                         ? 20
-                                                        : 40
+                                                        : 0
                                                     : 20,
                                               ),
                                               bbbData != "failure"
                                                   ? bbbData["bbb"][bbbData["bbb"]
+                                                                      .length -
+                                                                  1]["runs"]
+                                                              .toString() ==
+                                                          "null" ? Text("1",
+                                                          style: TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: isDarkMode
+                                                                          ? Colors
+                                                                              .amber
+                                                                          : Colors
+                                                                              .blueGrey,
+                                                                      fontSize:
+                                                                          50))
+                                                  : bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
                                                               .toString() ==
@@ -365,20 +383,23 @@ class _seriesstatusState extends State<seriesstatus> {
                                                               : Colors.blueGrey,
                                                           fontSize: 50),
                                                     ),
-                                                    Container(
-                                            alignment: Alignment.topRight,
-                                            margin: EdgeInsets.only(
-                                                left: 5, bottom: 12, top: 10),
-                                            child: isDarkMode
-                                                ? Image.asset(
-                                                    "assets/volume.png")
-                                                : Image.asset(
-                                                    "assets/volume.png",
-                                                    color: Colors.grey,
-                                                  ),),
+                                              Container(
+                                                alignment: Alignment.topRight,
+                                                margin: EdgeInsets.only(
+                                                    left: 5,
+                                                    bottom: 12,
+                                                    top: 10),
+                                                child: isDarkMode
+                                                    ? Image.asset(
+                                                        "assets/volume.png")
+                                                    : Image.asset(
+                                                        "assets/volume.png",
+                                                        color: Colors.grey,
+                                                      ),
+                                              ),
                                             ],
                                           ),
-                                        ),                                        
+                                        ),
                                         SizedBox(
                                           height: 15,
                                         ),

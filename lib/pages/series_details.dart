@@ -618,7 +618,7 @@ class _Series_detailsState extends State<Series_details> {
                             child: Image.asset(
                               'assets/matches.png',
                               color: Colors.black,
-                              scale: 1.2,
+                              scale: 4,
                             ),
                           ),
                           // ignore: prefer_const_constructors

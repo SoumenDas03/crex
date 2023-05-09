@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:crex/dashboard/fixtures_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
@@ -48,9 +48,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                 child: Text(
                   'More',
                   style: TextStyle(
-                      color: isDarkMode
-                          ? const Color.fromARGB(255, 153, 152, 152)
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontSize: 16),
                 ),
               ),
@@ -88,9 +86,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                 child: Text(
                   'Ranking',
                   style: TextStyle(
-                      color: isDarkMode
-                          ? const Color.fromARGB(255, 26, 26, 26)
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontSize: 16),
                 ),
               ),
@@ -133,18 +129,16 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: isDarkMode
-                          ? Image.asset(
-                              'assets/team_ranking.png',
-                              scale: 1.3,
-                            )
-                          : Image.asset(
-                              'assets/team_ranking.png',
-                              scale: 1.3,
-                              color: Colors.black,
-                            ),
-                    ),
+                        padding: const EdgeInsets.only(left: 10),
+                        child: isDarkMode
+                            ? Icon(
+                                CupertinoIcons.person_3_fill,
+                                size: 30,
+                              )
+                            : Icon(
+                                CupertinoIcons.person_3_fill,
+                                size: 30,
+                              )),
                     const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
@@ -161,42 +155,42 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                 child: Text(
                   'Settings',
                   style: TextStyle(
-                      color: isDarkMode
-                          ? const Color.fromARGB(255, 26, 26, 26)
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontSize: 16),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 15),
-                height: 40,
-                width: 320,
-                color: isDarkMode
-                    ? const Color.fromARGB(255, 26, 26, 26)
-                    : Colors.white,
-                child: Row(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: isDarkMode
-                          ? Image.asset('assets/language.png')
-                          : Image.asset(
-                              'assets/language.png',
-                              color: Colors.black,
-                            ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Language',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(top: 15),
+              //   height: 40,
+              //   width: 320,
+              //   color: isDarkMode
+              //       ? const Color.fromARGB(255, 26, 26, 26)
+              //       : Colors.white,
+              //   child: Row(
+              //     // ignore: prefer_const_literals_to_create_immutables
+              //     children: [
+              //       Padding(
+              //           padding: const EdgeInsets.only(left: 10),
+              //           child: isDarkMode
+              //               ? Icon(
+              //                   Icons.language,
+              //                   size: 30,
+              //                 )
+              //               : Icon(
+              //                   Icons.language,
+              //                   size: 30,
+              //                 )),
+              //       const Padding(
+              //         padding: EdgeInsets.only(left: 10),
+              //         child: Text(
+              //           'Language',
+              //           style: TextStyle(
+              //               fontSize: 16, fontWeight: FontWeight.w500),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
               Container(
                 margin: const EdgeInsets.only(top: 15),
                 height: 40,
@@ -300,9 +294,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                 child: Text(
                   'Support',
                   style: TextStyle(
-                      color: isDarkMode
-                          ? const Color.fromARGB(255, 26, 26, 26)
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontSize: 16),
                 ),
               ),
@@ -317,18 +309,11 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: isDarkMode
-                          ? Image.asset(
-                              'assets/feedback.png',
-                              scale: 1.1,
-                            )
-                          : Image.asset(
-                              'assets/feedback.png',
-                              scale: 1.1,
-                              color: Colors.black,
-                            ),
-                    ),
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(
+                          Icons.chat_bubble,
+                          size: 30,
+                        )),
                     const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
@@ -345,9 +330,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                 child: Text(
                   'About Us',
                   style: TextStyle(
-                      color: isDarkMode
-                          ? const Color.fromARGB(255, 26, 26, 26)
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                       fontSize: 16),
                 ),
               ),
@@ -366,10 +349,12 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                       child: isDarkMode
                           ? Image.asset(
                               'assets/contact.png',
+                              scale: 2,
                             )
                           : Image.asset(
                               'assets/contact.png',
                               color: Colors.black,
+                              scale: 2,
                             ),
                     ),
                     const Padding(
@@ -398,9 +383,11 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                       child: isDarkMode
                           ? Image.asset(
                               'assets/privacy.png',
+                              scale: 2,
                             )
                           : Image.asset(
                               'assets/privacy.png',
+                              scale: 2,
                               color: Colors.black,
                             ),
                     ),
@@ -426,16 +413,8 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: isDarkMode
-                          ? Image.asset(
-                              'assets/terms.png',
-                            )
-                          : Image.asset(
-                              'assets/terms.png',
-                              color: Colors.black,
-                            ),
-                    ),
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Icon(Icons.text_snippet_sharp)),
                     const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
@@ -558,7 +537,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                               child: Image.asset(
                                 'assets/series.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             const Text(
@@ -585,7 +564,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                               child: Image.asset(
                                 'assets/matches.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             const Text(
@@ -612,7 +591,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                               child: Image.asset(
                                 'assets/fixtures.png',
                                 color: Colors.black,
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             const Text(
@@ -634,7 +613,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/more.png',
-                                scale: 1.2,
+                                scale: 4,
                               ),
                             ),
                             const Text(
