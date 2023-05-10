@@ -149,10 +149,10 @@ class _home_dashboardState extends State<home_dashboard> {
                                 // ignore: prefer_const_constructors
                                 child: Icon(
                                   Icons.home,
-                                  color: Colors.black,
-                                  // color: isDarkMode
-                                  //     ? const Color(0xFFFF2E00)
-                                  //     : const Color(0xFFFF4D00),
+                                  // color: Colors.black,
+                                  color: isDarkMode
+                                      ? const Color(0xFFFF2E00)
+                                      : const Color(0xFFFF4D00),
                                 ),
                               ),
                               // ignore: prefer_const_constructors

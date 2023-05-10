@@ -203,7 +203,9 @@ class _matches_dashboardState extends State<matches_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/matches.png',
-                                scale: 4,
+                                scale: 4,color: isDarkMode
+                                      ? const Color(0xFFFF2E00)
+                                      : const Color(0xFFFF4D00),
                               ),
                             ),
                             // ignore: prefer_const_constructors

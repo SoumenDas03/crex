@@ -236,7 +236,9 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/fixtures.png',
-                                scale: 4,
+                                scale: 4,color: isDarkMode
+                                      ? const Color(0xFFFF2E00)
+                                      : const Color(0xFFFF4D00),
                                 // color: const Color(0xFFFF4D00),
                               ),
                             ),

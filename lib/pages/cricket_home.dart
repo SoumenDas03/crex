@@ -116,7 +116,6 @@ class _cricket_homeState extends State<cricket_home> {
       );
 
       mapBetting = jsonDecode(response.body.toString());
-
       if (response.statusCode == 200) {
         return mapBetting;
         // ignore: use_build_context_synchronously

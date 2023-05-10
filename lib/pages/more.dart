@@ -613,7 +613,9 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/more.png',
-                                scale: 4,
+                                scale: 4,color: isDarkMode
+                                      ? const Color(0xFFFF2E00)
+                                      : const Color(0xFFFF4D00),
                               ),
                             ),
                             const Text(

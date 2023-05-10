@@ -42,6 +42,9 @@ class _infoState extends State<info> {
       map = jsonDecode(response.body.toString());
       data = map["data"];
       if (response.statusCode == 200) {
+        setState(() {
+          print("refreshing info...");
+        });
         return data;
         // ignore: use_build_context_synchronously
       } else {
