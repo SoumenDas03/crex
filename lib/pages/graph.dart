@@ -21,6 +21,23 @@ class graph extends StatefulWidget {
 }
 
 class _graphState extends State<graph> {
+
+   Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails(),
+     getBallByBall()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
   var map, data, bbbmap, bbbData, dataChat, chatMessage;
   late IO.Socket socket;
 
@@ -49,7 +66,7 @@ class _graphState extends State<graph> {
     super.dispose();
   }
 
-  getSingleCricketMatchDetails() async {
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -73,7 +90,7 @@ class _graphState extends State<graph> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -140,23 +157,13 @@ class _graphState extends State<graph> {
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.grey,
       body: FutureBuilder(
-          future: getSingleCricketMatchDetails(),
+          future: apiFetch(),
           builder: (context, snapshot) {
             if (data == null) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else {
-              return FutureBuilder(
-                future: getBallByBall(),
-                builder: (context, snapshot) {
-                  if (bbbData == null) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    );
-                  } else {
                     return SingleChildScrollView(
                       child: Container(
                         alignment: Alignment.center,
@@ -1197,9 +1204,7 @@ class _graphState extends State<graph> {
                     );
                   }
                 },
-              );
-            }
-          }),
+      ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(bottom: 5, top: 5),
         color: isDarkMode ? Colors.black : Colors.grey,

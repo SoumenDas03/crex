@@ -15,6 +15,22 @@ class singlePlayer_info extends StatefulWidget {
 }
 
 class _singlePlayer_infoState extends State<singlePlayer_info> {
+  Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+      getPlayerInfo(),
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+
   // ignore: prefer_typing_uninitialized_variables
   var map,
       data,
@@ -33,7 +49,7 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
     return (to.difference(from).inHours / 24).round();
   }
 
-  getPlayerInfo() async {
+  Future getPlayerInfo() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -111,7 +127,7 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
         title: Text("Player Info"),
       ),
       body: FutureBuilder(
-        future: getPlayerInfo(),
+        future: apiFetch(),
         builder: (context, snapshot) {
           if (data == null) {
             return Center(

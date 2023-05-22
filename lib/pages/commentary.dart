@@ -35,7 +35,26 @@ class _commententaryState extends State<commententary> {
       bbbData,
       reversebbbData,
       mapBetting;
-  getSingleCricketMatchDetails() async {
+
+      Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails(),
+     getMatchScores(),
+     getBallByBall()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+  
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -61,7 +80,7 @@ class _commententaryState extends State<commententary> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -102,7 +121,7 @@ class _commententaryState extends State<commententary> {
     }
   }
 
-  getMatchScores() async {
+  Future getMatchScores() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -170,33 +189,13 @@ class _commententaryState extends State<commententary> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
-        future: getSingleCricketMatchDetails(),
+        future: apiFetch(),
         builder: (context, snapshot) {
           if (data == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else {
-            return FutureBuilder(
-              future: getMatchScores(),
-              builder: (context, snapshot) {
-                if (scoreData == null) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.yellow,
-                    ),
-                  );
-                } else {
-                  return FutureBuilder(
-                    future: getBallByBall(),
-                    builder: (context, snapshot) {
-                      if (bbbData == null) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
-                          ),
-                        );
-                      } else {
+          }  else {
                         return FutureBuilder(
                           future: getBettingPoints(data["teams"][0].toString()),
                           builder: (context, snapshot) {
@@ -4109,13 +4108,8 @@ class _commententaryState extends State<commententary> {
                         );
                       }
                     },
-                  );
-                }
-              },
-            );
-          }
-        },
-      ),
+                  ),
+       
     );
   }
 }

@@ -19,7 +19,22 @@ class fixtures_series extends StatefulWidget {
 // ignore: camel_case_types
 class _fixtures_seriesState extends State<fixtures_series> {
   var map, data;
-  getSeriesList() async {
+
+  Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([getSeriesList()]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+
+  Future getSeriesList() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -49,7 +64,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
       child: Scaffold(
           backgroundColor: Colors.black,
           body: FutureBuilder(
-            future: getSeriesList(),
+            future: apiFetch(),
             builder: (context, snapshot) {
               if (data == null) {
                 return const Center(

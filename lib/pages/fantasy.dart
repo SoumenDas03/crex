@@ -40,7 +40,26 @@ class _fantasyState extends State<fantasy> {
       bbbData,
       topPointList;
 
-  getSingleCricketMatchDetails() async {
+      Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+      getSingleCricketMatchDetails(),
+      getFantasyPoints(),
+      getMatchScores(),
+     getBallByBall()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+  
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -63,7 +82,7 @@ class _fantasyState extends State<fantasy> {
     }
   }
 
-  getFantasyPoints() async {
+  Future getFantasyPoints() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -89,7 +108,7 @@ class _fantasyState extends State<fantasy> {
     }
   }
 
-  getMatchScores() async {
+  Future getMatchScores() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -144,7 +163,7 @@ class _fantasyState extends State<fantasy> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -172,41 +191,13 @@ class _fantasyState extends State<fantasy> {
       child: Scaffold(
           backgroundColor: Colors.black,
           body: FutureBuilder(
-            future: getSingleCricketMatchDetails(),
+            future: apiFetch(),
             builder: (context, snapshot) {
               if (data == null) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return FutureBuilder(
-                  future: getFantasyPoints(),
-                  builder: (context, snapshot) {
-                    if (fantasyData == null) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.deepPurple,
-                        ),
-                      );
-                    } else {
-                      return FutureBuilder(
-                        future: getMatchScores(),
-                        builder: (context, snapshot) {
-                          if (scoreData == null) {
-                            return Center(
-                              child:
-                                  CircularProgressIndicator(color: Colors.red),
-                            );
-                          } else {
-                            return FutureBuilder(
-                              future: getBallByBall(),
-                              builder: (context, snapshot) {
-                                if (bbbData == null) {
-                                  return Center(
-                                      child: CircularProgressIndicator(
-                                    color: Colors.green,
-                                  ));
-                                } else {
                                   return SingleChildScrollView(
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -4224,15 +4215,8 @@ class _fantasyState extends State<fantasy> {
                                   );
                                 }
                               },
-                            );
-                          }
-                        },
-                      );
-                    }
-                  },
-                );
-              }
-            },
+                           
+            
           )),
     );
   }

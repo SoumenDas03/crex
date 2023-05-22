@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class seriesstatus extends StatefulWidget {
+
+  
   const seriesstatus(
       {Key? key, required this.id, required this.seriesId, required this.theme})
       : super(key: key);
@@ -23,7 +25,24 @@ class _seriesstatusState extends State<seriesstatus> {
   bool isVisible = false;
   bool flag = true;
   var map, data, map1, data1, bbbmap, bbbData;
-  getSingleCricketMatchDetails() async {
+    Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails(),
+     getSeriesDetails(),
+     getBallByBall(),
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -46,7 +65,7 @@ class _seriesstatusState extends State<seriesstatus> {
     }
   }
 
-  getSeriesDetails() async {
+  Future getSeriesDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -66,7 +85,7 @@ class _seriesstatusState extends State<seriesstatus> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -92,32 +111,13 @@ class _seriesstatusState extends State<seriesstatus> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
-        future: getSingleCricketMatchDetails(),
+        future: apiFetch(),
         builder: (context, snapshot) {
           if (data == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            return FutureBuilder(
-              future: getSeriesDetails(),
-              builder: (context, snapshot) {
-                if (data1 == null) {
-                  return Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.red,
-                  ));
-                } else {
-                  return FutureBuilder(
-                    future: getBallByBall(),
-                    builder: (context, snapshot) {
-                      if (bbbData == null) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
-                          ),
-                        );
-                      } else {
                         return SingleChildScrollView(
                           child: Container(
                             height: MediaQuery.of(context).size.height,
@@ -1612,13 +1612,9 @@ class _seriesstatusState extends State<seriesstatus> {
                         );
                       }
                     },
-                  );
-                }
-              },
-            );
-          }
-        },
-      ),
+                  ),
+                
+            
     );
   }
 }

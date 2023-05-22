@@ -17,6 +17,22 @@ class live_first extends StatefulWidget {
 }
 
 class _live_firstState extends State<live_first> {
+
+    Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
   // ignore: prefer_typing_uninitialized_variables
   var map, data, team1, team2, draw, total = 100;
   int randomD(int min, int max) {
@@ -38,7 +54,7 @@ class _live_firstState extends State<live_first> {
     return min + Random().nextInt(max - min);
   }
 
-  getSingleCricketMatchDetails() async {
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -65,7 +81,7 @@ class _live_firstState extends State<live_first> {
       child: Scaffold(
           backgroundColor: Colors.black,
           body: FutureBuilder(
-            future: getSingleCricketMatchDetails(),
+            future: apiFetch(),
             builder: (context, snapshot) {
               if (data == null) {
                 return Center(

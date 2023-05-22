@@ -25,7 +25,21 @@ class _seriesState extends State<series> {
   bool flag1 = false;
   String? selected = "First";
   var map, data;
-  getSeriesList() async {
+  Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([getSeriesList()]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+
+  Future getSeriesList() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -51,7 +65,7 @@ class _seriesState extends State<series> {
     return Scaffold(
         // backgroundColor: Colors.black,
         body: FutureBuilder(
-      future: getSeriesList(),
+      future: apiFetch(),
       builder: (context, snapshot) {
         if (data == null) {
           return Center(

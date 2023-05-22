@@ -29,6 +29,23 @@ class live_second extends StatefulWidget {
 }
 
 class _live_secondState extends State<live_second> with WidgetsBindingObserver {
+      Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails(),
+     getBallByBall()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+
   var map, data, sugamWicket, wicketOrderData, bbbmap, bbbData, mapBetting;
   bool flag = false;
   final floating = Floating();
@@ -83,7 +100,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     debugPrint('PiP enabled? $status');
   }
 
-  getSingleCricketMatchDetails() async {
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -115,7 +132,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -747,21 +764,11 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
-        future: getSingleCricketMatchDetails(),
+        future: apiFetch(),
         builder: (context, snapshot) {
           if (data == null) {
             return Center(child: CircularProgressIndicator());
-          } else {
-            return FutureBuilder(
-              future: getBallByBall(),
-              builder: (context, snapshot) {
-                if (bbbData == null) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.green,
-                    ),
-                  );
-                } else {
+          }  else {
                   return FutureBuilder(
                     future: getBettingPoints(data["teams"][0].toString()),
                     builder: (context, snapshot) {
@@ -4313,10 +4320,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                   );
                 }
               },
-            );
-          }
-        },
-      ),
+            ),
+         
       floatingActionButton: FutureBuilder<bool>(
         future: floating.isPipAvailable,
         initialData: true,

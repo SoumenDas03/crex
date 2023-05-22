@@ -32,7 +32,25 @@ class _infoState extends State<info> {
     {'class': 'D', 'total': 7},
     {'class': 'E', 'total': 21},
   ];
-  getSingleCricketMatchDetails() async {
+
+    Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getSingleCricketMatchDetails(),
+     getBallByBall(),
+     getNewsList()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -57,7 +75,7 @@ class _infoState extends State<info> {
     }
   }
 
-  getNewsList() async {
+  Future getNewsList() async {
     try {
       http.Response response = await http.get(
         Uri.parse('https://playexch.us/api/news-list'),
@@ -78,7 +96,7 @@ class _infoState extends State<info> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -106,27 +124,13 @@ class _infoState extends State<info> {
       body: Consumer<ThemeChanger>(
         builder: (context, value, child) {
           return FutureBuilder(
-            future: getSingleCricketMatchDetails(),
+            future: apiFetch(),
             builder: (context, snapshot) {
               if (data == null) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else {
-                return FutureBuilder(
-                  future: getBallByBall(),
-                  builder: (context, snapshot) {
-                    if (bbbData == null) {
-                      return Center(
-                        child: CircularProgressIndicator(color: Colors.green),
-                      );
-                    } else {
-                      return FutureBuilder(
-                        future: getNewsList(),
-                        builder: (context, snapshot) {
-                          if (data1 == null) {
-                            return Center(child: CircularProgressIndicator());
-                          } else {
+              }  else {
                             return DefaultTabController(
                               length: 6,
                               child: SingleChildScrollView(
@@ -4185,13 +4189,7 @@ class _infoState extends State<info> {
                         },
                       );
                     }
-                  },
-                );
-              }
-            },
-          );
-        },
-      ),
-    );
+             
+    ),);
   }
 }

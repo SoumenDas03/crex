@@ -16,7 +16,22 @@ class infoPlaying_xi_team extends StatefulWidget {
 
 class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
   var map, data, newData, secondNewData;
-  getMatchSquad() async {
+
+  Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([getMatchSquad()]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
+
+  Future getMatchSquad() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -53,7 +68,7 @@ class _infoPlaying_xi_teamState extends State<infoPlaying_xi_team> {
             title: Text("Playing XI"),
           ),
           body: FutureBuilder(
-            future: getMatchSquad(),
+            future: apiFetch(),
             builder: (context, snapshot) {
               if (data == null) {
                 return Center(

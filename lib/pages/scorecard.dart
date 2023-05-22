@@ -21,9 +21,25 @@ class scorecard extends StatefulWidget {
 
 // ignore: camel_case_types
 class _scorecardState extends State<scorecard> {
+    Future<void> apiFetch() async {
+    var status = true;
+
+    await Future.wait([
+     getBallByBall(),
+     getSingleCricketMatchDetails()
+    ]).then((v) {
+      for (var item in v) {
+        print('$item \n');
+      }
+    }).whenComplete(() {
+      status = false;
+    });
+
+    print(status == true ? 'Loading' : 'FINISHED');
+  }
   // ignore: prefer_typing_uninitialized_variables
   var map, data, bbbmap, bbbData;
-  getSingleCricketMatchDetails() async {
+  Future getSingleCricketMatchDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -46,7 +62,7 @@ class _scorecardState extends State<scorecard> {
     }
   }
 
-  getBallByBall() async {
+  Future getBallByBall() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -72,17 +88,10 @@ class _scorecardState extends State<scorecard> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
-        future: getSingleCricketMatchDetails(),
-        builder: (context, snapshot) {
-          if (data == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return FutureBuilder(
-              future: getBallByBall(),
+        
+              future: apiFetch(),
               builder: (context, snapshot) {
-                if (bbbData == null) {
+                if (data == null) {
                   return Center(
                     child: CircularProgressIndicator(
                       color: Colors.green,
@@ -3452,10 +3461,8 @@ class _scorecardState extends State<scorecard> {
                   );
                 }
               },
-            );
-          }
-        },
-      ),
-    );
+    ),);
+          
+       
   }
 }
