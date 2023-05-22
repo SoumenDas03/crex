@@ -55,14 +55,14 @@ class _cricket_homeState extends State<cricket_home> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/currentMatches?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&offset=0'),
+            'https://api.cricapi.com/v1/currentMatches?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&offset=0'
+        ),
       );
 
       map = jsonDecode(response.body.toString());
       data = map["data"]
           .where((element) =>
               element["matchEnded"] == false &&
-              element["status"] != "Match not started" &&
               element["teamInfo"].length > 1 &&
               element["status"] != "No result (due to rain)" &&
               element["status"] != "Match tied (VJD)" &&
@@ -497,7 +497,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black54,
                                                                                 child: Text(
-                                                                                  mapBetting["point"] != "" ? mapBetting["point"][6].toString() : "56",
+                                                                                  mapBetting["point"] != "" ? (double.parse(mapBetting["point"][6]) * 25).round().toString() : "56",
                                                                                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -513,7 +513,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black12,
                                                                                 child: Text(
-                                                                                  mapBetting["point"] != "" ? mapBetting["point"][14].toString() : '22',
+                                                                                  mapBetting["point"] != "" ? (double.parse(mapBetting["point"][14]) * 25).round().toString() : '22',
                                                                                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -721,7 +721,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black54,
                                                                                 child: Text(
-                                                                                  mapBetting["point"] != "" ? mapBetting["point"][6].toString() : "56",
+                                                                                  mapBetting["point"] != "" ? (double.parse(mapBetting["point"][6]) * 25).round().toString() : "56",
                                                                                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -737,7 +737,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                                 width: 42,
                                                                                 color: Colors.black12,
                                                                                 child: Text(
-                                                                                  mapBetting["point"] != "" ? mapBetting["point"][14].toString() : "22",
+                                                                                  mapBetting["point"] != "" ? (double.parse(mapBetting["point"][14]) * 25).round().toString() : "22",
                                                                                   style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ),
@@ -925,7 +925,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                         child:
                                                                             Text(
                                                                           mapBetting["point"] != ""
-                                                                              ? mapBetting["point"][6].toString()
+                                                                              ? (double.parse(mapBetting["point"][6]) * 25).round().toString()
                                                                               : "56",
                                                                           style: TextStyle(
                                                                               color: Colors.white,
@@ -953,7 +953,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                         child:
                                                                             Text(
                                                                           mapBetting["point"] != ""
-                                                                              ? mapBetting["point"][14].toString()
+                                                                              ? (double.parse(mapBetting["point"][14]) * 25).round().toString()
                                                                               : "22",
                                                                           style: TextStyle(
                                                                               color: Colors.black,
@@ -1183,7 +1183,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                           child:
                                                                               Text(
                                                                             mapBetting["point"] != ""
-                                                                                ? mapBetting["point"][6].toString()
+                                                                                ? (double.parse(mapBetting["point"][6]) * 25).round().toString()
                                                                                 : "56",
                                                                             style:
                                                                                 TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -1210,7 +1210,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                                           child:
                                                                               Text(
                                                                             mapBetting["point"] != ""
-                                                                                ? mapBetting["point"][14].toString()
+                                                                                ? (double.parse(mapBetting["point"][14]) * 25).round().toString()
                                                                                 : "22",
                                                                             style:
                                                                                 TextStyle(color: Colors.black, fontWeight: FontWeight.bold),

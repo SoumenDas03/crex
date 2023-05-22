@@ -766,7 +766,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
       body: FutureBuilder(
         future: apiFetch(),
         builder: (context, snapshot) {
-          if (data == null) {
+          if (bbbData == null) {
             return Center(child: CircularProgressIndicator());
           }  else {
                   return FutureBuilder(
@@ -1868,8 +1868,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               ),
                                               child: Text(
                                                 mapBetting["point"] != ""
-                                                    ? mapBetting["point"][6]
-                                                        .toString()
+                                                    ? (double.parse(mapBetting["point"][6]) * 25).round().toString()
                                                     : "56",
                                                 style: TextStyle(
                                                     fontSize: 20,
@@ -1893,8 +1892,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               ),
                                               child: Text(
                                                 mapBetting["point"] != ""
-                                                    ? mapBetting["point"][14]
-                                                        .toString()
+                                                    ? (double.parse(mapBetting["point"][14]) * 25).round().toString()
                                                     : "57",
                                                 style: TextStyle(
                                                     fontSize: 20,
