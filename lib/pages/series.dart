@@ -29,7 +29,7 @@ class _seriesState extends State<series> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/series?apikey=dfe5a856-430f-49e9-99f4-6a994d3d76e8&offset=0'),
+            'https://api.cricapi.com/v1/series?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
