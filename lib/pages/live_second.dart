@@ -155,11 +155,12 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
   getBettingPoints(String match_name) async {
     try {
       http.Response response = await http
-          .post(Uri.parse('https://playexch.us/api/get-match-details'), body: {
+          .post(Uri.parse('https://playexch.us/api/get-match-details-odds'), body: {
         "match_name": match_name,
       });
 
-      mapBetting = jsonDecode(response.body.toString());
+      var mapNoob = jsonDecode(response.body.toString());
+      mapBetting = mapNoob["data"];
 
       if (response.statusCode == 200) {
         return mapBetting;
@@ -1867,14 +1868,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black45,
                                               ),
                                               child: Text(
-                                                mapBetting["point"] != ""
-                                                    ? (double.parse(mapBetting["point"][6]) * 25).round().toString()
-                                                    : "56",
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
-                                              ),
+                                                      mapBetting != null ? mapBetting["odd_one"][0] == "1" ?
+                                                                            ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString() : "56",
+                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                                                    ),
                                             ),
                                             SizedBox(
                                               width: 10,
@@ -1891,8 +1888,9 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black26,
                                               ),
                                               child: Text(
-                                                mapBetting["point"] != ""
-                                                    ? (double.parse(mapBetting["point"][14]) * 25).round().toString()
+                                                mapBetting!= null
+                                                    ? mapBetting["odd_two"][0] == "1" ?
+                                                                            ((double.parse(mapBetting["odd_two"]) * int.parse(mapBetting["odd_two"][0]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString()
                                                     : "57",
                                                 style: TextStyle(
                                                     fontSize: 20,
