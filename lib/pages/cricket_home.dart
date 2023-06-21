@@ -463,7 +463,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                               child: FutureBuilder(
                                                                 future: getBettingPoints(data[index]["teams"][0].toString()),
                                                                 builder: (context,snapshot) {
-                                                                  if(mapBetting == null) {
+                                                                  if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                                     return Row(
                                                                       crossAxisAlignment:
                                                                       CrossAxisAlignment
@@ -839,7 +839,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                               child: FutureBuilder(
                                                                   future: getBettingPoints(data[index]["teams"][0].toString()),
                                                                   builder: (context,snapshot) {
-                                                                    if(mapBetting == null) {
+                                                                    if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                                       return Row(
                                                                         crossAxisAlignment:
                                                                         CrossAxisAlignment
@@ -1161,7 +1161,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                       child: FutureBuilder(
                                                           future: getBettingPoints(upcomingData[index]["teams"][0].toString()),
                                                           builder: (context,snapshot) {
-                                                            if(mapBetting == null) {
+                                                            if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                               return Row(
                                                                 crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -1544,7 +1544,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                         child: FutureBuilder(
                                                             future: getBettingPoints(newData[index]["teams"][0].toString()),
                                                             builder: (context,snapshot) {
-                                                              if(mapBetting == null) {
+                                                              if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                                 return Row(
                                                                   crossAxisAlignment:
                                                                   CrossAxisAlignment

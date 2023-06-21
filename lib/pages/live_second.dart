@@ -1868,8 +1868,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black45,
                                               ),
                                               child: Text(
-                                                      mapBetting != null ? mapBetting["odd_one"][0] == "1" ?
-                                                                            ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString() : "56",
+                                                mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-" ? "56" : mapBetting["odd_one"][0] == "1" ?
+                                                ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString(),
                                                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                                                     ),
                                             ),
@@ -1888,10 +1888,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black26,
                                               ),
                                               child: Text(
-                                                mapBetting!= null
-                                                    ? mapBetting["odd_two"][0] == "1" ?
-                                                                            ((double.parse(mapBetting["odd_two"]) * int.parse(mapBetting["odd_two"][0]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString()
-                                                    : "57",
+                                                mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-"
+                                                    ? "57"
+                                                    : mapBetting["odd_two"][0] == "1" ?
+                                                ((double.parse(mapBetting["odd_two"]) * int.parse(mapBetting["odd_two"][0]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString(),
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
