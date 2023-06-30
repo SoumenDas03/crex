@@ -58,7 +58,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -84,7 +84,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -106,7 +106,7 @@ class _commententaryState extends State<commententary> {
   getPlayerInfo(String id) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          'https://api.cricapi.com/v1/players_info?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=$id'));
+          'https://api.cricapi.com/v1/players_info?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=$id'));
 
       playerInfoMap = jsonDecode(response.body.toString());
       playerInfoData = playerInfoMap["data"];
@@ -125,7 +125,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       scoreMap = jsonDecode(response.body.toString());

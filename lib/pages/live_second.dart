@@ -29,7 +29,9 @@ class live_second extends StatefulWidget {
 }
 
 class _live_secondState extends State<live_second> with WidgetsBindingObserver {
-      Future<void> apiFetch() async {
+
+
+  Future<void> apiFetch() async {
     var status = true;
 
     await Future.wait([
@@ -104,7 +106,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -136,7 +138,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -759,6 +761,241 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     );
   }
 
+  Widget testBattingPoint() {
+    final isDarkMode = widget.theme == "dark";
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Material(color:  isDarkMode
+                    ? Colors.blueGrey[900]
+                    : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                    ),
+                  ),
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 5, top: 10, bottom: 10),
+                    child: Column(
+                      children: [
+                        Text(
+                          data["teamInfo"][0]["shortname"],
+                          style: TextStyle( color:  isDarkMode
+                          ? Colors.white
+                              : Colors.black,fontWeight: FontWeight.w600,
+                              fontSize: 15),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 32,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.blue,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  mapBetting != null ? mapBetting["odd_five"].toString() : "3",
+                                  style: TextStyle(
+                                    color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 32,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xFFFF4D00),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                        mapBetting != null ? mapBetting["odd_six"].toString() : "4",
+                                        style: TextStyle(
+                                          color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                        ),
+                                      )),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Material(color:  isDarkMode
+                    ? Colors.blueGrey[900]
+                    : null,
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 5, top: 10, bottom: 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "DRAW",
+                              style: TextStyle( color:  isDarkMode
+                                  ? Colors.white
+                                  : Colors.black,fontSize: 15 , fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Icon(
+                              Icons.info_outline,
+                              size: 10,
+                              color: Colors.grey[500],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 32,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.blue,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  mapBetting != null ? mapBetting["odd_three"].toString() : "1.05",
+                                  style: TextStyle(
+                                    color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 32,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xFFFF4D00),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      mapBetting != null ? mapBetting["odd_four"].toString() : "1.5",
+                                      style: TextStyle(
+                                        color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Material(color: isDarkMode
+                    ? Colors.blueGrey[900]
+                    : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
+                  elevation: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 5, right: 10, top: 10, bottom: 10),
+                    child: Column(
+                      children: [
+                        Text(
+                          data["teamInfo"][1]["shortname"],
+                          style: TextStyle( color:  isDarkMode
+                              ? Colors.white
+                              : Colors.black,fontSize: 15,fontWeight: FontWeight.bold,),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              height: 32,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.blue,
+                              ),
+                              child: Center(
+                                  child: Text(
+                                    mapBetting != null ? mapBetting["odd_one"].toString() : "3",
+                                    style: TextStyle(
+                                      color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  height: 32,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xFFFF4D00),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                        mapBetting != null ? mapBetting["odd_two"].toString() : "3.5",
+                                        style: TextStyle(
+                                          color: Colors.white,fontWeight: FontWeight.bold, fontSize: 18
+                                        ),
+                                      )),
+                                )
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
@@ -773,7 +1010,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                   return FutureBuilder(
                     future: getBettingPoints(data["teams"][0].toString()),
                     builder: (context, snapshot) {
-                      if (mapBetting == null) {
+                      if (data == null) {
                         return Center(
                           child: CircularProgressIndicator(
                             color: Colors.green,
@@ -1729,17 +1966,26 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   ),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  _showModalBottomSheet();
-                                  setState(() {});
-                                },
-                                child: Visibility(
-                                  visible: numberview,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Opacity(
-                                      opacity: 0.8,
+                              Visibility(
+                                visible: data["matchType"] == "test" ? true : false,
+                                  child: InkWell(
+                                      onTap: () {
+                                        _showModalBottomSheet();
+                                        setState(() {});
+                                      },
+                                      child: testBattingPoint())
+                              ),
+                              Visibility(
+                                visible: data["matchType"] == "test" ? false : true,
+                                child: InkWell(
+                                  onTap: () {
+                                    _showModalBottomSheet();
+                                    setState(() {});
+                                  },
+                                  child: Visibility(
+                                    visible: numberview,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius:
@@ -1759,7 +2005,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   MainAxisAlignment.start,
                                               // ignore: prefer_const_literals_to_create_immutables
                                               children: [
-                                                SizedBox(width: 25),
+                                                SizedBox(width: 24),
                                                 Text(
                                                   data["score"][data["score"].length - 1]["inning"].substring(
                                                               0,
@@ -1868,7 +2114,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                     : Colors.black45,
                                               ),
                                               child: Text(
-                                                mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-" ? "56" : mapBetting["odd_one"][0] == "1" ?
+                                                mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-" ? "00" : mapBetting["odd_one"][0] == "1" ?
                                                 ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString(),
                                                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                                                     ),
@@ -1889,7 +2135,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               ),
                                               child: Text(
                                                 mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-"
-                                                    ? "57"
+                                                    ? "01"
                                                     : mapBetting["odd_two"][0] == "1" ?
                                                 ((double.parse(mapBetting["odd_two"]) * int.parse(mapBetting["odd_two"][0]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString(),
                                                 style: TextStyle(
@@ -1928,140 +2174,137 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                   visible: percentage,
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
-                                    child: Opacity(
-                                      opacity: 0.8,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: isDarkMode
-                                              ? Colors.blueGrey[900]
-                                              : const Color(0xFFDFDFDF),
-                                        ),
-                                        // width: 300,
-                                        height: 45,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      data["teamInfo"][0]
-                                                          ["shortname"],
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 18),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5),
+                                        color: isDarkMode
+                                            ? Colors.blueGrey[900]
+                                            : const Color(0xFFDFDFDF),
+                                      ),
+                                      // width: 300,
+                                      height: 45,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    data["teamInfo"][0]
+                                                        ["shortname"],
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.center,
+                                                    width: 150,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      // ignore: prefer_const_literals_to_create_immutables
+                                                      children: [
+                                                        const SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      width: 150,
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        // ignore: prefer_const_literals_to_create_immutables
-                                                        children: [
-                                                          const SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      data["teamInfo"][1]
-                                                          ["shortname"],
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 18),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  // ignore: prefer_const_literals_to_create_immutables
-                                                  children: [
-                                                    Text(
-                                                      "60%",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    LinearPercentIndicator(
-                                                      width: 150.0,
-                                                      lineHeight: 12.0,
-                                                      percent: 0.6,
-                                                      animation: true,
-                                                      linearStrokeCap:
-                                                          LinearStrokeCap
-                                                              .roundAll,
-                                                      progressColor:
-                                                          Colors.greenAccent,
-                                                      animationDuration: 2500,
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Text(
-                                                      "40%",
-                                                      style: TextStyle(
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Text(
-                                              'View',
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontSize: 17),
-                                            )
-                                          ],
-                                        ),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text(
+                                                    data["teamInfo"][1]
+                                                        ["shortname"],
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                // ignore: prefer_const_literals_to_create_immutables
+                                                children: [
+                                                  Text(
+                                                    "60%",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  LinearPercentIndicator(
+                                                    width: 150.0,
+                                                    lineHeight: 12.0,
+                                                    percent: 0.6,
+                                                    animation: true,
+                                                    linearStrokeCap:
+                                                        LinearStrokeCap
+                                                            .roundAll,
+                                                    progressColor:
+                                                        Colors.greenAccent,
+                                                    animationDuration: 2500,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    "40%",
+                                                    style: TextStyle(
+                                                        color: isDarkMode
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            'View',
+                                            style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 17),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -2260,195 +2503,18 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               // ),
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Opacity(
-                                  opacity: 0.8,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      // border: Border.all(color: Colors.white, width: 0.5)
-      
-                                      color: isDarkMode
-                                          ? Colors.blueGrey[900]
-                                          : const Color(0xFFDFDFDF),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              data["scorecard"].length > 1
-                                                  ? Text(
-                                                      "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"]}",
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                      ),
-                                                    )
-                                                  : Text(
-                                                      "Over: " +
-                                                          (data["scorecard"][data[
-                                                                              "scorecard"]
-                                                                          .length -
-                                                                      1]["totals"]["O"] *
-                                                                  2)
-                                                              .toString(),
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: isDarkMode
-                                                            ? Colors.white
-                                                            : Colors.black,
-                                                      ),
-                                                    ),
-                                              SizedBox(
-                                                width: 75,
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                height: 30,
-                                                width: 80,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(3),
-                                                  // border: Border.all(
-                                                  //     color: Colors.white, width: 0.5)
-      
-                                                  color: isDarkMode
-                                                      ? Colors.blue
-                                                      : Colors.black45,
-                                                ),
-                                                child: Text(
-                                                  'NO 79',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                height: 30,
-                                                width: 80,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          2.5),
-                                                  // border: Border.all(
-                                                  //     color: Colors.white, width: 0.5)
-      
-                                                  color: isDarkMode
-                                                      ? Colors.red
-                                                      : Colors.black26,
-                                                ),
-                                                child: Text(
-                                                  'YES 200',
-                                                  style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, bottom: 10),
-                                          child: Container(
-                                            height: 1,
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.blueGrey,
-                                          ),
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Open 150',
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 12),
-                                            ),
-                                            SizedBox(
-                                              width: 12,
-                                            ),
-                                            Text(
-                                              'Min 120',
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 12),
-                                            ),
-                                            SizedBox(
-                                              width: 12,
-                                            ),
-                                            Text(
-                                              'Max 150',
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 12),
-                                            ),
-                                            SizedBox(
-                                              width: 45,
-                                            ),
-                                            Text(
-                                              '10 runs in 9 balls',
-                                              style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontSize: 12),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: data["scorecard"]
-                                                [data["scorecard"].length - 1]
-                                            ["totals"]["O"] >
-                                        10
-                                    ? true
-                                    : false,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Opacity(
-                                    opacity: 0.8,
-                                    child: Container(
+                                child: ListView.builder(
+                                  physics: ClampingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: mapBetting["point"].length,
+                                  itemBuilder: (BuildContext context,
+                                      int index) {
+                                    return Container(
+                                      margin: EdgeInsets.only(bottom: 10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         // border: Border.all(color: Colors.white, width: 0.5)
-      
                                         color: isDarkMode
                                             ? Colors.blueGrey[900]
                                             : const Color(0xFFDFDFDF),
@@ -2463,19 +2529,8 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                data["scorecard"].length > 1
-                                                    ? Text(
-                                                        "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2}",
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: isDarkMode
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        "Over: ${data["scorecard"][data["scorecard"].length - 1]["totals"]["O"] * 2}",
+                                                Text( mapBetting["point"][index]["remark"]
+                                                                .toString(),
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -2485,7 +2540,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                         ),
                                                       ),
                                                 SizedBox(
-                                                  width: 75,
+                                                  width: 25,
                                                 ),
                                                 Container(
                                                   alignment: Alignment.center,
@@ -2493,21 +2548,20 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   width: 80,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            3),
+                                                        BorderRadius.circular(3),
                                                     // border: Border.all(
                                                     //     color: Colors.white, width: 0.5)
-      
+
                                                     color: isDarkMode
                                                         ? Colors.blue
                                                         : Colors.black45,
                                                   ),
                                                   child: Text(
-                                                    'NO 79',
+                                                    mapBetting["point"][index]["point_two"] != null ?  'NO ' + mapBetting["point"][index]["point_two"]
+                                                        .toString() : 'No   --',
                                                     style: TextStyle(
                                                       color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
@@ -2524,19 +2578,19 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                             2.5),
                                                     // border: Border.all(
                                                     //     color: Colors.white, width: 0.5)
-      
+
                                                     color: isDarkMode
                                                         ? Colors.red
                                                         : Colors.black26,
                                                   ),
                                                   child: Text(
-                                                    'YES 200',
+                                                  mapBetting["point"][index]["point_one"] != null ?  'Yes ' + mapBetting["point"][index]["point_one"]
+                                        .toString() : 'yes   --',
                                                     style: TextStyle(
                                                       color: isDarkMode
                                                           ? Colors.white
                                                           : Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                      fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
@@ -2553,62 +2607,10 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                   : Colors.blueGrey,
                                             ),
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'Open 150',
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontSize: 12),
-                                              ),
-                                              SizedBox(
-                                                width: 12,
-                                              ),
-                                              Text(
-                                                'Min 120',
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontSize: 12),
-                                              ),
-                                              SizedBox(
-                                                width: 12,
-                                              ),
-                                              Text(
-                                                'Max 150',
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontSize: 12),
-                                              ),
-                                              SizedBox(
-                                                width: 45,
-                                              ),
-                                              Text(
-                                                '10 runs in 9 balls',
-                                                style: TextStyle(
-                                                    color: isDarkMode
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          )
                                         ],
                                       ),
-                                    ),
-                                  ),
+                                    );
+                                  }
                                 ),
                               ),
                               Padding(
@@ -3434,149 +3436,146 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Opacity(
-                                  opacity: 0.8,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      // border: Border.all(color: Colors.white, width: 0.5)
-                                      color: isDarkMode
-                                          ? Colors.blueGrey[900]
-                                          : const Color(0xFFDFDFDF),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                'Who will win ?',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: isDarkMode
-                                                        ? Colors.blueGrey[100]
-                                                        : Colors.black45),
-                                              ),
-                                              SizedBox(
-                                                width: 45,
-                                              ),
-                                              Text(
-                                                'Total Votes:2,25,222',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: isDarkMode
-                                                        ? Colors.blueGrey[100]
-                                                        : Colors.black45),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5, bottom: 5),
-                                          child: Container(
-                                            height: 1,
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.blueGrey,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    // border: Border.all(color: Colors.white, width: 0.5)
+                                    color: isDarkMode
+                                        ? Colors.blueGrey[900]
+                                        : const Color(0xFFDFDFDF),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 30,
-                                              width: 80,
-                                              decoration: BoxDecoration(
+                                            Text(
+                                              'Who will win ?',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: isDarkMode
+                                                      ? Colors.blueGrey[100]
+                                                      : Colors.black45),
+                                            ),
+                                            SizedBox(
+                                              width: 45,
+                                            ),
+                                            Text(
+                                              'Total Votes:2,25,222',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: isDarkMode
+                                                      ? Colors.blueGrey[100]
+                                                      : Colors.black45),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 5, bottom: 5),
+                                        child: Container(
+                                          height: 1,
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.blueGrey,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                              // border: Border.all(
+                                              //     color: Colors.white, width: 0.5)
+                                              color: isDarkMode
+                                                  ? Colors.amber
+                                                  : Colors.black26,
+                                            ),
+                                            child: Text(
+                                              data["teamInfo"][0]["shortname"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(3),
+                                                    BorderRadius.circular(
+                                                        2.5),
+                                                border: Border.all(
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    width: 1)),
+                                            child: Text(
+                                              'DRAW',
+                                              style: TextStyle(
+                                                color: isDarkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 30,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        2.5),
                                                 // border: Border.all(
                                                 //     color: Colors.white, width: 0.5)
                                                 color: isDarkMode
-                                                    ? Colors.amber
-                                                    : Colors.black26,
-                                              ),
-                                              child: Text(
-                                                data["teamInfo"][0]["shortname"]
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                                    ? Colors.green
+                                                    : Colors.grey),
+                                            child: Text(
+                                              data["teamInfo"][1]["shortname"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 30,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          2.5),
-                                                  border: Border.all(
-                                                      color: isDarkMode
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                      width: 1)),
-                                              child: Text(
-                                                'DRAW',
-                                                style: TextStyle(
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              height: 30,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          2.5),
-                                                  // border: Border.all(
-                                                  //     color: Colors.white, width: 0.5)
-                                                  color: isDarkMode
-                                                      ? Colors.green
-                                                      : Colors.grey),
-                                              child: Text(
-                                                data["teamInfo"][1]["shortname"]
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        )
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
@@ -3625,46 +3624,43 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                               SizedBox(
                                 height: 5,
                               ),
-                              Opacity(
-                                opacity: 0.8,
-                                child: Container(
-                                  height: 45,
-                                  width: 350,
-                                  color: isDarkMode
-                                      ? Colors.blueGrey[900]
-                                      : const Color(0xFFDFDFDF),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: InkWell(
-                                      onTap: () {
-                                        setState(
-                                          () {
-                                            flag = flag ? false : true;
-                                          },
-                                        );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.settings,
-                                            color: isDarkMode
-                                                ? Colors.white
-                                                : Colors.black,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Match Settings',
-                                            style: TextStyle(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12),
-                                          )
-                                        ],
-                                      ),
+                              Container(
+                                height: 45,
+                                width: 350,
+                                color: isDarkMode
+                                    ? Colors.blueGrey[900]
+                                    : const Color(0xFFDFDFDF),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(
+                                        () {
+                                          flag = flag ? false : true;
+                                        },
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.settings,
+                                          color: isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'Match Settings',
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),

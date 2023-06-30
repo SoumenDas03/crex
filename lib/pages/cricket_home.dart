@@ -35,7 +35,6 @@ class _cricket_homeState extends State<cricket_home> {
     }).whenComplete(() {
       status = false;
     });
-
     print(status == true ? 'Loading' : 'FINISHED');
   }
 
@@ -54,7 +53,7 @@ class _cricket_homeState extends State<cricket_home> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/currentMatches?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&offset=0'),
+            'https://api.cricapi.com/v1/currentMatches?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -85,7 +84,8 @@ class _cricket_homeState extends State<cricket_home> {
           .where((element) => element["matchEnded"] == true)
           .toList()
           .where((element) => element["matchEnded"] == true)
-          .toList();
+          .toList()
+          .where((element) => element["score"].length != 0).toList();
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
@@ -101,17 +101,13 @@ class _cricket_homeState extends State<cricket_home> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/matches?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&offset=0'),
+            'https://playexch.us/api/scarp-match-list'),
       );
 
       upcomingMap = jsonDecode(response.body.toString());
-      upcomingData = upcomingMap["data"]
-          .where((element) =>
-              element["matchStarted"] == false &&
-              element["teams"][0] != "Tbc" &&
-              element["teamInfo"] != null &&
-              element["teamInfo"].length > 1)
-          .toList();
+      upcomingData = upcomingMap["data"].where((element) =>
+      element["match_inpaly"] != "In-Play").toList();
+
       if (response.statusCode == 200) {
         return upcomingData;
         // ignore: use_build_context_synchronously
@@ -462,198 +458,144 @@ class _cricket_homeState extends State<cricket_home> {
                                                                   Colors.white,
                                                               child: FutureBuilder(
                                                                 future: getBettingPoints(data[index]["teams"][0].toString()),
-                                                                builder: (context,snapshot) {
-                                                                  if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
+                                                                builder: (context, snapshot) {
+                                                                  final mapBetting = snapshot.data;
+                                                                  if (mapBetting == null ||
+                                                                      mapBetting["odd_one"] == null ||
+                                                                      mapBetting["odd_one"] == "-" ||
+                                                                      mapBetting["odd_two"] == null ||
+                                                                      mapBetting["odd_two"] == "-" ||
+                                                                      mapBetting["odd_five"] == null ||
+                                                                      mapBetting["odd_five"] == "-" ||
+                                                                      mapBetting["odd_six"] == null ||
+                                                                      mapBetting["odd_six"] == "-") {
                                                                     return Row(
-                                                                      crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                      mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                                       children: [
                                                                         Text(
-                                                                          data[index]["teamInfo"][0]
-                                                                          [
-                                                                          "shortname"]
-                                                                              .toString(),
+                                                                          data[index]["teamInfo"][0]["shortname"].toString(),
                                                                           style: TextStyle(
-                                                                              color: Color(
-                                                                                  0xFFFF4D00),
-                                                                              fontWeight:
-                                                                              FontWeight
-                                                                                  .bold),
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
-                                                                        Image
-                                                                            .asset(
-                                                                            "assets/cricket icon.png"),
-                                                                        SizedBox(
-                                                                          width: 25,
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              3),
-                                                                          child:
-                                                                          Container(
-                                                                            alignment:
-                                                                            Alignment
-                                                                                .center,
-                                                                            height:
-                                                                            22,
-                                                                            width: 42,
-                                                                            color: Colors
-                                                                                .black54,
-                                                                            child:
-                                                                            Text(
-                                                                              "56",
-                                                                              style: TextStyle(
-                                                                                  color: Colors
-                                                                                      .white,
-                                                                                  fontWeight: FontWeight
-                                                                                      .bold),
-                                                                            ),
+                                                                            color: Color(0xFFFF4D00),
+                                                                            fontWeight: FontWeight.bold,
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        Image.asset("assets/cricket icon.png"),
+                                                                        SizedBox(width: 25),
                                                                         ClipRRect(
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              3),
-                                                                          child:
-                                                                          Container(
-                                                                            alignment:
-                                                                            Alignment
-                                                                                .center,
-                                                                            height:
-                                                                            22,
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
                                                                             width: 42,
-                                                                            color: Colors
-                                                                                .black12,
+                                                                            color: Colors.black54,
                                                                             child: Text(
-                                                                              "22",
+                                                                              "00",
                                                                               style: TextStyle(
-                                                                                  color: Colors
-                                                                                      .black,
-                                                                                  fontWeight: FontWeight
-                                                                                      .bold),
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          width: 40,
+                                                                        SizedBox(width: 5),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black12,
+                                                                            child: Text(
+                                                                              "01",
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                            ),
+                                                                          ),
                                                                         ),
-                                                                        Image
-                                                                            .asset(
+                                                                        SizedBox(width: 40),
+                                                                        Image.asset(
                                                                           "assets/live_tv.png",
                                                                           scale: 1.3,
-                                                                        )
+                                                                        ),
                                                                       ],
                                                                     );
                                                                   } else {
                                                                     return Row(
-                                                                      crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                      mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                                       children: [
                                                                         Text(
-                                                                          data[index]["teamInfo"][0]
-                                                                          [
-                                                                          "shortname"]
-                                                                              .toString(),
+                                                                          data[index]["teamInfo"][0]["shortname"].toString(),
                                                                           style: TextStyle(
-                                                                              color: Color(
-                                                                                  0xFFFF4D00),
-                                                                              fontWeight:
-                                                                              FontWeight
-                                                                                  .bold),
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
-                                                                        Image
-                                                                            .asset(
-                                                                            "assets/cricket icon.png"),
-                                                                        SizedBox(
-                                                                          width: 25,
-                                                                        ),
-                                                                        ClipRRect(
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              3),
-                                                                          child:
-                                                                          Container(
-                                                                            alignment:
-                                                                            Alignment
-                                                                                .center,
-                                                                            height:
-                                                                            22,
-                                                                            width: 42,
-                                                                            color: Colors
-                                                                                .black54,
-                                                                            child:
-                                                                            Text( mapBetting["odd_one"][0] == "1" ?
-                                                                            ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString(),
-                                                                              style: TextStyle(
-                                                                                  color: Colors
-                                                                                      .white,
-                                                                                  fontWeight: FontWeight
-                                                                                      .bold),
-                                                                            ),
+                                                                            color: Color(0xFFFF4D00),
+                                                                            fontWeight: FontWeight.bold,
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          width: 5,
-                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        Image.asset("assets/cricket icon.png"),
+                                                                        SizedBox(width: 25),
                                                                         ClipRRect(
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              3),
-                                                                          child:
-                                                                          Container(
-                                                                            alignment:
-                                                                            Alignment
-                                                                                .center,
-                                                                            height:
-                                                                            22,
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
                                                                             width: 42,
-                                                                            color: Colors
-                                                                                .black12,
+                                                                            color: Colors.black54,
                                                                             child: Text(
-                                                                  mapBetting["odd_two"][0] == "1" ?
-                                                                            ((double.parse(mapBetting["odd_two"]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString(),
+                                                                              mapBetting["odd_one"][0] == "1"
+                                                                                  ? ((double.parse(mapBetting["odd_one"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_one"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString()
+                                                                                  : ((double.parse(mapBetting["odd_five"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_five"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString(),
                                                                               style: TextStyle(
-                                                                                  color: Colors
-                                                                                      .black,
-                                                                                  fontWeight: FontWeight
-                                                                                      .bold),
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          width: 40,
+                                                                        SizedBox(width: 5),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black12,
+                                                                            child: Text(
+                                                                              mapBetting["odd_two"][0] == "1"
+                                                                                  ? ((double.parse(mapBetting["odd_two"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_two"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString()
+                                                                                  : ((double.parse(mapBetting["odd_six"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_six"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString(),
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                            ),
+                                                                          ),
                                                                         ),
-                                                                        Image
-                                                                            .asset(
+                                                                        SizedBox(width: 40),
+                                                                        Image.asset(
                                                                           "assets/live_tv.png",
                                                                           scale: 1.3,
-                                                                        )
+                                                                        ),
                                                                       ],
                                                                     );
-                                                                  };
-                                                                }
+                                                                  }
+                                                                },
                                                               ),
                                                             ),
                                                           ),
@@ -837,201 +779,147 @@ class _cricket_homeState extends State<cricket_home> {
                                                               color:
                                                                   Colors.white,
                                                               child: FutureBuilder(
-                                                                  future: getBettingPoints(data[index]["teams"][0].toString()),
-                                                                  builder: (context,snapshot) {
-                                                                    if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
-                                                                      return Row(
-                                                                        crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                        mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                        children: [
-                                                                          Text(
-                                                                            data[index]["teamInfo"][0]
-                                                                            [
-                                                                            "shortname"]
-                                                                                .toString(),
-                                                                            style: TextStyle(
-                                                                                color: Color(
-                                                                                    0xFFFF4D00),
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold),
+                                                                future: getBettingPoints(data[index]["teams"][0].toString()),
+                                                                builder: (context, snapshot) {
+                                                                  final mapBetting = snapshot.data;
+                                                                  if (mapBetting == null ||
+                                                                      mapBetting["odd_one"] == null ||
+                                                                      mapBetting["odd_one"] == "-" ||
+                                                                      mapBetting["odd_two"] == null ||
+                                                                      mapBetting["odd_two"] == "-" ||
+                                                                      mapBetting["odd_five"] == null ||
+                                                                      mapBetting["odd_five"] == "-" ||
+                                                                      mapBetting["odd_six"] == null ||
+                                                                      mapBetting["odd_six"] == "-") {
+                                                                    return Row(
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      children: [
+                                                                        Text(
+                                                                          data[index]["teamInfo"][0]["shortname"].toString(),
+                                                                          style: TextStyle(
+                                                                            color: Color(0xFFFF4D00),
+                                                                            fontWeight: FontWeight.bold,
                                                                           ),
-                                                                          SizedBox(
-                                                                            width: 5,
-                                                                          ),
-                                                                          Image
-                                                                              .asset(
-                                                                              "assets/cricket icon.png"),
-                                                                          SizedBox(
-                                                                            width: 25,
-                                                                          ),
-                                                                          ClipRRect(
-                                                                            borderRadius:
-                                                                            BorderRadius
-                                                                                .circular(
-                                                                                3),
-                                                                            child:
-                                                                            Container(
-                                                                              alignment:
-                                                                              Alignment
-                                                                                  .center,
-                                                                              height:
-                                                                              22,
-                                                                              width: 42,
-                                                                              color: Colors
-                                                                                  .black54,
-                                                                              child:
-                                                                              Text(
-                                                                                "56",
-                                                                                style: TextStyle(
-                                                                                    color: Colors
-                                                                                        .white,
-                                                                                    fontWeight: FontWeight
-                                                                                        .bold),
+                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        Image.asset("assets/cricket icon.png"),
+                                                                        SizedBox(width: 25),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black54,
+                                                                            child: Text(
+                                                                              "00",
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          SizedBox(
-                                                                            width: 5,
-                                                                          ),
-                                                                          ClipRRect(
-                                                                            borderRadius:
-                                                                            BorderRadius
-                                                                                .circular(
-                                                                                3),
-                                                                            child:
-                                                                            Container(
-                                                                              alignment:
-                                                                              Alignment
-                                                                                  .center,
-                                                                              height:
-                                                                              22,
-                                                                              width: 42,
-                                                                              color: Colors
-                                                                                  .black12,
-                                                                              child: Text(
-                                                                                "22",
-                                                                                style: TextStyle(
-                                                                                    color: Colors
-                                                                                        .black,
-                                                                                    fontWeight: FontWeight
-                                                                                        .bold),
+                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black12,
+                                                                            child: Text(
+                                                                              "01",
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          SizedBox(
-                                                                            width: 40,
+                                                                        ),
+                                                                        SizedBox(width: 40),
+                                                                        Image.asset(
+                                                                          "assets/live_tv.png",
+                                                                          scale: 1.3,
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  } else {
+                                                                    return Row(
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      children: [
+                                                                        Text(
+                                                                          data[index]["teamInfo"][0]["shortname"].toString(),
+                                                                          style: TextStyle(
+                                                                            color: Color(0xFFFF4D00),
+                                                                            fontWeight: FontWeight.bold,
                                                                           ),
-                                                                          Image
-                                                                              .asset(
-                                                                            "assets/live_tv.png",
-                                                                            scale: 1.3,
-                                                                          )
-                                                                        ],
-                                                                      );
-                                                                    } else {
-                                                                      return Row(
-                                                                        crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                        mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                        children: [
-                                                                          Text(
-                                                                            data[index]["teamInfo"][0]
-                                                                            [
-                                                                            "shortname"]
-                                                                                .toString(),
-                                                                            style: TextStyle(
-                                                                                color: Color(
-                                                                                    0xFFFF4D00),
-                                                                                fontWeight:
-                                                                                FontWeight
-                                                                                    .bold),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: 5,
-                                                                          ),
-                                                                          Image
-                                                                              .asset(
-                                                                              "assets/cricket icon.png"),
-                                                                          SizedBox(
-                                                                            width: 25,
-                                                                          ),
-                                                                          ClipRRect(
-                                                                            borderRadius:
-                                                                            BorderRadius
-                                                                                .circular(
-                                                                                3),
-                                                                            child:
-                                                                            Container(
-                                                                              alignment:
-                                                                              Alignment
-                                                                                  .center,
-                                                                              height:
-                                                                              22,
-                                                                              width: 42,
-                                                                              color: Colors
-                                                                                  .black54,
-                                                                              child:
-                                                                              Text(
-                                                                                mapBetting["odd_one"][0] == "1" ?
-                                                                                ((double.parse(mapBetting["odd_one"]) * 100) - ((int.parse(mapBetting["odd_one"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_five"]) * 100) - ((int.parse(mapBetting["odd_five"][0])) * 100)).toInt().toString(),
-                                                                                style: TextStyle(
-                                                                                    color: Colors
-                                                                                        .white,
-                                                                                    fontWeight: FontWeight
-                                                                                        .bold),
+                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        Image.asset("assets/cricket icon.png"),
+                                                                        SizedBox(width: 25),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black54,
+                                                                            child: Text(
+                                                                              mapBetting["odd_one"][0] == "1"
+                                                                                  ? ((double.parse(mapBetting["odd_one"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_one"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString()
+                                                                                  : ((double.parse(mapBetting["odd_five"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_five"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString(),
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontWeight: FontWeight.bold,
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          SizedBox(
-                                                                            width: 5,
-                                                                          ),
-                                                                          ClipRRect(
-                                                                            borderRadius:
-                                                                            BorderRadius
-                                                                                .circular(
-                                                                                3),
-                                                                            child:
-                                                                            Container(
-                                                                              alignment:
-                                                                              Alignment
-                                                                                  .center,
-                                                                              height:
-                                                                              22,
-                                                                              width: 42,
-                                                                              color: Colors
-                                                                                  .black12,
-                                                                              child: Text(
-                                                                                mapBetting["odd_two"][0] == "1" ?
-                                                                            ((double.parse(mapBetting["odd_two"]) * 100) - ((int.parse(mapBetting["odd_two"][0])) * 100)).toInt().toString() : ((double.parse(mapBetting["odd_six"]) * 100) - ((int.parse(mapBetting["odd_six"][0])) * 100)).toInt().toString(),
-                                                                                style: TextStyle(
-                                                                                    color: Colors
-                                                                                        .black,
-                                                                                    fontWeight: FontWeight
-                                                                                        .bold),
+                                                                        ),
+                                                                        SizedBox(width: 5),
+                                                                        ClipRRect(
+                                                                          borderRadius: BorderRadius.circular(3),
+                                                                          child: Container(
+                                                                            alignment: Alignment.center,
+                                                                            height: 22,
+                                                                            width: 42,
+                                                                            color: Colors.black12,
+                                                                            child: Text(
+                                                                              mapBetting["odd_two"][0] == "1"
+                                                                                  ? ((double.parse(mapBetting["odd_two"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_two"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString()
+                                                                                  : ((double.parse(mapBetting["odd_six"]) * 100) -
+                                                                                  ((int.parse(mapBetting["odd_six"][0])) * 100))
+                                                                                  .toInt()
+                                                                                  .toString(),
+                                                                              style: TextStyle(
+                                                                                color: Colors.black,
+                                                                                fontWeight: FontWeight.bold,
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                          SizedBox(
-                                                                            width: 40,
-                                                                          ),
-                                                                          Image
-                                                                              .asset(
-                                                                            "assets/live_tv.png",
-                                                                            scale: 1.3,
-                                                                          )
-                                                                        ],
-                                                                      );
-                                                                    };
+                                                                        ),
+                                                                        SizedBox(width: 40),
+                                                                        Image.asset(
+                                                                          "assets/live_tv.png",
+                                                                          scale: 1.3,
+                                                                        ),
+                                                                      ],
+                                                                    );
                                                                   }
+                                                                },
                                                               ),
+
                                                             ),
                                                           ),
                                                         ),
@@ -1047,9 +935,7 @@ class _cricket_homeState extends State<cricket_home> {
                                     child: ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: upcomingData.length > 5
-                                            ? upcomingData.length
-                                            : 5,
+                                        itemCount: upcomingData.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
@@ -1076,67 +962,57 @@ class _cricket_homeState extends State<cricket_home> {
                                                             CrossAxisAlignment
                                                                 .center,
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                            MainAxisAlignment.spaceEvenly,
                                                         // ignore: prefer_const_literals_to_create_immutables
                                                         children: [
-                                                          CircleAvatar(
-                                                            radius: 15,
-                                                            backgroundImage: NetworkImage(
-                                                                upcomingData[index]
-                                                                            [
-                                                                            "teamInfo"]
-                                                                        [
-                                                                        0]["img"]
-                                                                    .toString()),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            upcomingData[index][
-                                                                        "teamInfo"][0]
-                                                                    [
-                                                                    "shortname"]
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
+                                                          Row(
+                                                            children: [
+                                                              CircleAvatar(
+                                                                radius: 15,
+                                                                backgroundImage: NetworkImage(
+                                                                  "https://images.mid-day.com/images/images/2023/mar/ball-istock-aug-a_d.jpg"
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                upcomingData[index]["match_name"]
+                                                                    .toString().split("V/S")[0].toString().substring(0,3),
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
                                                                     FontWeight
                                                                         .bold),
+                                                              ),
+                                                            ],
                                                           ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 50,
-                                                          ),
-                                                          CircleAvatar(
-                                                            radius: 15,
-                                                            backgroundImage: NetworkImage(
-                                                                upcomingData[index]
-                                                                            [
-                                                                            "teamInfo"]
-                                                                        [
-                                                                        1]["img"]
-                                                                    .toString()),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Text(
-                                                            upcomingData[index][
-                                                                        "teamInfo"][1]
-                                                                    [
-                                                                    "shortname"]
-                                                                .toString(),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
+
+                                                          Text(upcomingData[index]["match_datetime"].toString(), style: TextStyle(color: Colors.black),),
+
+                                                          Row(
+                                                            children: [
+                                                              CircleAvatar(
+                                                                radius: 15,
+                                                                backgroundImage: NetworkImage(
+                                                                  "https://images.mid-day.com/images/images/2023/mar/ball-istock-aug-a_d.jpg"
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                upcomingData[index]["match_name"]
+                                                                    .toString().split("V/S")[1].toString().substring(0,4),
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
                                                                     FontWeight
                                                                         .bold),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
@@ -1159,8 +1035,10 @@ class _cricket_homeState extends State<cricket_home> {
                                                       width: 300,
                                                       color: Colors.white,
                                                       child: FutureBuilder(
-                                                          future: getBettingPoints(upcomingData[index]["teams"][0].toString()),
+                                                          future: getBettingPoints(upcomingData[index]["match_name"]
+                                                              .toString().split("V/S")[0].toString()),
                                                           builder: (context,snapshot) {
+                                                            final mapBetting = snapshot.data;
                                                             if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                               return Row(
                                                                 crossAxisAlignment:
@@ -1171,10 +1049,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                     .center,
                                                                 children: [
                                                                   Text(
-                                                                    upcomingData[index]["teamInfo"][0]
-                                                                    [
-                                                                    "shortname"]
-                                                                        .toString(),
+                                                                    upcomingData[index]["match_name"]
+                                                                        .toString().split("V/S")[0].toString().substring(0,3),
                                                                     style: TextStyle(
                                                                         color: Color(
                                                                             0xFFFF4D00),
@@ -1265,10 +1141,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                     .center,
                                                                 children: [
                                                                   Text(
-                                                                    upcomingData[index]["teamInfo"][0]
-                                                                    [
-                                                                    "shortname"]
-                                                                        .toString(),
+                                                                    upcomingData[index]["match_name"]
+                                                                        .toString().split("V/S")[0].toString().substring(0,3),
                                                                     style: TextStyle(
                                                                         color: Color(
                                                                             0xFFFF4D00),
@@ -1368,7 +1242,7 @@ class _cricket_homeState extends State<cricket_home> {
                                     child: ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: 5,
+                                        itemCount: newData.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return InkWell(
@@ -1544,6 +1418,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                         child: FutureBuilder(
                                                             future: getBettingPoints(newData[index]["teams"][0].toString()),
                                                             builder: (context,snapshot) {
+                                                              final mapBetting = snapshot.data;
                                                               if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
                                                                 return Row(
                                                                   crossAxisAlignment:

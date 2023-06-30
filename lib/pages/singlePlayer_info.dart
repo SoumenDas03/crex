@@ -53,7 +53,7 @@ class _singlePlayer_infoState extends State<singlePlayer_info> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/players_info?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.playerId}'),
+            'https://api.cricapi.com/v1/players_info?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.playerId}'),
       );
 
       map = jsonDecode(response.body.toString());

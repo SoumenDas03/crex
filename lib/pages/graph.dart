@@ -70,7 +70,7 @@ class _graphState extends State<graph> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
       map = jsonDecode(response.body.toString());
       data = map["data"];
@@ -94,7 +94,7 @@ class _graphState extends State<graph> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=f1a40d68-eacd-40dd-bd92-d2506957493d&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
