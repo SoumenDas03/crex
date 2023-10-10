@@ -70,7 +70,7 @@ class _graphState extends State<graph> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
       map = jsonDecode(response.body.toString());
       data = map["data"];
@@ -94,7 +94,7 @@ class _graphState extends State<graph> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -350,7 +350,7 @@ class _graphState extends State<graph> {
                                                 width: 50,
                                               ),
                                               SizedBox(
-                                                width: bbbData != "failure"
+                                                width: bbbData != "failure" && bbbData != null && bbbData != null
                                                     ? bbbData["bbb"][bbbData[
                                                                         "bbb"]
                                                                     .length -
@@ -360,7 +360,7 @@ class _graphState extends State<graph> {
                                                         : 0
                                                     : 20,
                                               ),
-                                              bbbData != "failure"
+                                              bbbData != "failure" && bbbData != null
                                                   ? bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
@@ -557,7 +557,7 @@ class _graphState extends State<graph> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
@@ -583,7 +583,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -619,7 +619,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -651,7 +651,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -683,7 +683,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -715,7 +715,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -747,7 +747,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -784,7 +784,7 @@ class _graphState extends State<graph> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"]
                                                                             .length -
                                                                         1][
@@ -830,7 +830,7 @@ class _graphState extends State<graph> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                         : "Over 15",
                                                     style: TextStyle(
@@ -850,7 +850,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           6][
@@ -882,7 +882,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -914,7 +914,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           4][
@@ -946,7 +946,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           3][
@@ -978,7 +978,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           2][
@@ -1010,7 +1010,7 @@ class _graphState extends State<graph> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           1][
@@ -1047,7 +1047,7 @@ class _graphState extends State<graph> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"].length - 1][
                                                                     "dismissal"] ==
                                                                 null

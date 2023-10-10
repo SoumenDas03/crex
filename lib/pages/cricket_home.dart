@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_import, prefer_const_literals_to_create_immutables, duplicate_ignore, avoid_unnecessary_containers, prefer_typing_uninitialized_variables, avoid_print, prefer_interpolation_to_compose_strings
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,6 +9,7 @@ import 'package:crex/dashboard/infoTabviews.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,52 +51,68 @@ class _cricket_homeState extends State<cricket_home> {
       mapBetting,
       dataBetting;
   firstCarouselSlider exampleTwoController = Get.put(firstCarouselSlider());
+
   Future getCricketDetails() async {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/currentMatches?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&offset=0'),
+            'https://api.cricapi.com/v1/currentMatches?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());
       data = map["data"]
           .where((element) =>
-              element["matchEnded"] == false &&
-              element["score"].length != 0 &&
-              element["status"] != "No result (due to rain)" &&
-              element["status"] != "Match tied (VJD)" &&
-              element["status"] != "No Result - due to rain" &&
-              element["status"] != "No result - due to rain" &&
-              element["status"] != "No result due to bad weather" &&
-              element["status"] !=
-                  "Match tied (Teams score level on DLS method)" &&
-              element["status"] !=
-                  "No result (rain) - CSG and LKK joint-winners" &&
-              element["status"] != "New Zealand Legends opt to bowl" &&
-              element["status"] != "Day 1: Stumps - Sri Lanka opt to bowl" &&
-              element["status"] != "No result(due to rain)" &&
-              element["status"] !=
-                  "Day 2: Stumps - Wellington trail by 239 runs" &&
-              element["status"] !=
-                  "Day 3: 3rd Session - Central Districts trail by 135 runs" &&
-              element["status"] !=
-                  "Day 2: 3rd Session - Northern Knights opt to bowl")
+      element["matchEnded"] == false &&
+          element["score"].length != 0 &&
+          element["status"] != "No result (due to rain)" &&
+          element["status"] != "Match tied (VJD)" &&
+          element["status"] != "No Result - due to rain" &&
+          element["status"] != "No result - due to rain" &&
+          element["status"] != "No result due to bad weather" &&
+          element["status"] !=
+              "Match tied (Teams score level on DLS method)" &&
+          element["status"] !=
+              "No result (rain) - CSG and LKK joint-winners" &&
+          element["status"] != "New Zealand Legends opt to bowl" &&
+          element["status"] != "Day 1: Stumps - Sri Lanka opt to bowl" &&
+          element["status"] != "No result(due to rain)" &&
+          element["status"] !=
+              "Day 2: Stumps - Wellington trail by 239 runs" &&
+          element["status"] !=
+              "Day 3: 3rd Session - Central Districts trail by 135 runs" &&
+          element["status"] !=
+              "Day 2: 3rd Session - Northern Knights opt to bowl")
           .toList();
       newData = map["data"]
           .where((element) => element["matchEnded"] == true)
           .toList()
           .where((element) => element["matchEnded"] == true)
           .toList()
-          .where((element) => element["score"].length != 0).toList();
+          .where((element) => element["score"].length != 0)
+          .toList();
+
+      // Reverse the order of data and newData in place
+      data = data.reversed.toList();
+      newData = newData.reversed.toList();
+
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
       } else {
         print('failed');
       }
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
+  }
+
+
+  void fetchDataPeriodically() {
+    const Duration interval = Duration(seconds: 30);
+
+    Timer.periodic(interval, (timer) async {
+      setState(() {
+        print("object");
+      });
+    });
   }
 
   Future getUpcomingMatches() async {
@@ -106,7 +124,8 @@ class _cricket_homeState extends State<cricket_home> {
 
       upcomingMap = jsonDecode(response.body.toString());
       upcomingData = upcomingMap["data"].where((element) =>
-      element["match_inpaly"] != "In-Play").toList();
+      element["match_inpaly"] != "In-Play" && element["match_name"]
+          .toString().split("V/S")[1].toString() != "").toList() ;
 
       if (response.statusCode == 200) {
         return upcomingData;
@@ -115,16 +134,17 @@ class _cricket_homeState extends State<cricket_home> {
         print('failed');
       }
     } catch (e) {
-      print(e.toString());
     }
   }
 
-  Future getBettingPoints(String match_name) async {
+  Future getBettingPoints(String match_name, String short_name, String game_name) async {
     try {
       http.Response response = await http.post(
           Uri.parse('https://playexch.us/api/get-match-details-odds'),
           body: {
             "match_name": match_name,
+            "short_name": short_name,
+            "game_name": game_name,
           });
       var mapNoob = jsonDecode(response.body.toString());
       mapBetting = mapNoob["data"];
@@ -135,7 +155,7 @@ class _cricket_homeState extends State<cricket_home> {
         print('failed');
       }
     } catch (e) {
-      print(e.toString());
+
     }
   }
 
@@ -153,6 +173,12 @@ class _cricket_homeState extends State<cricket_home> {
     } else {
       return bannerList;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDataPeriodically();
   }
 
   @override
@@ -305,7 +331,7 @@ class _cricket_homeState extends State<cricket_home> {
                                               shrinkWrap: true,
                                               itemCount: data.length < 5
                                                   ? data.length
-                                                  : 4,
+                                                  : 5,
                                               itemBuilder:
                                                   (BuildContext context,
                                                       int index) {
@@ -457,7 +483,10 @@ class _cricket_homeState extends State<cricket_home> {
                                                               color:
                                                                   Colors.white,
                                                               child: FutureBuilder(
-                                                                future: getBettingPoints(data[index]["teams"][0].toString()),
+                                                                future: getBettingPoints(data[index]["teams"][0].toString(),data[index]["teamInfo"][0]
+                                                                [
+                                                                "shortname"]
+                                                                    .toString(), "cricket"),
                                                                 builder: (context, snapshot) {
                                                                   final mapBetting = snapshot.data;
                                                                   if (mapBetting == null ||
@@ -779,7 +808,10 @@ class _cricket_homeState extends State<cricket_home> {
                                                               color:
                                                                   Colors.white,
                                                               child: FutureBuilder(
-                                                                future: getBettingPoints(data[index]["teams"][0].toString()),
+                                                                future: getBettingPoints(data[index]["teams"][0].toString(),data[index]["teamInfo"][0]
+                                                                [
+                                                                "shortname"]
+                                                                    .toString(), "cricket"),
                                                                 builder: (context, snapshot) {
                                                                   final mapBetting = snapshot.data;
                                                                   if (mapBetting == null ||
@@ -935,7 +967,7 @@ class _cricket_homeState extends State<cricket_home> {
                                     child: ListView.builder(
                                         physics: ClampingScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: upcomingData.length,
+                                        itemCount: upcomingData == null ? 0 : upcomingData.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
@@ -1036,7 +1068,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                       color: Colors.white,
                                                       child: FutureBuilder(
                                                           future: getBettingPoints(upcomingData[index]["match_name"]
-                                                              .toString().split("V/S")[0].toString()),
+                                                              .toString().split("V/S")[0].toString(), '', "cricket"),
                                                           builder: (context,snapshot) {
                                                             final mapBetting = snapshot.data;
                                                             if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
@@ -1416,7 +1448,7 @@ class _cricket_homeState extends State<cricket_home> {
                                                         width: 300,
                                                         color: Colors.white,
                                                         child: FutureBuilder(
-                                                            future: getBettingPoints(newData[index]["teams"][0].toString()),
+                                                            future: getBettingPoints(newData[index]["teams"][0].toString(), '', "cricket"),
                                                             builder: (context,snapshot) {
                                                               final mapBetting = snapshot.data;
                                                               if(mapBetting == null || mapBetting["odd_one"] == null || mapBetting["odd_one"] == "-" || mapBetting["odd_two"] == null || mapBetting["odd_two"] == "-" || mapBetting["odd_five"] == null || mapBetting["odd_five"] == "-" || mapBetting["odd_six"] == null || mapBetting["odd_six"] == "-") {
@@ -1445,7 +1477,8 @@ class _cricket_homeState extends State<cricket_home> {
                                                                     ),
                                                                     Image
                                                                         .asset(
-                                                                        "assets/cricket icon.png"),
+                                                                        "assets/cricket icon.png"
+                                                                    ),
                                                                     SizedBox(
                                                                       width: 25,
                                                                     ),

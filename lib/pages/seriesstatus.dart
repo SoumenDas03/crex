@@ -46,7 +46,7 @@ class _seriesstatusState extends State<seriesstatus> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -69,7 +69,7 @@ class _seriesstatusState extends State<seriesstatus> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/series_info?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.seriesId}'),
+            'https://api.cricapi.com/v1/series_info?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.seriesId}'),
       );
 
       map1 = jsonDecode(response.body.toString());
@@ -89,7 +89,7 @@ class _seriesstatusState extends State<seriesstatus> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -113,7 +113,7 @@ class _seriesstatusState extends State<seriesstatus> {
       body: FutureBuilder(
         future: apiFetch(),
         builder: (context, snapshot) {
-          if (data == null) {
+          if (data1 == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -304,7 +304,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                 width: 50,
                                               ),
                                               SizedBox(
-                                                width: bbbData != "failure"
+                                                width: bbbData != "failure" && bbbData != null
                                                     ? bbbData["bbb"][bbbData[
                                                                         "bbb"]
                                                                     .length -
@@ -314,7 +314,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : 0
                                                     : 20,
                                               ),
-                                              bbbData != "failure"
+                                              bbbData != "failure" && bbbData != null
                                                   ? bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
@@ -511,7 +511,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
@@ -537,7 +537,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -573,7 +573,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -605,7 +605,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -637,7 +637,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -669,7 +669,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -701,7 +701,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -738,7 +738,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"]
                                                                             .length -
                                                                         1][
@@ -784,7 +784,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                         : "Over 15",
                                                     style: TextStyle(
@@ -804,7 +804,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           6][
@@ -836,7 +836,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -868,7 +868,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           4][
@@ -900,7 +900,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           3][
@@ -932,7 +932,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           2][
@@ -964,7 +964,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           1][
@@ -1001,7 +1001,7 @@ class _seriesstatusState extends State<seriesstatus> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"].length - 1][
                                                                     "dismissal"] ==
                                                                 null

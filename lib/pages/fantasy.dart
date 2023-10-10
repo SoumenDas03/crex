@@ -63,7 +63,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -86,7 +86,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_points?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}&ruleset=0'),
+            'https://api.cricapi.com/v1/match_points?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}&ruleset=0'),
       );
 
       fantasyMap = jsonDecode(response.body.toString());
@@ -112,7 +112,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       scoreMap = jsonDecode(response.body.toString());
@@ -167,7 +167,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -193,7 +193,7 @@ class _fantasyState extends State<fantasy> {
           body: FutureBuilder(
             future: apiFetch(),
             builder: (context, snapshot) {
-              if (data == null) {
+              if (fantasyData == null) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
@@ -352,8 +352,7 @@ class _fantasyState extends State<fantasy> {
                                                             width: 50,
                                                           ),
                                                           SizedBox(
-                                                            width: bbbData !=
-                                                                    "failure"
+                                                            width: bbbData != "failure" && bbbData != null 
                                                                 ? bbbData["bbb"]
                                                                             [
                                                                             bbbData["bbb"].length -
@@ -363,7 +362,7 @@ class _fantasyState extends State<fantasy> {
                                                                     : 0
                                                                 : 20,
                                                           ),
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"][bbbData["bbb"].length - 1]["runs"]
                                                                           .toString() ==
                                                                       "null"
@@ -394,7 +393,7 @@ class _fantasyState extends State<fantasy> {
                                                                               scale: 5)
                                                                           : bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] == null
                                                                               ? Text(
-                                                                                  bbbData != "failure"
+                                                                                  bbbData != "failure" && bbbData != null
                                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] == null
                                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 1]["runs"].toString()
                                                                                           : "W"
@@ -554,7 +553,7 @@ class _fantasyState extends State<fantasy> {
                                                             children: [
                                                               Text(
                                                                 bbbData !=
-                                                                        "failure"
+                                                                        "failure" && bbbData != null
                                                                     ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 8] !=
                                                                             null
@@ -586,7 +585,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 8] != null
@@ -620,7 +619,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 11]["runs"]
@@ -653,7 +652,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 10]["runs"]
@@ -686,7 +685,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 9]["runs"]
@@ -719,7 +718,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 8]["runs"]
@@ -752,7 +751,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 7]["runs"]
@@ -788,31 +787,30 @@ class _fantasyState extends State<fantasy> {
                                                                 width: 2,
                                                               ),
                                                               Text(
-                                                                bbbData !=
-                                                                        "failure"
-                                                                    ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] ==
-                                                                            null
-                                                                        ? (bbbData["bbb"][bbbData["bbb"].length - 7]["runs"] ??
-                                                                                1 + bbbData["bbb"][bbbData["bbb"].length - 8]["runs"] ??
-                                                                                1 + bbbData["bbb"][bbbData["bbb"].length - 9]["runs"] ??
-                                                                                1 + bbbData["bbb"][bbbData["bbb"].length - 10]["runs"] ??
-                                                                                1 + bbbData["bbb"][bbbData["bbb"].length - 11]["runs"] ??
-                                                                                1 + bbbData["bbb"][bbbData["bbb"].length - 12]["runs"] ??
-                                                                                1)
-                                                                            .toString()
-                                                                        : "8"
-                                                                    : "1",
+                                                                    () {
+                                                                  if (bbbData != "failure" && bbbData != null) {
+                                                                    final bbb = bbbData["bbb"];
+                                                                    final lastIndex = bbb.length - 1;
+
+                                                                    if (bbb[lastIndex]["dismissal"] == null) {
+                                                                      final runsSum = [
+                                                                        for (int i = lastIndex - 6; i <= lastIndex; i++)
+                                                                          bbb[i]["runs"] ?? 1
+                                                                      ].reduce((a, b) => a + b);
+
+                                                                      return runsSum.toString();
+                                                                    } else {
+                                                                      return "8";
+                                                                    }
+                                                                  } else {
+                                                                    return "1";
+                                                                  }
+                                                                }(),
                                                                 style: TextStyle(
-                                                                    color: isDarkMode
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
+                                                                  color: isDarkMode ? Colors.white : Colors.black,
+                                                                  fontSize: 12,
+                                                                  fontWeight: FontWeight.bold,
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -834,7 +832,7 @@ class _fantasyState extends State<fantasy> {
                                                             children: [
                                                               Text(
                                                                 bbbData !=
-                                                                        "failure"
+                                                                        "failure" && bbbData != null
                                                                     ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                                     : "Over 15",
                                                                 style: TextStyle(
@@ -862,7 +860,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 6]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 6]["runs"]
@@ -895,7 +893,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 5]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 5]["runs"]
@@ -928,7 +926,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 4]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 4]["runs"]
@@ -961,7 +959,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 3]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 3]["runs"]
@@ -994,7 +992,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 2]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 2]["runs"]
@@ -1027,7 +1025,7 @@ class _fantasyState extends State<fantasy> {
                                                                 radius: 5,
                                                                 child: Text(
                                                                   bbbData !=
-                                                                          "failure"
+                                                                          "failure" && bbbData != null
                                                                       ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] ==
                                                                               null
                                                                           ? bbbData["bbb"][bbbData["bbb"].length - 1]["runs"]
@@ -1064,7 +1062,8 @@ class _fantasyState extends State<fantasy> {
                                                               ),
                                                               Text(
                                                                 bbbData !=
-                                                                        "failure"
+                                                                        "failure" && bbbData !=
+                                                                            null
                                                                     ? bbbData["bbb"][bbbData["bbb"].length - 1]["dismissal"] ==
                                                                             null
                                                                         ? (bbbData["bbb"][bbbData["bbb"].length - 1]["runs"] ??

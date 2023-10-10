@@ -58,7 +58,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -84,12 +84,12 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
       bbbData = bbbmap["data"] != null ? bbbmap["data"] : bbbmap["status"];
-      if (bbbData != "failure") {
+      if (bbbData != "failure" && bbbData != null) {
         reversebbbData = bbbData["bbb"].reversed.toList();
       }
       if (response.statusCode == 200) {
@@ -106,7 +106,7 @@ class _commententaryState extends State<commententary> {
   getPlayerInfo(String id) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          'https://api.cricapi.com/v1/players_info?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=$id'));
+          'https://api.cricapi.com/v1/players_info?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=$id'));
 
       playerInfoMap = jsonDecode(response.body.toString());
       playerInfoData = playerInfoMap["data"];
@@ -125,7 +125,7 @@ class _commententaryState extends State<commententary> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       scoreMap = jsonDecode(response.body.toString());
@@ -385,7 +385,7 @@ class _commententaryState extends State<commententary> {
                                                 width: 50,
                                               ),
                                               SizedBox(
-                                                width: bbbData != "failure"
+                                                width: bbbData != "failure" && bbbData != null
                                                     ? bbbData["bbb"][bbbData[
                                                                         "bbb"]
                                                                     .length -
@@ -395,7 +395,7 @@ class _commententaryState extends State<commententary> {
                                                         : 0
                                                     : 20,
                                               ),
-                                              bbbData != "failure"
+                                              bbbData != "failure" && bbbData != null
                                                   ? bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
@@ -592,7 +592,7 @@ class _commententaryState extends State<commententary> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
@@ -618,7 +618,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -654,7 +654,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -686,7 +686,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -718,7 +718,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -750,7 +750,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -782,7 +782,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -819,7 +819,7 @@ class _commententaryState extends State<commententary> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"]
                                                                             .length -
                                                                         1][
@@ -865,7 +865,7 @@ class _commententaryState extends State<commententary> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                         : "Over 15",
                                                     style: TextStyle(
@@ -885,7 +885,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           6][
@@ -917,7 +917,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -949,7 +949,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           4][
@@ -981,7 +981,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           3][
@@ -1013,7 +1013,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           2][
@@ -1045,7 +1045,7 @@ class _commententaryState extends State<commententary> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           1][
@@ -1082,7 +1082,7 @@ class _commententaryState extends State<commententary> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"].length - 1][
                                                                     "dismissal"] ==
                                                                 null
@@ -1178,6 +1178,9 @@ class _commententaryState extends State<commententary> {
                                                                       .toString()),
                                                               builder: (context,
                                                                   snapshot) {
+                                                                playerInfoData =
+                                                                    snapshot
+                                                                        .data;
                                                                 if (playerInfoData ==
                                                                     null) {
                                                                   return CircleAvatar(
@@ -1295,6 +1298,8 @@ class _commententaryState extends State<commententary> {
                                                                       .toString()),
                                                               builder: (context,
                                                                   snapshot) {
+                                                                playerInfoData = snapshot
+                                                                    .data;
                                                                 if (playerInfoData ==
                                                                     null) {
                                                                   return CircleAvatar(
@@ -1426,6 +1431,8 @@ class _commententaryState extends State<commententary> {
                                                                       .toString()),
                                                               builder: (context,
                                                                   snapshot) {
+                                                                playerInfoData = snapshot
+                                                                    .data;
                                                                 if (playerInfoData ==
                                                                     null) {
                                                                   return CircleAvatar(
@@ -1530,7 +1537,7 @@ class _commententaryState extends State<commententary> {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? ('Over ' +
                                                                   bbbData["bbb"]
                                                                           [
@@ -1554,8 +1561,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 29]
                                                                             [
                                                                             "dismissal"] ==
@@ -1591,7 +1597,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 29]
                                                                             [
@@ -1618,8 +1624,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 28]
                                                                             [
                                                                             "dismissal"] ==
@@ -1655,7 +1660,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 28]
                                                                             [
@@ -1682,8 +1687,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 27]
                                                                             [
                                                                             "dismissal"] ==
@@ -1719,7 +1723,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 27]
                                                                             [
@@ -1746,8 +1750,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 26]
                                                                             [
                                                                             "dismissal"] ==
@@ -1783,7 +1786,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 26]
                                                                             [
@@ -1810,8 +1813,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 25]
                                                                             [
                                                                             "dismissal"] ==
@@ -1847,7 +1849,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 25]
                                                                             [
@@ -1874,8 +1876,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 24]
                                                                             [
                                                                             "dismissal"] ==
@@ -1911,7 +1912,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 24]
                                                                             [
@@ -1947,7 +1948,7 @@ class _commententaryState extends State<commententary> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"]
                                                                                   [bbbData["bbb"].length - 24][
                                                                               "dismissal"] ==
@@ -1992,7 +1993,7 @@ class _commententaryState extends State<commententary> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? ('Over ' +
                                                                   bbbData["bbb"]
                                                                           [
@@ -2016,8 +2017,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 23]
                                                                             [
                                                                             "dismissal"] ==
@@ -2053,7 +2053,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 23]
                                                                             [
@@ -2080,8 +2080,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 22]
                                                                             [
                                                                             "dismissal"] ==
@@ -2117,7 +2116,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 22]
                                                                             [
@@ -2144,8 +2143,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 21]
                                                                             [
                                                                             "dismissal"] ==
@@ -2181,7 +2179,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 21]
                                                                             [
@@ -2208,8 +2206,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 20]
                                                                             [
                                                                             "dismissal"] ==
@@ -2245,7 +2242,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 20]
                                                                             [
@@ -2272,8 +2269,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 19]
                                                                             [
                                                                             "dismissal"] ==
@@ -2309,7 +2305,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 19]
                                                                             [
@@ -2336,8 +2332,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 18]
                                                                             [
                                                                             "dismissal"] ==
@@ -2373,7 +2368,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 18]
                                                                             [
@@ -2409,7 +2404,7 @@ class _commententaryState extends State<commententary> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"]
                                                                                   [bbbData["bbb"].length - 18][
                                                                               "dismissal"] ==
@@ -2454,7 +2449,7 @@ class _commententaryState extends State<commententary> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? ('Over ' +
                                                                   bbbData["bbb"]
                                                                           [
@@ -2478,8 +2473,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 17]
                                                                             [
                                                                             "dismissal"] ==
@@ -2515,7 +2509,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 17]
                                                                             [
@@ -2542,8 +2536,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 16]
                                                                             [
                                                                             "dismissal"] ==
@@ -2579,7 +2572,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 16]
                                                                             [
@@ -2606,8 +2599,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 15]
                                                                             [
                                                                             "dismissal"] ==
@@ -2643,7 +2635,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 15]
                                                                             [
@@ -2670,8 +2662,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 14]
                                                                             [
                                                                             "dismissal"] ==
@@ -2707,7 +2698,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 14]
                                                                             [
@@ -2734,8 +2725,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 13]
                                                                             [
                                                                             "dismissal"] ==
@@ -2771,7 +2761,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 13]
                                                                             [
@@ -2798,8 +2788,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 12]
                                                                             [
                                                                             "dismissal"] ==
@@ -2835,7 +2824,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 12]
                                                                             [
@@ -2871,7 +2860,7 @@ class _commententaryState extends State<commententary> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"]
                                                                                   [bbbData["bbb"].length - 12][
                                                                               "dismissal"] ==
@@ -2916,7 +2905,7 @@ class _commententaryState extends State<commententary> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? ('Over ' +
                                                                   bbbData["bbb"]
                                                                           [
@@ -2940,8 +2929,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 11]
                                                                             [
                                                                             "dismissal"] ==
@@ -2977,7 +2965,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 11]
                                                                             [
@@ -3004,8 +2992,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 10]
                                                                             [
                                                                             "dismissal"] ==
@@ -3041,7 +3028,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 10]
                                                                             [
@@ -3068,8 +3055,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 9]
                                                                             [
                                                                             "dismissal"] ==
@@ -3105,7 +3091,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 9]
                                                                             [
@@ -3132,8 +3118,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 8]
                                                                             [
                                                                             "dismissal"] ==
@@ -3169,7 +3154,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 8]
                                                                             [
@@ -3196,8 +3181,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 7]
                                                                             [
                                                                             "dismissal"] ==
@@ -3233,7 +3217,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 7]
                                                                             [
@@ -3291,7 +3275,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 6]
                                                                             [
@@ -3327,7 +3311,7 @@ class _commententaryState extends State<commententary> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"]
                                                                                   [bbbData["bbb"].length - 6][
                                                                               "dismissal"] ==
@@ -3381,7 +3365,7 @@ class _commententaryState extends State<commententary> {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? ('Over ' +
                                                                   bbbData["bbb"]
                                                                           [
@@ -3405,8 +3389,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? (bbbData["bbb"][bbbData["bbb"].length - 5]
                                                                             [
                                                                             "dismissal"] ==
@@ -3442,7 +3425,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 5]
                                                                             [
@@ -3500,7 +3483,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 4]
                                                                             [
@@ -3527,8 +3510,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length - 3]
                                                                             [
                                                                             "dismissal"] ==
@@ -3563,7 +3545,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 4]
                                                                             [
@@ -3590,8 +3572,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length - 3]
                                                                             [
                                                                             "dismissal"] ==
@@ -3626,7 +3607,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 3]
                                                                             [
@@ -3653,8 +3634,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length - 2]
                                                                             [
                                                                             "dismissal"] ==
@@ -3689,7 +3669,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 2]
                                                                             [
@@ -3716,8 +3696,7 @@ class _commententaryState extends State<commententary> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: bbbData !=
-                                                                    "failure"
+                                                            color: bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length - 1]
                                                                             [
                                                                             "dismissal"] ==
@@ -3752,7 +3731,7 @@ class _commententaryState extends State<commententary> {
                                                           height: 22,
                                                           width: 22,
                                                           child: Text(
-                                                            bbbData != "failure"
+                                                            bbbData != "failure" && bbbData != null
                                                                 ? bbbData["bbb"][bbbData["bbb"].length -
                                                                                 1]
                                                                             [
@@ -3788,7 +3767,7 @@ class _commententaryState extends State<commententary> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          bbbData != "failure"
+                                                          bbbData != "failure" && bbbData != null
                                                               ? bbbData["bbb"]
                                                                                   [bbbData["bbb"].length - 1][
                                                                               "dismissal"] ==
@@ -3932,26 +3911,17 @@ class _commententaryState extends State<commententary> {
                                                             Container(
                                                               width: 100,
                                                               child: Text(
-                                                                bbbData !=
-                                                                        "failure"
-                                                                    ? reversebbbData[index]["bowler"] !=
-                                                                            null
-                                                                        ? reversebbbData[index]["bowler"]["name"] +
-                                                                            " to " +
-                                                                            reversebbbData[index]["batsman"][
-                                                                                "name"]
-                                                                        : "Bowler" + " to " + reversebbbData[index]["batsman"]["name"] !=
-                                                                                null
-                                                                            ? reversebbbData[index]["batsman"]["name"]
-                                                                            : "Batsman"
+                                                                bbbData != "failure"
+                                                                    ? (reversebbbData[index]["bowler"] != null
+                                                                    ? (reversebbbData[index]["batsman"] != null
+                                                                    ? reversebbbData[index]["bowler"]["name"] +
+                                                                    " to " +
+                                                                    reversebbbData[index]["batsman"]["name"]
+                                                                    : "Bowler" + " to " + "Batsman")
+                                                                    : "Batsman")
                                                                     : "Ball by ball data is not Available",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
+                                                                style: TextStyle(
+                                                                  color: isDarkMode ? Colors.white : Colors.black,
                                                                 ),
                                                               ),
                                                             ),

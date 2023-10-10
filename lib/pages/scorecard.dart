@@ -43,7 +43,7 @@ class _scorecardState extends State<scorecard> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -66,7 +66,7 @@ class _scorecardState extends State<scorecard> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=a8ee5579-8994-41ba-af5d-4e2fcd2e9e91&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -82,7 +82,51 @@ class _scorecardState extends State<scorecard> {
     }
   }
 
-  @override
+    String calculateValue(dynamic bbbData) {
+      if (bbbData != null &&
+          bbbData is Map<String, dynamic> &&
+          bbbData.containsKey("bbb")) {
+        final bbbList = bbbData["bbb"];
+
+        if (bbbList is List && bbbList.isNotEmpty) {
+          final lastItem = bbbList.last;
+
+          if (lastItem is Map<String, dynamic> &&
+              lastItem.containsKey("dismissal")) {
+            if (lastItem["dismissal"] == null) {
+              final totalRuns = calculateTotalRuns(bbbList);
+              if (totalRuns != null && totalRuns >= 8) {
+                return totalRuns.toString();
+              }
+            } else {
+              return "8";
+            }
+          }
+        }
+      }
+      return "1";
+    }
+
+    int? calculateTotalRuns(List<dynamic> bbbList) {
+      int totalRuns = 0;
+
+      for (final item in bbbList.reversed) {
+        if (item is Map<String, dynamic> && item.containsKey("runs")) {
+          final runs = item["runs"];
+          if (runs is int) {
+            totalRuns += runs;
+            if (totalRuns >= 8) {
+              return totalRuns;
+            }
+          }
+        }
+      }
+
+      return null;
+    }
+
+
+    @override
   Widget build(BuildContext context) {
     final isDarkMode = widget.theme == "dark";
     return Scaffold(
@@ -282,17 +326,17 @@ class _scorecardState extends State<scorecard> {
                                                 width: 50,
                                               ),
                                               SizedBox(
-                                                width: bbbData != "failure"
-                                                    ? bbbData["bbb"][bbbData[
+                                                width: bbbData != "failure" && bbbData != null
+                                                    ? bbbData['bbb']!= null ? bbbData["bbb"][bbbData[
                                                                         "bbb"]
                                                                     .length -
                                                                 1]["dismissal"] ==
                                                             null
                                                         ? 20
                                                         : 0
-                                                    : 20,
+                                                    : 20 : 0,
                                               ),
-                                              bbbData != "failure"
+                                              bbbData != "failure" && bbbData != null
                                                   ? bbbData["bbb"][bbbData["bbb"]
                                                                       .length -
                                                                   1]["runs"]
@@ -489,7 +533,7 @@ class _scorecardState extends State<scorecard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData[
                                                                             "bbb"]
                                                                         .length -
@@ -515,7 +559,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -551,7 +595,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -583,7 +627,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -615,7 +659,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -647,7 +691,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null  && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -679,7 +723,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -716,7 +760,7 @@ class _scorecardState extends State<scorecard> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"]
                                                                             .length -
                                                                         1][
@@ -762,7 +806,7 @@ class _scorecardState extends State<scorecard> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? ('Over ${bbbData["bbb"][bbbData["bbb"].length - 1]["over"]}')
                                                         : "Over 15",
                                                     style: TextStyle(
@@ -782,7 +826,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           6][
@@ -814,7 +858,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           5][
@@ -846,7 +890,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           4][
@@ -878,7 +922,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           3][
@@ -910,7 +954,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           2][
@@ -942,7 +986,7 @@ class _scorecardState extends State<scorecard> {
                                                         : Colors.black,
                                                     radius: 5,
                                                     child: Text(
-                                                      bbbData != "failure"
+                                                      bbbData != "failure" && bbbData != null
                                                           ? bbbData["bbb"][bbbData["bbb"]
                                                                               .length -
                                                                           1][
@@ -979,7 +1023,7 @@ class _scorecardState extends State<scorecard> {
                                                     width: 2,
                                                   ),
                                                   Text(
-                                                    bbbData != "failure"
+                                                    bbbData != "failure" && bbbData != null
                                                         ? bbbData["bbb"][bbbData["bbb"].length - 1][
                                                                     "dismissal"] ==
                                                                 null
@@ -1539,13 +1583,13 @@ class _scorecardState extends State<scorecard> {
                                                       ),
                                                       Text(
                                                         data["scorecard"]
-                                                                    .length >
-                                                                1
-                                                            ? ", ${data["scorecard"][data["scorecard"].length - 2]["extras"]["w"]}w, "
-                                                            : ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
+                                                            .length >
+                                                            1
+                                                            ? ", ${ data["scorecard"][data["scorecard"].length - 2]["extras"].containsKey("w") ? data["scorecard"][data["scorecard"].length - 2]["extras"]["w"] : 0}w, "
+                                                            : ", ${data["scorecard"][data["scorecard"].length - 1]["extras"].containsKey("w") ? data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]: 0}w, ",
                                                         style: TextStyle(
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                            FontWeight.bold,
                                                             color: isDarkMode
                                                                 ? Colors.white
                                                                 : Colors.black),
@@ -1555,13 +1599,13 @@ class _scorecardState extends State<scorecard> {
                                                       ),
                                                       Text(
                                                         data["scorecard"]
-                                                                    .length >
-                                                                10
-                                                            ? "${data["scorecard"][data["scorecard"].length - 2]["extras"]["nb"]}nb "
-                                                            : "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
+                                                            .length >
+                                                            10
+                                                            ? "${data["scorecard"][data["scorecard"].length - 2]["extras"].containsKey("nb") ? data["scorecard"][data["scorecard"].length - 2]["extras"]["nb"] : 0}nb "
+                                                            : "${ data["scorecard"][data["scorecard"].length - 1]["extras"].containsKey("nb") ? data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"] : 0}nb ",
                                                         style: TextStyle(
                                                             fontWeight:
-                                                                FontWeight.bold,
+                                                            FontWeight.bold,
                                                             color: isDarkMode
                                                                 ? Colors.white
                                                                 : Colors.black),
@@ -2411,20 +2455,17 @@ class _scorecardState extends State<scorecard> {
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          ", ${data["scorecard"][data["scorecard"].length - 1]["extras"]["w"]}w, ",
+                                                          ", ${data["scorecard"][data["scorecard"].length - 1]["extras"].containsKey("w") ? data["scorecard"][data["scorecard"].length - 1]["extras"]["w"] : '0'}w, ",
                                                           style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: isDarkMode
-                                                                ? Colors.white
-                                                                : Colors.black,
+                                                            fontWeight: FontWeight.bold,
+                                                            color: isDarkMode ? Colors.white : Colors.black,
                                                           ),
                                                         ),
                                                         SizedBox(
                                                           width: 5,
                                                         ),
                                                         Text(
-                                                          "${data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"]}nb ",
+                                                          "${ data["scorecard"][data["scorecard"].length - 1]["extras"].containsKey("nb") ? data["scorecard"][data["scorecard"].length - 1]["extras"]["nb"] : 0}nb ",
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
