@@ -124,8 +124,10 @@ class _cricket_homeState extends State<cricket_home> {
 
       upcomingMap = jsonDecode(response.body.toString());
       upcomingData = upcomingMap["data"].where((element) =>
-      element["match_inpaly"] != "In-Play" && element["match_name"]
-          .toString().split("V/S")[1].toString() != "").toList() ;
+      element["match_inpaly"] != "In-Play").toList();
+      // upcomingData = upcomingMap["data"].where((element) =>
+      // element["match_inpaly"] != "In-Play" && element["match_name"]
+      //     .toString().split("V/S")[1].toString() != "").toList() ;
 
       if (response.statusCode == 200) {
         return upcomingData;
