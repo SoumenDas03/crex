@@ -49,9 +49,9 @@ class _scorecardState extends State<scorecard> {
       map = jsonDecode(response.body.toString());
       data = map["data"];
       if (response.statusCode == 200) {
-        setState(() {
-          print("refreshing score....");
-        });
+        // setState(() {
+        //   print("refreshing score....");
+        // });
         return data;
         // ignore: use_build_context_synchronously
       } else {
@@ -1745,6 +1745,124 @@ class _scorecardState extends State<scorecard> {
                                           height: 20,
                                         ),
                                         Container(
+                                          alignment: Alignment.topLeft,
+                                          margin: EdgeInsets.only(left: 20),
+                                          child: Text('TET TO BAT',style: TextStyle(
+                                                                      color: Colors
+                                                                          .orange,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16),),
+                                        ),
+                                         Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 25, right: 25,top: 20),
+                                        child: GridView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          physics:
+                                              const ClampingScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: 5,
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 1,
+                                            // crossAxisSpacing: 20,
+                                            childAspectRatio: 1 / .5,
+                                          ),
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           // singlePlayer_info(
+                                                //           //     playerId: newData[
+                                                //           //                 index]
+                                                //           //             ["id"]
+                                                //           //         .toString()),
+                                                //     ));
+                                              },
+                                              child: Container(
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Container(
+                                                          child: CircleAvatar(
+                                                            radius: 25,
+                                                         backgroundImage: AssetImage('assets/virat.png'),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 100,
+                                                              child: Text(
+                                                                'T Hridoy',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(),
+                                                              child: Text(
+                                                                'SR: 55.74',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .orange,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                   
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
                                           alignment: Alignment.center,
                                           height: 35,
                                           width: 350,
@@ -2087,6 +2205,11 @@ class _scorecardState extends State<scorecard> {
                                       ],
                                     ),
                                   ),
+
+
+
+
+
                                   SingleChildScrollView(
                                     // physics: NeverScrollableScrollPhysics(),
                                     physics: ClampingScrollPhysics(),
@@ -2606,6 +2729,124 @@ class _scorecardState extends State<scorecard> {
                                             ],
                                           ),
                                         ),
+                                         SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          margin: EdgeInsets.only(left: 20),
+                                          child: Text('TET TO BAT',style: TextStyle(
+                                                                      color: Colors
+                                                                          .orange,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16),),
+                                        ),
+                                         Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 25, right: 25,top: 20),
+                                        child: GridView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          physics:
+                                              const ClampingScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: 5,
+                                          gridDelegate:
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 1,
+                                            // crossAxisSpacing: 20,
+                                            childAspectRatio: 1 / .5,
+                                          ),
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           // singlePlayer_info(
+                                                //           //     playerId: newData[
+                                                //           //                 index]
+                                                //           //             ["id"]
+                                                //           //         .toString()),
+                                                //     ));
+                                              },
+                                              child: Container(
+                                                child: Column(
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Container(
+                                                          child: CircleAvatar(
+                                                            radius: 25,
+                                                         backgroundImage: AssetImage('assets/virat.png'),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              width: 100,
+                                                              child: Text(
+                                                                'T Hridoy',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        15),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(),
+                                                              child: Text(
+                                                                'SR: 55.74',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .orange,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        10),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                   
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
                                         SizedBox(
                                           height: 20,
                                         ),

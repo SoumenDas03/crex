@@ -65,9 +65,9 @@ class _commententaryState extends State<commententary> {
       data = map["data"];
       if (response.statusCode == 200) {
         // ignore: avoid_print
-        setState(() {
-          print("refreshing commentary....");
-        });
+        // setState(() {
+        //   print("refreshing commentary....");
+        // });
         print("success");
         // ignore: use_build_context_synchronously
       } else {

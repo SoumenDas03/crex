@@ -75,9 +75,9 @@ class _graphState extends State<graph> {
       map = jsonDecode(response.body.toString());
       data = map["data"];
       if (response.statusCode == 200) {
-        setState(() {
-          print("refreshing chat....");
-        });
+        // setState(() {
+        //   print("refreshing chat....");
+        // });
         return data;
         // ignore: use_build_context_synchronously
       } else {

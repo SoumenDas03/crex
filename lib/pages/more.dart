@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:crex/pages/rankingpage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
@@ -579,7 +580,7 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const fixtures_dashboard(),
+                          builder: (context) => const rankingPage(),
                         ));
                       },
                       child: Container(
@@ -588,14 +589,14 @@ class _moreState extends State<more> with WidgetsBindingObserver {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/fixtures.png',
+                              child:Icon(Icons.leaderboard
+                               ,
                                 color: Colors.black,
-                                scale: 4,
+                             
                               ),
                             ),
                             const Text(
-                              'Fixtures',
+                              'Ranking',
                               style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.w500),
                             )

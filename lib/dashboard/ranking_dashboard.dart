@@ -12,6 +12,7 @@ import 'package:crex/pages/football_home.dart';
 // ignore: unused_import
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/more.dart';
+import 'package:crex/pages/rankingpage.dart';
 
 // ignore: unused_import
 import 'package:crex/pages/series.dart';
@@ -23,15 +24,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
-class fixtures_dashboard extends StatefulWidget {
-  const fixtures_dashboard({super.key});
+class ranking_dashboard extends StatefulWidget {
+  const ranking_dashboard({super.key});
 
   @override
-  State<fixtures_dashboard> createState() => _fixtures_dashboardState();
+  State<ranking_dashboard> createState() => _ranking_dashboardState();
 }
 
 // ignore: camel_case_types
-class _fixtures_dashboardState extends State<fixtures_dashboard> {
+class _ranking_dashboardState extends State<ranking_dashboard> {
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
@@ -224,7 +225,7 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const fixtures_dashboard(),
+                          builder: (context) => const rankingPage(),
                         ));
                       },
                       child: Container(
@@ -234,9 +235,9 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/fixtures.png',
-                                scale: 4,color: isDarkMode
+                              child: Icon(
+                               Icons.leaderboard,
+                                color: isDarkMode
                                       ? const Color(0xFFFF2E00)
                                       : const Color(0xFFFF4D00),
                                 // color: const Color(0xFFFF4D00),
@@ -244,7 +245,7 @@ class _fixtures_dashboardState extends State<fixtures_dashboard> {
                             ),
                             // ignore: prefer_const_constructors
                             Text(
-                              'Fixtures',
+                              'Ranking',
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,

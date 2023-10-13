@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, sized_box_for_whitespace
 
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
@@ -500,7 +500,7 @@ class _fixtures_addteam_secondState extends State<fixtures_addteam_second> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures_dashboard(),
+                        builder: (context) => const ranking_dashboard(),
                       ));
                     },
                     child: Container(

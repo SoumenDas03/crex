@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';

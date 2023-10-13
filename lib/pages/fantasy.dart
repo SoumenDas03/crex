@@ -69,9 +69,9 @@ class _fantasyState extends State<fantasy> {
       map = jsonDecode(response.body.toString());
       data = map["data"];
       if (response.statusCode == 200) {
-        setState(() {
-          print("refreshing fantasy....");
-        });
+        // setState(() {
+        //   print("refreshing fantasy....");
+        // });
         return data;
         // ignore: use_build_context_synchronously
       } else {

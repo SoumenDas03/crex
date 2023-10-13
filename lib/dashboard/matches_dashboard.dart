@@ -1,5 +1,5 @@
 // ignore: unused_import
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
 
@@ -12,6 +12,7 @@ import 'package:crex/pages/football_home.dart';
 // ignore: unused_import
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/more.dart';
+import 'package:crex/pages/rankingpage.dart';
 
 // ignore: unused_import
 import 'package:crex/pages/series.dart';
@@ -225,7 +226,7 @@ class _matches_dashboardState extends State<matches_dashboard> {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const fixtures_dashboard(),
+                          builder: (context) => const rankingPage(),
                         ));
                       },
                       child: Container(
@@ -235,15 +236,15 @@ class _matches_dashboardState extends State<matches_dashboard> {
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/fixtures.png',
+                              child: Icon(
+                                Icons.leaderboard,
                                 color: Colors.black,
-                                scale: 4,
+                            
                               ),
                             ),
                             // ignore: prefer_const_constructors
                             Text(
-                              'Fixtures',
+                              'Ranking',
                               // ignore: prefer_const_constructors
                               style: TextStyle(
                                   fontSize: 12,

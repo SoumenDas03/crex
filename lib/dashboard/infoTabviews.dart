@@ -1,13 +1,15 @@
 // ignore: file_names
 // ignore_for_file: file_names, duplicate_ignore, prefer_const_constructors
 
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
 import 'package:crex/pages/commentary.dart';
 import 'package:crex/pages/fantasy.dart';
 import 'package:crex/pages/graph.dart';
 import 'package:crex/pages/info.dart';
+import 'package:crex/pages/latestSquadsOverviews.dart';
+import 'package:crex/pages/latestSquads_pointsTable.dart';
 import 'package:crex/pages/live_second.dart';
 import 'package:crex/pages/more.dart';
 
@@ -19,7 +21,8 @@ import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class infoTabViews extends StatefulWidget {
-  const infoTabViews({Key? key, required this.id, required this.seriesId, required this.theme})
+  const infoTabViews(
+      {Key? key, required this.id, required this.seriesId, required this.theme})
       : super(key: key);
 
   final String id;
@@ -40,7 +43,7 @@ class _infoTabViewsState extends State<infoTabViews> {
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         initialIndex: 3,
-        length: 7,
+        length: 8,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -73,6 +76,9 @@ class _infoTabViewsState extends State<infoTabViews> {
                   Tab(
                     text: 'Series Status',
                   ),
+                  Tab(
+                    text: 'Point Table',
+                  ),
                 ]),
           ),
           body: TabBarView(
@@ -97,8 +103,16 @@ class _infoTabViewsState extends State<infoTabViews> {
                 id: widget.id,
                 theme: widget.theme,
               ),
-              graph(id: widget.id, theme: widget.theme,),
-              seriesstatus(id: widget.id, seriesId: widget.seriesId, theme: widget.theme,),
+              graph(
+                id: widget.id,
+                theme: widget.theme,
+              ),
+              seriesstatus(
+                id: widget.id,
+                seriesId: widget.seriesId,
+                theme: widget.theme,
+              ),
+              latestSquads_pointsTable(),
             ],
           ),
           // bottomNavigationBar: Container(

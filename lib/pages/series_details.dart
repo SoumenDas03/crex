@@ -1,4 +1,4 @@
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
@@ -637,7 +637,7 @@ class _Series_detailsState extends State<Series_details> {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const fixtures_dashboard(),
+                        builder: (context) => const ranking_dashboard(),
                       ));
                     },
                     child: Container(

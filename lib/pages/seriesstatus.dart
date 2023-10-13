@@ -52,9 +52,9 @@ class _seriesstatusState extends State<seriesstatus> {
       map = jsonDecode(response.body.toString());
       data = map["data"];
       if (response.statusCode == 200) {
-        setState(() {
-          print("refreshing series....");
-        });
+        // setState(() {
+        //   print("refreshing series....");
+        // });
         return data;
         // ignore: use_build_context_synchronously
       } else {
@@ -1037,12 +1037,14 @@ class _seriesstatusState extends State<seriesstatus> {
                                             )
                                           ],
                                         ),
-                                        SizedBox(height: 5),
+                                        SizedBox(height: 25),
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
+                             
+
                                 SizedBox(
                                   height: 5,
                                 ),

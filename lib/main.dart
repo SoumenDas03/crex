@@ -1,7 +1,8 @@
 // ignore_for_file: unused_import
-import 'package:crex/dashboard/fixtures_dashboard.dart';
+import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/matches_dashboard.dart';
 import 'package:crex/dashboard/series_dashboard.dart';
+import 'package:crex/pages/ManTeamRanking.dart';
 import 'package:crex/pages/batter_Ranking.dart';
 import 'package:crex/pages/allRounder_Ranking.dart';
 import 'package:crex/pages/bestFigures.dart';
@@ -64,33 +65,32 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-void main() => runApp(const MyApp());
-
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return ChangeNotifierProvider(
       create: (context) => ThemeChanger(),
-      child: Builder(builder: (BuildContext context) {     
+      child: Builder(builder: (BuildContext context) {
         final themeChanger = Provider.of<ThemeChanger>(context);
         return MaterialApp(
           themeMode: themeChanger.themeMode,
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.black),
           ),
           darkTheme: ThemeData(
               brightness: Brightness.dark,
               primaryColor: Colors.black,
-              iconTheme: const IconThemeData(color: Colors.white)),
+              iconTheme: IconThemeData(color: Colors.white)),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          home: const splashScreen(),
+          home: ManTeamRanking(),
         );
       }),
     );
