@@ -267,11 +267,7 @@ class _rankingPageState extends State<rankingPage> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const rankingPage(),
-                          ));
-                        },
+                        onTap: () {},
                         child: Container(
                           // ignore: prefer_const_constructors
                           margin: EdgeInsets.only(left: 23),
