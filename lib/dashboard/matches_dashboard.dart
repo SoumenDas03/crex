@@ -12,7 +12,7 @@ import 'package:crex/pages/football_home.dart';
 // ignore: unused_import
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/more.dart';
-import 'package:crex/pages/rankingpage.dart';
+import 'package:crex/dashboard/rankingpage.dart';
 
 // ignore: unused_import
 import 'package:crex/pages/series.dart';

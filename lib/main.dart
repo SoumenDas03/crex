@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
               iconTheme: IconThemeData(color: Colors.white)),
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          home: ManTeamRanking(),
+          home: home_dashboard(),
         );
       }),
     );

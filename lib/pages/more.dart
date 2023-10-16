@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:crex/pages/rankingpage.dart';
+import 'package:crex/dashboard/rankingpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:crex/dashboard/ranking_dashboard.dart';
 import 'package:crex/dashboard/home_dashboard.dart';

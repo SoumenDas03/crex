@@ -12,7 +12,7 @@ import 'package:crex/pages/football_home.dart';
 // ignore: unused_import
 import 'package:crex/pages/matches.dart';
 import 'package:crex/pages/more.dart';
-import 'package:crex/pages/rankingpage.dart';
+import 'package:crex/dashboard/rankingpage.dart';
 
 // ignore: unused_import
 import 'package:crex/pages/series.dart';
@@ -92,32 +92,25 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
       // ignore: prefer_const_constructors
 
       // ignore: prefer_const_constructors
-      body: fixtures(),
-
+      body: rankingPage(),
       bottomNavigationBar: Container(
-        color: Colors.black12,
+        // color: Colors.black,
         child: Container(
-          height: 60,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-                // ignore: prefer_const_constructors
-                topRight: Radius.circular(20),
-                // ignore: prefer_const_constructors
-                topLeft: Radius.circular(20)),
+              // ignore: prefer_const_constructors
+              topRight: Radius.circular(20),
+              // ignore: prefer_const_constructors
+              topLeft: Radius.circular(20),
+            ),
             color:
                 isDarkMode ? const Color(0xFFFF2E00) : const Color(0xFFDFDFDF),
           ),
+          height: 60,
           child: Stack(
             children: [
-              // Positioned(
-              //   bottom: 0,
-              //   child: Container(
-              //     height: 45,
-              //     width: MediaQuery.of(context).size.width,
-              //     color: const Color(0xFFFF4D00),
-              //   ),
-              // ),
               Positioned(
+                bottom: 5,
                 left: 10,
                 child: Row(
                   children: [
@@ -137,10 +130,9 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
                             CircleAvatar(
                               backgroundColor: Colors.white,
                               // ignore: prefer_const_constructors
-                              child: Icon(
-                                Icons.home,
-                                color: Colors.black,
-                              ),
+                              child: Icon(Icons.home,
+                                  // color: Colors.black,
+                                  color: Colors.black),
                             ),
                             // ignore: prefer_const_constructors
                             Text(
@@ -171,8 +163,8 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/series.png',
-                                scale: 4,
                                 color: Colors.black,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -204,8 +196,8 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/matches.png',
-                                scale: 4,
                                 color: Colors.black,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -236,11 +228,10 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
                             CircleAvatar(
                               backgroundColor: Colors.white,
                               child: Icon(
-                               Icons.leaderboard,
+                                Icons.leaderboard,
                                 color: isDarkMode
-                                      ? const Color(0xFFFF2E00)
-                                      : const Color(0xFFFF4D00),
-                                // color: const Color(0xFFFF4D00),
+                                    ? const Color(0xFFFF2E00)
+                                    : const Color(0xFFFF4D00),
                               ),
                             ),
                             // ignore: prefer_const_constructors
@@ -272,8 +263,8 @@ class _ranking_dashboardState extends State<ranking_dashboard> {
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/more.png',
-                                scale: 4,
                                 color: Colors.black,
+                                scale: 4,
                               ),
                             ),
                             // ignore: prefer_const_constructors
