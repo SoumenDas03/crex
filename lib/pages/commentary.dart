@@ -3844,7 +3844,7 @@ class _commententaryState extends State<commententary> {
                                                         children: [
                                                           Row(
                                                             children: [
-                                                              Column(
+                                                              Column(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
                                                                 children: [
                                                                   Row(
                                                                     children: [
@@ -3912,10 +3912,11 @@ class _commententaryState extends State<commententary> {
                                                                     ],
                                                                   ),
                                                                   SizedBox(
-                                                                    height: 2,
+                                                                    height: 5,
                                                                   ),
-                                                                  Row(
+                                                                  Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
+                                                                      SizedBox(width: 15,),
                                                                       Text(
                                                                         "12.55",
                                                                         style:

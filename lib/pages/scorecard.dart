@@ -1747,7 +1747,7 @@ class _scorecardState extends State<scorecard> {
                                         Container(
                                           alignment: Alignment.topLeft,
                                           margin: EdgeInsets.only(left: 20),
-                                          child: Text('TET TO BAT',style: TextStyle(
+                                          child: Text('YET TO BAT',style: TextStyle(
                                                                       color: Colors
                                                                           .orange,
                                                                       fontWeight:
@@ -2735,7 +2735,7 @@ class _scorecardState extends State<scorecard> {
                                         Container(
                                           alignment: Alignment.topLeft,
                                           margin: EdgeInsets.only(left: 20),
-                                          child: Text('TET TO BAT',style: TextStyle(
+                                          child: Text('YET TO BAT',style: TextStyle(
                                                                       color: Colors
                                                                           .orange,
                                                                       fontWeight:
