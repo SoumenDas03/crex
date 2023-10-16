@@ -67,6 +67,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 void main() => runApp(MyApp());
 
+
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   // This widget is the root of your application.
@@ -85,9 +86,13 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black),
           ),
           darkTheme: ThemeData(
+
               brightness: Brightness.dark,
               primaryColor: Colors.black,
               iconTheme: IconThemeData(color: Colors.white)),
+
+      
+
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           home: home_dashboard(),
