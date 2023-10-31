@@ -38,7 +38,8 @@ class _fantasyState extends State<fantasy> {
       economySugam,
       bbbmap,
       bbbData,
-      topPointList;
+      topPointList,
+  playerInfoMap, playerInfoData;
 
       Future<void> apiFetch() async {
     var status = true;
@@ -50,7 +51,7 @@ class _fantasyState extends State<fantasy> {
      getBallByBall()
     ]).then((v) {
       for (var item in v) {
-        print('$item \n');
+        // print('$item \n');
       }
     }).whenComplete(() {
       status = false;
@@ -174,6 +175,24 @@ class _fantasyState extends State<fantasy> {
       bbbData = bbbmap["data"] ?? bbbmap["status"];
       if (response.statusCode == 200) {
         return bbbData;
+        // ignore: use_build_context_synchronously
+      } else {
+        print('failed');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  getPlayerInfo(String id) async {
+    try {
+      http.Response response = await http.get(Uri.parse(
+          'https://api.cricapi.com/v1/players_info?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=$id'));
+
+      playerInfoMap = jsonDecode(response.body.toString());
+      playerInfoData = playerInfoMap["data"];
+      if (response.statusCode == 200) {
+        return playerInfoData;
         // ignore: use_build_context_synchronously
       } else {
         print('failed');
@@ -1186,65 +1205,90 @@ class _fantasyState extends State<fantasy> {
                                                       ),
                                                       child: Stack(
                                                         children: [
-                                                          Positioned(
-                                                            right: -6,
-                                                            child:
-                                                                Image.network(
-                                                              "https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg",
-                                                              height: 125,
-                                                              fit: BoxFit.fill,
-                                                            ),
+                                                          FutureBuilder(
+                                                            future: getPlayerInfo(pointsOrderData[index]["id"].toString()),
+                                                            builder: (context, snapshot) {
+                                                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                                                return Positioned(
+                                                                  right: -6,
+                                                                  child:
+                                                                  Image.network(
+                                                                    "https://cdn.dribbble.com/users/1519354/screenshots/9237401/media/bfdbbc44670c08055e05e6edee9774a9.jpg",
+                                                                    height: 125,
+                                                                    fit: BoxFit.fill,
+                                                                  ),
+                                                                );
+                                                              } else if (snapshot.hasError) {
+                                                                return Text("Error: ${snapshot.error}");
+                                                              } else if (!snapshot.hasData) {
+                                                                return Text("No Data Available");
+                                                              } else {
+                                                                var playerInfoData1 = snapshot.data as Map<String, dynamic>;
+                                                                return Positioned(
+                                                                  right: -6,
+                                                                  child: Image.network(
+                                                                    playerInfoData1["playerImg"],
+                                                                    height: 100,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            },
                                                           ),
                                                           Positioned(
                                                               left: 28,
-                                                              top: 25,
-                                                              child: Column(
-                                                                // ignore: prefer_const_literals_to_create_immutables
-                                                                children: [
-                                                                  Container(
-                                                                    width: 55,
-                                                                    child:
-                                                                        Center(
+                                                              top: 55,
+                                                              child: Container(
+                                                                color: Colors
+                                                                    .blueGrey[
+                                                                        900]!.withOpacity(0.5),
+                                                                child: Column(
+                                                                  // ignore: prefer_const_literals_to_create_immutables
+                                                                  children: [
+                                                                    Container(
+                                                                      width: 55,
                                                                       child:
-                                                                          Text(
-                                                                        pointsOrderData[index]["name"]
-                                                                            .substring(0,
-                                                                                pointsOrderData[index]["name"].indexOf(" "))
-                                                                            .toString(),
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white,
-                                                                            fontSize:
-                                                                                10,
-                                                                            fontWeight:
-                                                                                FontWeight.w600),
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          pointsOrderData[index]["name"]
+                                                                              .substring(0,
+                                                                                  pointsOrderData[index]["name"].indexOf(" "))
+                                                                              .toString(),
+                                                                          style: TextStyle(
+                                                                              color: Colors
+                                                                                  .white,
+                                                                              fontSize:
+                                                                                  10,
+                                                                              fontWeight:
+                                                                                  FontWeight.w600),
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                  Text(
-                                                                    pointsOrderData[index]
-                                                                            [
-                                                                            "points"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            15,
-                                                                        fontWeight:
-                                                                            FontWeight.w600),
-                                                                  ),
-                                                                  Text(
-                                                                    "Pts",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            10,
-                                                                        fontWeight:
-                                                                            FontWeight.w600),
-                                                                  )
-                                                                ],
+                                                                    Text(
+                                                                      pointsOrderData[index]
+                                                                              [
+                                                                              "points"]
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.w600),
+                                                                    ),
+                                                                    Text(
+                                                                      "Pts",
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontSize:
+                                                                              10,
+                                                                          fontWeight:
+                                                                              FontWeight.w600),
+                                                                    )
+                                                                  ],
+                                                                ),
                                                               ))
                                                         ],
                                                       ),

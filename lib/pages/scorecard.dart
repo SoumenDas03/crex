@@ -132,7 +132,6 @@ class _scorecardState extends State<scorecard> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: FutureBuilder(
-        
               future: apiFetch(),
               builder: (context, snapshot) {
                 if (data == null) {

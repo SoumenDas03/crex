@@ -108,9 +108,9 @@ class _cricket_homeState extends State<cricket_home> {
     const Duration interval = Duration(seconds: 30);
 
     Timer.periodic(interval, (timer) async {
-      // setState(() {
-      //   print("object");
-      // });
+      setState(() {
+        print("object");
+      });
     });
   }
 

@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:crex/pages/singlePlayer_info.dart';
 import 'package:crex/provider/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -35,6 +36,13 @@ class _commententaryState extends State<commententary> {
       bbbData,
       reversebbbData,
       mapBetting;
+
+  int count = 0;
+
+  List<Map<String, dynamic>> firstbbbData = [];
+  List<Map<String, dynamic>> secondbbbData = [];
+  List<int> uniqueOverNumbersFirst = [];
+  List<int> uniqueOverNumbersSecond = [];
 
   Future<void> apiFetch() async {
     var status = true;
@@ -89,6 +97,28 @@ class _commententaryState extends State<commententary> {
       bbbData = bbbmap["data"] != null ? bbbmap["data"] : bbbmap["status"];
       if (bbbData != "failure" && bbbData != null) {
         reversebbbData = bbbData["bbb"].reversed.toList();
+        if( count == 0) {
+          for (var i = 0; i < reversebbbData.length; i++) {
+            if (reversebbbData[i]["inning"] == 0) {
+              firstbbbData.add(reversebbbData[i]);
+            } else {
+              secondbbbData.add(reversebbbData[i]);
+            }
+            count++;
+          }
+          firstbbbData.forEach((item) {
+            int overNumber = item["over"];
+            if (!uniqueOverNumbersFirst.contains(overNumber)) {
+              uniqueOverNumbersFirst.add(overNumber);
+            }
+          });
+          secondbbbData.forEach((item) {
+            int overNumber = item["over"];
+            if (!uniqueOverNumbersSecond.contains(overNumber)) {
+              uniqueOverNumbersSecond.add(overNumber);
+            }
+          });
+        }
       }
       if (response.statusCode == 200) {
         return bbbData;
@@ -3715,7 +3745,9 @@ class _commententaryState extends State<commententary> {
                                             width: 150,
                                             child: Center(
                                               child: Text(
-                                                "1st Inns",
+                                                bbbData["score"].length > 1 ?
+                                                bbbData["score"][bbbData["score"].length -2]["inning"] :
+                                                bbbData["score"][bbbData["score"].length -1]["inning"],
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -3742,7 +3774,9 @@ class _commententaryState extends State<commententary> {
                                           width: 150,
                                           child: Center(
                                               child: Text(
-                                            "2nd Inns",
+                                            bbbData["score"].length > 1 ?
+                                                bbbData["score"][bbbData["score"].length -1]["inning"] :
+                                                "Yet to bat",
                                             style:
                                                 TextStyle(color: Colors.white),
                                           )),
@@ -3769,10 +3803,14 @@ class _commententaryState extends State<commententary> {
                                 Visibility(visible: tabIndex==0,
                                   child: Container(
                                     child: ListView.builder(
-                                      itemCount: 5,
+                                      itemCount: uniqueOverNumbersFirst.length,
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
+                                        int overNumber = uniqueOverNumbersFirst[index];
+                                        List<dynamic> filteredBbbData = firstbbbData
+                                            .where((data) => data["over"] == overNumber)
+                                            .toList();
                                         return Column(
                                           children: [
                                             InkWell(
@@ -3787,7 +3825,7 @@ class _commententaryState extends State<commententary> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        "10 Over",
+                                                        overNumber.toString() + " Over",
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -3825,26 +3863,18 @@ class _commententaryState extends State<commententary> {
                                               visible: isVisibleList[index],
                                               child: Container(
                                                 child: ListView.builder(
-                                                    physics:
-                                                        ClampingScrollPhysics(),
+                                                    physics: ClampingScrollPhysics(),
                                                     shrinkWrap: true,
-                                                    itemCount:
-                                                        bbbData != "failure"
-                                                            ? (reversebbbData
-                                                                        .length >
-                                                                    50
-                                                                ? reversebbbData
-                                                                    .length
-                                                                : reversebbbData
-                                                                    .length)
-                                                            : 5,
+                                                    itemCount: filteredBbbData.length,
                                                     itemBuilder:
                                                         (context, index) {
                                                       return Column(
                                                         children: [
                                                           Row(
                                                             children: [
-                                                              Column(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
+                                                              Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                                 children: [
                                                                   Row(
                                                                     children: [
@@ -3856,12 +3886,10 @@ class _commententaryState extends State<commententary> {
                                                                                 15),
                                                                         child:
                                                                             Text(
-                                                                          bbbData !=
-                                                                                  "failure"
-                                                                              ? reversebbbData[index]["over"].toString() +
-                                                                                  "." +
-                                                                                  reversebbbData[index]["ball"].toString()
-                                                                              : "1",
+                                                                          filteredBbbData[index]["over"]
+                                                                              .toString() + "." +
+                                                                          filteredBbbData[index]["ball"]
+                                                                              .toString(),
                                                                           style: TextStyle(
                                                                               color: isDarkMode
                                                                                   ? Colors.white
@@ -3873,10 +3901,10 @@ class _commententaryState extends State<commententary> {
                                                                             BoxDecoration(
                                                                           color: bbbData !=
                                                                                   "failure"
-                                                                              ? reversebbbData[index]["dismissal"] == null
-                                                                                  ? (reversebbbData[index]["runs"] == 4
+                                                                              ? filteredBbbData[index]["dismissal"] == null
+                                                                                  ? (filteredBbbData[index]["runs"] == 4
                                                                                       ? Colors.amber
-                                                                                      : reversebbbData[index]["runs"] == 6
+                                                                                      : filteredBbbData[index]["runs"] == 6
                                                                                           ? Colors.green
                                                                                           : Colors.transparent)
                                                                                   : Colors.red
@@ -3899,8 +3927,8 @@ class _commententaryState extends State<commententary> {
                                                                             Text(
                                                                           bbbData !=
                                                                                   "failure"
-                                                                              ? reversebbbData[index]["dismissal"] == null
-                                                                                  ? reversebbbData[index]["runs"].toString()
+                                                                              ? filteredBbbData[index]["dismissal"] == null
+                                                                                  ? filteredBbbData[index]["runs"].toString()
                                                                                   : "W"
                                                                               : "1",
                                                                           style: TextStyle(
@@ -3955,13 +3983,13 @@ class _commententaryState extends State<commententary> {
                                                                 child: Text(
                                                                   bbbData !=
                                                                           "failure"
-                                                                      ? (reversebbbData[index]["bowler"] !=
+                                                                      ? (filteredBbbData[index]["bowler"] !=
                                                                               null
-                                                                          ? (reversebbbData[index]["batsman"] !=
+                                                                          ? (filteredBbbData[index]["batsman"] !=
                                                                                   null
-                                                                              ? reversebbbData[index]["bowler"]["name"] +
+                                                                              ? filteredBbbData[index]["bowler"]["name"] +
                                                                                   " to " +
-                                                                                  reversebbbData[index]["batsman"]["name"]
+                                                                      filteredBbbData[index]["batsman"]["name"]
                                                                               : "Bowler" + " to " + "Batsman")
                                                                           : "Batsman")
                                                                       : "Ball by ball data is not Available",
@@ -4116,10 +4144,14 @@ class _commententaryState extends State<commententary> {
                                 Visibility(visible: tabIndex==1,
                                   child: Container(
                                     child: ListView.builder(
-                                      itemCount: 5,
+                                      itemCount: uniqueOverNumbersSecond.length,
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
                                       itemBuilder: (context, index) {
+                                        int overNumber = uniqueOverNumbersSecond[index];
+                                        List<dynamic> filteredBbbData = secondbbbData
+                                            .where((data) => data["over"] == overNumber)
+                                            .toList();
                                         return Column(
                                           children: [
                                             InkWell(
@@ -4134,7 +4166,7 @@ class _commententaryState extends State<commententary> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        "12 Over",
+                                                        overNumber.toString() + " Over",
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -4175,16 +4207,8 @@ class _commententaryState extends State<commententary> {
                                                     physics:
                                                         ClampingScrollPhysics(),
                                                     shrinkWrap: true,
-                                                    itemCount:
-                                                        bbbData != "failure"
-                                                            ? (reversebbbData
-                                                                        .length >
-                                                                    50
-                                                                ? reversebbbData
-                                                                    .length
-                                                                : reversebbbData
-                                                                    .length)
-                                                            : 5,
+                                                    itemCount: filteredBbbData
+                                                        .length,
                                                     itemBuilder:
                                                         (context, index) {
                                                       return Column(
@@ -4205,9 +4229,9 @@ class _commententaryState extends State<commententary> {
                                                                             Text(
                                                                           bbbData !=
                                                                                   "failure"
-                                                                              ? reversebbbData[index]["over"].toString() +
+                                                                              ? filteredBbbData[index]["over"].toString() +
                                                                                   "." +
-                                                                                  reversebbbData[index]["ball"].toString()
+                                                                                  filteredBbbData[index]["ball"].toString()
                                                                               : "1",
                                                                           style: TextStyle(
                                                                               color: isDarkMode
@@ -4220,10 +4244,10 @@ class _commententaryState extends State<commententary> {
                                                                             BoxDecoration(
                                                                           color: bbbData !=
                                                                                   "failure"
-                                                                              ? reversebbbData[index]["dismissal"] == null
-                                                                                  ? (reversebbbData[index]["runs"] == 4
+                                                                              ? filteredBbbData[index]["dismissal"] == null
+                                                                                  ? (filteredBbbData[index]["runs"] == 4
                                                                                       ? Colors.amber
-                                                                                      : reversebbbData[index]["runs"] == 6
+                                                                                      : filteredBbbData[index]["runs"] == 6
                                                                                           ? Colors.green
                                                                                           : Colors.transparent)
                                                                                   : Colors.red
@@ -4246,8 +4270,8 @@ class _commententaryState extends State<commententary> {
                                                                             Text(
                                                                           bbbData !=
                                                                                   "failure"
-                                                                              ? reversebbbData[index]["dismissal"] == null
-                                                                                  ? reversebbbData[index]["runs"].toString()
+                                                                              ? filteredBbbData[index]["dismissal"] == null
+                                                                                  ? filteredBbbData[index]["runs"].toString()
                                                                                   : "W"
                                                                               : "1",
                                                                           style: TextStyle(
@@ -4301,13 +4325,13 @@ class _commententaryState extends State<commententary> {
                                                                 child: Text(
                                                                   bbbData !=
                                                                           "failure"
-                                                                      ? (reversebbbData[index]["bowler"] !=
+                                                                      ? (filteredBbbData[index]["bowler"] !=
                                                                               null
-                                                                          ? (reversebbbData[index]["batsman"] !=
+                                                                          ? (filteredBbbData[index]["batsman"] !=
                                                                                   null
-                                                                              ? reversebbbData[index]["bowler"]["name"] +
+                                                                              ? filteredBbbData[index]["bowler"]["name"] +
                                                                                   " to " +
-                                                                                  reversebbbData[index]["batsman"]["name"]
+                                                                                  filteredBbbData[index]["batsman"]["name"]
                                                                               : "Bowler" + " to " + "Batsman")
                                                                           : "Batsman")
                                                                       : "Ball by ball data is not Available",
