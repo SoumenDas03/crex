@@ -56,14 +56,16 @@ class _match_settingsState extends State<match_settings> {
         ),
         body: TabBarView(
           children: <Widget>[
-            info(id: "1",theme: "dark"),
+            info(id: "1",theme: "dark", fullMatchName: "1",),
             fantasy(
               id: "1",
               theme: "dark",
+              fullMatchName: "Pakistan vs India",
             ),
             commententary(
               id: "1",
               theme: "dark",
+              fullMatchName: "Pakistan vs India",
             ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -1838,6 +1840,7 @@ class _match_settingsState extends State<match_settings> {
             scorecard(
               id: "1",
               theme: "dark",
+              fullMatchName: "1",
             ),
             Icon(
               Icons.graphic_eq,

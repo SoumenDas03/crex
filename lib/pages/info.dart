@@ -13,18 +13,19 @@ import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 
 class info extends StatefulWidget {
-  const info({Key? key, required this.id, required this.theme})
+  const info({Key? key, required this.id, required this.theme, required this.fullMatchName})
       : super(key: key);
 
   final String id;
   final String theme;
+  final String fullMatchName;
 
   @override
   State<info> createState() => _infoState();
 }
 
 class _infoState extends State<info> {
-  var map, data, bbbmap, bbbData, data1, map1;
+  var map, data, bbbmap, bbbData, data1, map1, match_id, liveScore, livePoints;
   List ranking = [
     {'class': 'A', 'total': 23},
     {'class': 'B', 'total': 14},
@@ -39,7 +40,8 @@ class _infoState extends State<info> {
     await Future.wait([
      getSingleCricketMatchDetails(),
      getBallByBall(),
-     getNewsList()
+     getNewsList(),
+      getLiveBettingPoints(widget.fullMatchName, widget.id),
     ]).then((v) {
       for (var item in v) {
         print('$item \n');
@@ -54,7 +56,7 @@ class _infoState extends State<info> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -100,7 +102,7 @@ class _infoState extends State<info> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -113,6 +115,38 @@ class _infoState extends State<info> {
       }
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  Future getLiveBettingPoints(String matchName, matchID) async {
+    try {
+      final matchResponse = await http.post(
+          Uri.parse('https://playexch.us/api/get-match-details-odds'),
+          body: {"match_name": matchName}
+      );
+
+      if (matchResponse.statusCode != 200) {
+        print('Failed to fetch match details');
+        return;
+      }
+
+      final matchDetails = jsonDecode(matchResponse.body.toString());
+      match_id = matchDetails["data"]["match_id"];
+
+      final oddsResponse = await http.post(
+          Uri.parse('https://playexch.us/api/get-match-odds'),
+          body: {"matchid": match_id}
+      );
+
+      if (oddsResponse.statusCode == 200) {
+        var map1 = jsonDecode(oddsResponse.body);
+        livePoints = map1["data"];
+        liveScore = map1["score"];
+      } else {
+        print('Failed to fetch match odds');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -251,7 +285,10 @@ class _infoState extends State<info> {
                                                                         .bold),
                                                           ),
                                                           Text(
-                                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                            liveScore == null || liveScore.length == 0 ?
+                                                            '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}' :
+                                                            liveScore[0]["inning1"]["runs"].toString()
+                                                                + "-" + liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
                                                                     ? Colors
@@ -290,11 +327,12 @@ class _infoState extends State<info> {
                                                             height: 10,
                                                           ),
                                                           Text(
-                                                            data["score"][(data[
-                                                                            "score"]
-                                                                        .length) -
-                                                                    1]["o"]
-                                                                .toString(),
+                                                              liveScore == null || liveScore.length == 0 ? data["score"][(data[
+                                                              "score"]
+                                                                  .length) -
+                                                                  1]["o"]
+                                                                  .toString() :
+                                                              liveScore[0]["inning1"]["overs"].toString(),
                                                             style: TextStyle(
                                                                 color: isDarkMode
                                                                     ? Colors

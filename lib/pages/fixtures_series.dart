@@ -38,7 +38,7 @@ class _fixtures_seriesState extends State<fixtures_series> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/series?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&offset=0'),
+            'https://api.cricapi.com/v1/series?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&offset=0'),
       );
 
       map = jsonDecode(response.body.toString());

@@ -22,12 +22,15 @@ import 'package:provider/provider.dart';
 // ignore: camel_case_types
 class infoTabViews extends StatefulWidget {
   const infoTabViews(
-      {Key? key, required this.id, required this.seriesId, required this.theme})
+      {Key? key, required this.id, required this.seriesId, required this.theme, required this.matchName,required this.fullMatchName, required this.getOver})
       : super(key: key);
 
   final String id;
   final String seriesId;
   final String theme;
+  final String matchName;
+  final String getOver;
+  final String fullMatchName;
 
   @override
   State<infoTabViews> createState() => _infoTabViewsState();
@@ -86,22 +89,29 @@ class _infoTabViewsState extends State<infoTabViews> {
               info(
                 id: widget.id,
                 theme: widget.theme,
+                fullMatchName: widget.fullMatchName,
               ),
               fantasy(
                 id: widget.id,
                 theme: widget.theme,
+                fullMatchName: widget.fullMatchName,
               ),
               commententary(
                 id: widget.id,
                 theme: widget.theme,
+                fullMatchName: widget.fullMatchName,
               ),
               live_second(
                 id: widget.id,
                 theme: widget.theme,
+                matchName: widget.matchName,
+                getOver: widget.getOver,
+                fullMatchName: widget.fullMatchName,
               ),
               scorecard(
                 id: widget.id,
                 theme: widget.theme,
+                fullMatchName: widget.fullMatchName,
               ),
               graph(
                 id: widget.id,
@@ -112,7 +122,7 @@ class _infoTabViewsState extends State<infoTabViews> {
                 seriesId: widget.seriesId,
                 theme: widget.theme,
               ),
-              latestSquads_pointsTable(),
+              latestSquads_pointsTable(seriesId: widget.seriesId,),
             ],
           ),
           // bottomNavigationBar: Container(

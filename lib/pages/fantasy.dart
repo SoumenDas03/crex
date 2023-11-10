@@ -10,11 +10,12 @@ import 'package:provider/provider.dart';
 import '../provider/theme_changer.dart';
 
 class fantasy extends StatefulWidget {
-  const fantasy({Key? key, required this.id, required this.theme})
+  const fantasy({Key? key, required this.id, required this.theme, required this.fullMatchName})
       : super(key: key);
 
   final String id;
   final String theme;
+  final String fullMatchName;
 
   @override
   State<fantasy> createState() => _fantasyState();
@@ -39,7 +40,8 @@ class _fantasyState extends State<fantasy> {
       bbbmap,
       bbbData,
       topPointList,
-  playerInfoMap, playerInfoData;
+  playerInfoMap, playerInfoData,
+      match_id, liveScore, livePoints;
 
       Future<void> apiFetch() async {
     var status = true;
@@ -48,7 +50,8 @@ class _fantasyState extends State<fantasy> {
       getSingleCricketMatchDetails(),
       getFantasyPoints(),
       getMatchScores(),
-     getBallByBall()
+     getBallByBall(),
+      getLiveBettingPoints(widget.fullMatchName, widget.id),
     ]).then((v) {
       for (var item in v) {
         // print('$item \n');
@@ -64,7 +67,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}'),
       );
 
       map = jsonDecode(response.body.toString());
@@ -87,7 +90,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_points?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}&ruleset=0'),
+            'https://api.cricapi.com/v1/match_points?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}&ruleset=0'),
       );
 
       fantasyMap = jsonDecode(response.body.toString());
@@ -113,7 +116,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_scorecard?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_scorecard?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}'),
       );
 
       scoreMap = jsonDecode(response.body.toString());
@@ -168,7 +171,7 @@ class _fantasyState extends State<fantasy> {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            'https://api.cricapi.com/v1/match_bbb?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=${widget.id}'),
+            'https://api.cricapi.com/v1/match_bbb?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=${widget.id}'),
       );
 
       bbbmap = jsonDecode(response.body.toString());
@@ -187,7 +190,7 @@ class _fantasyState extends State<fantasy> {
   getPlayerInfo(String id) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          'https://api.cricapi.com/v1/players_info?apikey=7650ef82-5d21-43df-b3b9-8955150ccddf&id=$id'));
+          'https://api.cricapi.com/v1/players_info?apikey=a6e59415-3226-4b92-817f-a90ddebd0315&id=$id'));
 
       playerInfoMap = jsonDecode(response.body.toString());
       playerInfoData = playerInfoMap["data"];
@@ -199,6 +202,38 @@ class _fantasyState extends State<fantasy> {
       }
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  Future getLiveBettingPoints(String matchName, matchID) async {
+    try {
+      final matchResponse = await http.post(
+          Uri.parse('https://playexch.us/api/get-match-details-odds'),
+          body: {"match_name": matchName}
+      );
+
+      if (matchResponse.statusCode != 200) {
+        print('Failed to fetch match details');
+        return;
+      }
+
+      final matchDetails = jsonDecode(matchResponse.body.toString());
+      match_id = matchDetails["data"]["match_id"];
+
+      final oddsResponse = await http.post(
+          Uri.parse('https://playexch.us/api/get-match-odds'),
+          body: {"matchid": match_id}
+      );
+
+      if (oddsResponse.statusCode == 200) {
+        var map1 = jsonDecode(oddsResponse.body);
+        livePoints = map1["data"];
+        liveScore = map1["score"];
+      } else {
+        print('Failed to fetch match odds');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -316,7 +351,10 @@ class _fantasyState extends State<fantasy> {
                                                                             fontWeight: FontWeight.bold),
                                                                       ),
                                                                       Text(
-                                                                        '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}',
+                                                                        liveScore == null || liveScore.length == 0 ?
+                                                                        '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}' :
+                                                                        liveScore[0]["inning1"]["runs"].toString()
+                                                                            + "-" + liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString(),
                                                                         style: TextStyle(
                                                                             color: isDarkMode
                                                                                 ? Colors.white
@@ -348,9 +386,12 @@ class _fantasyState extends State<fantasy> {
                                                                             10,
                                                                       ),
                                                                       Text(
-                                                                        data["score"][(data["score"].length) -
-                                                                                1]["o"]
-                                                                            .toString(),
+                                                                        liveScore == null || liveScore.length == 0 ? data["score"][(data[
+                                                                        "score"]
+                                                                            .length) -
+                                                                            1]["o"]
+                                                                            .toString() :
+                                                                        liveScore[0]["inning1"]["overs"].toString(),
                                                                         style: TextStyle(
                                                                             color: isDarkMode
                                                                                 ? Colors.white
