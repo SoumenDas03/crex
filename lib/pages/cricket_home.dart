@@ -107,7 +107,7 @@ class _cricket_homeState extends State<cricket_home> {
   }
 
   void fetchDataPeriodically() {
-    const Duration interval = Duration(seconds: 2);
+    const Duration interval = Duration(seconds: 10);
 
     Timer.periodic(interval, (timer) async {
       setState(() {
