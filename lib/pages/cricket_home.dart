@@ -415,9 +415,13 @@ class _cricket_homeState extends State<cricket_home> {
                                                               Theme.of(context)
                                                                   .brightness
                                                                   .name,
-                                                              matchName: data[index]["teamInfo"][0]["name"].split(" ")[0] == data[index]["score"][0]["inning"].split(" ")[0]
+                                                              matchName: data[index]["score"].length == 1 ?
+                                                              data[index]["teamInfo"][0]["name"].split(" ")[0] == data[index]["score"][0]["inning"].split(" ")[0]
                                                                   ? data[index]["teamInfo"][0]["shortname"]
-                                                                  : data[index]["teamInfo"][1]["shortname"],
+                                                                  : data[index]["teamInfo"][1]["shortname"] :
+                                                              data[index]["teamInfo"][1]["name"].split(" ")[0] == data[index]["score"][1]["inning"].split(" ")[0]
+                                                                  ? data[index]["teamInfo"][1]["shortname"]
+                                                                  : data[index]["teamInfo"][0]["shortname"],
                                                               getOver: data[index]["score"][data[index]["score"].length - 1]["o"].toString(),
                                                               fullMatchName: data[index]["teamInfo"][0]["name"].split(" ")[0] == data[index]["score"][0]["inning"].split(" ")[0]
                                                                   ? data[index]["teamInfo"][0]["name"]
