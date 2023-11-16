@@ -171,26 +171,26 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
     }
   }
 
-  Future getBettingPoints(String match_name) async {
-    try {
-      http.Response response = await http
-          .post(Uri.parse('https://playexch.us/api/get-match-details-odds'), body: {
-        "match_name": match_name,
-      });
-
-      mapNoob = jsonDecode(response.body.toString());
-      mapBetting = mapNoob["data"];
-
-      if (response.statusCode == 200) {
-        return mapBetting;
-        // ignore: use_build_context_synchronously
-      } else {
-        print('failed');
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  // Future getBettingPoints(String match_name) async {
+  //   try {
+  //     http.Response response = await http
+  //         .post(Uri.parse('https://playexch.us/api/get-match-details-odds'), body: {
+  //       "match_name": match_name,
+  //     });
+  //
+  //     mapNoob = jsonDecode(response.body.toString());
+  //     mapBetting = mapNoob["data"];
+  //
+  //     if (response.statusCode == 200) {
+  //       return mapBetting;
+  //       // ignore: use_build_context_synchronously
+  //     } else {
+  //       print('failed');
+  //     }
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   Future getLiveBettingPoints(String matchName, matchID) async {
     try {
@@ -217,7 +217,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
         livePoints = map1["data"];
         liveScore = map1["score"];
         getLiveSession(match_id,
-            widget.matchName,
+            widget.matchName == "RSA" ? "SA" : widget.matchName,
             data["score"][(data["score"].length) - 1]["o"].toString());
       } else {
         print('Failed to fetch match odds');
@@ -1200,7 +1200,7 @@ class _live_secondState extends State<live_second> with WidgetsBindingObserver {
                                                 liveScore == null || liveScore.length == 0 ?
                                                 '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}' :
                                                 liveScore[0]["inning1"]["runs"].toString()
-                                                    + "-" + liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString(),
+                                                    + "-" + (liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString()),
                                                 style: TextStyle(
                                                     color: isDarkMode
                                                         ? Colors

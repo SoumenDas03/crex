@@ -248,7 +248,7 @@ class _commententaryState extends State<commententary> {
       body: FutureBuilder(
         future: apiFetch(),
         builder: (context, snapshot) {
-          if (data == null) {
+          if (scoreData == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -362,7 +362,7 @@ class _commententaryState extends State<commententary> {
                                                   liveScore == null || liveScore.length == 0 ?
                                                   '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}' :
                                                   liveScore[0]["inning1"]["runs"].toString()
-                                                      + "-" + liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString(),
+                                                      + "-" + (liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString()),
                                                   style: TextStyle(
                                                       color: isDarkMode
                                                           ? Colors.white
@@ -3158,55 +3158,37 @@ class _commententaryState extends State<commententary> {
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: bbbData != "failure"
-                                                ? bbbData["bbb"][bbbData["bbb"].length - 6]
-                                            [
-                                            "dismissal"] ==
-                                                null
-                                                ? (bbbData["bbb"]
-                                            [bbbData["bbb"].length - 6]
-                                            [
-                                            "runs"] ==
-                                                4
-                                                ? Colors.amber
-                                                : bbbData["bbb"][bbbData["bbb"].length - 6]["runs"] ==
-                                                6
-                                                ? Colors.green
-                                                : Colors
-                                                .transparent)
-                                                : Colors.red
-                                                : Colors.transparent,
-                                            borderRadius:
-                                            BorderRadius.circular(30),
-                                            border: Border.all(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                width: 0.5)),
+                                          color: bbbData != null && bbbData != "failure"
+                                              ? bbbData["bbb"] != null &&
+                                              bbbData["bbb"].length >= 6 &&
+                                              bbbData["bbb"][bbbData["bbb"].length - 6]["dismissal"] == null
+                                              ? (bbbData["bbb"][bbbData["bbb"].length - 6]["runs"] == 4
+                                              ? Colors.amber
+                                              : bbbData["bbb"][bbbData["bbb"].length - 6]["runs"] == 6
+                                              ? Colors.green
+                                              : Colors.transparent)
+                                              : Colors.red
+                                              : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(30),
+                                          border: Border.all(
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                            width: 0.5,
+                                          ),
+                                        ),
                                         alignment: Alignment.center,
                                         height: 22,
                                         width: 22,
                                         child: Text(
-                                          bbbData != "failure" &&
-                                              bbbData != null
-                                              ? bbbData["bbb"][bbbData[
-                                          "bbb"]
-                                              .length -
-                                              6]
-                                          ["dismissal"] ==
-                                              null
-                                              ? bbbData[
-                                          "bbb"][bbbData[
-                                          "bbb"]
-                                              .length -
-                                              6]["runs"]
-                                              .toString()
-                                              : "W"
-                                              : "1",
+                                          bbbData != null &&
+                                              bbbData != "failure" &&
+                                              bbbData["bbb"] != null &&
+                                              bbbData["bbb"].length >= 6 &&
+                                              bbbData["bbb"][bbbData["bbb"].length - 6]["dismissal"] == null
+                                              ? bbbData["bbb"][bbbData["bbb"].length - 6]["runs"].toString()
+                                              : "W",
                                           style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(
@@ -3359,56 +3341,37 @@ class _commententaryState extends State<commententary> {
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: bbbData != "failure"
-                                                ? (bbbData["bbb"]
-                                            [bbbData["bbb"].length - 4]
-                                            [
-                                            "dismissal"] ==
-                                                null
-                                                ? (bbbData["bbb"]
-                                            [bbbData["bbb"].length - 4]
-                                            [
-                                            "runs"] ==
-                                                4
-                                                ? Colors.amber
-                                                : bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] ==
-                                                6
-                                                ? Colors.green
-                                                : Colors
-                                                .transparent)
-                                                : Colors.red)
-                                                : Colors.transparent,
-                                            borderRadius:
-                                            BorderRadius.circular(30),
-                                            border: Border.all(
-                                                color: isDarkMode
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                width: 0.5)),
+                                          color: bbbData != null && bbbData != "failure"
+                                              ? (bbbData["bbb"] != null &&
+                                              bbbData["bbb"].length >= 4 &&
+                                              bbbData["bbb"][bbbData["bbb"].length - 4]["dismissal"] == null
+                                              ? (bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] == 4
+                                              ? Colors.amber
+                                              : bbbData["bbb"][bbbData["bbb"].length - 4]["runs"] == 6
+                                              ? Colors.green
+                                              : Colors.transparent)
+                                              : Colors.red)
+                                              : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(30),
+                                          border: Border.all(
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                            width: 0.5,
+                                          ),
+                                        ),
                                         alignment: Alignment.center,
                                         height: 22,
                                         width: 22,
                                         child: Text(
-                                          bbbData != "failure" &&
-                                              bbbData != null
-                                              ? bbbData["bbb"][bbbData[
-                                          "bbb"]
-                                              .length -
-                                              4]
-                                          ["dismissal"] ==
-                                              null
-                                              ? bbbData[
-                                          "bbb"][bbbData[
-                                          "bbb"]
-                                              .length -
-                                              4]["runs"]
-                                              .toString()
-                                              : "W"
-                                              : "1",
+                                          bbbData != null &&
+                                              bbbData != "failure" &&
+                                              bbbData["bbb"] != null &&
+                                              bbbData["bbb"].length >= 4 &&
+                                              bbbData["bbb"][bbbData["bbb"].length - 4]["dismissal"] == null
+                                              ? bbbData["bbb"][bbbData["bbb"].length - 4]["runs"].toString()
+                                              : "W",
                                           style: TextStyle(
-                                              color: isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(

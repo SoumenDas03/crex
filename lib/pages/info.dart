@@ -288,7 +288,7 @@ class _infoState extends State<info> {
                                                             liveScore == null || liveScore.length == 0 ?
                                                             '${data["score"][(data["score"].length) - 1]["r"]}-${data["score"][(data["score"].length) - 1]["w"]}' :
                                                             liveScore[0]["inning1"]["runs"].toString()
-                                                                + "-" + liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString(),
+                                                                + "-" + (liveScore[0]["inning1"]["wickets"] == "ALL_OUT" ? "10" : liveScore[0]["inning1"]["wickets"].toString()),
                                                             style: TextStyle(
                                                                 color: isDarkMode
                                                                     ? Colors

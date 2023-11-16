@@ -30,14 +30,18 @@ class _football_homeState extends State<football_home> {
       bannerList,
       dataUrl,
       dataList,
-      livedata;
+      livedata,
+      completedData;
   firstCarouselSlider exampleTwoController = Get.put(firstCarouselSlider());
 
   Future<void> apiFetch() async {
     var status = true;
-    await Future.wait(
-            [getFootballMatches(), getFootballMatchesUpcoming(), getBanner()])
-        .then((v) {
+    await Future.wait([
+      getFootballMatches(),
+      getFootballMatchesUpcoming(),
+      getFootballMatchesCompleted(),
+      getBanner()
+    ]).then((v) {
       for (var item in v) {
         print('$item \n');
       }
@@ -50,14 +54,11 @@ class _football_homeState extends State<football_home> {
   Future getFootballMatches() async {
     try {
       http.Response response = await http.get(
-        Uri.parse('https://playexch.us/api/scarp-football-today-list'),
+        Uri.parse('https://playexch.us/api/live-football-match'),
       );
 
       map = jsonDecode(response.body.toString());
       data = map["data"];
-      livedata = data
-          .where((element) => element["match_inpaly"] == "In-Play")
-          .toList();
       if (response.statusCode == 200) {
         return data;
         // ignore: use_build_context_synchronously
@@ -72,13 +73,32 @@ class _football_homeState extends State<football_home> {
   Future getFootballMatchesUpcoming() async {
     try {
       http.Response response = await http.get(
-        Uri.parse('https://playexch.us/api/scarp-football-list'),
+        Uri.parse('https://playexch.us/api/upcoming-football-match'),
       );
 
       mapUpcoming = jsonDecode(response.body.toString());
       dataUpcoming = mapUpcoming["data"];
       if (response.statusCode == 200) {
         return dataUpcoming;
+        // ignore: use_build_context_synchronously
+      } else {
+        print('failed');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future getFootballMatchesCompleted() async {
+    try {
+      http.Response response = await http.get(
+        Uri.parse('https://playexch.us/api/complete-football-match'),
+      );
+
+      map = jsonDecode(response.body.toString());
+      completedData = map["data"];
+      if (response.statusCode == 200) {
+        return completedData;
         // ignore: use_build_context_synchronously
       } else {
         print('failed');
@@ -104,6 +124,60 @@ class _football_homeState extends State<football_home> {
     }
   }
 
+  String formatDateTime(String inputDate) {
+    final parsedDate = DateTime.parse(inputDate);
+
+    final months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    final day = parsedDate.day;
+    final month = months[parsedDate.month - 1]
+        .toString()
+        .substring(0, 3); // Adjust month index
+    final year = parsedDate.year;
+    final hours = parsedDate.hour;
+    final minutes = parsedDate.minute;
+
+    // Function to add suffix to day (e.g., 1st, 2nd, 3rd, 4th, etc.)
+    String getDayWithSuffix(int day) {
+      if (day >= 11 && day <= 13) {
+        return '${day}th';
+      }
+      switch (day % 10) {
+        case 1:
+          return '${day}st';
+        case 2:
+          return '${day}nd';
+        case 3:
+          return '${day}rd';
+        default:
+          return '${day}th';
+      }
+    }
+
+    // Function to convert 24-hour format to 12-hour format with AM/PM
+    String getFormattedHours(int hours, int minutes) {
+      final formattedHours = hours % 12 == 0 ? 12 : hours % 12;
+      final period = hours < 12 ? 'AM' : 'PM';
+      final formattedMinutes = minutes.toString().padLeft(2, '0');
+      return '$formattedHours:$formattedMinutes $period';
+    }
+
+    return '${getDayWithSuffix(day)} $month, $year ${getFormattedHours(hours, minutes)}';
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeChanger = Provider.of<ThemeChanger>(context);
@@ -113,12 +187,12 @@ class _football_homeState extends State<football_home> {
       body: FutureBuilder(
         future: apiFetch(),
         builder: (context, snapshot) {
-          if (livedata == null) {
+          if (dataUpcoming == null) {
             return Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            return SingleChildScrollView(
+            return SingleChildScrollView(physics: NeverScrollableScrollPhysics(),
               child: Container(
                 margin: EdgeInsets.only(top: 5),
                 child: Column(
@@ -239,7 +313,7 @@ class _football_homeState extends State<football_home> {
                                     padding: EdgeInsets.only(bottom: 25),
                                     height: 500,
                                     child: TabBarView(children: [
-                                      livedata.length == 0
+                                      data == null || data.length == 0
                                           ? Center(
                                               child: Text(
                                                 "No match has started",
@@ -253,11 +327,12 @@ class _football_homeState extends State<football_home> {
                                           : Container(
                                               margin: EdgeInsets.only(
                                                   bottom: 20, top: 10),
-                                              child: ListView.builder(
+                                              child: ListView.builder(padding: EdgeInsets.only(bottom: 50),
                                                   physics:
                                                       AlwaysScrollableScrollPhysics(),
                                                   shrinkWrap: true,
-                                                  itemCount: livedata.length,
+                                                  itemCount:
+                                                      data.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -293,7 +368,17 @@ class _football_homeState extends State<football_home> {
                                                                   // ignore: prefer_const_literals_to_create_immutables
                                                                   children: [
                                                                     Row(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
                                                                       children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
                                                                         CircleAvatar(
                                                                           radius:
                                                                               15,
@@ -306,10 +391,11 @@ class _football_homeState extends State<football_home> {
                                                                         ),
                                                                         Container(
                                                                           width:
-                                                                              70,
+                                                                              50,
                                                                           child:
                                                                               Text(
-                                                                            livedata[index]["match_name"].toString().split("V/S")[0].toString(),
+                                                                            data[index]["match_name"].toString().split("v")[0].toString().substring(0,
+                                                                                3),
                                                                             style:
                                                                                 TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                             overflow:
@@ -318,20 +404,35 @@ class _football_homeState extends State<football_home> {
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    Text(
-                                                                      livedata[index]
-                                                                              [
-                                                                              "match_datetime"]
-                                                                          .toString(),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: isDarkMode
-                                                                            ? const Color(0xFFFF2E00)
-                                                                            : const Color(0xFFFF4D00),
+                                                                    Container(
+                                                                      width:
+                                                                          100,
+                                                                      child:
+                                                                          Text(
+                                                                        formatDateTime(
+                                                                            data[index]["match_datetime"].toString()),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color: isDarkMode
+                                                                              ? const Color(0xFFFF2E00)
+                                                                              : const Color(0xFFFF4D00),
+                                                                        ),
+                                                                        overflow:
+                                                                            TextOverflow.clip,
                                                                       ),
                                                                     ),
                                                                     Row(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
                                                                       children: [
+                                                                        SizedBox(
+                                                                          width:
+                                                                              10,
+                                                                        ),
                                                                         CircleAvatar(
                                                                           radius:
                                                                               15,
@@ -347,7 +448,8 @@ class _football_homeState extends State<football_home> {
                                                                               70,
                                                                           child:
                                                                               Text(
-                                                                            livedata[index]["match_name"].toString().split("V/S")[1].toString(),
+                                                                            data[index]["match_name"].toString().split("v")[1].toString().substring(0,
+                                                                                4),
                                                                             style:
                                                                                 TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                                                                             overflow:
@@ -382,28 +484,26 @@ class _football_homeState extends State<football_home> {
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
                                                                           .center,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
                                                                   children: [
-                                                                    // Text(
-                                                                    //   data[index]["match_name"]
-                                                                    //       .toString()
-                                                                    //       .split("V/S")[0]
-                                                                    //       .toString()
-                                                                    //       .substring(0, 3),
-                                                                    //   style: TextStyle(
-                                                                    //       color: isDarkMode
-                                                                    //           ? const Color(
-                                                                    //               0xFFFF2E00)
-                                                                    //           : const Color(
-                                                                    //               0xFFFF4D00),
-                                                                    //       fontWeight:
-                                                                    //           FontWeight.bold),
-                                                                    // ),
-                                                                    // SizedBox(
-                                                                    //   width: 50,
-                                                                    // ),
+                                                                    SizedBox(
+                                                                      width: 40,
+                                                                    ),
+                                                                    Text(
+                                                                      data[index]["odds"][0]["favname"] !=
+                                                                              "--"
+                                                                          ? data[index]["odds"][0]["favname"].toString().substring(
+                                                                              0,
+                                                                              3)
+                                                                          : "--",
+                                                                      style: TextStyle(
+                                                                          color: isDarkMode
+                                                                              ? const Color(0xFFFF2E00)
+                                                                              : const Color(0xFFFF4D00),
+                                                                          fontWeight: FontWeight.bold),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: 50,
+                                                                    ),
                                                                     ClipRRect(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
@@ -420,64 +520,16 @@ class _football_homeState extends State<football_home> {
                                                                             .black54,
                                                                         child:
                                                                             Text(
-                                                                          livedata[index]["odd_one"]
+                                                                          data[index]["odds"][0]["back"]
                                                                               .toString(),
                                                                           style: TextStyle(
                                                                               color: Colors.white,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              3),
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            22,
-                                                                        width:
-                                                                            45,
-                                                                        color: Colors
-                                                                            .black12,
-                                                                        child:
-                                                                            Text(
-                                                                          livedata[index]["odd_two"]
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.black,
                                                                               fontWeight: FontWeight.bold),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                     SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              3),
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            22,
-                                                                        width:
-                                                                            45,
-                                                                        color: Colors
-                                                                            .black54,
-                                                                        child:
-                                                                            Text(
-                                                                          livedata[index]["odd_three"]
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
+                                                                      width: 10,
                                                                     ),
                                                                     ClipRRect(
                                                                       borderRadius:
@@ -495,58 +547,7 @@ class _football_homeState extends State<football_home> {
                                                                             .black12,
                                                                         child:
                                                                             Text(
-                                                                          livedata[index]["odd_four"]
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.black,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width: 5,
-                                                                    ),
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              3),
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            22,
-                                                                        width:
-                                                                            45,
-                                                                        color: Colors
-                                                                            .black54,
-                                                                        child:
-                                                                            Text(
-                                                                          livedata[index]["odd_five"]
-                                                                              .toString(),
-                                                                          style: TextStyle(
-                                                                              color: Colors.white,
-                                                                              fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              3),
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            22,
-                                                                        width:
-                                                                            45,
-                                                                        color: Colors
-                                                                            .black12,
-                                                                        child:
-                                                                            Text(
-                                                                          livedata[index]["odd_six"]
+                                                                          data[index]["odds"][0]["lay"]
                                                                               .toString(),
                                                                           style: TextStyle(
                                                                               color: Colors.black,
@@ -564,348 +565,21 @@ class _football_homeState extends State<football_home> {
                                                     );
                                                   }),
                                             ),
-                                      Container(
+                                      dataUpcoming == null || dataUpcoming.length == 0
+                                          ? Center(
+                                        child: Text(
+                                          "No match has started",
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                      )
+                                          : Container(
                                         margin: EdgeInsets.only(
                                             bottom: 20, top: 10),
-                                        child: ListView.builder(
-                                            physics:
-                                                AlwaysScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: data.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 10),
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        50),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50)),
-                                                        child: Container(
-                                                          height: 60,
-                                                          width: 330,
-                                                          color: Colors.white,
-                                                          child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            // ignore: prefer_const_literals_to_create_immutables
-                                                            children: [
-                                                              Row(
-                                                                children: [
-                                                                  CircleAvatar(
-                                                                    radius: 15,
-                                                                    backgroundImage:
-                                                                        NetworkImage(
-                                                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  Container(
-                                                                    width: 70,
-                                                                    child: Text(
-                                                                      data[index]
-                                                                              [
-                                                                              "match_name"]
-                                                                          .toString()
-                                                                          .split(
-                                                                              "V/S")[0]
-                                                                          .toString(),
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                      overflow:
-                                                                          TextOverflow
-                                                                              .ellipsis,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                data[index][
-                                                                        "match_datetime"]
-                                                                    .toString(),
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? const Color(
-                                                                          0xFFFF2E00)
-                                                                      : const Color(
-                                                                          0xFFFF4D00),
-                                                                ),
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  CircleAvatar(
-                                                                    radius: 15,
-                                                                    backgroundImage:
-                                                                        NetworkImage(
-                                                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  Container(
-                                                                    width: 70,
-                                                                    child: Text(
-                                                                      data[index]
-                                                                              [
-                                                                              "match_name"]
-                                                                          .toString()
-                                                                          .split(
-                                                                              "V/S")[1]
-                                                                          .toString(),
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                      overflow:
-                                                                          TextOverflow
-                                                                              .ellipsis,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        15)),
-                                                        child: Container(
-                                                          height: 35,
-                                                          width: 300,
-                                                          color: Colors.white,
-                                                          child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            children: [
-                                                              // Text(
-                                                              //   data[index]["match_name"]
-                                                              //       .toString()
-                                                              //       .split("V/S")[0]
-                                                              //       .toString()
-                                                              //       .substring(0, 3),
-                                                              //   style: TextStyle(
-                                                              //       color: isDarkMode
-                                                              //           ? const Color(
-                                                              //               0xFFFF2E00)
-                                                              //           : const Color(
-                                                              //               0xFFFF4D00),
-                                                              //       fontWeight:
-                                                              //           FontWeight.bold),
-                                                              // ),
-                                                              // SizedBox(
-                                                              //   width: 50,
-                                                              // ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_one"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black12,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_two"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 5,
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_three"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black12,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_four"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 5,
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_five"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black12,
-                                                                  child: Text(
-                                                                    data[index][
-                                                                            "odd_six"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            }),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            bottom: 20, top: 10),
-                                        child: ListView.builder(
+                                        child: ListView.builder(padding: EdgeInsets.only(bottom: 50),
                                             physics:
                                                 AlwaysScrollableScrollPhysics(),
                                             shrinkWrap: true,
@@ -950,6 +624,9 @@ class _football_homeState extends State<football_home> {
                                                                     MainAxisAlignment
                                                                         .start,
                                                                 children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
                                                                   CircleAvatar(
                                                                     radius: 15,
                                                                     backgroundImage:
@@ -966,9 +643,12 @@ class _football_homeState extends State<football_home> {
                                                                               [
                                                                               "match_name"]
                                                                           .toString()
-                                                                          .split(
-                                                                              "V/S")[0]
-                                                                          .toString(),
+                                                                          .split("v")[
+                                                                              0]
+                                                                          .toString()
+                                                                          .substring(
+                                                                              0,
+                                                                              3),
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -981,19 +661,25 @@ class _football_homeState extends State<football_home> {
                                                                   ),
                                                                 ],
                                                               ),
-                                                              Text(
-                                                                dataUpcoming[
-                                                                            index]
-                                                                        [
-                                                                        "match_datetime"]
-                                                                    .toString(),
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: isDarkMode
-                                                                      ? const Color(
-                                                                          0xFFFF2E00)
-                                                                      : const Color(
-                                                                          0xFFFF4D00),
+                                                              Container(
+                                                                width: 100,
+                                                                child: Text(
+                                                                  formatDateTime(
+                                                                      dataUpcoming[index]
+                                                                              [
+                                                                              "match_datetime"]
+                                                                          .toString()),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                            0xFFFF2E00)
+                                                                        : const Color(
+                                                                            0xFFFF4D00),
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .clip,
                                                                 ),
                                                               ),
                                                               Row(
@@ -1004,6 +690,9 @@ class _football_homeState extends State<football_home> {
                                                                     MainAxisAlignment
                                                                         .start,
                                                                 children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
                                                                   CircleAvatar(
                                                                     radius: 15,
                                                                     backgroundImage:
@@ -1020,9 +709,12 @@ class _football_homeState extends State<football_home> {
                                                                               [
                                                                               "match_name"]
                                                                           .toString()
-                                                                          .split(
-                                                                              "V/S")[1]
-                                                                          .toString(),
+                                                                          .split("v")[
+                                                                              1]
+                                                                          .toString()
+                                                                          .substring(
+                                                                              0,
+                                                                              4),
                                                                       style: TextStyle(
                                                                           color: Colors
                                                                               .black,
@@ -1060,28 +752,36 @@ class _football_homeState extends State<football_home> {
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .center,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
                                                             children: [
-                                                              // Text(
-                                                              //   data[index]["match_name"]
-                                                              //       .toString()
-                                                              //       .split("V/S")[0]
-                                                              //       .toString()
-                                                              //       .substring(0, 3),
-                                                              //   style: TextStyle(
-                                                              //       color: isDarkMode
-                                                              //           ? const Color(
-                                                              //               0xFFFF2E00)
-                                                              //           : const Color(
-                                                              //               0xFFFF4D00),
-                                                              //       fontWeight:
-                                                              //           FontWeight.bold),
-                                                              // ),
-                                                              // SizedBox(
-                                                              //   width: 50,
-                                                              // ),
+                                                              SizedBox(
+                                                                width: 40,
+                                                              ),
+                                                              Text(
+                                                                dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "favname"] !=
+                                                                        "--"
+                                                                    ? dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "favname"]
+                                                                        .toString()
+                                                                        .substring(
+                                                                            0,
+                                                                            3)
+                                                                    : "--",
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                            0xFFFF2E00)
+                                                                        : const Color(
+                                                                            0xFFFF4D00),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 50,
+                                                              ),
                                                               ClipRRect(
                                                                 borderRadius:
                                                                     BorderRadius
@@ -1097,74 +797,20 @@ class _football_homeState extends State<football_home> {
                                                                   color: Colors
                                                                       .black54,
                                                                   child: Text(
-                                                                    dataUpcoming[index]
+                                                                    dataUpcoming[index]["odds"][0]
                                                                             [
-                                                                            "odd_one"]
+                                                                            "back"]
                                                                         .toString(),
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black12,
-                                                                  child: Text(
-                                                                    dataUpcoming[index]
-                                                                            [
-                                                                            "odd_two"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
                                                                         fontWeight:
                                                                             FontWeight.bold),
                                                                   ),
                                                                 ),
                                                               ),
                                                               SizedBox(
-                                                                width: 5,
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  child: Text(
-                                                                    dataUpcoming[index]
-                                                                            [
-                                                                            "odd_three"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
+                                                                width: 10,
                                                               ),
                                                               ClipRRect(
                                                                 borderRadius:
@@ -1181,66 +827,9 @@ class _football_homeState extends State<football_home> {
                                                                   color: Colors
                                                                       .black12,
                                                                   child: Text(
-                                                                    dataUpcoming[index]
+                                                                    dataUpcoming[index]["odds"][0]
                                                                             [
-                                                                            "odd_four"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 5,
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black54,
-                                                                  child: Text(
-                                                                    dataUpcoming[index]
-                                                                            [
-                                                                            "odd_five"]
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            3),
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 22,
-                                                                  width: 45,
-                                                                  color: Colors
-                                                                      .black12,
-                                                                  child: Text(
-                                                                    dataUpcoming[index]
-                                                                            [
-                                                                            "odd_six"]
+                                                                            "lay"]
                                                                         .toString(),
                                                                     style: TextStyle(
                                                                         color: Colors
@@ -1260,7 +849,575 @@ class _football_homeState extends State<football_home> {
                                               );
                                             }),
                                       ),
-                                      Text(""),
+                                      dataUpcoming == null || dataUpcoming.length == 0
+                                          ? Center(
+                                        child: Text(
+                                          "No match has started",
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                      )
+                                          : Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 20, top: 10),
+                                        child: ListView.builder(padding: EdgeInsets.only(bottom: 50),
+                                            physics:
+                                                AlwaysScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: dataUpcoming.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        50),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50)),
+                                                        child: Container(
+                                                          height: 60,
+                                                          width: 330,
+                                                          color: Colors.white,
+                                                          child: Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            // ignore: prefer_const_literals_to_create_immutables
+                                                            children: [
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  CircleAvatar(
+                                                                    radius: 15,
+                                                                    backgroundImage:
+                                                                        NetworkImage(
+                                                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    width: 50,
+                                                                    child: Text(
+                                                                      dataUpcoming[index]
+                                                                              [
+                                                                              "match_name"]
+                                                                          .toString()
+                                                                          .split("v")[
+                                                                              0]
+                                                                          .toString()
+                                                                          .substring(
+                                                                              0,
+                                                                              3),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Container(
+                                                                width: 100,
+                                                                child: Text(
+                                                                  formatDateTime(
+                                                                      dataUpcoming[index]
+                                                                              [
+                                                                              "match_datetime"]
+                                                                          .toString()),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                            0xFFFF2E00)
+                                                                        : const Color(
+                                                                            0xFFFF4D00),
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .clip,
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  CircleAvatar(
+                                                                    radius: 15,
+                                                                    backgroundImage:
+                                                                        NetworkImage(
+                                                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    width: 70,
+                                                                    child: Text(
+                                                                      dataUpcoming[index]
+                                                                              [
+                                                                              "match_name"]
+                                                                          .toString()
+                                                                          .split("v")[
+                                                                              1]
+                                                                          .toString()
+                                                                          .substring(
+                                                                              0,
+                                                                              4),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        15)),
+                                                        child: Container(
+                                                          height: 35,
+                                                          width: 300,
+                                                          color: Colors.white,
+                                                          child: Row(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 40,
+                                                              ),
+                                                              Text(
+                                                                dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "favname"] !=
+                                                                        "--"
+                                                                    ? dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "favname"]
+                                                                        .toString()
+                                                                        .substring(
+                                                                            0,
+                                                                            3)
+                                                                    : "--",
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                            0xFFFF2E00)
+                                                                        : const Color(
+                                                                            0xFFFF4D00),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 50,
+                                                              ),
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            3),
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  height: 22,
+                                                                  width: 45,
+                                                                  color: Colors
+                                                                      .black54,
+                                                                  child: Text(
+                                                                    dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "back"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            3),
+                                                                child:
+                                                                    Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  height: 22,
+                                                                  width: 45,
+                                                                  color: Colors
+                                                                      .black12,
+                                                                  child: Text(
+                                                                    dataUpcoming[index]["odds"][0]
+                                                                            [
+                                                                            "lay"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            }),
+                                      ),
+                                      completedData == null || completedData.length == 0
+                                          ? Center(
+                                        child: Text(
+                                          "No match has started",
+                                          style: TextStyle(
+                                              color: isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                      )
+                                          :
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            bottom: 20, top: 10),
+                                        child: ListView.builder(padding: EdgeInsets.only(bottom: 50),
+                                            physics:
+                                            AlwaysScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: completedData.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 10),
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      alignment:
+                                                      Alignment.topRight,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft: Radius
+                                                                .circular(
+                                                                50),
+                                                            bottomLeft: Radius
+                                                                .circular(
+                                                                50)),
+                                                        child: Container(
+                                                          height: 60,
+                                                          width: 330,
+                                                          color: Colors.white,
+                                                          child: Row(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                            // ignore: prefer_const_literals_to_create_immutables
+                                                            children: [
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  CircleAvatar(
+                                                                    radius: 15,
+                                                                    backgroundImage:
+                                                                    NetworkImage(
+                                                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    width: 50,
+                                                                    child: Text(
+                                                                      completedData[index]
+                                                                      [
+                                                                      "match_name"]
+                                                                          .toString()
+                                                                          .split("v")[
+                                                                      0]
+                                                                          .toString()
+                                                                          .substring(
+                                                                          0,
+                                                                          3),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                          FontWeight.bold),
+                                                                      overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Container(
+                                                                width: 100,
+                                                                child: Text(
+                                                                  formatDateTime(
+                                                                      completedData[index]
+                                                                      [
+                                                                      "match_datetime"]
+                                                                          .toString()),
+                                                                  style:
+                                                                  TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                        0xFFFF2E00)
+                                                                        : const Color(
+                                                                        0xFFFF4D00),
+                                                                  ),
+                                                                  overflow:
+                                                                  TextOverflow
+                                                                      .clip,
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  CircleAvatar(
+                                                                    radius: 15,
+                                                                    backgroundImage:
+                                                                    NetworkImage(
+                                                                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ574iDnMdPcWo282EUFxA_31GTwL7a4g5-5g&usqp=CAU"),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    width: 70,
+                                                                    child: Text(
+                                                                      completedData[index]
+                                                                      [
+                                                                      "match_name"]
+                                                                          .toString()
+                                                                          .split("v")[
+                                                                      1]
+                                                                          .toString()
+                                                                          .substring(
+                                                                          0,
+                                                                          4),
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                          FontWeight.bold),
+                                                                      overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Container(
+                                                      alignment:
+                                                      Alignment.topRight,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft: Radius
+                                                                .circular(
+                                                                15)),
+                                                        child: Container(
+                                                          height: 35,
+                                                          width: 300,
+                                                          color: Colors.white,
+                                                          child: Row(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 40,
+                                                              ),
+                                                              Text(
+                                                                completedData[index]["odds"][0]
+                                                                [
+                                                                "favname"] !=
+                                                                    "--"
+                                                                    ? completedData[index]["odds"][0]
+                                                                [
+                                                                "favname"]
+                                                                    .toString()
+                                                                    .substring(
+                                                                    0,
+                                                                    3)
+                                                                    : "--",
+                                                                style: TextStyle(
+                                                                    color: isDarkMode
+                                                                        ? const Color(
+                                                                        0xFFFF2E00)
+                                                                        : const Color(
+                                                                        0xFFFF4D00),
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 50,
+                                                              ),
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    3),
+                                                                child:
+                                                                Container(
+                                                                  alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                                  height: 22,
+                                                                  width: 45,
+                                                                  color: Colors
+                                                                      .black54,
+                                                                  child: Text(
+                                                                    completedData[index]["odds"][0]
+                                                                    [
+                                                                    "back"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                        FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    3),
+                                                                child:
+                                                                Container(
+                                                                  alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                                  height: 22,
+                                                                  width: 45,
+                                                                  color: Colors
+                                                                      .black12,
+                                                                  child: Text(
+                                                                    completedData[index]["odds"][0]
+                                                                    [
+                                                                    "lay"]
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                        FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            }),
+                                      ),
                                     ]),
                                   )
                                 ],
