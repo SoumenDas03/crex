@@ -50,7 +50,7 @@ class _graphState extends State<graph> {
     _controller = TextEditingController();
     _scrollController = ScrollController();
     socket = IO.io(
-      'http://cricair.com:8011',
+      'http://13.233.12.249:8009',
       IO.OptionBuilder().setTransports(['websocket']).enableForceNew().build(),
     );
     connect();
